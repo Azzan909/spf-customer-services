@@ -21,6 +21,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check out maintained dashboard updates
+        uses: actions/checkout@v4
       - name: Prepare independent dashboard copy
         shell: python
         run: |
@@ -68,10 +70,13 @@ jobs:
               print(f"Downloaded {item}")
 
           (root / ".nojekyll").write_text("", encoding="utf-8")
+      - name: Apply maintained dashboard updates
+        shell: bash
+        run: |
+          cp -R overrides/. _site/
+          python patches/patch_index.py _site/index.html
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Upload dashboard
         uses: actions/upload-pages-artifact@v3
         with:

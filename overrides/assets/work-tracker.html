@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الموقف التنفيذي — المديرية العامة لخدمات المتعاملين</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#EAEDF3;
+  --surface:#FFFFFF;
+  --surface-alt:#F5F7FA;
+  --ink:#16233D;
+  --ink-soft:#5C6B84;
+  --ink-faint:#93A0B4;
+  --line:#E0E5ED;
+  --line-strong:#CDD5E1;
+
+  --navy:#152244;
+  --navy-deep:#0B142B;
+  --navy-soft:rgba(21,34,68,0.06);
+
+  --gold:#AD8A3F;
+  --gold-bright:#C9A44F;
+  --gold-soft:rgba(173,138,63,0.13);
+
+  --good:#1E7B4D;
+  --good-soft:rgba(30,123,77,0.10);
+  --warn:#B7791F;
+  --warn-soft:rgba(183,121,31,0.10);
+  --bad:#B23A3A;
+  --bad-soft:rgba(178,58,58,0.10);
+
+  --radius:10px;
+  --radius-sm:6px;
+  --shadow-sm:0 1px 2px rgba(11,20,43,0.06);
+  --shadow-md:0 10px 30px -12px rgba(11,20,43,0.28);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'IBM Plex Sans Arabic',Tahoma,'Segoe UI',sans-serif;
+  min-height:100vh;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ───────── HEADER ───────── */
+header{
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  padding:0 28px;
+  height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:70;
+}
+.header-left{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:32px;height:32px;border-radius:7px;
+  background:linear-gradient(155deg,var(--navy) 0%, var(--navy-deep) 100%);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-bright);font-weight:700;font-size:13px;flex-shrink:0;
+  border:1px solid rgba(173,138,63,0.35);
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.25;}
+.brand-name{font-size:13.5px;font-weight:600;color:var(--ink);}
+.brand-sub{font-size:11px;color:var(--ink-soft);}
+.header-right{display:flex;align-items:center;gap:10px;}
+.header-tag{
+  font-size:11.5px;color:var(--ink-soft);
+  background:var(--surface-alt);border:1px solid var(--line);
+  padding:5px 12px;border-radius:20px;
+  display:flex;align-items:center;gap:6px;
+}
+.header-tag .live-dot{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px var(--good-soft);}
+
+/* ───────── LAYOUT ───────── */
+.page{max-width:1320px;margin:0 auto;padding:0 24px 48px;}
+
+/* ───────── HERO / LEDGER BAND ───────── */
+.hero{
+  background:linear-gradient(120deg,var(--navy-deep) 0%, var(--navy) 62%, #1E3157 100%);
+  margin:0 -24px 20px;
+  padding:26px 24px 22px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 64px);
+  pointer-events:none;
+}
+.hero-inner{max-width:1320px;margin:0 auto;position:relative;display:flex;align-items:flex-end;gap:36px;flex-wrap:wrap;}
+.hero-figure{display:flex;flex-direction:column;gap:2px;}
+.hero-figure .label{font-size:11.5px;color:rgba(255,255,255,0.55);font-weight:500;}
+.hero-figure .value{font-size:44px;font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-0.5px;}
+.hero-figure .value .unit{font-size:20px;color:rgba(255,255,255,0.7);font-weight:500;margin-inline-start:2px;}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;margin-inline-start:auto;}
+.hero-stat{display:flex;flex-direction:column;gap:2px;cursor:pointer;padding:4px 2px;border-bottom:2px solid transparent;transition:border-color .15s;}
+.hero-stat:hover{border-color:rgba(201,164,79,0.5);}
+.hero-stat .n{font-size:22px;font-weight:700;color:#fff;}
+.hero-stat .l{font-size:11px;color:rgba(255,255,255,0.55);}
+.hero-stat.is-good .n{color:#6FCB9B;}
+.hero-stat.is-warn .n{color:#E8B863;}
+.hero-stat.is-bad .n{color:#E88A8A;}
+
+/* ───────── FILTER BAR ───────── */
+.filter-bar{
+  display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:11px 14px;margin-bottom:16px;
+  box-shadow:var(--shadow-sm);
+}
+.filter-bar select, .filter-bar input[type=text]{
+  font-family:inherit;font-size:12.5px;color:var(--ink);
+  background:var(--surface-alt);border:1px solid var(--line);
+  border-radius:7px;padding:7px 10px;outline:none;cursor:pointer;
+  min-width:120px;
+}
+.filter-bar input[type=text]{cursor:text;min-width:180px;flex:1;}
+.filter-bar select:focus, .filter-bar input:focus{border-color:var(--gold);}
+.btn-reset{
+  font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-soft);
+  background:none;border:1px solid var(--line-strong);border-radius:7px;
+  padding:7px 12px;cursor:pointer;transition:all .15s;
+}
+.btn-reset:hover{background:var(--surface-alt);color:var(--bad);border-color:var(--bad);}
+.filter-count{font-size:11.5px;color:var(--ink-faint);margin-inline-start:auto;white-space:nowrap;}
+
+/* ───────── TABS ───────── */
+.tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--line);}
+.tab{
+  font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);
+  background:none;border:none;padding:9px 4px;cursor:pointer;
+  border-bottom:2px solid transparent;margin-inline-end:22px;
+  transition:color .15s;
+}
+.tab:hover{color:var(--ink);}
+.tab.active{color:var(--navy);border-color:var(--gold);}
+.tab .badge{
+  display:inline-block;margin-inline-start:5px;font-size:10.5px;font-weight:700;
+  background:var(--gold-soft);color:var(--gold);padding:1px 6px;border-radius:9px;
+}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ───────── CARDS / GRID ───────── */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+.card-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border-bottom:1px solid var(--line);
+}
+.card-head h3{font-size:13px;font-weight:600;color:var(--ink);}
+.card-head .hint{font-size:11px;color:var(--ink-faint);}
+.grid-2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-bottom:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:900px){.grid-2{grid-template-columns:1fr;}.grid-3{grid-template-columns:1fr 1fr;}}
+
+/* status donut card */
+.donut-wrap{padding:14px 16px;display:flex;align-items:center;gap:18px;}
+.donut-wrap canvas{max-width:150px;max-height:150px;}
+.donut-legend{display:flex;flex-direction:column;gap:9px;flex:1;}
+.legend-row{display:flex;align-items:center;gap:8px;font-size:12.5px;}
+.legend-dot{width:9px;height:9px;border-radius:3px;flex-shrink:0;}
+.legend-row .name{color:var(--ink-soft);flex:1;}
+.legend-row .val{font-weight:700;color:var(--ink);}
+
+/* attention list */
+.attn-list{padding:6px 0;}
+.attn-item{
+  display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;
+  border-bottom:1px solid var(--surface-alt);transition:background .12s;
+}
+.attn-item:last-child{border-bottom:none;}
+.attn-item:hover{background:var(--surface-alt);}
+.attn-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.attn-title{flex:1;font-size:12.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.attn-meta{font-size:11px;color:var(--ink-faint);flex-shrink:0;}
+.empty-note{padding:22px 16px;text-align:center;color:var(--ink-faint);font-size:12.5px;}
+
+/* dept bars */
+.deptbar-list{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+.deptbar-row{cursor:pointer;}
+.deptbar-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;}
+.deptbar-top .name{color:var(--ink);font-weight:500;}
+.deptbar-top .pct{color:var(--ink-soft);font-weight:700;}
+.deptbar-track{height:7px;background:var(--surface-alt);border-radius:4px;overflow:hidden;}
+.deptbar-fill{height:100%;border-radius:4px;}
+
+/* ───────── TABLE ───────── */
+.table-card{overflow:hidden;}
+.tbl-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+thead th{
+  text-align:right;padding:10px 14px;background:var(--surface-alt);
+  color:var(--ink-soft);font-weight:600;font-size:11.5px;
+  border-bottom:1px solid var(--line);white-space:nowrap;
+}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--surface-alt);vertical-align:middle;}
+tbody tr{cursor:pointer;transition:background .12s;}
+tbody tr:hover{background:var(--surface-alt);}
+.cell-title{max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);font-weight:500;}
+.cell-emp{color:var(--ink-soft);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.pct-mini{display:flex;align-items:center;gap:7px;min-width:90px;}
+.pct-mini .track{flex:1;height:5px;background:var(--surface-alt);border-radius:3px;overflow:hidden;}
+.pct-mini .fill{height:100%;border-radius:3px;}
+.pct-mini .num{font-size:11.5px;font-weight:700;color:var(--ink-soft);min-width:28px;}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.pill-dot{width:5px;height:5px;border-radius:50%;}
+.pill-good{background:var(--good-soft);color:var(--good);}
+.pill-good .pill-dot{background:var(--good);}
+.pill-warn{background:var(--warn-soft);color:var(--warn);}
+.pill-warn .pill-dot{background:var(--warn);}
+.pill-bad{background:var(--bad-soft);color:var(--bad);}
+.pill-bad .pill-dot{background:var(--bad);}
+
+.pager{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-top:1px solid var(--line);}
+.pager .info{font-size:11.5px;color:var(--ink-faint);}
+.pager .nav{display:flex;gap:6px;}
+.pager button{
+  font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-soft);
+  background:var(--surface-alt);border:1px solid var(--line);border-radius:6px;
+  padding:5px 11px;cursor:pointer;
+}
+.pager button:disabled{opacity:0.4;cursor:not-allowed;}
+.pager button:not(:disabled):hover{background:var(--gold-soft);border-color:var(--gold);color:var(--gold);}
+
+/* ───────── PERFORMANCE GRID ───────── */
+.perf-toggle{display:flex;gap:6px;margin-bottom:14px;}
+.perf-toggle button{
+  font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-soft);
+  background:var(--surface);border:1px solid var(--line);border-radius:7px;
+  padding:6px 14px;cursor:pointer;
+}
+.perf-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.perf-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;cursor:pointer;transition:border-color .15s,transform .1s;
+}
+.perf-card:hover{border-color:var(--gold);transform:translateY(-1px);}
+.perf-card.is-total{background:linear-gradient(120deg,var(--navy-deep),var(--navy));border-color:var(--navy);}
+.perf-card.is-total .perf-name{color:rgba(255,255,255,0.7);}
+.perf-card.is-total .perf-score{color:var(--gold-bright);}
+.perf-card.is-total .perf-sub{color:rgba(255,255,255,0.55);}
+.perf-card.is-total .perf-track{background:rgba(255,255,255,0.15);}
+.perf-name{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.perf-score{font-size:26px;font-weight:700;margin-bottom:7px;}
+.perf-track{height:6px;background:var(--surface-alt);border-radius:3px;overflow:hidden;margin-bottom:7px;}
+.perf-fill{height:100%;border-radius:3px;}
+.perf-sub{font-size:11px;color:var(--ink-faint);}
+
+/* ───────── DATA QUALITY ───────── */
+.dq-card{padding:16px;margin-bottom:14px;}
+.dq-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--surface-alt);}
+.dq-item:last-child{border-bottom:none;}
+.dq-icon{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.dq-icon.fixed{background:var(--good-soft);color:var(--good);}
+.dq-icon.flag{background:var(--warn-soft);color:var(--warn);}
+.dq-body{flex:1;}
+.dq-title{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.dq-detail{font-size:12px;color:var(--ink-soft);line-height:1.6;}
+.dq-nums{display:flex;gap:14px;margin-top:6px;font-size:11.5px;color:var(--ink-faint);}
+.dq-nums b{color:var(--ink);}
+
+/* ───────── DRAWER ───────── */
+.overlay{
+  position:fixed;inset:0;background:rgba(11,20,43,0.45);backdrop-filter:blur(1px);
+  z-index:100;opacity:0;pointer-events:none;transition:opacity .18s;
+}
+.overlay.open{opacity:1;pointer-events:auto;}
+.drawer{
+  position:fixed;top:0;bottom:0;left:0;width:min(420px,92vw);
+  background:var(--surface);z-index:101;box-shadow:var(--shadow-md);
+  transform:translateX(-100%);transition:transform .22s ease;
+  display:flex;flex-direction:column;
+}
+.drawer.open{transform:translateX(0);}
+.drawer-head{
+  padding:16px 18px;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+  background:linear-gradient(120deg,var(--navy-deep),var(--navy));
+}
+.drawer-head h3{font-size:14px;font-weight:600;color:#fff;line-height:1.5;}
+.drawer-close{
+  background:rgba(255,255,255,0.12);border:none;color:#fff;width:26px;height:26px;
+  border-radius:6px;cursor:pointer;flex-shrink:0;font-size:14px;line-height:1;
+}
+.drawer-body{padding:16px 18px;overflow-y:auto;flex:1;}
+.dfield{margin-bottom:14px;}
+.dfield .k{font-size:11px;color:var(--ink-faint);margin-bottom:3px;}
+.dfield .v{font-size:13px;color:var(--ink);line-height:1.6;}
+.drawer-sub-list{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;}
+.drawer-sub-item{padding:8px 0;border-bottom:1px solid var(--surface-alt);font-size:12px;cursor:pointer;}
+.drawer-sub-item:hover{color:var(--gold);}
+
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:6px;}
+
+/* ───────── SPF GALLERY REDESIGN ───────── */
+:root{
+  --bg:#F3F0E9;
+  --surface:#FFFFFF;
+  --surface-alt:#F5F6F2;
+  --ink:#203D35;
+  --ink-soft:#60766E;
+  --ink-faint:#899A94;
+  --line:#D8DED8;
+  --line-strong:#C4CEC7;
+  --navy:#254E44;
+  --navy-deep:#14382F;
+  --navy-soft:rgba(37,78,68,.08);
+  --gold:#B58A4A;
+  --gold-bright:#E2C17E;
+  --gold-soft:rgba(181,138,74,.13);
+  --burgundy:#58152F;
+  --burgundy-soft:rgba(88,21,47,.09);
+  --good:#28775B;
+  --good-soft:rgba(40,119,91,.11);
+  --warn:#B17A2C;
+  --warn-soft:rgba(177,122,44,.12);
+  --bad:#A53D4D;
+  --bad-soft:rgba(165,61,77,.11);
+  --radius:20px 7px 20px 7px;
+  --radius-sm:10px 4px 10px 4px;
+  --shadow-sm:none;
+  --shadow-md:0 28px 65px -30px rgba(20,56,47,.45);
+}
+body{background:linear-gradient(145deg,#F8F5EF 0%,#EEF2ED 100%);font-family:Tahoma,"Segoe UI",sans-serif;}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.38;background:repeating-radial-gradient(ellipse at 90% -70%,transparent 0 18px,rgba(37,78,68,.055) 19px 20px);}
+header{height:72px;padding:0 34px;background:rgba(20,56,47,.97);border:0;color:#fff;box-shadow:0 14px 35px rgba(20,56,47,.14);}
+.header-left{gap:14px}.brand-mark{width:44px;height:44px;padding:5px;border-radius:50%;background:#fff;border:1px solid rgba(226,193,126,.55);box-shadow:0 0 0 4px rgba(255,255,255,.08)}
+.brand-mark img{display:block;width:100%;height:100%;object-fit:contain}.brand-name{font-size:15px;color:#fff}.brand-sub{font-size:12px;color:#D8E3DE}
+.header-tag{font-size:12px;color:#F4E3C4;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);padding:8px 14px}.header-tag .live-dot{background:var(--gold-bright);box-shadow:0 0 0 4px rgba(226,193,126,.14)}
+.page{max-width:1450px;padding:0 32px 55px;position:relative}
+.hero{margin:0 0 22px;padding:34px 32px 26px;background:radial-gradient(circle at 16% 18%,rgba(226,193,126,.22),transparent 28%),linear-gradient(120deg,var(--burgundy) 0%,#3D1A2B 35%,var(--navy-deep) 72%,var(--navy) 100%);border-radius:0 0 44px 8px;}
+.hero:before{background:repeating-radial-gradient(ellipse at 82% -130%,transparent 0 22px,rgba(255,255,255,.055) 23px 24px)}
+.hero:after{content:"";position:absolute;left:-70px;top:-110px;width:320px;height:320px;border:1px solid rgba(226,193,126,.22);border-radius:50% 50% 14% 50%;transform:rotate(24deg)}
+.hero-inner{display:grid;grid-template-columns:1.15fr .5fr;align-items:center;gap:22px}
+.hero-intro{position:relative;z-index:2;max-width:680px}.hero-intro>span{display:inline-block;margin-bottom:8px;color:var(--gold-bright);font-size:12px;font-weight:700}.hero-intro h1{margin:0 0 9px;color:#fff;font-size:clamp(25px,3vw,39px);line-height:1.45}.hero-intro p{max-width:630px;color:rgba(255,255,255,.73);font-size:13px;line-height:1.8}.hero-context{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}.hero-context span{padding:7px 11px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:rgba(255,255,255,.07);color:#F0E7D7;font-size:11px}
+.hero-figure{--rate:71;position:relative;z-index:2;justify-self:center;width:178px;height:178px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--gold-bright) calc(var(--rate)*1%),rgba(255,255,255,.12) 0);box-shadow:0 24px 45px rgba(0,0,0,.18)}
+.hero-figure:before{content:"";position:absolute;inset:12px;border-radius:50%;background:linear-gradient(145deg,#274F44,#183A32);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+.hero-figure .label,.hero-figure .value{position:relative;z-index:1}.hero-figure .label{align-self:end;color:rgba(255,255,255,.67);font-size:11px}.hero-figure .value{align-self:start;font-size:48px;color:#fff;margin-top:4px}.hero-figure .value .unit{font-size:17px;color:var(--gold-bright)}
+.hero-stats{grid-column:1/-1;width:100%;display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin:4px 0 0}
+.hero-stat{position:relative;min-height:92px;padding:15px 16px;border:1px solid rgba(255,255,255,.11);border-radius:16px 5px 16px 5px;background:rgba(255,255,255,.075);backdrop-filter:blur(7px);transition:transform .18s,background .18s,border-color .18s}
+.hero-stat:hover{transform:translateY(-3px);background:rgba(255,255,255,.12);border-color:rgba(226,193,126,.55)}.hero-stat .n{font-size:29px;color:#fff}.hero-stat .l{font-size:11px;color:rgba(255,255,255,.67)}.hero-stat.is-good .n{color:#8ED2B4}.hero-stat.is-warn .n{color:#E9C37C}.hero-stat.is-bad .n{color:#F0A2AF}
+.filter-bar{position:sticky;top:82px;z-index:55;gap:10px;padding:14px 16px;margin-bottom:18px;border-color:rgba(37,78,68,.14);border-radius:18px 5px 18px 5px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 16px 35px -28px rgba(20,56,47,.55)}
+.filter-bar:before{content:"تصفية العرض";flex:0 0 auto;color:var(--navy);font-size:12px;font-weight:700;padding-inline-end:4px}
+.filter-bar select,.filter-bar input[type=text]{min-height:40px;font-size:13px;border-radius:11px 4px 11px 4px;background:#F6F5F1;border-color:#D6DDD7}.filter-bar select:focus,.filter-bar input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.btn-reset{min-height:40px;padding:8px 14px;border-radius:11px 4px 11px 4px;color:var(--burgundy);border-color:rgba(88,21,47,.2);background:var(--burgundy-soft)}.filter-count{padding:7px 11px;border-radius:18px;background:var(--navy-soft);color:var(--navy);font-weight:700}
+.tabs{gap:8px;padding:6px;margin-bottom:18px;border:1px solid var(--line);border-radius:16px 5px 16px 5px;background:#fff}.tab{flex:1;margin:0;padding:11px 15px;border:0;border-radius:11px 4px 11px 4px;font-size:13px}.tab:hover{background:var(--navy-soft);color:var(--navy)}.tab.active{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;box-shadow:0 10px 20px -14px rgba(20,56,47,.65)}.tab .badge{background:rgba(226,193,126,.2);color:inherit}
+.card{border-color:rgba(37,78,68,.14);border-radius:22px 7px 22px 7px;background:rgba(255,255,255,.94);overflow:hidden}.card-head{padding:18px 20px;border-bottom-color:#E7EAE6;background:linear-gradient(90deg,#fff,#F7F6F1)}.card-head h3{font-size:15px;color:var(--navy)}.card-head .hint{font-size:12px;color:var(--ink-soft)}
+.grid-2{grid-template-columns:1.08fr .92fr;gap:14px}.donut-wrap{min-height:250px;padding:20px 24px;justify-content:center}.donut-wrap canvas{max-width:190px;max-height:190px}.donut-legend{gap:12px}.legend-row{padding:10px 12px;border-radius:12px 4px 12px 4px;background:var(--surface-alt);font-size:13px}.legend-dot{width:10px;height:10px;border-radius:50%}.legend-row .val{font-size:15px;color:var(--navy)}
+.attn-list{padding:10px}.attn-item{margin-bottom:7px;padding:12px 13px;border:1px solid #E6E9E5;border-radius:12px 4px 12px 4px;background:#fff}.attn-item:hover{background:#FAF7F0;border-color:rgba(181,138,74,.45)}.attn-dot{width:9px;height:9px;box-shadow:0 0 0 4px var(--warn-soft)}.attn-title{font-size:13px}.empty-note{min-height:180px;display:grid;place-items:center;color:var(--navy);font-size:13px}
+.deptbar-list{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:18px}.deptbar-row{min-height:150px;padding:16px;border:1px solid #E0E6E1;border-radius:18px 5px 18px 5px;background:linear-gradient(145deg,#fff,#F5F6F2);display:flex;flex-direction:column;justify-content:space-between;transition:transform .18s,border-color .18s}.deptbar-row:hover{transform:translateY(-3px);border-color:var(--gold)}.deptbar-top{display:block}.deptbar-top .name{display:block;min-height:40px;font-size:13px;line-height:1.6;color:var(--navy)}.deptbar-top .pct{display:block;margin:8px 0;font-size:28px;color:var(--burgundy)}.deptbar-track{height:8px;background:#E3E9E4}.deptbar-fill{background:linear-gradient(90deg,var(--navy),var(--gold))!important}
+.table-card{border-radius:22px 7px 22px 7px}thead th{padding:14px;background:var(--navy);color:#fff;border-color:rgba(255,255,255,.08)}tbody td{padding:13px 14px;border-bottom-color:#EEF0ED}tbody tr:nth-child(even){background:#FAFAF7}tbody tr:hover{background:#F5EFE4}.cell-title{color:var(--navy)}
+.pager{padding:14px 18px;background:#F8F7F3}.pager button{padding:8px 14px;border-radius:10px 4px 10px 4px;background:#fff}.pager button:not(:disabled):hover{background:var(--navy);border-color:var(--navy);color:#fff}
+.perf-toggle{padding:5px;border:1px solid var(--line);border-radius:14px 5px 14px 5px;background:#fff;width:max-content}.perf-toggle button{padding:9px 16px;border:0}.perf-toggle button.active{background:var(--burgundy);border-color:var(--burgundy)}.grid-3{gap:12px}.perf-card{min-height:165px;padding:19px;border-radius:20px 6px 20px 6px;background:linear-gradient(145deg,#fff,#F5F6F2);display:flex;flex-direction:column;justify-content:center}.perf-card:hover{transform:translateY(-4px);border-color:var(--gold)}.perf-card.is-total{background:linear-gradient(135deg,var(--burgundy),#34101F);border:0}.perf-name{font-size:13px}.perf-score{font-size:35px;color:var(--navy)}.perf-track{height:8px}.perf-fill{background:linear-gradient(90deg,var(--navy),var(--gold))!important}
+.dq-card{padding:20px}.dq-item{padding:15px 4px}.dq-icon{width:40px;height:40px;border-radius:13px 4px 13px 4px}.dq-title{font-size:13px;color:var(--navy)}.dq-detail{font-size:13px}
+.overlay{background:rgba(20,56,47,.48);backdrop-filter:blur(5px)}.drawer{width:min(470px,94vw);border-radius:0 28px 28px 0}.drawer-head{padding:23px;background:linear-gradient(130deg,var(--burgundy),#31101F)}.drawer-head h3{font-size:17px}.drawer-close{width:34px;height:34px;border-radius:11px}.drawer-body{padding:23px}.dfield{padding:12px 0;border-bottom:1px solid #E8EBE7}.dfield .k{font-size:12px;color:var(--gold)}.dfield .v{font-size:14px;color:var(--navy)}
+::-webkit-scrollbar-thumb{background:#AABAB1}
+@media(max-width:1100px){.hero-stats{grid-template-columns:repeat(3,1fr)}.deptbar-list{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){header{height:auto;min-height:70px;padding:11px 16px;gap:10px}.brand-name{font-size:13px}.brand-sub{font-size:10px}.header-tag{font-size:10px;padding:6px 9px}.page{padding:0 14px 40px}.hero{margin:0 0 16px;padding:24px 14px 20px;border-radius:0 0 28px 6px}.hero-inner{grid-template-columns:1fr}.hero-intro h1{font-size:25px}.hero-intro p{font-size:12px}.hero-figure{width:150px;height:150px;justify-self:start}.hero-stats{grid-template-columns:repeat(2,1fr)}.hero-stat{min-height:85px}.filter-bar{position:relative;top:auto}.filter-bar:before{width:100%}.filter-bar select,.filter-bar input[type=text]{width:100%;min-width:0}.filter-count{margin:0}.tabs{overflow:auto}.tab{min-width:120px;white-space:nowrap}.grid-2,.grid-3{grid-template-columns:1fr}.donut-wrap{flex-direction:column}.deptbar-list{grid-template-columns:1fr}.deptbar-row{min-height:120px}.cell-title{max-width:240px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="brand-mark"><img src="spf-logo.png" alt="شعار صندوق الحماية الاجتماعية"></div>
+    <div class="brand-text">
+      <span class="brand-name">المديرية العامة لخدمات المتعاملين</span>
+      <span class="brand-sub">صندوق الحماية الاجتماعية</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="header-tag" id="last-update-tag"><span class="live-dot"></span>آخر تحديث: —</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-intro">
+      <span>لوحة القيادة التشغيلية</span>
+      <h1>الموقف التنفيذي وكفاءة الاستجابة</h1>
+      <p>قراءة بصرية موحّدة لحالة الأعمال، ونسب الإنجاز، وتوزيع المسؤوليات عبر أقسام المديرية.</p>
+      <div class="hero-context"><span>74 بندًا تشغيليًا</span><span>4 أقسام</span><span>تحديث أسبوع 13–17 سبتمبر 2026</span></div>
+    </div>
+    <div class="hero-figure">
+      <span class="label">نسبة الإنجاز الكلي</span>
+      <span class="value" id="hero-rate">—<span class="unit">%</span></span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat" onclick="setStatusFilter('all')"><span class="n" id="stat-total">—</span><span class="l">إجمالي المهام</span></div>
+      <div class="hero-stat is-good" onclick="setStatusFilter('منجز')"><span class="n" id="stat-done">—</span><span class="l">منجز</span></div>
+      <div class="hero-stat is-warn" onclick="setStatusFilter('قيد الإجراء')"><span class="n" id="stat-prog">—</span><span class="l">قيد الإجراء</span></div>
+      <div class="hero-stat is-bad" onclick="setStatusFilter('متأخر')"><span class="n" id="stat-late">—</span><span class="l">متأخر</span></div>
+      <div class="hero-stat"><span class="n" id="stat-depts">—</span><span class="l">الأقسام</span></div>
+      <div class="hero-stat"><span class="n" id="stat-emps">—</span><span class="l">الموظفون</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="filter-bar">
+    <select id="f-month" onchange="onFilterChange()"></select>
+    <select id="f-dept" onchange="onFilterChange()"></select>
+    <select id="f-emp" onchange="onFilterChange()"></select>
+    <select id="f-status" onchange="onFilterChange()">
+      <option value="all">كل الحالات</option>
+      <option value="منجز">منجز</option>
+      <option value="قيد الإجراء">قيد الإجراء</option>
+      <option value="متأخر">متأخر</option>
+    </select>
+    <input type="text" id="f-search" placeholder="بحث في المهام أو الموظفين..." oninput="onSearchInput()">
+    <button class="btn-reset" onclick="resetFilters()">إعادة تعيين</button>
+    <span class="filter-count" id="filter-count"></span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="overview" onclick="switchTab('overview')">نظرة عامة</button>
+    <button class="tab" data-tab="table" onclick="switchTab('table')">السجل التفصيلي</button>
+    <button class="tab" data-tab="perf" onclick="switchTab('perf')">الأداء</button>
+    <button class="tab" data-tab="dq" onclick="switchTab('dq')">جودة البيانات <span class="badge" id="dq-badge">0</span></button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="tab-panel active" id="panel-overview">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head"><h3>توزيع الحالات</h3><span class="hint">حسب الفلاتر الحالية</span></div>
+        <div class="donut-wrap">
+          <canvas id="donut"></canvas>
+          <div class="donut-legend" id="donut-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>يحتاج انتباه</h3><span class="hint">متأخر أو قارب على الإنجاز</span></div>
+        <div class="attn-list" id="attn-list"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>نسبة الإنجاز حسب القسم</h3><span class="hint">اضغط للتصفية</span></div>
+      <div class="deptbar-list" id="deptbar-list"></div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="tab-panel" id="panel-table">
+    <div class="card table-card">
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr>
+            <th>المهمة</th><th>القسم</th><th>الموظف</th><th>النسبة</th><th>التاريخ</th><th>الحالة</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="pager">
+        <span class="info" id="pager-info"></span>
+        <div class="nav">
+          <button id="pg-prev" onclick="changePage(-1)">السابق</button>
+          <button id="pg-next" onclick="changePage(1)">التالي</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="tab-panel" id="panel-perf">
+    <div class="perf-toggle">
+      <button class="active" data-mode="dept" onclick="setPerfMode('dept')">حسب القسم</button>
+      <button data-mode="emp" onclick="setPerfMode('emp')">حسب الموظف</button>
+    </div>
+    <div class="grid-3" id="perf-grid"></div>
+  </div>
+
+  <!-- DATA QUALITY -->
+  <div class="tab-panel" id="panel-dq">
+    <div class="card dq-card">
+      <div class="card-head" style="padding:0 0 12px;border:none;"><h3>تصحيحات تم تطبيقها تلقائياً</h3></div>
+      <div id="dq-fixed"></div>
+    </div>
+    <div class="card dq-card">
+      <div class="card-head" style="padding:0 0 12px;border:none;"><h3>بنود تحتاج مراجعتك</h3></div>
+      <div id="dq-flags"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 id="drawer-title">—</h3>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</div>
+
+
+<script>
+const DATA = [{"title":"متابعة طلبات المؤمن عليهم وأصحاب الاعمال","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"13 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"ادخال طلبات المتعاملين في الرابط","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"13 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"الرد على استفسارات موظفي المركز ومتابعتهم","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"13 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"تقرير الأسبوع الثاني من شهر سبتمبر لمؤشرات مركز الاتصال","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"13 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"تقرير عن جودة المكالمات","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"14 سبتمبر","received":"14 سبتمبر","due":"14 سبتمبر","status":"منجز","overdue":false},{"title":"إعداد جدول المناوبة الإسبوعي","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"16 سبتمبر","received":"16 سبتمبر","due":"16 سبتمبر","status":"منجز","overdue":false},{"title":"توقف خدمات مركز الاتصال","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"15 سبتمبر","received":"14 سبتمبر","due":"15 سبتمبر","status":"منجز","overdue":false},{"title":"المتابعة الدورية لمتدربي خدمات المتعاملين","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"15 سبتمبر","received":"15 سبتمبر","due":"15 سبتمبر","status":"منجز","overdue":false},{"title":"خطة تدشين خدمات عبر مركز الاتصال","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"16 سبتمبر","received":"14 سبتمبر","due":"16 سبتمبر","status":"منجز","overdue":false},{"title":"بدء تدشين مشروع تفعيل الخدمات عبر مركز الاتصال — المرحلة الأولى (18 خدمة","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"15 سبتمبر","received":"13 سبتمبر","due":"15 سبتمبر","status":"منجز","overdue":false},{"title":"اعداد امتحان تعزيز المعرفة لموظفي مركز الاتصال","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"15 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"تقرير مركز الاتصال لشهر أغسطس","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"14 سبتمبر","received":"13 سبتمبر","due":"14 سبتمبر","status":"منجز","overdue":false},{"title":"تعميم للموظفين بشأن بند الترويج","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":null,"date":"9 يوليو","received":"14 سبتمبر","due":"9 يوليو","status":"قيد الإجراء","overdue":false},{"title":"متابعة حضور وانصراف موظفي الجدد الخاصين بلغة الإشارة","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"14 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"مخاطبة الشركة بتوفير البيانات التاريخية لقناة الواتساب","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":null,"date":"14 سبتمبر","received":"14 سبتمبر","due":null,"status":"قيد الإجراء","overdue":false},{"title":"مخاطبة الشركة لإضافة صلاحية البيانات التاريخية لمركز الاتصال","dept":"مركز الاتصال","emp":"فريق مركز الاتصال","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":null,"date":"14 سبتمبر","received":"14 سبتمبر","due":null,"status":"قيد الإجراء","overdue":false},{"title":"البوث الخاص بالدوائر","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":99,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"شراء ( شامل النقل ) أجهزة تنقية ومعقمات الجو لدوائر الحماية الاجتماعية في المحافظات","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":91,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"إسعاد المتعاملين - مشروع توسعة الرسائل النصية","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":30,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"حقيبة التدريب","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":90,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مصطلحات مهمة في خدمة العملاء","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مقترح مشروع من أول زيارة","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":10,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مؤشرات حجم الاعمال","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":null,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مبادرة سجل مخاطر المديرية - النصف الثاني","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"متابعة البريد الصادر والوارد من المحافظات","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"إعداد تقرير تحليل الصادر والوارد وحركة الحقائب","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تم عقد اجتماع مع دائر الحماية الاجتماعية بمحافظة جنوب الباطنة بتاريخ 14/9/2026","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تم عقد الاجتماع مع دائرة الحماية الاجتماعية بمحافظة الوسطى بتاريخ 17/9/2026","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تعويض و تحفيز موظفيين خدمات المتعاملين","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تعزيز المعرفه - إتقان الخدمة","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"ملتقى الإدارة","dept":"شؤون الدوائر والمنافذ","emp":"فريق شؤون الدوائر والمنافذ","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تحليل مؤشرات منصة الواتساب","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":60,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"متابعة تنفيذ اعمال مشروع مركز الاتصال","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":80,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تحسينات على النظام الحالي","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":80,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تحسينات على النظام في البيئة التجريبية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":80,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تحسين عملية التصديق والرد على ملاحظات تحليل الشركة","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":80,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"طلب جميع المستدات اللازمه لعملية التدقيق والايزو","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":80,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تقرير منظومة الحماية الاجتماعية - إضافة جزئية الخاصة بالمديرية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":90,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مسمى المساعد الذكي - الملكية الفكرية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":60,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"اجتماع الأسبوعي لملتقى المدراء ومناقشة الأشياء التشغيلية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":80,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"فحص المساعد الذكي Conversational IVR","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":75,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"Whatwsapp phase 2","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":75,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"Data analytics and reporting platform","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":75,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مسمى المساعد الذكي - الملكية الفكرية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"عرض تقرير مقترح الاسم + عرض الخطه الإعلامية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"عرض المديرية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"إعداد مؤشرات خاصة لقييم موظفي مركز الاتصال","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تصور ملتقى المدراء","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"تحديث دليل الخدمات","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":90,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"الطلبات المقدمة للدعم الفني","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تقرير منصة تجاوب لشهر 8","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"محاور لقاء المدراء","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"متابعة فحص المساعد الذكي","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":65,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"منصة E-LEARNING","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"الموقف التنفيذي لحالات عدم المطابقة والفرص التحسينية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":0,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"أبرز مؤشرات التواصل ورضا المستفيدين - اجتماع مجلس الإدارة 2026","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":0,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"إطار قياس ومتابعة جودة قنوات الخدمة","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تحليل ومعالجة تكرار زيارات المتعاملين","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"محاضر ايسا","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"ملتقى المتعاملين","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":70,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"الخطة التشغيلية 2027","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":null,"received":null,"due":null,"status":"منجز","overdue":false},{"title":"عرض تصور الخدمة خارج ساعات العمل الرسمي","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":95,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"توزيع درجات الاختبار الثاني لتعزيز المعرفة","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":90,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"معجم مصطلحات خدمة العملاء","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"خطة ترويج الخدمات و القنوات الرقمية","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"ملتقى الإدارة","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"مقترح حوكمة تجربة العملاء","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":0,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"تحليل مؤشرات مركز الاتصال ووقت فراغ الموظفين","dept":"إدارة وتطوير الخدمات","emp":"فريق إدارة وتطوير الخدمات","tech":"قيد المتابعة وفق التحديث الأسبوعي.","pct":50,"date":null,"received":null,"due":null,"status":"قيد الإجراء","overdue":false},{"title":"التصميم المؤسسي للسترة والزي الميداني","dept":"إدارة علاقات المتعاملين","emp":"فريق إدارة علاقات المتعاملين","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"16 سبتمبر","received":"16 سبتمبر","due":"16 سبتمبر","status":"منجز","overdue":false},{"title":"استمارة تقيم الهيئات الحكومية 2026","dept":"إدارة علاقات المتعاملين","emp":"فريق إدارة علاقات المتعاملين","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"15 سبتمبر","received":"15 سبتمبر","due":"15 سبتمبر","status":"منجز","overdue":false},{"title":"أسباب مسار تصعيد الطلبات عبر المنصة الوطنية\" تجاوب\" يوليو- أغسطس","dept":"إدارة علاقات المتعاملين","emp":"فريق إدارة علاقات المتعاملين","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"16 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"الورشة الإفتراضية للمنصة الوطنية \"تجاوب \"","dept":"إدارة علاقات المتعاملين","emp":"فريق إدارة علاقات المتعاملين","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"17 سبتمبر","received":"17 سبتمبر","due":"17 سبتمبر","status":"منجز","overdue":false},{"title":"التقرير الشهري لقسم إدارة علاقات المتعاملين خلال الفترة يناير- أغسطس","dept":"إدارة علاقات المتعاملين","emp":"فريق إدارة علاقات المتعاملين","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"16 سبتمبر","received":"16 سبتمبر","due":"16 سبتمبر","status":"منجز","overdue":false},{"title":"اجتماع دورة حياة المستفيدين في المحفظة الالكترونية","dept":"إدارة علاقات المتعاملين","emp":"فريق إدارة علاقات المتعاملين","tech":"تم الإنجاز وفق التحديث الأسبوعي.","pct":100,"date":"13 سبتمبر","received":"13 سبتمبر","due":"13 سبتمبر","status":"منجز","overdue":false}];
+
+// ═══════════════════════════════════════════════
+// DATA QUALITY — تصحيحات تلقائية وبنود مرصودة للمراجعة
+// ═══════════════════════════════════════════════
+const DQ_FIXED = [
+  {title:"اعتماد آخر تحديث أسبوعي",detail:"تم استبدال بيانات الفترة السابقة ببيانات ملف الموقف التنفيذي وكفاءة الاستجابة للأسبوع 13–17 سبتمبر 2026، مع إخفاء أسماء الموظفين في النسخة العامة."},
+  {title:"توحيد حالات الإنجاز",detail:"وُحّدت صيغ «منجز» و«منتهي» و«تم الإنجاز» تحت حالة واحدة، مع الإبقاء على «قيد الإجراء» كما ورد في المصدر."},
+  {title:"عدم افتراض التأخير",detail:"لا يُصنّف أي بند كمتأخر تلقائيًا ما لم يثبت ذلك من الحالة أو تاريخ التسليم الوارد في المصدر."},
+  {title:"الحفاظ على بنود المشاريع المتعددة",detail:"أُدرجت التحسينات الفرعية لمشروع مركز الاتصال كبنود مستقلة مع ربطها بالمسؤول والحالة ونسبة الإنجاز المشتركة."}
+];
+
+const DQ_FLAGS = [{title:"تاريخ يحتاج مراجعة في ملف المصدر",detail:"موعد تسليم بند «تعميم للموظفين بشأن بند الترويج» محفوظ كتاريخ 9 يوليو 2026، بينما تاريخ الاستلام 14 سبتمبر 2026. عُرض التاريخ كما هو دون تعديل افتراضي.",nums:"بند واحد"}];
+
+// ═══════════════════════════════════════════════
+// STATE & HELPERS
+// ═══════════════════════════════════════════════
+let filtered = [...DATA];
+let fDept='all', fMonth='all', fEmp='all', fStatus='all', fSearch='';
+let currentTab='overview';
+let page=1;
+const PAGE_SIZE=15;
+let donutChart;
+let searchDebounce;
+let perfMode='dept';
+
+function splitEmps(emp){
+  return (emp||'').split(/[\/,\-–]/).map(n=>n.trim()).filter(n=>n.length>1 && n!=='القسم' && n!=='الجميع' && n!=='الفريق');
+}
+function monthOf(str){
+  if(!str) return null;
+  const m = str.match(/[\u0600-\u06FF]+$/);
+  return m ? m[0] : null;
+}
+function pctColor(p){
+  if(p == null) return 'var(--ink-faint)';
+  if(p >= 100) return 'var(--good)';
+  if(p >= 75) return 'var(--navy)';
+  if(p >= 50) return 'var(--warn)';
+  return 'var(--bad)';
+}
+function statusPill(r){
+  if(r.status === 'منجز') return `<span class="pill pill-good"><span class="pill-dot"></span>منجز</span>`;
+  if(r.status === 'متأخر') return `<span class="pill pill-bad"><span class="pill-dot"></span>متأخر</span>`;
+  return `<span class="pill pill-warn"><span class="pill-dot"></span>قيد الإجراء</span>`;
+}
+
+// ═══════════════════════════════════════════════
+// FILTER POPULATION
+// ═══════════════════════════════════════════════
+const MONTH_ORDER = ['فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر'];
+function populateFilters(){
+  const deptSel = document.getElementById('f-dept');
+  const depts = [...new Set(DATA.map(r=>r.dept))].sort((a,b)=>a.localeCompare(b,'ar'));
+  deptSel.innerHTML = '<option value="all">كل الأقسام</option>' + depts.map(d=>`<option value="${d}">${d}</option>`).join('');
+
+  const monthSel = document.getElementById('f-month');
+  const monthsPresent = new Set(DATA.map(r=>monthOf(r.date)).filter(Boolean));
+  let mopts = '<option value="all">كل الأشهر</option>';
+  MONTH_ORDER.forEach(m=>{ if(monthsPresent.has(m)) mopts += `<option value="${m}">${m}</option>`; });
+  monthSel.innerHTML = mopts;
+
+  const empSel = document.getElementById('f-emp');
+  const empSet = new Set();
+  DATA.forEach(r=>splitEmps(r.emp).forEach(n=>empSet.add(n)));
+  const emps = [...empSet].sort((a,b)=>a.localeCompare(b,'ar'));
+  empSel.innerHTML = '<option value="all">كل الموظفين</option>' + emps.map(n=>`<option value="${n}">${n}</option>`).join('');
+}
+
+// ═══════════════════════════════════════════════
+// FILTERING
+// ═══════════════════════════════════════════════
+function applyFilters(){
+  filtered = DATA.filter(r=>{
+    const s = fStatus==='all' || r.status===fStatus;
+    const d = fDept==='all' || r.dept===fDept;
+    const mo = fMonth==='all' || monthOf(r.date)===fMonth;
+    const e = fEmp==='all' || splitEmps(r.emp).includes(fEmp);
+    const q = !fSearch || r.title.includes(fSearch) || r.emp.includes(fSearch) || (r.dept||'').includes(fSearch);
+    return s && d && mo && e && q;
+  });
+  page=1;
+  renderAll();
+}
+function onFilterChange(){
+  fDept = document.getElementById('f-dept').value;
+  fMonth = document.getElementById('f-month').value;
+  fEmp = document.getElementById('f-emp').value;
+  fStatus = document.getElementById('f-status').value;
+  applyFilters();
+}
+function onSearchInput(){
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(()=>{
+    fSearch = document.getElementById('f-search').value.trim();
+    applyFilters();
+  },220);
+}
+function resetFilters(){
+  fDept='all'; fMonth='all'; fEmp='all'; fStatus='all'; fSearch='';
+  document.getElementById('f-dept').value='all';
+  document.getElementById('f-month').value='all';
+  document.getElementById('f-emp').value='all';
+  document.getElementById('f-status').value='all';
+  document.getElementById('f-search').value='';
+  applyFilters();
+}
+function setStatusFilter(s){
+  fStatus = s;
+  document.getElementById('f-status').value = s;
+  applyFilters();
+}
+function filterByDept(d){
+  fDept = d;
+  document.getElementById('f-dept').value = d;
+  switchTab('table');
+  applyFilters();
+}
+function filterByEmp(n){
+  fEmp = n;
+  document.getElementById('f-emp').value = n;
+  switchTab('table');
+  applyFilters();
+}
+
+// ═══════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════
+function switchTab(name){
+  currentTab = name;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if(name==='overview') renderOverview();
+  if(name==='table') renderTable();
+  if(name==='perf') renderPerf();
+  if(name==='dq') renderDQ();
+}
+
+// ═══════════════════════════════════════════════
+// KPI / HERO
+// ═══════════════════════════════════════════════
+function renderHero(){
+  const total = filtered.length;
+  const done = filtered.filter(r=>r.status==='منجز').length;
+  const prog = filtered.filter(r=>r.status==='قيد الإجراء').length;
+  const late = filtered.filter(r=>r.status==='متأخر').length;
+  const knownProgress = filtered.filter(r=>r.pct!=null).map(r=>r.pct);
+  const rate = knownProgress.length ? Math.round(knownProgress.reduce((sum,value)=>sum+value,0)/knownProgress.length) : 0;
+  const depts = new Set(filtered.map(r=>r.dept)).size;
+  const empSet = new Set(); filtered.forEach(r=>splitEmps(r.emp).forEach(n=>empSet.add(n)));
+
+  document.getElementById('hero-rate').innerHTML = rate + '<span class="unit">%</span>';
+  document.querySelector('.hero-figure').style.setProperty('--rate', rate);
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-done').textContent = done;
+  document.getElementById('stat-prog').textContent = prog;
+  document.getElementById('stat-late').textContent = late;
+  document.getElementById('stat-depts').textContent = depts;
+  document.getElementById('stat-emps').textContent = empSet.size;
+
+  document.getElementById('filter-count').textContent = `عرض ${total} من أصل ${DATA.length} مهمة`;
+}
+
+function renderAll(){
+  renderHero();
+  if(currentTab==='overview') renderOverview();
+  if(currentTab==='table') renderTable();
+  if(currentTab==='perf') renderPerf();
+  if(currentTab==='dq') renderDQ();
+}
+
+// ═══════════════════════════════════════════════
+// OVERVIEW TAB
+// ═══════════════════════════════════════════════
+function renderOverview(){
+  const done = filtered.filter(r=>r.status==='منجز').length;
+  const prog = filtered.filter(r=>r.status==='قيد الإجراء').length;
+  const late = filtered.filter(r=>r.status==='متأخر').length;
+
+  const ctx = document.getElementById('donut').getContext('2d');
+  if(donutChart) donutChart.destroy();
+  donutChart = new Chart(ctx,{
+    type:'doughnut',
+    data:{
+      labels:['منجز','قيد الإجراء','متأخر'],
+      datasets:[{data:[done,prog,late], backgroundColor:['#28775B','#C59A52','#8E2948'], borderWidth:0, hoverOffset:7}]
+    },
+    options:{cutout:'68%', plugins:{legend:{display:false}, tooltip:{rtl:true}}}
+  });
+  const total = done+prog+late || 1;
+  document.getElementById('donut-legend').innerHTML = [
+    ['منجز','#1E7B4D',done],['قيد الإجراء','#B7791F',prog],['متأخر','#B23A3A',late]
+  ].map(([name,color,val])=>`
+    <div class="legend-row">
+      <span class="legend-dot" style="background:${color}"></span>
+      <span class="name">${name}</span>
+      <span class="val">${val} (${Math.round(val/total*100)}%)</span>
+    </div>`).join('');
+
+  // attention list: late items + near-done items (>=85% not done)
+  const late_ = filtered.filter(r=>r.status==='متأخر');
+  const nearDone = filtered.filter(r=>r.status==='قيد الإجراء' && r.pct!=null && r.pct>=85);
+  const items = [...late_, ...nearDone].slice(0,8);
+  const el = document.getElementById('attn-list');
+  if(!items.length){
+    el.innerHTML = '<div class="empty-note">لا توجد بنود تحتاج انتباهاً حالياً ضمن الفلاتر المحددة.</div>';
+  } else {
+    el.innerHTML = items.map(r=>{
+      const idx = DATA.indexOf(r);
+      const isLate = r.status==='متأخر';
+      return `<div class="attn-item" onclick="openTaskDrawer(${idx})">
+        <span class="attn-dot" style="background:${isLate?'var(--bad)':'var(--warn)'}"></span>
+        <span class="attn-title">${r.title}</span>
+        <span class="attn-meta">${isLate?'متأخر':(r.pct+'%')}</span>
+      </div>`;
+    }).join('');
+  }
+
+  // dept completion bars
+  const deptMap = {};
+  filtered.forEach(r=>{ (deptMap[r.dept]=deptMap[r.dept]||[]).push(r); });
+  const rows = Object.entries(deptMap).map(([d,items])=>{
+    const done = items.filter(r=>r.status==='منجز').length;
+    return {d, total:items.length, done, pct: Math.round(done/items.length*100)};
+  }).sort((a,b)=>b.total-a.total);
+  document.getElementById('deptbar-list').innerHTML = rows.map(r=>`
+    <div class="deptbar-row" onclick="filterByDept('${r.d.replace(/'/g,"\\'")}')">
+      <div class="deptbar-top"><span class="name">${r.d}</span><span class="pct">${r.pct}% <span style="color:var(--ink-faint);font-weight:400;">(${r.done}/${r.total})</span></span></div>
+      <div class="deptbar-track"><div class="deptbar-fill" style="width:${r.pct}%;background:${pctColor(r.pct)}"></div></div>
+    </div>`).join('') || '<div class="empty-note">لا توجد بيانات ضمن الفلاتر المحددة.</div>';
+}
+
+// ═══════════════════════════════════════════════
+// TABLE TAB
+// ═══════════════════════════════════════════════
+function renderTable(){
+  const tbody = document.getElementById('tbody');
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  if(page>totalPages) page=totalPages;
+  const start = (page-1)*PAGE_SIZE;
+  const pageItems = filtered.slice(start, start+PAGE_SIZE);
+
+  if(!pageItems.length){
+    tbody.innerHTML = `<tr><td colspan="6" class="empty-note">لا توجد نتائج مطابقة للفلاتر المحددة.</td></tr>`;
+  } else {
+    tbody.innerHTML = pageItems.map(r=>{
+      const idx = DATA.indexOf(r);
+      const p = r.pct!=null ? r.pct : null;
+      const w = p!=null ? p : 0;
+      const c = pctColor(p);
+      return `<tr onclick="openTaskDrawer(${idx})">
+        <td class="cell-title">${r.title}</td>
+        <td>${r.dept}</td>
+        <td class="cell-emp">${r.emp}</td>
+        <td><div class="pct-mini"><div class="track"><div class="fill" style="width:${w}%;background:${c}"></div></div><span class="num">${p!=null?p+'%':'—'}</span></div></td>
+        <td>${r.date || '—'}</td>
+        <td>${statusPill(r)}</td>
+      </tr>`;
+    }).join('');
+  }
+  document.getElementById('pager-info').textContent = `صفحة ${page} من ${totalPages} — ${filtered.length} مهمة`;
+  document.getElementById('pg-prev').disabled = page<=1;
+  document.getElementById('pg-next').disabled = page>=totalPages;
+}
+function changePage(delta){
+  page += delta;
+  renderTable();
+}
+
+// ═══════════════════════════════════════════════
+// PERFORMANCE TAB
+// ═══════════════════════════════════════════════
+function setPerfMode(mode){
+  perfMode = mode;
+  document.querySelectorAll('.perf-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.mode===mode));
+  renderPerf();
+}
+function calcEff(items){
+  const total = items.length;
+  const done = items.filter(r=>r.status==='منجز').length;
+  if(!total) return {score:100,total:0,done:0};
+  return {score: Math.round(done/total*100), total, done};
+}
+function renderPerf(){
+  const grid = document.getElementById('perf-grid');
+  const overall = calcEff(filtered);
+  let html = `<div class="perf-card is-total">
+    <div class="perf-name">الدائرة كاملة (ضمن الفلاتر)</div>
+    <div class="perf-score">${overall.score}%</div>
+    <div class="perf-track"><div class="perf-fill" style="width:${overall.score}%;background:var(--gold-bright);"></div></div>
+    <div class="perf-sub">${overall.done} منجز من ${overall.total} مهمة</div>
+  </div>`;
+
+  if(perfMode==='dept'){
+    const map={};
+    filtered.forEach(r=>{ (map[r.dept]=map[r.dept]||[]).push(r); });
+    Object.entries(map).sort((a,b)=>calcEff(b[1]).total-calcEff(a[1]).total).forEach(([name,items])=>{
+      const e = calcEff(items);
+      html += perfCard(name, e, `filterByDept('${name.replace(/'/g,"\\'")}')`);
+    });
+  } else {
+    const map={};
+    filtered.forEach(r=>{ splitEmps(r.emp).forEach(name=>{ (map[name]=map[name]||[]).push(r); }); });
+    Object.entries(map).sort((a,b)=>calcEff(a[1]).score-calcEff(b[1]).score).forEach(([name,items])=>{
+      const e = calcEff(items);
+      html += perfCard(name, e, `filterByEmp('${name.replace(/'/g,"\\'")}')`);
+    });
+  }
+  grid.innerHTML = html;
+}
+function perfCard(name, e, onclick){
+  return `<div class="perf-card" onclick="${onclick}">
+    <div class="perf-name">${name}</div>
+    <div class="perf-score" style="color:${e.score>=80?'var(--good)':e.score>=60?'var(--warn)':'var(--bad)'}">${e.score}%</div>
+    <div class="perf-track"><div class="perf-fill" style="width:${e.score}%;background:${e.score>=80?'var(--good)':e.score>=60?'var(--warn)':'var(--bad)'};"></div></div>
+    <div class="perf-sub">${e.done} منجز من ${e.total} مهمة</div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// DATA QUALITY TAB
+// ═══════════════════════════════════════════════
+function renderDQ(){
+  document.getElementById('dq-fixed').innerHTML = DQ_FIXED.map(f=>`
+    <div class="dq-item">
+      <div class="dq-icon fixed">✓</div>
+      <div class="dq-body">
+        <div class="dq-title">${f.title}</div>
+        <div class="dq-detail">${f.detail}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('dq-flags').innerHTML = DQ_FLAGS.length ? DQ_FLAGS.map(f=>`
+    <div class="dq-item">
+      <div class="dq-icon flag">!</div>
+      <div class="dq-body">
+        <div class="dq-title">${f.title}</div>
+        <div class="dq-detail">${f.detail}</div>
+        <div class="dq-nums">${f.nums}</div>
+      </div>
+    </div>`).join('') : '<div class="empty-note">لا توجد بنود معلّقة تحتاج مراجعتك حالياً.</div>';
+}
+document.getElementById('dq-badge').textContent = DQ_FLAGS.length;
+
+// ═══════════════════════════════════════════════
+// DRAWER
+// ═══════════════════════════════════════════════
+function openDrawer(){
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+function openTaskDrawer(idx){
+  const r = DATA[idx];
+  document.getElementById('drawer-title').textContent = r.title;
+  document.getElementById('drawer-body').innerHTML = `
+    <div class="dfield"><div class="k">الحالة</div><div class="v">${statusPill(r)}</div></div>
+    <div class="dfield"><div class="k">القسم</div><div class="v">${r.dept}</div></div>
+    <div class="dfield"><div class="k">الموظف / الموظفون</div><div class="v">${r.emp}</div></div>
+    <div class="dfield"><div class="k">نسبة الإنجاز</div><div class="v">${r.pct!=null? r.pct+'%':'غير محدد'}</div></div>
+    <div class="dfield"><div class="k">تاريخ الاستلام</div><div class="v">${r.received || 'غير محدد'}</div></div>
+    <div class="dfield"><div class="k">موعد التسليم</div><div class="v">${r.due || 'غير محدد'}</div></div>
+    <div class="dfield"><div class="k">التفاصيل الفنية</div><div class="v">${r.tech || '—'}</div></div>
+  `;
+  openDrawer();
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+function init(){
+  populateFilters();
+  const fmt = new Intl.DateTimeFormat('ar', {day:'numeric', month:'long', year:'numeric'});
+  document.getElementById('last-update-tag').innerHTML = `<span class="live-dot"></span>آخر تحديث: ${fmt.format(new Date(2026,8,17))}`;
+  applyFilters();
+}
+init();
+
+</script>
+</body>
+</html>
