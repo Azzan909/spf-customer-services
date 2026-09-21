@@ -1,4 +1,4 @@
-name: Deploy public dashboard
+name: Deploy both public dashboards
 
 on:
   push:
@@ -21,14 +21,70 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out dashboard
+      - name: Check out dashboard files
         uses: actions/checkout@v4
+
+      - name: Prepare current and restored dashboards
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          site = Path("_site")
+          legacy = site / "legacy"
+          legacy.mkdir(parents=True, exist_ok=True)
+          (site / "index.html").write_bytes(Path("index.html").read_bytes())
+          (site / ".nojekyll").write_text("", encoding="utf-8")
+
+          base = "https://spf-customer-services-gallery.spf2040.chatgpt.site/"
+          files = [
+              "index.html",
+              "assets/app.js",
+              "assets/channels/ai-assistant.png",
+              "assets/channels/contact-center.png",
+              "assets/channels/facebook.png",
+              "assets/channels/himaya-app.png",
+              "assets/channels/instagram.png",
+              "assets/channels/oman-governorates.png",
+              "assets/channels/tajawob.png",
+              "assets/channels/web-portal.png",
+              "assets/channels/whatsapp.png",
+              "assets/channels/x.png",
+              "assets/data.js",
+              "assets/excel-import.js",
+              "assets/executive-mode.js",
+              "assets/exhibition.css",
+              "assets/exhibition.js",
+              "assets/model-branch-poster.jpg",
+              "assets/model-branch.mp4",
+              "assets/oman-governorates-map.png",
+              "assets/spf-logo.png",
+              "assets/styles.css",
+              "assets/work-tracker.html",
+              "assets/قالب تحديث منصة خدمات المتعاملين.xlsx",
+          ]
+
+          for item in files:
+              target = legacy / item
+              target.parent.mkdir(parents=True, exist_ok=True)
+              request = Request(base + quote(item, safe="/"), headers={"User-Agent": "SPF-Dashboard-Deployment/1.0"})
+              with urlopen(request, timeout=120) as response:
+                  target.write_bytes(response.read())
+              print(f"Restored {item}")
+
+      - name: Apply the last saved repository updates to restored platform
+        shell: bash
+        run: |
+          cp -R overrides/. _site/legacy/
+          python patches/patch_index.py _site/legacy/index.html
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload public dashboard
+      - name: Upload both dashboards
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
-      - name: Deploy dashboard
+          path: _site
+      - name: Deploy dashboards
         id: deployment
         uses: actions/deploy-pages@v4
