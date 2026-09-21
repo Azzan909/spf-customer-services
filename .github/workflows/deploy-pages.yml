@@ -1,4 +1,4 @@
-name: Deploy customer services dashboard
+name: Deploy public dashboard
 
 on:
   push:
@@ -21,66 +21,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out maintained dashboard updates
+      - name: Check out dashboard
         uses: actions/checkout@v4
-      - name: Prepare independent dashboard copy
-        shell: python
-        run: |
-          from pathlib import Path
-          from urllib.parse import quote
-          from urllib.request import Request, urlopen
-
-          base = "https://spf-customer-services-gallery.spf2040.chatgpt.site/"
-          files = [
-              "index.html",
-              "assets/app.js",
-              "assets/channels/ai-assistant.png",
-              "assets/channels/contact-center.png",
-              "assets/channels/facebook.png",
-              "assets/channels/himaya-app.png",
-              "assets/channels/instagram.png",
-              "assets/channels/oman-governorates.png",
-              "assets/channels/tajawob.png",
-              "assets/channels/web-portal.png",
-              "assets/channels/whatsapp.png",
-              "assets/channels/x.png",
-              "assets/data.js",
-              "assets/excel-import.js",
-              "assets/executive-mode.js",
-              "assets/exhibition.css",
-              "assets/exhibition.js",
-              "assets/model-branch-poster.jpg",
-              "assets/model-branch.mp4",
-              "assets/oman-governorates-map.png",
-              "assets/spf-logo.png",
-              "assets/styles.css",
-              "assets/work-tracker.html",
-              "assets/قالب تحديث منصة خدمات المتعاملين.xlsx",
-          ]
-
-          root = Path("_site")
-          root.mkdir(exist_ok=True)
-          for item in files:
-              target = root / item
-              target.parent.mkdir(parents=True, exist_ok=True)
-              url = base + quote(item, safe="/")
-              request = Request(url, headers={"User-Agent": "SPF-Dashboard-Deployment/1.0"})
-              with urlopen(request, timeout=90) as response:
-                  target.write_bytes(response.read())
-              print(f"Downloaded {item}")
-
-          (root / ".nojekyll").write_text("", encoding="utf-8")
-      - name: Apply maintained dashboard updates
-        shell: bash
-        run: |
-          cp -R overrides/. _site/
-          python patches/patch_index.py _site/index.html
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload dashboard
+      - name: Upload public dashboard
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: .
       - name: Deploy dashboard
         id: deployment
         uses: actions/deploy-pages@v4
