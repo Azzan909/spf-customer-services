@@ -85,6 +85,7 @@
   function thresholdForResult(item,field,index){
     const key=`plan.${item.id}.${field}.${index}`;
     if(Object.prototype.hasOwnProperty.call(workingEdits,key))return workingEdits[key];
+    if(Array.isArray(item.resultTargets)&&item.resultTargets[index]&&item.resultTargets[index][field]!=null)return item.resultTargets[index][field];
     const raw=String(planValue(item,field)||"").trim(),parts=raw.split(/\s*\/\s*/).filter(Boolean);
     return parts.length===item.results.length?parts[index]:raw;
   }
