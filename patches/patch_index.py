@@ -25,8 +25,33 @@ replace_required(
             <article class="plan-target"><span>نسبة إنجاز الخطة</span><strong id="planCompletionRate">0%</strong><small>المبادرات المسلّمة من إجمالي الخطة</small></article>
             <article class="plan-kpi-on-time"><span>سُلّمت في الوقت المحدد</span><strong id="planOnTimeCount">0</strong><small>تحقق أو تفوق التوقعات</small></article>
             <article class="plan-kpi-late"><span>المبادرات المتأخرة</span><strong id="planLateCount">0</strong><small>تسليم متأخر أو تجاوز الموعد</small></article>
-            <article><span>إجمالي بنود الخطة</span><strong id="planTotalCount">20</strong><small>7 أهداف و13 مبادرة إضافية</small></article>
+            <article><span>إجمالي بنود الخطة</span><strong id="planTotalCount">22</strong><small>9 أهداف و13 مبادرة إضافية</small></article>
           </div>''')
+
+replace_required(
+    '<button class="btn secondary" id="updateGuide">دليل التحديث</button>',
+    '<button class="btn secondary" id="privacyLockButton">قفل العرض</button>\n          <button class="btn secondary" id="updateGuide">دليل التحديث</button>')
+replace_required('الأهداف التشغيلية السبعة', 'الأهداف التشغيلية التسعة')
+replace_required('سبعة أهداف رئيسية تقود التنفيذ', 'تسعة أهداف رئيسية تقود التنفيذ')
+
+replace_required(
+'''            <article class="method-application">
+              <span>كيف تُطبّقها المديرية؟</span>
+              <div><b>100%</b><small>تحليل شهري للشكاوى</small></div>
+              <div><b>277+</b><small>ملف معرفة وأدلة خدمة</small></div>
+              <ul><li>تقارير الرؤى السلوكية وشخصيات المتعاملين</li><li>تصميم الخدمات حول رحلة المتعامل وأحداث الحياة</li><li>خيار بشري وإتاحة شاملة في القنوات الرقمية</li><li>قياس التجربة والتحسين وفق النتائج</li></ul>
+            </article>''',
+'''            <article class="method-application">
+              <span>كيف تطبّق المديرية مركزية المتعامل عمليًا؟</span>
+              <p class="application-intro">مسار عمل متكرر يبدأ بصوت المتعامل وينتهي بتحسين قابل للقياس.</p>
+              <ol class="application-steps">
+                <li><b>1</b><div><strong>نستمع</strong><small>نجمع الشكاوى والمقترحات ونتائج الرضا.</small></div></li>
+                <li><b>2</b><div><strong>نحلّل</strong><small>نحدد أكثر نقاط الألم تكرارًا وأسبابها.</small></div></li>
+                <li><b>3</b><div><strong>نحسّن</strong><small>نبسّط الإجراء ونحدّث المعرفة والقنوات.</small></div></li>
+                <li><b>4</b><div><strong>نقيس</strong><small>نقارن النتيجة بالمؤشر ونصحح المسار.</small></div></li>
+              </ol>
+              <div class="application-proof"><div><b>100%</b><small>تحليل شهري للشكاوى</small></div><div><b>277+</b><small>ملف معرفة ودليل خدمة</small></div></div>
+            </article>''')
 
 replace_required(
     '<p class="plan-data-note">يعرض القسم المستهدفات والمواعيد الواردة في الخطة المرفقة. لم تُدرج نسب إنجاز فعلية لعدم توفرها في المصدر.</p>',
@@ -66,6 +91,16 @@ replace_required(
 replace_required(
     '<div class="board-portfolio"><article><strong>100%</strong><span>التنسيق والمتابعة</span></article><article><strong>48%</strong><span>شؤون الدوائر والمنافذ</span></article><article><strong>5</strong><span>أقسام ضمن المتابعة</span></article></div>',
     '<div class="board-portfolio"><article><strong>11%</strong><span>إدارة وتطوير الخدمات</span></article><article><strong>4</strong><span>أقسام ضمن المتابعة</span></article><article><strong>74</strong><span>بندًا في التحديث الأسبوعي</span></article></div>')
+
+privacy_modal = '''  <div class="modal" id="privacyLockModal" aria-hidden="true"><div class="modal-backdrop" data-close-privacy></div><article class="modal-panel wide privacy-panel" role="dialog" aria-modal="true" aria-labelledby="privacyLockTitle"><button class="modal-close" data-close-privacy aria-label="إغلاق">×</button><span class="modal-status">خصوصية العرض على هذا الجهاز</span><h2 id="privacyLockTitle">قفل أو تشويش تبويبات مختارة</h2><p class="privacy-note">هذا قفل عرض مناسب للاجتماعات والعروض، ولا يُعد بديلًا عن نظام دخول مؤسسي لأن الموقع الحالي صفحة عامة.</p><div class="privacy-grid" id="privacyTabChoices"></div><div class="privacy-pin"><label><span>رمز العرض</span><input id="privacyPin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="أدخل 4 أرقام أو أكثر"></label><label><span>تأكيد الرمز</span><input id="privacyPinConfirm" type="password" inputmode="numeric" autocomplete="new-password" placeholder="أعد إدخال الرمز"></label></div><div class="privacy-actions"><button class="btn primary" id="savePrivacyLock">حفظ القفل</button><button class="btn secondary" id="clearPrivacyLock">إلغاء جميع الأقفال</button></div><div class="excel-import-status" id="privacyStatus" role="status" aria-live="polite"></div></article></div>
+
+'''
+replace_required(
+    '  <script src="assets/data.js"></script>',
+    privacy_modal + '  <script src="assets/data.js"></script>\n  <script src="assets/plan-data-2026.js"></script>')
+replace_required(
+    '  <script src="assets/app.js"></script>',
+    '  <script src="assets/app.js"></script>\n  <script src="assets/privacy-lock.js"></script>')
 
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
 path.write_text(text, encoding="utf-8")
