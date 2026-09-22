@@ -97,13 +97,12 @@ privacy_modal = '''  <div class="modal" id="privacyLockModal" aria-hidden="true"
 
 '''
 
-tracker_modal = '''  <div class="modal" id="trackerUpdateModal" aria-hidden="true"><div class="modal-backdrop" data-close-tracker></div><article class="modal-panel wide" role="dialog" aria-modal="true" aria-labelledby="trackerModalTitle"><button class="modal-close" data-close-tracker aria-label="إغلاق">×</button><span class="modal-status">الموقف التنفيذي · كفاءة الاستجابة</span><h2 id="trackerModalTitle">تحديث بيانات الأعمال</h2><p style="font-size:13px;color:var(--muted,#68746f);margin:4px 0 18px">أدخل عدد البنود المنجزة والإجمالية لكل قسم. تُحسب جميع النسب تلقائيًا وتُحدَّث مؤشرات اللوحة فور الحفظ وتُحفظ على هذا المتصفح.</p><div class="tracker-edit-grid" id="trackerEditGrid"></div><div class="tracker-edit-footer" id="trackerEditFooter"></div><div style="display:flex;gap:9px;margin-top:20px;justify-content:flex-end"><button class="btn primary" id="saveTrackerEdits">حفظ وتحديث اللوحة</button><button class="btn secondary" data-close-tracker>إغلاق</button></div><div class="excel-import-status" id="trackerSaveStatus" role="status" aria-live="polite" style="margin-top:10px"></div></article></div>
-
-'''
-
 replace_required(
     '  <script src="assets/data.js"></script>',
-    privacy_modal + tracker_modal + '  <script src="assets/data.js"></script>\n  <script src="assets/plan-data-2026.js"></script>')
+    privacy_modal + '  <script src="assets/data.js"></script>\n  <script src="assets/plan-data-2026.js"></script>')
+replace_required(
+    '<a class="btn secondary" href="assets/work-tracker.html" target="_blank" rel="noopener">فتح بالحجم الكامل</a>',
+    '<a class="btn secondary" href="assets/work-tracker.html" target="_blank" rel="noopener">فتح وتحديث البيان التفصيلي</a>')
 replace_required(
     '  <script src="assets/app.js"></script>',
     '  <script src="assets/app.js"></script>\n  <script src="assets/privacy-lock.js"></script>')

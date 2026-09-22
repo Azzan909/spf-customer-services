@@ -259,7 +259,7 @@
   prepareEditable();applyValues(savedEdits);
 
   // ── Work Tracker Module ──────────────────────────────────────────────────
-  const TRACKER_STORAGE_KEY="spf-work-tracker-v2";
+  const TRACKER_SUMMARY_KEY="spf-work-tracker-summary-v3";
   const DEFAULT_TRACKER_DEPTS=[
     {id:"contact",     name:"مركز الاتصال",                 done:102, total:107},
     {id:"coord",       name:"التنسيق والمتابعة",             done:7,   total:7},
@@ -268,17 +268,21 @@
     {id:"branches",    name:"شؤون الدوائر والمنافذ",        done:36,  total:75},
   ];
 
-  function readTrackerData(){
-    try{const d=JSON.parse(localStorage.getItem(TRACKER_STORAGE_KEY)||"null");return Array.isArray(d)&&d.length?d:DEFAULT_TRACKER_DEPTS.map(x=>({...x}))}catch(_){return DEFAULT_TRACKER_DEPTS.map(x=>({...x}))}
+  function defaultTrackerSummary(){
+    const depts=DEFAULT_TRACKER_DEPTS.map(x=>({...x}));
+    const done=depts.reduce((s,d)=>s+d.done,0),total=depts.reduce((s,d)=>s+d.total,0);
+    return {depts,done,total,late:0,progress:total-done,rate:total?Math.round(done/total*100):0};
   }
-  function saveTrackerData(depts){localStorage.setItem(TRACKER_STORAGE_KEY,JSON.stringify(depts))}
+  function readTrackerSummary(){
+    try{const saved=JSON.parse(localStorage.getItem(TRACKER_SUMMARY_KEY)||"null");return saved&&Array.isArray(saved.depts)?saved:defaultTrackerSummary()}catch(_){return defaultTrackerSummary()}
+  }
 
-  function renderTrackerBoard(){
-    const depts=readTrackerData();
-    const totalDone=depts.reduce((s,d)=>s+d.done,0);
-    const totalItems=depts.reduce((s,d)=>s+d.total,0);
+  function renderTrackerBoard(summary=readTrackerSummary()){
+    const depts=summary.depts||[];
+    const totalDone=Number(summary.done)||0;
+    const totalItems=Number(summary.total)||0;
     const rate=totalItems?Math.round(totalDone/totalItems*100):0;
-    const inProgress=totalItems-totalDone;
+    const inProgress=Math.max(0,totalItems-totalDone);
 
     const setTxt=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
     const setWidth=(id,w)=>{const el=document.getElementById(id);if(el)el.style.width=w};
@@ -318,72 +322,16 @@
     if(boardDeptCountEl){const s=boardDeptCountEl.querySelector("strong");if(s)s.textContent=depts.length}
     const boardTotalItemsEl=document.getElementById("boardTotalItems");
     if(boardTotalItemsEl){const s=boardTotalItemsEl.querySelector("strong");if(s)s.textContent=totalItems}
+    const boardTitle=document.querySelector('[data-board-title="متابعة الأعمال"] .board-slide-heading h2');
+    if(boardTitle)boardTitle.textContent=`لوحة واحدة لمتابعة ${totalItems} بندًا تشغيليًا`;
   }
 
-  function openTrackerModal(){
-    const modal=document.getElementById("trackerUpdateModal");if(!modal)return;
-    const depts=readTrackerData();
-    const grid=document.getElementById("trackerEditGrid");
-    if(grid){
-      grid.innerHTML=depts.map(dept=>`
-        <div class="tracker-dept-row" data-dept-id="${dept.id}">
-          <span class="tracker-dept-name">${dept.name}</span>
-          <label class="tracker-field-label">منجز<input type="number" min="0" class="tracker-input tracker-done-input" data-dept="${dept.id}" value="${dept.done}"></label>
-          <label class="tracker-field-label">إجمالي<input type="number" min="0" class="tracker-input tracker-total-input" data-dept="${dept.id}" value="${dept.total}"></label>
-        </div>`).join("");
-      updateTrackerFooter(depts);
-      grid.querySelectorAll(".tracker-input").forEach(input=>input.addEventListener("input",()=>{
-        const current=getCurrentEditDepts();updateTrackerFooter(current);
-      }));
-    }
-    modal.classList.add("open");modal.setAttribute("aria-hidden","false");
-  }
-
-  function getCurrentEditDepts(){
-    const grid=document.getElementById("trackerEditGrid");if(!grid)return readTrackerData();
-    return readTrackerData().map(dept=>{
-      const doneEl=grid.querySelector(`.tracker-done-input[data-dept="${dept.id}"]`);
-      const totalEl=grid.querySelector(`.tracker-total-input[data-dept="${dept.id}"]`);
-      return {...dept,done:doneEl?Math.max(0,parseInt(doneEl.value)||0):dept.done,total:totalEl?Math.max(0,parseInt(totalEl.value)||0):dept.total};
-    });
-  }
-
-  function updateTrackerFooter(depts){
-    const footer=document.getElementById("trackerEditFooter");if(!footer)return;
-    const done=depts.reduce((s,d)=>s+d.done,0);
-    const total=depts.reduce((s,d)=>s+d.total,0);
-    const rate=total?Math.round(done/total*100):0;
-    footer.textContent=`الإجمالي: ${done} منجز من ${total} — نسبة الإنجاز: ${rate}%`;
-  }
-
-  (function(){
-    const rateEl=document.getElementById("trackerRate");
-    if(!rateEl)return;
-    const block=rateEl.closest(".section-block");
-    if(!block)return;
-    const heading=block.querySelector(".section-heading");
-    if(!heading)return;
-    const btn=document.createElement("button");
-    btn.className="btn secondary";
-    btn.id="trackerUpdateButton";
-    btn.textContent="تحديث البيانات";
-    heading.appendChild(btn);
-    btn.addEventListener("click",openTrackerModal);
-  })();
-
-  const saveTrackerBtn=document.getElementById("saveTrackerEdits");
-  if(saveTrackerBtn)saveTrackerBtn.addEventListener("click",()=>{
-    const depts=getCurrentEditDepts();
-    saveTrackerData(depts);renderTrackerBoard();
-    const modal=document.getElementById("trackerUpdateModal");
-    if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
-    toast("تم حفظ بيانات متابعة الأعمال");
+  window.addEventListener("message",event=>{
+    if(event.origin!==window.location.origin||event.data?.type!=="spf-work-tracker-summary")return;
+    const summary=event.data.summary;if(!summary||!Array.isArray(summary.depts))return;
+    try{localStorage.setItem(TRACKER_SUMMARY_KEY,JSON.stringify(summary))}catch(_){/* private mode */}
+    renderTrackerBoard(summary);
   });
-
-  document.querySelectorAll("[data-close-tracker]").forEach(x=>x.addEventListener("click",()=>{
-    const modal=document.getElementById("trackerUpdateModal");
-    if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
-  }));
 
   renderTrackerBoard();
 })();
