@@ -31,9 +31,6 @@ replace_required(
 replace_required(
     '<button class="btn secondary" id="updateGuide">دليل التحديث</button>',
     '<button class="btn secondary" id="privacyLockButton">قفل العرض</button>\n          <button class="btn secondary" id="updateGuide">دليل التحديث</button>')
-replace_required(
-    '<button class="btn secondary" id="privacyLockButton">قفل العرض</button>\n          <button class="btn secondary" id="updateGuide">دليل التحديث</button>',
-    '<button class="btn secondary" id="trackerUpdateButton">تحديث الأعمال</button>\n          <button class="btn secondary" id="privacyLockButton">قفل العرض</button>\n          <button class="btn secondary" id="updateGuide">دليل التحديث</button>')
 replace_required('الأهداف التشغيلية السبعة', 'الأهداف التشغيلية التسعة')
 replace_required('سبعة أهداف رئيسية تقود التنفيذ', 'تسعة أهداف رئيسية تقود التنفيذ')
 
@@ -66,10 +63,10 @@ replace_required(
             <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5"/></svg><span>إجمالي الأعمال</span><strong>354</strong><small>خمسة أقسام تشغيلية</small></article>
             <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span>منجز</span><strong>252</strong><small>أُغلقت بنودها</small></article>
             <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>قيد الإجراء</span><strong>102</strong><small>تتطلب متابعة</small></article>''',
-'''            <article class="tracker-rate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-8M22 19H2"/></svg><span>نسبة البنود المنجزة</span><strong id="trackerRate">42%</strong><small id="trackerRateSummary">31 من أصل 74 بندًا</small><i><em id="trackerRateBar" style="width:42%"></em></i></article>
-            <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5"/></svg><span>إجمالي الأعمال</span><strong id="trackerTotalCount">74</strong><small id="trackerCountSummary">أربعة أقسام تشغيلية</small></article>
-            <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span>منجز</span><strong id="trackerDoneCount">31</strong><small>أُغلقت بنودها</small></article>
-            <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>قيد الإجراء</span><strong id="trackerProgressCount">43</strong><small>تتطلب متابعة</small></article>''')
+'''            <article class="tracker-rate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-8M22 19H2"/></svg><span>نسبة البنود المنجزة</span><strong id="trackerRate">71%</strong><small id="trackerRateSummary">252 من أصل 354 بندًا</small><i><em id="trackerRateBar" style="width:71%"></em></i></article>
+            <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5"/></svg><span>إجمالي الأعمال</span><strong id="trackerTotalCount">354</strong><small id="trackerCountSummary">خمسة أقسام تشغيلية</small></article>
+            <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span>منجز</span><strong id="trackerDoneCount">252</strong><small>أُغلقت بنودها</small></article>
+            <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>قيد الإجراء</span><strong id="trackerProgressCount">102</strong><small>تتطلب متابعة</small></article>''')
 
 replace_required(
     '''            <article><div><span>مركز الاتصال</span><b>102 / 107</b></div><i><em style="width:95%"></em></i><small>95% من البنود منجزة</small></article>
@@ -77,23 +74,24 @@ replace_required(
             <article><div><span>إدارة علاقات المتعاملين</span><b>35 / 42</b></div><i><em style="width:83%"></em></i><small>83% من البنود منجزة</small></article>
             <article><div><span>إدارة وتطوير الخدمات</span><b>72 / 123</b></div><i><em style="width:59%"></em></i><small>59% من البنود منجزة</small></article>
             <article><div><span>شؤون الدوائر والمنافذ</span><b>36 / 75</b></div><i><em style="width:48%"></em></i><small>48% من البنود منجزة</small></article>''',
-    '''            <article data-tracker-dept="contact"><div><span>مركز الاتصال</span><b class="tracker-dept-ratio">13 / 16</b></div><i><em style="width:81%"></em></i><small>81% من البنود منجزة</small></article>
-            <article data-tracker-dept="crm"><div><span>إدارة علاقات المتعاملين</span><b class="tracker-dept-ratio">6 / 6</b></div><i><em style="width:100%"></em></i><small>100% من البنود منجزة</small></article>
-            <article data-tracker-dept="service-dev"><div><span>إدارة وتطوير الخدمات</span><b class="tracker-dept-ratio">4 / 37</b></div><i><em style="width:11%"></em></i><small>11% من البنود منجزة</small></article>
-            <article data-tracker-dept="branches"><div><span>شؤون الدوائر والمنافذ</span><b class="tracker-dept-ratio">8 / 15</b></div><i><em style="width:53%"></em></i><small>53% من البنود منجزة</small></article>''')
+    '''            <article data-tracker-dept="contact"><div><span>مركز الاتصال</span><b class="tracker-dept-ratio">102 / 107</b></div><i><em style="width:95%"></em></i><small>95% من البنود منجزة</small></article>
+            <article data-tracker-dept="coord"><div><span>التنسيق والمتابعة</span><b class="tracker-dept-ratio">7 / 7</b></div><i><em style="width:100%"></em></i><small>100% من البنود منجزة</small></article>
+            <article data-tracker-dept="crm"><div><span>إدارة علاقات المتعاملين</span><b class="tracker-dept-ratio">35 / 42</b></div><i><em style="width:83%"></em></i><small>83% من البنود منجزة</small></article>
+            <article data-tracker-dept="service-dev"><div><span>إدارة وتطوير الخدمات</span><b class="tracker-dept-ratio">72 / 123</b></div><i><em style="width:59%"></em></i><small>59% من البنود منجزة</small></article>
+            <article data-tracker-dept="branches"><div><span>شؤون الدوائر والمنافذ</span><b class="tracker-dept-ratio">36 / 75</b></div><i><em style="width:48%"></em></i><small>48% من البنود منجزة</small></article>''')
 
 replace_required(
     '<div class="board-slide-heading"><span>05 · الموقف التنفيذي</span><h2>لوحة واحدة لمتابعة 354 بندًا تشغيليًا</h2><p>قراءة تنفيذية لحالة الأعمال حسب القسم حتى 26 أغسطس 2026.</p></div>',
-    '<div class="board-slide-heading"><span>05 · الموقف التنفيذي</span><h2>لوحة واحدة لمتابعة 74 بندًا تشغيليًا</h2><p>قراءة تنفيذية لحالة الأعمال حسب القسم وفق تحديث 17 سبتمبر 2026.</p></div>')
+    '<div class="board-slide-heading"><span>05 · الموقف التنفيذي</span><h2>لوحة واحدة لمتابعة 354 بندًا تشغيليًا</h2><p>قراءة تنفيذية لحالة الأعمال حسب القسم وفق تحديث 17 سبتمبر 2026.</p></div>')
 replace_required(
     '<article class="board-maturity"><span>البنود المنجزة</span><strong>71%</strong><i><em style="width:71%"></em></i><div><b>252 منجزًا</b><b>102 قيد الإجراء</b></div></article>',
-    '<article class="board-maturity"><span>البنود المنجزة</span><strong id="boardRate">42%</strong><i><em id="boardRateBar" style="width:42%"></em></i><div><b id="boardDone">31 منجزًا</b><b id="boardProgress">43 قيد الإجراء</b></div></article>')
+    '<article class="board-maturity"><span>البنود المنجزة</span><strong id="boardRate">71%</strong><i><em id="boardRateBar" style="width:71%"></em></i><div><b id="boardDone">252 منجزًا</b><b id="boardProgress">102 قيد الإجراء</b></div></article>')
 replace_required(
     '<div class="board-proof"><article><strong>95%</strong><span>مركز الاتصال</span></article><article><strong>83%</strong><span>علاقات المتعاملين</span></article><article><strong>59%</strong><span>إدارة وتطوير الخدمات</span></article></div>',
-    '<div class="board-proof"><article data-board-dept="contact"><strong>81%</strong><span>مركز الاتصال</span></article><article data-board-dept="crm"><strong>100%</strong><span>علاقات المتعاملين</span></article><article data-board-dept="branches"><strong>53%</strong><span>شؤون الدوائر والمنافذ</span></article></div>')
+    '<div class="board-proof"><article data-board-dept="contact"><strong>95%</strong><span>مركز الاتصال</span></article><article data-board-dept="crm"><strong>83%</strong><span>علاقات المتعاملين</span></article><article data-board-dept="branches"><strong>48%</strong><span>شؤون الدوائر والمنافذ</span></article></div>')
 replace_required(
     '<div class="board-portfolio"><article><strong>100%</strong><span>التنسيق والمتابعة</span></article><article><strong>48%</strong><span>شؤون الدوائر والمنافذ</span></article><article><strong>5</strong><span>أقسام ضمن المتابعة</span></article></div>',
-    '<div class="board-portfolio"><article data-board-dept="service-dev"><strong>11%</strong><span>إدارة وتطوير الخدمات</span></article><article id="boardDeptCount"><strong>4</strong><span>أقسام ضمن المتابعة</span></article><article id="boardTotalItems"><strong>74</strong><span>بندًا في التحديث الأسبوعي</span></article></div>')
+    '<div class="board-portfolio"><article data-board-dept="service-dev"><strong>59%</strong><span>إدارة وتطوير الخدمات</span></article><article id="boardDeptCount"><strong>5</strong><span>أقسام ضمن المتابعة</span></article><article id="boardTotalItems"><strong>354</strong><span>بندًا في التحديث الأسبوعي</span></article></div>')
 
 privacy_modal = '''  <div class="modal" id="privacyLockModal" aria-hidden="true"><div class="modal-backdrop" data-close-privacy></div><article class="modal-panel wide privacy-panel" role="dialog" aria-modal="true" aria-labelledby="privacyLockTitle"><button class="modal-close" data-close-privacy aria-label="إغلاق">×</button><span class="modal-status">خصوصية العرض على هذا الجهاز</span><h2 id="privacyLockTitle">قفل أو تشويش تبويبات مختارة</h2><p class="privacy-note">هذا قفل عرض مناسب للاجتماعات والعروض، ولا يُعد بديلًا عن نظام دخول مؤسسي لأن الموقع الحالي صفحة عامة.</p><div class="privacy-grid" id="privacyTabChoices"></div><div class="privacy-pin"><label><span>رمز العرض</span><input id="privacyPin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="أدخل 4 أرقام أو أكثر"></label><label><span>تأكيد الرمز</span><input id="privacyPinConfirm" type="password" inputmode="numeric" autocomplete="new-password" placeholder="أعد إدخال الرمز"></label></div><div class="privacy-actions"><button class="btn primary" id="savePrivacyLock">حفظ القفل</button><button class="btn secondary" id="clearPrivacyLock">إلغاء جميع الأقفال</button></div><div class="excel-import-status" id="privacyStatus" role="status" aria-live="polite"></div></article></div>
 

@@ -261,10 +261,11 @@
   // ── Work Tracker Module ──────────────────────────────────────────────────
   const TRACKER_STORAGE_KEY="spf-work-tracker-v2";
   const DEFAULT_TRACKER_DEPTS=[
-    {id:"contact",  name:"مركز الاتصال",                 done:13, total:16},
-    {id:"crm",      name:"إدارة علاقات المتعاملين",      done:6,  total:6},
-    {id:"service-dev", name:"إدارة وتطوير الخدمات",     done:4,  total:37},
-    {id:"branches", name:"شؤون الدوائر والمنافذ",        done:8,  total:15},
+    {id:"contact",     name:"مركز الاتصال",                 done:102, total:107},
+    {id:"coord",       name:"التنسيق والمتابعة",             done:7,   total:7},
+    {id:"crm",         name:"إدارة علاقات المتعاملين",      done:35,  total:42},
+    {id:"service-dev", name:"إدارة وتطوير الخدمات",         done:72,  total:123},
+    {id:"branches",    name:"شؤون الدوائر والمنافذ",        done:36,  total:75},
   ];
 
   function readTrackerData(){
@@ -283,33 +284,33 @@
     const setWidth=(id,w)=>{const el=document.getElementById(id);if(el)el.style.width=w};
 
     setTxt("trackerRate",rate+"%");
-    setTxt("trackerRateSummary",rate+"%");
+    setTxt("trackerRateSummary",totalDone+" من أصل "+totalItems+" بندًا");
     setTxt("trackerTotalCount",totalItems);
-    setTxt("trackerCountSummary",totalItems);
+    setTxt("trackerCountSummary",depts.length+" أقسام تشغيلية");
     setTxt("trackerDoneCount",totalDone);
     setTxt("trackerProgressCount",inProgress);
     setWidth("trackerRateBar",rate+"%");
 
     setTxt("boardRate",rate+"%");
     setWidth("boardRateBar",rate+"%");
-    setTxt("boardDone",totalDone);
-    setTxt("boardProgress",inProgress);
+    setTxt("boardDone",totalDone+" منجزًا");
+    setTxt("boardProgress",inProgress+" قيد الإجراء");
 
     depts.forEach(dept=>{
+      const deptRate=dept.total?Math.round(dept.done/dept.total*100):0;
       const trackerRow=document.querySelector(`[data-tracker-dept="${dept.id}"]`);
       if(trackerRow){
-        const ratio=dept.total?Math.round(dept.done/dept.total*100):0;
         const ratioEl=trackerRow.querySelector(".tracker-dept-ratio");
-        if(ratioEl)ratioEl.textContent=ratio+"%";
-        const em=trackerRow.querySelector("em");
-        if(em)em.textContent=dept.done;
+        if(ratioEl)ratioEl.textContent=dept.done+" / "+dept.total;
+        const bar=trackerRow.querySelector("i > em");
+        if(bar)bar.style.width=deptRate+"%";
         const sm=trackerRow.querySelector("small");
-        if(sm)sm.textContent="/ "+dept.total;
+        if(sm)sm.textContent=deptRate+"% من البنود منجزة";
       }
       const boardArticle=document.querySelector(`[data-board-dept="${dept.id}"]`);
       if(boardArticle){
         const strong=boardArticle.querySelector("strong");
-        if(strong)strong.textContent=dept.done+" / "+dept.total;
+        if(strong)strong.textContent=deptRate+"%";
       }
     });
 
@@ -355,8 +356,20 @@
     footer.textContent=`الإجمالي: ${done} منجز من ${total} — نسبة الإنجاز: ${rate}%`;
   }
 
-  const trackerUpdateBtn=document.getElementById("trackerUpdateButton");
-  if(trackerUpdateBtn)trackerUpdateBtn.addEventListener("click",openTrackerModal);
+  (function(){
+    const rateEl=document.getElementById("trackerRate");
+    if(!rateEl)return;
+    const block=rateEl.closest(".section-block");
+    if(!block)return;
+    const heading=block.querySelector(".section-heading");
+    if(!heading)return;
+    const btn=document.createElement("button");
+    btn.className="btn secondary";
+    btn.id="trackerUpdateButton";
+    btn.textContent="تحديث البيانات";
+    heading.appendChild(btn);
+    btn.addEventListener("click",openTrackerModal);
+  })();
 
   const saveTrackerBtn=document.getElementById("saveTrackerEdits");
   if(saveTrackerBtn)saveTrackerBtn.addEventListener("click",()=>{
