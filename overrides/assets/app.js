@@ -257,4 +257,120 @@
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+entry.target.id))}),{rootMargin:"-25% 0px -65% 0px"});
   // Chapter navigation is managed by exhibition.js in this independent edition.
   prepareEditable();applyValues(savedEdits);
+
+  // ── Work Tracker Module ──────────────────────────────────────────────────
+  const TRACKER_STORAGE_KEY="spf-work-tracker-v2";
+  const DEFAULT_TRACKER_DEPTS=[
+    {id:"contact",  name:"مركز الاتصال",                 done:13, total:16},
+    {id:"crm",      name:"إدارة علاقات المتعاملين",      done:6,  total:6},
+    {id:"service-dev", name:"إدارة وتطوير الخدمات",     done:4,  total:37},
+    {id:"branches", name:"شؤون الدوائر والمنافذ",        done:8,  total:15},
+  ];
+
+  function readTrackerData(){
+    try{const d=JSON.parse(localStorage.getItem(TRACKER_STORAGE_KEY)||"null");return Array.isArray(d)&&d.length?d:DEFAULT_TRACKER_DEPTS.map(x=>({...x}))}catch(_){return DEFAULT_TRACKER_DEPTS.map(x=>({...x}))}
+  }
+  function saveTrackerData(depts){localStorage.setItem(TRACKER_STORAGE_KEY,JSON.stringify(depts))}
+
+  function renderTrackerBoard(){
+    const depts=readTrackerData();
+    const totalDone=depts.reduce((s,d)=>s+d.done,0);
+    const totalItems=depts.reduce((s,d)=>s+d.total,0);
+    const rate=totalItems?Math.round(totalDone/totalItems*100):0;
+    const inProgress=totalItems-totalDone;
+
+    const setTxt=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+    const setWidth=(id,w)=>{const el=document.getElementById(id);if(el)el.style.width=w};
+
+    setTxt("trackerRate",rate+"%");
+    setTxt("trackerRateSummary",rate+"%");
+    setTxt("trackerTotalCount",totalItems);
+    setTxt("trackerCountSummary",totalItems);
+    setTxt("trackerDoneCount",totalDone);
+    setTxt("trackerProgressCount",inProgress);
+    setWidth("trackerRateBar",rate+"%");
+
+    setTxt("boardRate",rate+"%");
+    setWidth("boardRateBar",rate+"%");
+    setTxt("boardDone",totalDone);
+    setTxt("boardProgress",inProgress);
+
+    depts.forEach(dept=>{
+      const trackerRow=document.querySelector(`[data-tracker-dept="${dept.id}"]`);
+      if(trackerRow){
+        const ratio=dept.total?Math.round(dept.done/dept.total*100):0;
+        const ratioEl=trackerRow.querySelector(".tracker-dept-ratio");
+        if(ratioEl)ratioEl.textContent=ratio+"%";
+        const em=trackerRow.querySelector("em");
+        if(em)em.textContent=dept.done;
+        const sm=trackerRow.querySelector("small");
+        if(sm)sm.textContent="/ "+dept.total;
+      }
+      const boardArticle=document.querySelector(`[data-board-dept="${dept.id}"]`);
+      if(boardArticle){
+        const strong=boardArticle.querySelector("strong");
+        if(strong)strong.textContent=dept.done+" / "+dept.total;
+      }
+    });
+
+    const boardDeptCountEl=document.getElementById("boardDeptCount");
+    if(boardDeptCountEl){const s=boardDeptCountEl.querySelector("strong");if(s)s.textContent=depts.length}
+    const boardTotalItemsEl=document.getElementById("boardTotalItems");
+    if(boardTotalItemsEl){const s=boardTotalItemsEl.querySelector("strong");if(s)s.textContent=totalItems}
+  }
+
+  function openTrackerModal(){
+    const modal=document.getElementById("trackerUpdateModal");if(!modal)return;
+    const depts=readTrackerData();
+    const grid=document.getElementById("trackerEditGrid");
+    if(grid){
+      grid.innerHTML=depts.map(dept=>`
+        <div class="tracker-dept-row" data-dept-id="${dept.id}">
+          <span class="tracker-dept-name">${dept.name}</span>
+          <label class="tracker-field-label">منجز<input type="number" min="0" class="tracker-input tracker-done-input" data-dept="${dept.id}" value="${dept.done}"></label>
+          <label class="tracker-field-label">إجمالي<input type="number" min="0" class="tracker-input tracker-total-input" data-dept="${dept.id}" value="${dept.total}"></label>
+        </div>`).join("");
+      updateTrackerFooter(depts);
+      grid.querySelectorAll(".tracker-input").forEach(input=>input.addEventListener("input",()=>{
+        const current=getCurrentEditDepts();updateTrackerFooter(current);
+      }));
+    }
+    modal.classList.add("open");modal.setAttribute("aria-hidden","false");
+  }
+
+  function getCurrentEditDepts(){
+    const grid=document.getElementById("trackerEditGrid");if(!grid)return readTrackerData();
+    return readTrackerData().map(dept=>{
+      const doneEl=grid.querySelector(`.tracker-done-input[data-dept="${dept.id}"]`);
+      const totalEl=grid.querySelector(`.tracker-total-input[data-dept="${dept.id}"]`);
+      return {...dept,done:doneEl?Math.max(0,parseInt(doneEl.value)||0):dept.done,total:totalEl?Math.max(0,parseInt(totalEl.value)||0):dept.total};
+    });
+  }
+
+  function updateTrackerFooter(depts){
+    const footer=document.getElementById("trackerEditFooter");if(!footer)return;
+    const done=depts.reduce((s,d)=>s+d.done,0);
+    const total=depts.reduce((s,d)=>s+d.total,0);
+    const rate=total?Math.round(done/total*100):0;
+    footer.textContent=`الإجمالي: ${done} منجز من ${total} — نسبة الإنجاز: ${rate}%`;
+  }
+
+  const trackerUpdateBtn=document.getElementById("trackerUpdateButton");
+  if(trackerUpdateBtn)trackerUpdateBtn.addEventListener("click",openTrackerModal);
+
+  const saveTrackerBtn=document.getElementById("saveTrackerEdits");
+  if(saveTrackerBtn)saveTrackerBtn.addEventListener("click",()=>{
+    const depts=getCurrentEditDepts();
+    saveTrackerData(depts);renderTrackerBoard();
+    const modal=document.getElementById("trackerUpdateModal");
+    if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
+    toast("تم حفظ بيانات متابعة الأعمال");
+  });
+
+  document.querySelectorAll("[data-close-tracker]").forEach(x=>x.addEventListener("click",()=>{
+    const modal=document.getElementById("trackerUpdateModal");
+    if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
+  }));
+
+  renderTrackerBoard();
 })();
