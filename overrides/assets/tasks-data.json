@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-23T09:46:28.211Z",
+  "updated_at": "2026-09-23T09:47:31.374Z",
   "tasks": [
     {
       "id": "central-1",
@@ -4320,15 +4320,17 @@
       "overdue": false
     },
     {
+      "id": "central-392",
       "title": "أبرز مؤشرات التواصل ورضا المستفيدين - اجتماع مجلس الإدارة 2026",
       "dept": "إدارة وتطوير الخدمات",
       "emp": "عزان",
+      "status": "منجز",
+      "pct": 100,
+      "received": null,
+      "due": null,
+      "date": null,
       "tech": "إعداة هيكلة التقرير ومراجعة المؤشرات",
-      "pct": 0,
-      "date": "",
-      "status": "قيد الإجراء",
-      "overdue": false,
-      "id": "central-392"
+      "overdue": false
     },
     {
       "title": "إطار قياس ومتابعة جودة قنوات الخدمة",
