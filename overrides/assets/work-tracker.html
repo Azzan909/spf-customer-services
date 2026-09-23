@@ -635,10 +635,24 @@ let searchDebounce;
 let perfMode='dept';
 
 function filterState(){return {dept:fDept,month:fMonth,emp:fEmp,status:fStatus,search:fSearch};}
+function filterStateFromControls(){
+  return {
+    dept:document.getElementById('f-dept').value,
+    month:document.getElementById('f-month').value,
+    emp:document.getElementById('f-emp').value,
+    status:document.getElementById('f-status').value,
+    search:document.getElementById('f-search').value.trim()
+  };
+}
 function saveFilterState(){
   try{localStorage.setItem(FILTER_STORAGE_KEY,JSON.stringify(filterState()));}catch(_){/* storage can be blocked */}
 }
 function optionExists(id,value){return [...document.getElementById(id).options].some(option=>option.value===value);}
+function preserveSelectValue(id,value){
+  const select=document.getElementById(id);
+  if(value!=='all'&&!optionExists(id,value))select.add(new Option(value,value));
+  select.value=value;
+}
 function restoreFilterState(){
   let saved={};
   try{saved=JSON.parse(localStorage.getItem(FILTER_STORAGE_KEY)||'{}')||{};}catch(_){saved={};}
@@ -654,17 +668,17 @@ function restoreFilterState(){
   document.getElementById('f-search').value=fSearch;
 }
 function refreshFiltersAfterDataChange(){
-  const saved=filterState();
+  const saved=filterStateFromControls();
   populateFilters();
-  fDept=optionExists('f-dept',saved.dept)?saved.dept:'all';
-  fMonth=optionExists('f-month',saved.month)?saved.month:'all';
-  fEmp=optionExists('f-emp',saved.emp)?saved.emp:'all';
-  fStatus=optionExists('f-status',saved.status)?saved.status:'all';
+  fDept=saved.dept;
+  fMonth=saved.month;
+  fEmp=saved.emp;
+  fStatus=saved.status;
   fSearch=saved.search;
-  document.getElementById('f-dept').value=fDept;
-  document.getElementById('f-month').value=fMonth;
-  document.getElementById('f-emp').value=fEmp;
-  document.getElementById('f-status').value=fStatus;
+  preserveSelectValue('f-dept',fDept);
+  preserveSelectValue('f-month',fMonth);
+  preserveSelectValue('f-emp',fEmp);
+  preserveSelectValue('f-status',fStatus);
   document.getElementById('f-search').value=fSearch;
   saveFilterState();
   applyFilters();
