@@ -528,6 +528,7 @@ const GITHUB_OWNER='Azzan909';
 const GITHUB_REPO='spf-customer-services';
 const TASKS_REPO_PATH='overrides/assets/tasks-data.json';
 const OWNER_TOKEN_KEY='spf-github-owner-token-v1';
+const FILTER_STORAGE_KEY='spf-work-tracker-filters-v1';
 let isOwner=false;
 function cloneDefaults(){return DEFAULT_DATA.map((r,index)=>({...r,id:r.id||`source-${index+1}`}));}
 async function loadTasks(){
@@ -542,6 +543,16 @@ async function loadTasks(){
 let DATA=cloneDefaults();
 function githubHeaders(token){return {'Accept':'application/vnd.github+json','Authorization':`Bearer ${token}`,'X-GitHub-Api-Version':'2022-11-28'};}
 function encodeBase64(value){const bytes=new TextEncoder().encode(value);let binary='';bytes.forEach(byte=>binary+=String.fromCharCode(byte));return btoa(binary);}
+async function githubError(response,fallback){
+  const detail=await response.json().catch(()=>({}));
+  const message=String(detail.message||'');
+  if(response.status===401)return new Error('مفتاح GitHub غير صالح أو انتهت صلاحيته. أنشئ مفتاحًا جديدًا ثم سجّل الدخول مرة أخرى.');
+  if(response.status===403&&/Resource not accessible by personal access token/i.test(message)){
+    return new Error('المفتاح لا يملك صلاحية التعديل على هذا المستودع. في إعداد المفتاح اختر Resource owner: Azzan909، ثم Only select repositories: spf-customer-services، ثم Repository permissions → Contents: Read and write. بعد تعديل المفتاح سجّل خروج المالك ثم ادخل بالمفتاح المحدّث.');
+  }
+  if(response.status===404)return new Error('المفتاح لا يستطيع الوصول إلى مستودع المنصة. تأكد من اختيار المستودع spf-customer-services عند إنشاء المفتاح.');
+  return new Error(message||fallback);
+}
 function updateOwnerUI(){
   const login=document.getElementById('owner-login-button'),add=document.getElementById('add-task-button'),status=document.getElementById('owner-status');
   if(login)login.textContent=isOwner?'خروج المالك':'دخول المالك';
@@ -550,8 +561,13 @@ function updateOwnerUI(){
 }
 async function verifyOwnerToken(token){
   const response=await fetch('https://api.github.com/user',{headers:githubHeaders(token)});
-  if(!response.ok)return false;
-  const user=await response.json();return String(user.login||'').toLowerCase()===GITHUB_OWNER.toLowerCase();
+  if(!response.ok)throw await githubError(response,'تعذر التحقق من حساب GitHub');
+  const user=await response.json();
+  if(String(user.login||'').toLowerCase()!==GITHUB_OWNER.toLowerCase())throw new Error(`هذا المفتاح يخص الحساب ${user.login||'غير المعروف'} وليس ${GITHUB_OWNER}.`);
+  const endpoint=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TASKS_REPO_PATH}?ref=main`;
+  const repositoryAccess=await fetch(endpoint,{headers:githubHeaders(token)});
+  if(!repositoryAccess.ok)throw await githubError(repositoryAccess,'تعذر الوصول إلى ملف بيانات المنصة');
+  return true;
 }
 async function loginOwner(){
   if(isOwner){sessionStorage.removeItem(OWNER_TOKEN_KEY);isOwner=false;updateOwnerUI();return;}
@@ -559,7 +575,7 @@ async function loginOwner(){
   if(!token)return;
   const button=document.getElementById('owner-login-button');if(button)button.textContent='جارٍ التحقق…';
   try{
-    if(!await verifyOwnerToken(token.trim()))throw new Error('الحساب أو الصلاحية غير صحيحة');
+    await verifyOwnerToken(token.trim());
     sessionStorage.setItem(OWNER_TOKEN_KEY,token.trim());isOwner=true;updateOwnerUI();
   }catch(error){isOwner=false;updateOwnerUI();alert(error.message||'تعذر تسجيل دخول المالك');}
 }
@@ -573,11 +589,11 @@ async function saveTasks(){
   const token=sessionStorage.getItem(OWNER_TOKEN_KEY);if(!token)throw new Error('انتهت جلسة المالك');
   const endpoint=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TASKS_REPO_PATH}`;
   const current=await fetch(`${endpoint}?ref=main`,{headers:githubHeaders(token)});
-  if(!current.ok)throw new Error('تعذر قراءة النسخة الحالية من GitHub');
+  if(!current.ok)throw await githubError(current,'تعذر قراءة النسخة الحالية من GitHub');
   const metadata=await current.json();
   const document={version:Number(metadata.sha?1:0)+1,updated_at:new Date().toISOString(),tasks:DATA};
   const response=await fetch(endpoint,{method:'PUT',headers:{...githubHeaders(token),'Content-Type':'application/json'},body:JSON.stringify({message:`Update work tracker (${DATA.length} tasks)`,content:encodeBase64(JSON.stringify(document,null,2)+'\n'),sha:metadata.sha,branch:'main'})});
-  if(!response.ok){const detail=await response.json().catch(()=>({}));throw new Error(detail.message||'تعذر نشر التحديث إلى GitHub');}
+  if(!response.ok)throw await githubError(response,'تعذر نشر التحديث إلى GitHub');
   publishSummary();
 }
 function completionSummary(){
@@ -617,6 +633,42 @@ const PAGE_SIZE=15;
 let donutChart;
 let searchDebounce;
 let perfMode='dept';
+
+function filterState(){return {dept:fDept,month:fMonth,emp:fEmp,status:fStatus,search:fSearch};}
+function saveFilterState(){
+  try{localStorage.setItem(FILTER_STORAGE_KEY,JSON.stringify(filterState()));}catch(_){/* storage can be blocked */}
+}
+function optionExists(id,value){return [...document.getElementById(id).options].some(option=>option.value===value);}
+function restoreFilterState(){
+  let saved={};
+  try{saved=JSON.parse(localStorage.getItem(FILTER_STORAGE_KEY)||'{}')||{};}catch(_){saved={};}
+  fDept=optionExists('f-dept',saved.dept)?saved.dept:'all';
+  fMonth=optionExists('f-month',saved.month)?saved.month:'all';
+  fEmp=optionExists('f-emp',saved.emp)?saved.emp:'all';
+  fStatus=optionExists('f-status',saved.status)?saved.status:'all';
+  fSearch=String(saved.search||'');
+  document.getElementById('f-dept').value=fDept;
+  document.getElementById('f-month').value=fMonth;
+  document.getElementById('f-emp').value=fEmp;
+  document.getElementById('f-status').value=fStatus;
+  document.getElementById('f-search').value=fSearch;
+}
+function refreshFiltersAfterDataChange(){
+  const saved=filterState();
+  populateFilters();
+  fDept=optionExists('f-dept',saved.dept)?saved.dept:'all';
+  fMonth=optionExists('f-month',saved.month)?saved.month:'all';
+  fEmp=optionExists('f-emp',saved.emp)?saved.emp:'all';
+  fStatus=optionExists('f-status',saved.status)?saved.status:'all';
+  fSearch=saved.search;
+  document.getElementById('f-dept').value=fDept;
+  document.getElementById('f-month').value=fMonth;
+  document.getElementById('f-emp').value=fEmp;
+  document.getElementById('f-status').value=fStatus;
+  document.getElementById('f-search').value=fSearch;
+  saveFilterState();
+  applyFilters();
+}
 
 function splitEmps(emp){
   return (emp||'').split(/[\/,\-–]/).map(n=>n.trim()).filter(n=>n.length>1 && n!=='القسم' && n!=='الجميع' && n!=='الفريق');
@@ -681,12 +733,14 @@ function onFilterChange(){
   fMonth = document.getElementById('f-month').value;
   fEmp = document.getElementById('f-emp').value;
   fStatus = document.getElementById('f-status').value;
+  saveFilterState();
   applyFilters();
 }
 function onSearchInput(){
   clearTimeout(searchDebounce);
   searchDebounce = setTimeout(()=>{
     fSearch = document.getElementById('f-search').value.trim();
+    saveFilterState();
     applyFilters();
   },220);
 }
@@ -697,23 +751,27 @@ function resetFilters(){
   document.getElementById('f-emp').value='all';
   document.getElementById('f-status').value='all';
   document.getElementById('f-search').value='';
+  saveFilterState();
   applyFilters();
 }
 function setStatusFilter(s){
   fStatus = s;
   document.getElementById('f-status').value = s;
+  saveFilterState();
   applyFilters();
 }
 function filterByDept(d){
   fDept = d;
   document.getElementById('f-dept').value = d;
   switchTab('table');
+  saveFilterState();
   applyFilters();
 }
 function filterByEmp(n){
   fEmp = n;
   document.getElementById('f-emp').value = n;
   switchTab('table');
+  saveFilterState();
   applyFilters();
 }
 
@@ -1001,14 +1059,14 @@ async function saveTaskEdit(event,idx,isNew){
   if(isNew)DATA.push(task);else DATA[idx]=task;
   const note=document.getElementById('task-save-note');if(note)note.textContent='جارٍ نشر التحديث إلى GitHub…';
   try{
-    await saveTasks();resetFilters();if(note)note.textContent='تم النشر. سيظهر التحديث لجميع الزوار خلال دقائق.';setTimeout(closeDrawer,900);
-  }catch(error){DATA=previous;resetFilters();if(note)note.textContent=error.message||'تعذر نشر التحديث';}
+    await saveTasks();refreshFiltersAfterDataChange();if(note)note.textContent='تم النشر. سيظهر التحديث لجميع الزوار خلال دقائق.';setTimeout(closeDrawer,900);
+  }catch(error){DATA=previous;refreshFiltersAfterDataChange();if(note)note.textContent=error.message||'تعذر نشر التحديث';}
 }
 async function deleteTask(idx){
   if(!isOwner){alert('يلزم تسجيل دخول المالك للحذف.');return;}
   const r=DATA[idx];if(!r||!confirm(`حذف المهمة «${r.title}»؟`))return;
-  const previous=DATA.map(item=>({...item}));DATA.splice(idx,1);resetFilters();
-  try{await saveTasks();closeDrawer();}catch(error){DATA=previous;resetFilters();alert(error.message||'تعذر نشر الحذف');}
+  const previous=DATA.map(item=>({...item}));DATA.splice(idx,1);refreshFiltersAfterDataChange();
+  try{await saveTasks();closeDrawer();}catch(error){DATA=previous;refreshFiltersAfterDataChange();alert(error.message||'تعذر نشر الحذف');}
 }
 
 // ═══════════════════════════════════════════════
@@ -1017,6 +1075,7 @@ async function deleteTask(idx){
 async function init(){
   DATA=await loadTasks();
   populateFilters();
+  restoreFilterState();
   const fmt = new Intl.DateTimeFormat('ar', {day:'numeric', month:'long', year:'numeric'});
   document.getElementById('last-update-tag').innerHTML = `<span class="live-dot"></span>آخر تحديث: ${fmt.format(new Date())}`;
   applyFilters();
