@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updated_at": "2026-09-23T04:44:27.512Z",
+  "version": 2,
+  "updated_at": "2026-09-23T05:57:20.069Z",
   "tasks": [
     {
       "title": "الردود النموذجية للمنصة",
@@ -10,7 +10,8 @@
       "pct": 80,
       "date": "11 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-1"
     },
     {
       "title": "تقرير مخرجات ورشة للمديرية العامة لخدمات المتعاملين",
@@ -20,7 +21,8 @@
       "pct": 80,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-2"
     },
     {
       "title": "مختبر تجربة الحماية",
@@ -30,7 +32,8 @@
       "pct": 100,
       "date": "15 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-3"
     },
     {
       "title": "الخطة الإعلامية للدوائر",
@@ -40,7 +43,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-4"
     },
     {
       "title": "Smart CRM",
@@ -50,7 +54,8 @@
       "pct": null,
       "date": "11 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-5"
     },
     {
       "title": "الإجراءات التطويرية للقسم لعام 2026",
@@ -60,7 +65,8 @@
       "pct": null,
       "date": "11 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-6"
     },
     {
       "title": "أطلس حماية",
@@ -70,7 +76,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-7"
     },
     {
       "title": "منصة لتعزيز المعرفة",
@@ -80,7 +87,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-8"
     },
     {
       "title": "تقديم مقترح الروبوت الذكي لخدمة المتعاملين",
@@ -90,7 +98,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-9"
     },
     {
       "title": "Customer Services Dashboard",
@@ -100,16 +109,20 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-10"
     },
     {
+      "id": "central-11",
       "title": "التقرير الربع سنوي للمديرية 2026",
       "dept": "إدارة وتطوير الخدمات",
       "emp": "أحمد العبري / عزان الريامي",
-      "tech": "تصميم العرض – جاري العمل",
+      "status": "منجز",
       "pct": 70,
+      "received": null,
+      "due": "12 مارس",
       "date": "12 مارس",
-      "status": "قيد الإجراء",
+      "tech": "تصميم العرض – جاري العمل",
       "overdue": false
     },
     {
@@ -120,7 +133,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-12"
     },
     {
       "title": "إعداد مؤشرات الأداء للمحافظات",
@@ -130,7 +144,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-13"
     },
     {
       "title": "مصفوفة الخدمات مركز الاتصال",
@@ -140,7 +155,8 @@
       "pct": 100,
       "date": "12 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-14"
     },
     {
       "title": "تدريب الموظفين على برنامج ثقة",
@@ -150,7 +166,8 @@
       "pct": 100,
       "date": "3 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-15"
     },
     {
       "title": "تحديث بروتوكول المتعاملين",
@@ -160,7 +177,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-16"
     },
     {
       "title": "تحديث مؤشرات التحول الرقمي",
@@ -170,7 +188,8 @@
       "pct": 20,
       "date": "30 أبريل",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-17"
     },
     {
       "title": "مؤشرات الإجادة",
@@ -180,7 +199,8 @@
       "pct": 100,
       "date": "10 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-18"
     },
     {
       "title": "مؤشرات أداء الفروع",
@@ -190,7 +210,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-19"
     },
     {
       "title": "مبادرة ملتقى المتعاملين (مبادرة رقم 3) – يسرى وعهود",
@@ -200,7 +221,8 @@
       "pct": 100,
       "date": "26 فبراير",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-20"
     },
     {
       "title": "المقترحات التحسينية في نظام خدمات المتعاملين (CRM)",
@@ -210,7 +232,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-21"
     },
     {
       "title": "تدريب الموظفين الجدد على الأنظمة المعتمدة ومنصة تجاوب والردود النموذجية",
@@ -220,7 +243,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-22"
     },
     {
       "title": "مبادرة الاستجابة للشكاوى والمقترحات التطويرية بنسبة 75%",
@@ -230,7 +254,8 @@
       "pct": 100,
       "date": "4 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-23"
     },
     {
       "title": "مبادرة إعداد إطار عام للخدمات الاستباقية للمستفيدين",
@@ -240,7 +265,8 @@
       "pct": 100,
       "date": "1 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-24"
     },
     {
       "title": "مبادرة ملتقى المتعاملين (مبادرة رقم 3) – عهود",
@@ -250,7 +276,8 @@
       "pct": 100,
       "date": "4 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-25"
     },
     {
       "title": "التقرير الشهري لخدمات المتعاملين بالحضور الشخصي",
@@ -260,7 +287,8 @@
       "pct": 100,
       "date": "2 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-26"
     },
     {
       "title": "طرق تفاعلية لإيصال أخبار ومستجدات الصندوق",
@@ -270,7 +298,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-27"
     },
     {
       "title": "تنظيم خطة توزيع موظفين منصة تجاوب",
@@ -280,7 +309,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-28"
     },
     {
       "title": "التدقيق اللغوي للردود النموذجية",
@@ -290,7 +320,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-29"
     },
     {
       "title": "لستة توفير مسندم",
@@ -300,7 +331,8 @@
       "pct": 100,
       "date": "12 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-30"
     },
     {
       "title": "البوث الخاص بالدوائر",
@@ -310,7 +342,8 @@
       "pct": 99,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-31"
     },
     {
       "title": "عقد النظافة",
@@ -320,7 +353,8 @@
       "pct": 100,
       "date": "11 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-32"
     },
     {
       "title": "عقد صيانة الأنظمة الأمنية",
@@ -330,7 +364,8 @@
       "pct": 100,
       "date": "11 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-33"
     },
     {
       "title": "فواتير الكهرباء لدائرة الرستاق",
@@ -340,7 +375,8 @@
       "pct": 100,
       "date": "11 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-34"
     },
     {
       "title": "شراء (30) جهاز لابتوب للخدمات الميدانية والاستباقية",
@@ -350,7 +386,8 @@
       "pct": 100,
       "date": "12 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-35"
     },
     {
       "title": "شراء جهاز ربط شاشتي منفذ ولاية السيب بالبث الموحد (LG Digital Signage 4K)",
@@ -360,7 +397,8 @@
       "pct": 92,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-36"
     },
     {
       "title": "التنسيق لدورة تدريبية في الإسعافات الأولية والانعاش القلبي لموظفي الدوائر",
@@ -370,7 +408,8 @@
       "pct": 50,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-37"
     },
     {
       "title": "طلب إلحاق لعقد توريد وصيانة أجهزة معطرات الجو للدوائر والمنافذ (15 جهاز)",
@@ -380,7 +419,8 @@
       "pct": 71,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-38"
     },
     {
       "title": "شراء باقات ورد وصيانة دورية لدائرة الحماية الاجتماعية بمسقط",
@@ -390,7 +430,8 @@
       "pct": 100,
       "date": "12 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-39"
     },
     {
       "title": "توفير أعلام السلطنة لدوائر الحماية الاجتماعية بالمحافظات",
@@ -400,7 +441,8 @@
       "pct": 100,
       "date": "5 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-40"
     },
     {
       "title": "شراء كراسي مساج (شامل النقل والتركيب) لدوائر الحماية الاجتماعية بالمحافظات",
@@ -410,7 +452,8 @@
       "pct": 90,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-41"
     },
     {
       "title": "شراء أجهزة تنقية ومعقمات الجو لدوائر الحماية الاجتماعية بالمحافظات",
@@ -420,7 +463,8 @@
       "pct": 80,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-42"
     },
     {
       "title": "شراء تمر (الضيافة) لدائرة مسقط",
@@ -430,7 +474,8 @@
       "pct": 40,
       "date": "12 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-43"
     },
     {
       "title": "اجتماع الدوري للقسم",
@@ -440,7 +485,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-44"
     },
     {
       "title": "تحويل شيكات التقسيط للدوائر (صور / البريمي / نزوي)",
@@ -450,7 +496,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-45"
     },
     {
       "title": "تحويل عقد الإيجار السكني",
@@ -460,7 +507,8 @@
       "pct": 100,
       "date": "8 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-46"
     },
     {
       "title": "متابعة إصدار بطاقات للموظفين الجدد",
@@ -470,7 +518,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-47"
     },
     {
       "title": "إضافة مواعيد تسليم الخطط والتقارير في التقويم ومشاركتها مع الموظفين",
@@ -480,7 +529,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-48"
     },
     {
       "title": "ملف كفاءة الاستجابة والموقف التنفيذي",
@@ -490,7 +540,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-49"
     },
     {
       "title": "الموقف التنفيذي للموازنة والمؤشرات والخطة التشغيلية وتوثيق مواعيد التسليم في التقويم",
@@ -500,7 +551,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-50"
     },
     {
       "title": "ملف ركن تجربة العميل",
@@ -510,7 +562,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-51"
     },
     {
       "title": "ملف محاضر الاجتماعات للجنة الدولية",
@@ -520,7 +573,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-52"
     },
     {
       "title": "ملف مركزية العميل",
@@ -530,7 +584,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-53"
     },
     {
       "title": "ملف الأطلس الوطني والأطلس الدولي",
@@ -540,7 +595,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-54"
     },
     {
       "title": "ملف تفعيل خطة التواصل المجتمعي وقائمة الشركاء وتوثيقها في التقويم",
@@ -550,7 +606,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-55"
     },
     {
       "title": "ملف البوثات للمحافظات",
@@ -560,7 +617,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-56"
     },
     {
       "title": "ملف تصميم محافظة ظفار",
@@ -570,7 +628,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-57"
     },
     {
       "title": "ملف متابعة مؤشرات وتقارير الدوائر جميعها وتوحيدها",
@@ -580,7 +639,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-58"
     },
     {
       "title": "ملف مركز الاتصال وتحديث الموقف التنفيذي لبقية المتطلبات",
@@ -590,7 +650,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-59"
     },
     {
       "title": "ملف Smart CRM – المتابعة والإنجاز",
@@ -600,7 +661,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-60"
     },
     {
       "title": "ملف تغذية المساعد الذكي وإعادة تصميم المحتوى",
@@ -610,7 +672,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-61"
     },
     {
       "title": "ملف مصفوفة الخدمات – الإنجاز النهائي",
@@ -620,7 +683,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-62"
     },
     {
       "title": "ملف توسيع خدمات مركز الاتصال",
@@ -630,7 +694,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-63"
     },
     {
       "title": "ملف آلية ومنهجية إدارة وتطوير الخدمات",
@@ -640,7 +705,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-64"
     },
     {
       "title": "ملف الانتقال للمبنى الجديد (دائرة مسقط ودائرة التطوير والتنسيق مع الدعم المؤسسي وIT)",
@@ -650,7 +716,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-65"
     },
     {
       "title": "ملف الردود النموذجية – الإنجاز والاعتماد",
@@ -660,7 +727,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-66"
     },
     {
       "title": "ملف الإشعارات",
@@ -670,7 +738,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-67"
     },
     {
       "title": "ملف خدمات الصرف للبوابة الخارجية",
@@ -680,7 +749,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-68"
     },
     {
       "title": "ملف إعداد تقرير ثقة وجاهزيته خارجياً",
@@ -690,7 +760,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-69"
     },
     {
       "title": "ملف الاجتماع الأول لمدراء الدوائر",
@@ -700,7 +771,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-70"
     },
     {
       "title": "ملف أجهزة عنصر للدوائر",
@@ -710,7 +782,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-71"
     },
     {
       "title": "اختبار تعزيز المعرفة",
@@ -720,7 +793,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-72"
     },
     {
       "title": "ملف صالة أصحاب الأعمال",
@@ -730,7 +804,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-73"
     },
     {
       "title": "تحليل الشكاوى والاستفسارات منصة تجاوب وCRM لشهر مارس",
@@ -740,7 +815,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-74"
     },
     {
       "title": "شرح منصة تجاوب لموظفي مركز الاتصال (أبريل)",
@@ -750,7 +826,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-75"
     },
     {
       "title": "مبادرة الاستجابة للشكاوى والمقترحات التطويرية 75% – مارس 2026",
@@ -760,7 +837,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-76"
     },
     {
       "title": "التقرير الربع سنوي لخدمات المتعاملين بالحضور الشخصي (CRM)",
@@ -770,7 +848,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-77"
     },
     {
       "title": "تعزيز المعرفة بإصابات العمل والأمراض المهنية بالاجتماع الصباحي",
@@ -780,7 +859,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-78"
     },
     {
       "title": "المؤشرات التشغيلية لمديرية خدمات المتعاملين لشهر مارس 2026",
@@ -790,7 +870,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-79"
     },
     {
       "title": "مبادرة استجابة الطلبات الواردة",
@@ -800,7 +881,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-80"
     },
     {
       "title": "مبادرة قاعدة المعرفة – إحصاء الأسئلة والأجوبة",
@@ -810,7 +892,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-81"
     },
     {
       "title": "مبادرة نشر المعرفة من الأقسام إلى موظفي تجاوب",
@@ -820,7 +903,8 @@
       "pct": null,
       "date": "2 أبريل",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-82"
     },
     {
       "title": "حضور ورشة المحفظة الإلكترونية (بنك صحار وصندوق الحماية)",
@@ -830,7 +914,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-83"
     },
     {
       "title": "الموقف التنفيذي للخطة التشغيلية – رؤية عمان 2040",
@@ -840,7 +925,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-84"
     },
     {
       "title": "إعداد معايير موظف الشهر لقسم إدارة علاقات المتعاملين",
@@ -850,7 +936,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-85"
     },
     {
       "title": "منصة تجاوب – التقرير السنوي للعام 2025",
@@ -860,7 +947,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-86"
     },
     {
       "title": "اجتماع مع دائرة الحوكمة وإدارة المخاطر لمناقشة مؤشر البلاغات بتجاوب",
@@ -870,7 +958,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-87"
     },
     {
       "title": "مصفوفة الخدمات الشاملة",
@@ -880,7 +969,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-88"
     },
     {
       "title": "متابعة طلبات المؤمن عليهم وأصحاب الأعمال وتحويلها للدوائر",
@@ -890,7 +980,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-89"
     },
     {
       "title": "إدخال طلبات المتعاملين في الرابط",
@@ -900,7 +991,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-90"
     },
     {
       "title": "الرد على استفسارات موظفي المركز ومتابعتهم",
@@ -910,7 +1002,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-91"
     },
     {
       "title": "تقييم الموظفين وإبداء الملاحظات لكل موظف",
@@ -920,7 +1013,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-92"
     },
     {
       "title": "رصد منفعة دعم دخل الأسرة",
@@ -930,7 +1024,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-93"
     },
     {
       "title": "نشر تعميم قسم منفعة الإعاقة لموظفي القسم",
@@ -940,7 +1035,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-94"
     },
     {
       "title": "رصد تحديات الفروع والمنافذ ومركز الاتصال وإرسالها لسعادة الصارخية",
@@ -950,7 +1046,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-95"
     },
     {
       "title": "توفير مستلزمات قسم مركز الاتصال من الشؤون الإدارية",
@@ -960,7 +1057,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-96"
     },
     {
       "title": "معايير اختيار موظف الشهر من مركز الخدمة الهاتفية",
@@ -970,7 +1068,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-97"
     },
     {
       "title": "مراجعة نتائج قسم التميز المؤسسي وتحليلها",
@@ -980,7 +1079,8 @@
       "pct": 100,
       "date": "1 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-98"
     },
     {
       "title": "تعميم نتائج المركز الواردة من قسم التميز المؤسسي على الموظفين",
@@ -990,7 +1090,8 @@
       "pct": 100,
       "date": "31 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-99"
     },
     {
       "title": "رصد ملاحظات الواردة عبر خدمة الواتساب وإرسال نماذج لمديرة الدائرة",
@@ -1000,7 +1101,8 @@
       "pct": null,
       "date": "31 مارس",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-100"
     },
     {
       "title": "استلام حالات الرد من قسم منفعة الإعاقة وتعميمها",
@@ -1010,7 +1112,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-101"
     },
     {
       "title": "منفعة طلاب التعليم العالي – حصر واستلام الإيميل",
@@ -1020,7 +1123,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-102"
     },
     {
       "title": "مؤشرات مركز الاتصال لشهر مارس 2026",
@@ -1030,7 +1134,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-103"
     },
     {
       "title": "دليل تقديم طلب اللجان الطبية – تعميم على الموظفين",
@@ -1040,7 +1145,8 @@
       "pct": 100,
       "date": "2 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-104"
     },
     {
       "title": "طلب صلاحيات الملفات المشتركة للقسم وطلب هواتف للموظفين",
@@ -1050,7 +1156,8 @@
       "pct": 100,
       "date": "8 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-105"
     },
     {
       "title": "إعداد مبادرة الذكاء السلوكي المؤسسي",
@@ -1060,7 +1167,8 @@
       "pct": 50,
       "date": "8 مايو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-106"
     },
     {
       "title": "تقرير الربع السنوي لإدارة علاقات المتعاملين",
@@ -1070,7 +1178,8 @@
       "pct": 100,
       "date": "7 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-107"
     },
     {
       "title": "مبادرة إسعاد المتعاملين – تنظيم أفكار لفعاليات القسم",
@@ -1080,7 +1189,8 @@
       "pct": 50,
       "date": "8 مايو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-108"
     },
     {
       "title": "شرح آلية عمل المنصة الوطنية تجاوب لموظفي مركز الاتصال (مايو)",
@@ -1090,7 +1200,8 @@
       "pct": 100,
       "date": "8 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-109"
     },
     {
       "title": "مبادرة معاً نتعلم – أهم التعديلات الجديدة على معاش الوفاة",
@@ -1100,7 +1211,8 @@
       "pct": 100,
       "date": "8 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-110"
     },
     {
       "title": "مبادرة تحديث سجل مخاطر المديرية والإجراءات التصحيحية",
@@ -1110,7 +1222,8 @@
       "pct": 100,
       "date": "9 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-111"
     },
     {
       "title": "متطلبات المنافذ لبناء نظام التقييم",
@@ -1120,7 +1233,8 @@
       "pct": 100,
       "date": "9 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-112"
     },
     {
       "title": "بيانات مؤشرات الأداء التشغيلية للربع الأول 2026",
@@ -1130,7 +1244,8 @@
       "pct": 100,
       "date": "6 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-113"
     },
     {
       "title": "ورشة مناقشة مؤشر رضا المستفيدين – وزارة النقل والاتصالات",
@@ -1140,7 +1255,8 @@
       "pct": 100,
       "date": "20 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-114"
     },
     {
       "title": "مقترح السترة لخدمات المتعاملين – تحديث الزي المؤسسي",
@@ -1150,7 +1266,8 @@
       "pct": 100,
       "date": "19 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-115"
     },
     {
       "title": "تقرير ربع السنوي لقسم إدارة علاقات المتعاملين",
@@ -1160,7 +1277,8 @@
       "pct": 100,
       "date": "16 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-116"
     },
     {
       "title": "اجتماعات إيسا – تصميم العرض",
@@ -1170,7 +1288,8 @@
       "pct": 100,
       "date": "7 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-117"
     },
     {
       "title": "مصفوفة قاعدة المعرفة",
@@ -1180,7 +1299,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-118"
     },
     {
       "title": "مؤشرات شهر مارس 2026",
@@ -1190,7 +1310,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-119"
     },
     {
       "title": "اختبارات تعويضية لتعزيز المعرفة",
@@ -1200,7 +1321,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-120"
     },
     {
       "title": "نتائج العصف الذهني للخطة التشغيلية 2027",
@@ -1210,7 +1332,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-121"
     },
     {
       "title": "SMS IDs – تجهيز المصفوفة واعتمادها",
@@ -1220,7 +1343,8 @@
       "pct": 100,
       "date": "9 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-122"
     },
     {
       "title": "فحص نظام تحليل الكلام والمشاعر (UAT)",
@@ -1230,7 +1354,8 @@
       "pct": 100,
       "date": "9 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-123"
     },
     {
       "title": "معالجة إشكالية عدم عكس الرقم المدني في بيانات CRM",
@@ -1240,7 +1365,8 @@
       "pct": 100,
       "date": "15 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-124"
     },
     {
       "title": "إرسال ملاحظات الموقف التنفيذي لمشروع مركز الاتصال للشركة",
@@ -1250,7 +1376,8 @@
       "pct": 100,
       "date": "15 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-125"
     },
     {
       "title": "تحليل بيانات QRs الثلاثة والتواصل مع الفروع",
@@ -1260,7 +1387,8 @@
       "pct": 100,
       "date": "20 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-126"
     },
     {
       "title": "إعداد خطة عمل وبنود تقييم تجربة الروبوت",
@@ -1270,7 +1398,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-127"
     },
     {
       "title": "مسودة تدشين تطبيق نافذ",
@@ -1280,7 +1409,8 @@
       "pct": 100,
       "date": "22 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-128"
     },
     {
       "title": "إعداد العروض الخاصة بمنظمة إيسا",
@@ -1290,7 +1420,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-129"
     },
     {
       "title": "اعتماد سجل مخاطر المديرية المحدث 2026 ومتابعة الموقف التنفيذي",
@@ -1300,7 +1431,8 @@
       "pct": 70,
       "date": "30 أبريل",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-130"
     },
     {
       "title": "تنفيذ النتيجة الثانية بمبادرة سجل مخاطر المديرية",
@@ -1310,7 +1442,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-131"
     },
     {
       "title": "شيكات واردة لدائرتي صحار والبريمي وصور",
@@ -1320,7 +1453,8 @@
       "pct": 100,
       "date": "5 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-132"
     },
     {
       "title": "إعداد الموقف التنفيذي للموازنة 2026",
@@ -1330,7 +1464,8 @@
       "pct": 100,
       "date": "15 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-133"
     },
     {
       "title": "ملاحظات على بعض مباني الدوائر",
@@ -1340,7 +1475,8 @@
       "pct": 100,
       "date": "10 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-134"
     },
     {
       "title": "حضور ورشة التفكير الاستراتيجي",
@@ -1350,7 +1486,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-135"
     },
     {
       "title": "حضور الاجتماع الافتراضي لمنفعة كبار السن",
@@ -1360,7 +1497,8 @@
       "pct": 100,
       "date": "19 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-136"
     },
     {
       "title": "مناقشة منفعة كبار السن وتجهيز المحتوى",
@@ -1370,7 +1508,8 @@
       "pct": 100,
       "date": "19 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-137"
     },
     {
       "title": "معاملات منفعة دعم دخل الأسرة – فحص ومراجعة",
@@ -1380,7 +1519,8 @@
       "pct": 100,
       "date": "20 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-138"
     },
     {
       "title": "مناقشة الفئات الجديدة المضافة في معاش الوفاة",
@@ -1390,7 +1530,8 @@
       "pct": 100,
       "date": "20 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-139"
     },
     {
       "title": "مناقشة منفعة دعم دخل الأسرة",
@@ -1400,7 +1541,8 @@
       "pct": 100,
       "date": "21 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-140"
     },
     {
       "title": "تعميم وشرح المستفيدين من معاش كبار السن النشطين",
@@ -1410,7 +1552,8 @@
       "pct": 100,
       "date": "23 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-141"
     },
     {
       "title": "حضور اجتماع مع الشركة المنفذة للمشروع بحضور المدير العام",
@@ -1420,7 +1563,8 @@
       "pct": 100,
       "date": "5 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-142"
     },
     {
       "title": "حضور اجتماع تصور تفعيل الخدمات عبر مركز الاتصال",
@@ -1430,7 +1574,8 @@
       "pct": 100,
       "date": "5 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-143"
     },
     {
       "title": "تقرير تقييم مركز الاتصال من فريق التميز المؤسسي عن شهر فبراير",
@@ -1440,7 +1585,8 @@
       "pct": 100,
       "date": "6 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-144"
     },
     {
       "title": "تقرير الربع الأول لمركز الخدمة الهاتفية",
@@ -1450,7 +1596,8 @@
       "pct": 100,
       "date": "9 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-145"
     },
     {
       "title": "تعميم القرار الصادر بشأن معاش الوفاة وشرح التفاصيل للموظفين",
@@ -1460,7 +1607,8 @@
       "pct": 100,
       "date": "8 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-146"
     },
     {
       "title": "إعداد جدول مناوبة أسبوعي",
@@ -1470,7 +1618,8 @@
       "pct": 100,
       "date": "6 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-147"
     },
     {
       "title": "تعميم التحديث الأخير بشأن منفعة طلاب التعليم العالي",
@@ -1480,7 +1629,8 @@
       "pct": 100,
       "date": "8 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-148"
     },
     {
       "title": "تقرير تفصيلي للمؤشرات لشهر مارس",
@@ -1490,7 +1640,8 @@
       "pct": 100,
       "date": "8 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-149"
     },
     {
       "title": "طلب بيانات الدخول للـ Dashboard من الشركة المنفذة",
@@ -1500,7 +1651,8 @@
       "pct": 100,
       "date": "9 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-150"
     },
     {
       "title": "Issue with IVR Messages Report – متابعة الشركة المنفذة",
@@ -1510,7 +1662,8 @@
       "pct": null,
       "date": "9 أبريل",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-151"
     },
     {
       "title": "فحص الخدمات في نظام IVR وإرسال الملاحظات للشركة",
@@ -1520,7 +1673,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-152"
     },
     {
       "title": "لوحة مؤشرات المديرية",
@@ -1530,7 +1684,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-153"
     },
     {
       "title": "وثيقة الإطار العملي لمركزية العميل",
@@ -1540,7 +1695,8 @@
       "pct": 80,
       "date": "30 أبريل",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-154"
     },
     {
       "title": "أجندة الملتقى – استعراض مع المدير العام",
@@ -1550,7 +1706,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-155"
     },
     {
       "title": "تطبيق نافذ – تحليل المقترح الوارد من الشركة",
@@ -1560,7 +1717,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-156"
     },
     {
       "title": "الروبوت – تحليل المقترح الوارد من الشركة",
@@ -1570,7 +1728,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-157"
     },
     {
       "title": "تحليل بيانات QRs الثلاثة لشهر أبريل",
@@ -1580,7 +1739,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-158"
     },
     {
       "title": "تصور تنظيم المتعاملين",
@@ -1590,7 +1750,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-159"
     },
     {
       "title": "منهجية ترميز الخدمات",
@@ -1600,7 +1761,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-160"
     },
     {
       "title": "مقترح تقديم خدمات خارج ساعات العمل الرسمي",
@@ -1610,7 +1772,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-161"
     },
     {
       "title": "الإطار العام للخدمات الاستباقية",
@@ -1620,7 +1783,8 @@
       "pct": 100,
       "date": "30 أبريل",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-162"
     },
     {
       "title": "مؤشرات شهر أبريل 2026",
@@ -1630,7 +1794,8 @@
       "pct": 85,
       "date": "30 أبريل",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-163"
     },
     {
       "title": "تنفيذ حكم مطالب علي راشد الشافعي – تحويل شيكات للمستحقات",
@@ -1640,7 +1805,8 @@
       "pct": 100,
       "date": "14 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-164"
     },
     {
       "title": "تحويل أصل الشيكات الواردة من دائرة صور للاشتراكات",
@@ -1650,7 +1816,8 @@
       "pct": 100,
       "date": "14 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-165"
     },
     {
       "title": "متابعة طلبات المؤمن عليهم وأصحاب الأعمال (مايو)",
@@ -1660,7 +1827,8 @@
       "pct": 100,
       "date": "14 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-166"
     },
     {
       "title": "إدخال طلبات المتعاملين في الرابط (مايو)",
@@ -1670,7 +1838,8 @@
       "pct": 100,
       "date": "14 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-167"
     },
     {
       "title": "الرد على استفسارات موظفي المركز ومتابعتهم (مايو)",
@@ -1680,7 +1849,8 @@
       "pct": 100,
       "date": "14 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-168"
     },
     {
       "title": "تقييم الموظفين وإبداء الملاحظات لكل موظف (مايو)",
@@ -1690,7 +1860,8 @@
       "pct": 100,
       "date": "10 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-169"
     },
     {
       "title": "حضور الاجتماع الأسبوعي مع المدير العام (مايو)",
@@ -1700,7 +1871,8 @@
       "pct": 100,
       "date": "10 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-170"
     },
     {
       "title": "حضور جلسات نقل المعرفة في صالة خدمة المتعاملين",
@@ -1710,7 +1882,8 @@
       "pct": 100,
       "date": "14 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-171"
     },
     {
       "title": "حضور اجتماع منصة تجاوب 3/2026",
@@ -1720,7 +1893,8 @@
       "pct": 100,
       "date": "12 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-172"
     },
     {
       "title": "إعداد محضر الاجتماع وإرساله لسعادة الصارخية",
@@ -1730,7 +1904,8 @@
       "pct": 100,
       "date": "13 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-173"
     },
     {
       "title": "قصص النجاح – إعداد الاستمارة",
@@ -1740,7 +1915,8 @@
       "pct": 100,
       "date": "13 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-174"
     },
     {
       "title": "الاجتماع بشأن مؤشرات مركز الاتصال (مايو)",
@@ -1750,7 +1926,8 @@
       "pct": 100,
       "date": "10 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-175"
     },
     {
       "title": "اجتماع مع فريق عمل مركز الاتصال (الموظفين الجدد)",
@@ -1760,7 +1937,8 @@
       "pct": 100,
       "date": "13 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-176"
     },
     {
       "title": "تنظيم عمل السوشيل ميديا – مخاطبة الشركة",
@@ -1770,7 +1948,8 @@
       "pct": 100,
       "date": "13 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-177"
     },
     {
       "title": "تصور خطة عمل مركز الاتصال وإرساله لمديرة الدائرة",
@@ -1780,7 +1959,8 @@
       "pct": 100,
       "date": "11 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-178"
     },
     {
       "title": "اعتماد الجدول الأسبوعي وتعميمه على الموظفين",
@@ -1790,7 +1970,8 @@
       "pct": 100,
       "date": "13 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-179"
     },
     {
       "title": "تحويل أصل الشيكات الواردة من دائرتي الرستاق وإبراء",
@@ -1800,7 +1981,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-180"
     },
     {
       "title": "تصريف البريد الصادر والوارد – شيكات تقسيط شمال الباطنة",
@@ -1810,7 +1992,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-181"
     },
     {
       "title": "اجتماع مرئي مع مديرية إصابات العمل والأمراض المهنية لنقل المعرفة",
@@ -1820,7 +2003,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-182"
     },
     {
       "title": "كشف الصلاحيات – مخاطبة رحمة الحارثي",
@@ -1830,7 +2014,8 @@
       "pct": null,
       "date": "21 مايو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-183"
     },
     {
       "title": "مناقشة تقرير SLA المرسل من الشركة",
@@ -1840,7 +2025,8 @@
       "pct": 100,
       "date": "19 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-184"
     },
     {
       "title": "إعداد تقرير منصة تجاوب وإرساله لسعادة الصارخية",
@@ -1850,7 +2036,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-185"
     },
     {
       "title": "تقرير مكالمات مركز الاتصال يناير–أبريل 2026 وتقرير FCR",
@@ -1860,7 +2047,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-186"
     },
     {
       "title": "تقرير مركز الاتصال لشهر أبريل 2026",
@@ -1870,7 +2058,8 @@
       "pct": 100,
       "date": "17 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-187"
     },
     {
       "title": "مبادرة حوكمة ردود المتعاملين",
@@ -1880,7 +2069,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-188"
     },
     {
       "title": "حضور الاجتماع الافتراضي لإصابات العمل",
@@ -1890,7 +2080,8 @@
       "pct": 100,
       "date": "18 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-189"
     },
     {
       "title": "إعداد مخطط إصابات العمل وتعميمه على الموظفين",
@@ -1900,7 +2091,8 @@
       "pct": 100,
       "date": "19 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-190"
     },
     {
       "title": "مناقشة إصابات العمل ومنفعة دعم دخل الأسرة مع الفريق",
@@ -1910,7 +2102,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-191"
     },
     {
       "title": "حضور اجتماع منحة الابتعاث الداخلي مع الجهات المعنية",
@@ -1920,7 +2113,8 @@
       "pct": 100,
       "date": "20 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-192"
     },
     {
       "title": "إحصائية حساب العناية بالمتعاملين لمنصة X وإرسالها للقسم",
@@ -1930,7 +2124,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-193"
     },
     {
       "title": "حصر موظفي التعاقد الخارجي بمديرية خدمات المتعاملين",
@@ -1940,7 +2135,8 @@
       "pct": 100,
       "date": "19 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-194"
     },
     {
       "title": "مصروفات وزارة التنمية والانتقال وتوقف الخدمات",
@@ -1950,7 +2146,8 @@
       "pct": 100,
       "date": "19 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-195"
     },
     {
       "title": "حضور اجتماع تصور إدارة مركز الاتصال والمناقشة",
@@ -1960,7 +2157,8 @@
       "pct": 100,
       "date": "20 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-196"
     },
     {
       "title": "تصميم قالب تقارير احترافي لمنصة تجاوب (داشبورد تفاعلي)",
@@ -1970,7 +2168,8 @@
       "pct": 100,
       "date": "17 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-197"
     },
     {
       "title": "داشبورد احترافي للردود النموذجية لمنصة تجاوب",
@@ -1980,7 +2179,8 @@
       "pct": 100,
       "date": "20 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-198"
     },
     {
       "title": "تحليل مركز الاتصال",
@@ -1990,7 +2190,8 @@
       "pct": 100,
       "date": "21 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-199"
     },
     {
       "title": "متابعة طلبات المؤمن عليهم وأصحاب الأعمال",
@@ -2000,7 +2201,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-200"
     },
     {
       "title": "إدخال طلبات المتعاملين في الرابط",
@@ -2010,7 +2212,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-201"
     },
     {
       "title": "الرد على استفسارات موظفي المركز ومتابعتهم",
@@ -2020,7 +2223,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-202"
     },
     {
       "title": "تقييم الموظفين وإبداء الملاحظات",
@@ -2030,7 +2234,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-203"
     },
     {
       "title": "حضور جلسات نقل المعرفة في صالة خدمة المتعاملين",
@@ -2040,7 +2245,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-204"
     },
     {
       "title": "كشف الصلاحيات – مخاطبة أمل النبهاني",
@@ -2050,7 +2256,8 @@
       "pct": null,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-205"
     },
     {
       "title": "مؤشرات شهر مايو 2026",
@@ -2060,7 +2267,8 @@
       "pct": 100,
       "date": "2 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-206"
     },
     {
       "title": "تقرير شهر مايو 2026",
@@ -2070,7 +2278,8 @@
       "pct": 100,
       "date": "2 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-207"
     },
     {
       "title": "تقرير منصة الواتساب (أسبوع 1)",
@@ -2080,7 +2289,8 @@
       "pct": 100,
       "date": "2 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-208"
     },
     {
       "title": "تقرير مكالمات مركز الاتصال مايو 2026 وتقرير FCR",
@@ -2090,7 +2300,8 @@
       "pct": 100,
       "date": "2 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-209"
     },
     {
       "title": "إعداد مخطط لبرنامج ثقة",
@@ -2100,7 +2311,8 @@
       "pct": 100,
       "date": "2 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-210"
     },
     {
       "title": "تعميم تحويل معاملات منفعة الإعاقة",
@@ -2110,7 +2322,8 @@
       "pct": 100,
       "date": "31 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-211"
     },
     {
       "title": "حصر معاملات منفعة الإعاقة",
@@ -2120,7 +2333,8 @@
       "pct": 100,
       "date": "1 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-212"
     },
     {
       "title": "الإشراف على الموظفين ومتابعتهم (أسبوع 1)",
@@ -2130,7 +2344,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-213"
     },
     {
       "title": "متابعة تقنية المعلومات لعطل البوابة الداخلية",
@@ -2140,7 +2355,8 @@
       "pct": 100,
       "date": "31 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-214"
     },
     {
       "title": "إرجاع صلاحيات موظفي مركز الاتصال",
@@ -2150,7 +2366,8 @@
       "pct": 100,
       "date": "31 مايو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-215"
     },
     {
       "title": "العطل الفني في اختفاء صلاحيات النظام (أسبوع 1)",
@@ -2160,7 +2377,8 @@
       "pct": 100,
       "date": "2 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-216"
     },
     {
       "title": "إحصائية حساب العناية بالمتعاملين لمنصة إكس",
@@ -2170,7 +2388,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-217"
     },
     {
       "title": "نتائج اختبار تعزيز المعرفة (1) – النصف الأول 2026",
@@ -2180,7 +2399,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-218"
     },
     {
       "title": "البوث الخاص بالدوائر (إصدار أمر الشراء)",
@@ -2190,7 +2410,8 @@
       "pct": 99,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-219"
     },
     {
       "title": "إلحاق عقد معطرات الجو للدوائر بالمحافظات (15 جهاز)",
@@ -2200,7 +2421,8 @@
       "pct": 69,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-220"
     },
     {
       "title": "شراء كراسي مساج لدوائر الحماية الاجتماعية",
@@ -2210,7 +2432,8 @@
       "pct": 90,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-221"
     },
     {
       "title": "شراء أجهزة تنقية ومعقمات الجو للمحافظات",
@@ -2220,7 +2443,8 @@
       "pct": 80,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-222"
     },
     {
       "title": "شراء جهاز ربط شاشتي منفذ ولاية السيب بالبث الموحد",
@@ -2230,7 +2454,8 @@
       "pct": 85,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-223"
     },
     {
       "title": "شراء تمر الضيافة لدائرة مسقط",
@@ -2240,7 +2465,8 @@
       "pct": 40,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-224"
     },
     {
       "title": "اعتماد سجل مخاطر المديرية المحدث 2026",
@@ -2250,7 +2476,8 @@
       "pct": 70,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-225"
     },
     {
       "title": "مقترح وعاء مزهرية لباقة الورد في المحافظات 2027",
@@ -2260,7 +2487,8 @@
       "pct": 25,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-226"
     },
     {
       "title": "بلاغ توقف البوابة الداخلية 24 مايو 2026",
@@ -2270,7 +2498,8 @@
       "pct": 100,
       "date": "1 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-227"
     },
     {
       "title": "باقة الورد لدائرة مسقط (التنسيق مع الشركة)",
@@ -2280,7 +2509,8 @@
       "pct": null,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-228"
     },
     {
       "title": "شيكات التقسيط من دوائر صلالة والرستاق والدقم",
@@ -2290,7 +2520,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-229"
     },
     {
       "title": "متابعة شيكات التقسيط من دائرة إبراء والدقم",
@@ -2300,7 +2531,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-230"
     },
     {
       "title": "عقد إيجار سكني وارد من دائرة الدقم",
@@ -2310,7 +2542,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-231"
     },
     {
       "title": "تسليم أجهزة لابتوب للدوائر (صور، صحار، عبري، صلالة، إبراء)",
@@ -2320,7 +2553,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-232"
     },
     {
       "title": "حضور برنامج تدريبي في الذكاء الاصطناعي للقيادة والدعم الاستراتيجي",
@@ -2330,7 +2564,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-233"
     },
     {
       "title": "الردود النموذجية للمنصة (أسبوع 1)",
@@ -2340,7 +2575,8 @@
       "pct": 80,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-234"
     },
     {
       "title": "تقرير مخرجات ورشة تقييم منظومة الخدمات (أسبوع 1)",
@@ -2350,7 +2586,8 @@
       "pct": 80,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-235"
     },
     {
       "title": "متابعة تدشين نظام CRM",
@@ -2360,7 +2597,8 @@
       "pct": 100,
       "date": "11 مارس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-236"
     },
     {
       "title": "الإجراءات التطويرية للقسم لعام 2026",
@@ -2370,7 +2608,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-237"
     },
     {
       "title": "مصفوفة الخدمات الشاملة (أسبوع 1)",
@@ -2380,7 +2619,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-238"
     },
     {
       "title": "تصور تنظيم المتعاملين",
@@ -2390,7 +2630,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-239"
     },
     {
       "title": "منهجية ترميز الخدمات",
@@ -2400,7 +2641,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-240"
     },
     {
       "title": "مقترح تقديم خدمات خارج ساعات العمل الرسمي",
@@ -2410,7 +2652,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-241"
     },
     {
       "title": "الإطار العام للخدمات الاستباقية",
@@ -2420,7 +2663,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-242"
     },
     {
       "title": "مؤشرات أداء المحافظات (أسبوع 1)",
@@ -2430,7 +2674,8 @@
       "pct": 85,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-243"
     },
     {
       "title": "اختبارات تعويضية لتعزيز المعرفة",
@@ -2440,7 +2685,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-244"
     },
     {
       "title": "نتائج العصف الذهني للخطة التشغيلية 2027",
@@ -2450,7 +2696,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-245"
     },
     {
       "title": "SMS IDs – تجهيز المصفوفة واعتمادها",
@@ -2460,7 +2707,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-246"
     },
     {
       "title": "فحص نظام تحليل المكالمات والمشاعر – Round 2",
@@ -2470,7 +2718,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-247"
     },
     {
       "title": "معالجة إشكالية الرقم المدني في بيانات CRM",
@@ -2480,7 +2729,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-248"
     },
     {
       "title": "ملاحظات الموقف التنفيذي لمشروع مركز الاتصال",
@@ -2490,7 +2740,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-249"
     },
     {
       "title": "إعداد العروض الخاصة بمنظمة إيسا",
@@ -2500,7 +2751,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-250"
     },
     {
       "title": "فحص خدمات نظام IVR وإرسال الملاحظات للشركة",
@@ -2510,7 +2762,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-251"
     },
     {
       "title": "لوحة مؤشرات المديرية (أسبوع 1)",
@@ -2520,7 +2773,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-252"
     },
     {
       "title": "وثيقة الإطار العملي لمركزية العميل",
@@ -2530,7 +2784,8 @@
       "pct": 80,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-253"
     },
     {
       "title": "أجندة ملتقى المدراء",
@@ -2540,7 +2795,8 @@
       "pct": 80,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-254"
     },
     {
       "title": "تحليل مؤشرات مركز الاتصال (أسبوع 1)",
@@ -2550,7 +2806,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-255"
     },
     {
       "title": "ملتقى المتعاملين (الإعداد النهائي)",
@@ -2560,7 +2817,8 @@
       "pct": 100,
       "date": "1 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-256"
     },
     {
       "title": "منهجية التدشين",
@@ -2570,7 +2828,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-257"
     },
     {
       "title": "مقترح جهاز الترجمة الفورية – المسودة الأولى",
@@ -2580,7 +2839,8 @@
       "pct": 100,
       "date": "3 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-258"
     },
     {
       "title": "دليل حوكمة وتدقيق أداء مركز الاتصال (أسبوع 1)",
@@ -2590,7 +2850,8 @@
       "pct": 60,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-259"
     },
     {
       "title": "تحليل نظام فرع الإجازات المرضية والاعتيادية",
@@ -2600,7 +2861,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-260"
     },
     {
       "title": "رفع ملاحظات اتفاقية مستوى الخدمة (أسبوع 1)",
@@ -2610,7 +2872,8 @@
       "pct": null,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-261"
     },
     {
       "title": "متابعة فحص خدمات مشروع مركز الاتصال (أسبوع 1)",
@@ -2620,7 +2883,8 @@
       "pct": null,
       "date": "4 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-262"
     },
     {
       "title": "متابعة طلبات المؤمن عليهم وأصحاب الأعمال (أسبوع 2)",
@@ -2630,7 +2894,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-263"
     },
     {
       "title": "إدخال طلبات المتعاملين في الرابط (أسبوع 2)",
@@ -2640,7 +2905,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-264"
     },
     {
       "title": "الرد على استفسارات موظفي المركز (أسبوع 2)",
@@ -2650,7 +2916,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-265"
     },
     {
       "title": "تقرير مكالمات المركز Abandoned يناير–مايو 2026",
@@ -2660,7 +2927,8 @@
       "pct": 100,
       "date": "8 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-266"
     },
     {
       "title": "المعادلات المحتسبة في SLA",
@@ -2670,7 +2938,8 @@
       "pct": 100,
       "date": "8 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-267"
     },
     {
       "title": "مقترح صوت المتعامل",
@@ -2680,7 +2949,8 @@
       "pct": 100,
       "date": "7 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-268"
     },
     {
       "title": "تقرير منصة الواتساب (أسبوع 2)",
@@ -2690,7 +2960,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-269"
     },
     {
       "title": "فحص المنصة وقاعدة البيانات",
@@ -2700,7 +2971,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-270"
     },
     {
       "title": "حضور اجتماع مع الشركة المنفذة للمشروع",
@@ -2710,7 +2982,8 @@
       "pct": 100,
       "date": "9 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-271"
     },
     {
       "title": "حضور ورشة أصحاب الأعمال",
@@ -2720,7 +2993,8 @@
       "pct": 100,
       "date": "8 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-272"
     },
     {
       "title": "تعزيز المعرفة بشأن أصحاب الأعمال والأمان الوظيفي",
@@ -2730,7 +3004,8 @@
       "pct": 100,
       "date": "9 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-273"
     },
     {
       "title": "تحليل بيانات SLA (أسبوع 2)",
@@ -2740,7 +3015,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-274"
     },
     {
       "title": "ملاحظات التقييم عن اختبار تعزيز المعرفة (1)",
@@ -2750,7 +3026,8 @@
       "pct": 100,
       "date": "8 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-275"
     },
     {
       "title": "اعتماد الجدول الأسبوعي (أسبوع 2)",
@@ -2760,7 +3037,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-276"
     },
     {
       "title": "الإشراف على الموظفين ومتابعتهم (أسبوع 2)",
@@ -2770,7 +3048,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-277"
     },
     {
       "title": "العطل الفني في اختفاء صلاحيات النظام (أسبوع 2)",
@@ -2780,7 +3059,8 @@
       "pct": null,
       "date": "7 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-278"
     },
     {
       "title": "توقف شريحة الهاتف لمركز الاتصالات",
@@ -2790,7 +3070,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-279"
     },
     {
       "title": "الدليل الإرشادي لإرفاق المستندات وإرجاع طلبات إصابات العمل",
@@ -2800,7 +3081,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-280"
     },
     {
       "title": "البوث الخاص بالدوائر (مراجعة التصميم النهائي)",
@@ -2810,7 +3092,8 @@
       "pct": 99,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-281"
     },
     {
       "title": "إلحاق عقد معطرات الجو – عرض على لجنة المشتريات",
@@ -2820,7 +3103,8 @@
       "pct": 70,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-282"
     },
     {
       "title": "إصدار أمر شراء كراسي المساج وإرساله للشركة",
@@ -2830,7 +3114,8 @@
       "pct": 89,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-283"
     },
     {
       "title": "شراء أجهزة تنقية الجو – استجلاب العروض (أسبوع 2)",
@@ -2840,7 +3125,8 @@
       "pct": 79,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-284"
     },
     {
       "title": "معالجة مشكلة شاشتي منفذ ولاية السيب",
@@ -2850,7 +3136,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-285"
     },
     {
       "title": "شراء تمر الضيافة – استجلاب عروض الأسعار",
@@ -2860,7 +3147,8 @@
       "pct": 45,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-286"
     },
     {
       "title": "اعتماد سجل مخاطر المديرية 2026 – اجتماع المجرفي",
@@ -2870,7 +3158,8 @@
       "pct": 70,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-287"
     },
     {
       "title": "مقترح وعاء مزهرية لباقة الورد – رد قسم المحتوى الإبداعي",
@@ -2880,7 +3169,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-288"
     },
     {
       "title": "باقة الورد لدائرة مسقط (إشعار الاستبعاد)",
@@ -2890,7 +3180,8 @@
       "pct": 80,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-289"
     },
     {
       "title": "ربط كاميرات المراقبة في الدوائر بالمحافظات",
@@ -2900,7 +3191,8 @@
       "pct": 55,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-290"
     },
     {
       "title": "شيكات التقسيط – مركز مزايا للرشاقة والتجميل",
@@ -2910,7 +3202,8 @@
       "pct": 100,
       "date": "7 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-291"
     },
     {
       "title": "شيكات التقسيط – معين لدائرة إبراء",
@@ -2920,7 +3213,8 @@
       "pct": 100,
       "date": "10 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-292"
     },
     {
       "title": "اجتماع مرئي مع مديرية إصابات العمل 10/6/2026",
@@ -2930,7 +3224,8 @@
       "pct": 100,
       "date": "10 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-293"
     },
     {
       "title": "الردود النموذجية للمنصة (أسبوع 2)",
@@ -2940,7 +3235,8 @@
       "pct": 80,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-294"
     },
     {
       "title": "تقرير مخرجات ورشة تقييم الخدمات (أسبوع 2)",
@@ -2950,7 +3246,8 @@
       "pct": 80,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-295"
     },
     {
       "title": "مؤشرات شهر مايو 2026 (إدارة وتطوير)",
@@ -2960,7 +3257,8 @@
       "pct": 60,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-296"
     },
     {
       "title": "اعداد اختبارات تعزيز المعرفة (2)",
@@ -2970,7 +3268,8 @@
       "pct": 80,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-297"
     },
     {
       "title": "الخطة التشغيلية للنصف الثاني 2026",
@@ -2980,7 +3279,8 @@
       "pct": null,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-298"
     },
     {
       "title": "ملتقى المتعاملين (التعديل النهائي)",
@@ -2990,7 +3290,8 @@
       "pct": 100,
       "date": "1 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-299"
     },
     {
       "title": "منهجية التدشين (المراجعة النهائية)",
@@ -3000,7 +3301,8 @@
       "pct": 100,
       "date": "4 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-300"
     },
     {
       "title": "دليل حوكمة وتدقيق أداء مركز الاتصال (أسبوع 2)",
@@ -3010,7 +3312,8 @@
       "pct": 60,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-301"
     },
     {
       "title": "تعبأة استمارة الملكية الفكرية للوكيل الاقتراضي",
@@ -3020,7 +3323,8 @@
       "pct": 100,
       "date": "11 يونيو",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-302"
     },
     {
       "title": "تحليل مؤشرات منصة الواتساب",
@@ -3030,7 +3334,8 @@
       "pct": null,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-303"
     },
     {
       "title": "رفع ملاحظات اتفاقية مستوى الخدمة (أسبوع 2)",
@@ -3040,7 +3345,8 @@
       "pct": null,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-304"
     },
     {
       "title": "متابعة فحص خدمات مشروع مركز الاتصال (أسبوع 2)",
@@ -3050,7 +3356,8 @@
       "pct": null,
       "date": "11 يونيو",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-305"
     },
     {
       "title": "البوث الخاص بالدوائر",
@@ -3060,7 +3367,8 @@
       "pct": 99,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-306"
     },
     {
       "title": "شراء (شامل النقل) أجهزة تنقية ومعقمات الجو لدوائر الحماية الاجتماعية في المحافظات",
@@ -3070,7 +3378,8 @@
       "pct": 91,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-307"
     },
     {
       "title": "باقات ورد لدائرة مسقط",
@@ -3080,7 +3389,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-308"
     },
     {
       "title": "تعويض وتحفيز موظفي خدمات المتعاملين",
@@ -3090,7 +3400,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-309"
     },
     {
       "title": "تعزيز المعرفة – إتقان الخدمة",
@@ -3100,7 +3411,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-310"
     },
     {
       "title": "العرض التعريفي للمديرية",
@@ -3110,7 +3422,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-311"
     },
     {
       "title": "ملتقى الإدارة",
@@ -3120,7 +3433,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-312"
     },
     {
       "title": "حقيبة التدريب",
@@ -3130,7 +3444,8 @@
       "pct": 90,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-313"
     },
     {
       "title": "دراسة واقع متابعة أعمال الدوائر، وتحديد البيانات المتاحة والفجوات والتحديات الحالية",
@@ -3140,7 +3455,8 @@
       "pct": 34,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-314"
     },
     {
       "title": "العمل على مقترح الرسائل والإشعارات",
@@ -3150,7 +3466,8 @@
       "pct": 85,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-315"
     },
     {
       "title": "تركيب مظلات للدوائر في المحافظات (3 مظلات لكل دائرة)",
@@ -3160,7 +3477,8 @@
       "pct": 40,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-316"
     },
     {
       "title": "استجلاب عروض أسعار جديدة لتوفير مكائن القهوة في الدوائر بالمحافظات بسبب الملاحظات على الشركة الحالية",
@@ -3170,7 +3488,8 @@
       "pct": 31,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-317"
     },
     {
       "title": "إعداد مشروع الميزانية 2027",
@@ -3180,7 +3499,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-318"
     },
     {
       "title": "ملاحظة بشأن الموظف مقدم الضيافة بدائرة مسقط",
@@ -3190,7 +3510,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-319"
     },
     {
       "title": "إعداد محتوى المنصة الوطنية \"تجاوب\"",
@@ -3200,7 +3521,8 @@
       "pct": 100,
       "date": "24 أغسطس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-320"
     },
     {
       "title": "وثيقة الإطار العملي لمركزية العميل",
@@ -3210,7 +3532,8 @@
       "pct": 50,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-321"
     },
     {
       "title": "تحليل مؤشرات منصة الواتساب",
@@ -3220,7 +3543,8 @@
       "pct": 60,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-322"
     },
     {
       "title": "متابعة تنفيذ أعمال مشروع مركز الاتصال (تحسينات النظام الحالي والبيئة التجريبية، تحسين التصديق والرد على ملاحظات تحليل الشركة، طلب مستندات التدقيق والأيزو)",
@@ -3230,7 +3554,8 @@
       "pct": 80,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-323"
     },
     {
       "title": "تقرير منظومة الحماية الاجتماعية – إضافة جزئية خاصة بالمديرية",
@@ -3240,7 +3565,8 @@
       "pct": 90,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-324"
     },
     {
       "title": "لقاء المدراء – تصور بالكامل",
@@ -3250,7 +3576,8 @@
       "pct": 80,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-325"
     },
     {
       "title": "تدشين الحزمة الثالثة من التطبيق الهاتفي",
@@ -3260,7 +3587,8 @@
       "pct": 50,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-326"
     },
     {
       "title": "إحصائيات قنوات تقديم الخدمة في المديرية – النصف الأول",
@@ -3270,7 +3598,8 @@
       "pct": 80,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-327"
     },
     {
       "title": "مسمى المساعد الذكي – الملكية الفكرية (التسجيل)",
@@ -3280,7 +3609,8 @@
       "pct": 60,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-328"
     },
     {
       "title": "تحديث إطار جودة الخدمات",
@@ -3290,7 +3620,8 @@
       "pct": 50,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-329"
     },
     {
       "title": "الاجتماع الأسبوعي لملتقى المدراء ومناقشة الأمور التشغيلية",
@@ -3300,7 +3631,8 @@
       "pct": 80,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-330"
     },
     {
       "title": "الرسالة النصية وأسئلة التقييم لنظام Qmatic",
@@ -3310,7 +3642,8 @@
       "pct": null,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-331"
     },
     {
       "title": "تحديث مقترحات أدلة أيسا حسب توجيهات المدير العام",
@@ -3320,7 +3653,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-332"
     },
     {
       "title": "فحص المساعد الذكي (Conversational IVR)",
@@ -3330,7 +3664,8 @@
       "pct": 75,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-333"
     },
     {
       "title": "Whatsapp – المرحلة الثانية",
@@ -3340,7 +3675,8 @@
       "pct": 75,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-334"
     },
     {
       "title": "منصة تحليل البيانات والتقارير (Data Analytics & Reporting)",
@@ -3350,7 +3686,8 @@
       "pct": 75,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-335"
     },
     {
       "title": "مسمى المساعد الذكي – الملكية الفكرية (عرض الاسم والخطة الإعلامية)",
@@ -3360,7 +3697,8 @@
       "pct": 70,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-336"
     },
     {
       "title": "خطة المديرية (متابعة أحمد الحراصي)",
@@ -3370,7 +3708,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-337"
     },
     {
       "title": "عرض المديرية",
@@ -3380,7 +3719,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-338"
     },
     {
       "title": "إعداد عرض المديرية لمكتب الرئيس",
@@ -3390,7 +3730,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-339"
     },
     {
       "title": "إعداد عرض دائرة التواصل والإعلام",
@@ -3400,7 +3741,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-340"
     },
     {
       "title": "إعداد مؤشرات خاصة لتقييم موظفي مركز الاتصال",
@@ -3410,7 +3752,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-341"
     },
     {
       "title": "منصة E-Learning",
@@ -3420,7 +3763,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-342"
     },
     {
       "title": "معالجة شكوى المكالمات الدولية مع الشركة",
@@ -3430,7 +3774,8 @@
       "pct": 100,
       "date": null,
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-343"
     },
     {
       "title": "مستشار صندوق الحماية",
@@ -3440,7 +3785,8 @@
       "pct": 0,
       "date": null,
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-344"
     },
     {
       "title": "تصور ملتقى المدراء",
@@ -3450,7 +3796,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-345"
     },
     {
       "title": "متابعة طلبات المؤمن عليهم وأصحاب الأعمال",
@@ -3460,7 +3807,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-346"
     },
     {
       "title": "إدخال طلبات المتعاملين في الرابط",
@@ -3470,7 +3818,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-347"
     },
     {
       "title": "الرد على استفسارات موظفي المركز ومتابعتهم",
@@ -3480,7 +3829,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-348"
     },
     {
       "title": "الاستمرار في تقييم الموظفين وإبداء الملاحظات لكل منهم على حدة",
@@ -3490,7 +3840,8 @@
       "pct": 100,
       "date": "26 أغسطس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-349"
     },
     {
       "title": "تقرير الأسبوع الثالث من شهر أغسطس",
@@ -3500,7 +3851,8 @@
       "pct": 100,
       "date": "23 أغسطس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-350"
     },
     {
       "title": "إعداد جدول المناوبة الأسبوعي",
@@ -3510,7 +3862,8 @@
       "pct": 100,
       "date": "16 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-351"
     },
     {
       "title": "ورشة مناقشة خدمات مركز الاتصال",
@@ -3520,7 +3873,8 @@
       "pct": 100,
       "date": "25 أغسطس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-352"
     },
     {
       "title": "تحليل مؤشرات مركز الاتصال (يناير إلى يوليو 2026)",
@@ -3530,7 +3884,8 @@
       "pct": 100,
       "date": "26 أغسطس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-353"
     },
     {
       "title": "مخاطبة الشركة بشأن التسجيل الصوتي لإجازة المولد النبوي الشريف",
@@ -3540,7 +3895,8 @@
       "pct": 100,
       "date": "24 أغسطس",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-354"
     },
     {
       "title": "تقرير الأسبوع الثاني من شهر سبتمبر لمؤشرات مركز الاتصال",
@@ -3550,7 +3906,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-355"
     },
     {
       "title": "تقرير عن جودة المكالمات",
@@ -3560,7 +3917,8 @@
       "pct": 100,
       "date": "14 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-356"
     },
     {
       "title": "توقف خدمات مركز الاتصال",
@@ -3570,7 +3928,8 @@
       "pct": 100,
       "date": "15 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-357"
     },
     {
       "title": "المتابعة الدورية لمتدربي خدمات المتعاملين",
@@ -3580,7 +3939,8 @@
       "pct": 100,
       "date": "15 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-358"
     },
     {
       "title": "خطة تدشين خدمات عبر مركز الاتصال",
@@ -3590,7 +3950,8 @@
       "pct": 100,
       "date": "16 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-359"
     },
     {
       "title": "بدء تدشين مشروع تفعيل الخدمات عبر مركز الاتصال — المرحلة الأولى (18 خدمة",
@@ -3600,7 +3961,8 @@
       "pct": 100,
       "date": "15 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-360"
     },
     {
       "title": "اعداد امتحان تعزيز المعرفة لموظفي مركز الاتصال",
@@ -3610,7 +3972,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-361"
     },
     {
       "title": "تقرير مركز الاتصال لشهر أغسطس",
@@ -3620,7 +3983,8 @@
       "pct": 100,
       "date": "14 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-362"
     },
     {
       "title": "تعميم للموظفين بشأن بند الترويج",
@@ -3630,7 +3994,8 @@
       "pct": 0,
       "date": "9 يوليو",
       "status": "قيد الإجراء",
-      "overdue": true
+      "overdue": true,
+      "id": "central-363"
     },
     {
       "title": "متابعة حضور وانصراف موظفي الجدد الخاصين بلغة الإشارة",
@@ -3640,7 +4005,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-364"
     },
     {
       "title": "مخاطبة الشركة بتوفير البيانات التاريخية لقناة الواتساب",
@@ -3650,7 +4016,8 @@
       "pct": 0,
       "date": "14 سبتمبر",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-365"
     },
     {
       "title": "مخاطبة الشركة لإضافة صلاحية البيانات التاريخية لمركز الاتصال",
@@ -3660,7 +4027,8 @@
       "pct": 0,
       "date": "14 سبتمبر",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-366"
     },
     {
       "title": "إسعاد المتعاملين - مشروع توسعة الرسائل النصية",
@@ -3670,7 +4038,8 @@
       "pct": 30,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-367"
     },
     {
       "title": "مصطلحات مهمة في خدمة العملاء",
@@ -3680,7 +4049,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-368"
     },
     {
       "title": "مقترح مشروع من أول زيارة",
@@ -3690,7 +4060,8 @@
       "pct": 10,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-369"
     },
     {
       "title": "مؤشرات حجم الاعمال",
@@ -3700,7 +4071,8 @@
       "pct": 0,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-370"
     },
     {
       "title": "مبادرة سجل مخاطر المديرية - النصف الثاني",
@@ -3710,7 +4082,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-371"
     },
     {
       "title": "متابعة البريد الصادر والوارد من المحافظات",
@@ -3720,7 +4093,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-372"
     },
     {
       "title": "إعداد تقرير تحليل الصادر والوارد وحركة الحقائب",
@@ -3730,7 +4104,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-373"
     },
     {
       "title": "تم عقد اجتماع مع دائر الحماية الاجتماعية بمحافظة جنوب الباطنة بتاريخ 14/9/2026",
@@ -3740,7 +4115,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-374"
     },
     {
       "title": "تم عقد الاجتماع مع دائرة الحماية الاجتماعية بمحافظة الوسطى بتاريخ 17/9/2026",
@@ -3750,7 +4126,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-375"
     },
     {
       "title": "متابعة تنفيذ اعمال مشروع مركز الاتصال",
@@ -3760,7 +4137,8 @@
       "pct": 80,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-376"
     },
     {
       "title": "تحسينات على النظام الحالي",
@@ -3770,7 +4148,8 @@
       "pct": 80,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-377"
     },
     {
       "title": "تحسينات على النظام في البيئة التجريبية",
@@ -3780,7 +4159,8 @@
       "pct": 80,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-378"
     },
     {
       "title": "تحسين عملية التصديق والرد على ملاحظات تحليل الشركة",
@@ -3790,7 +4170,8 @@
       "pct": 80,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-379"
     },
     {
       "title": "طلب جميع المستدات اللازمه لعملية التدقيق والايزو",
@@ -3800,7 +4181,8 @@
       "pct": 80,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-380"
     },
     {
       "title": "مسمى المساعد الذكي - الملكية الفكرية",
@@ -3810,7 +4192,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-381"
     },
     {
       "title": "اجتماع الأسبوعي لملتقى المدراء ومناقشة الأشياء التشغيلية",
@@ -3820,7 +4203,8 @@
       "pct": 80,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-382"
     },
     {
       "title": "Whatwsapp phase 2",
@@ -3830,7 +4214,8 @@
       "pct": 75,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-383"
     },
     {
       "title": "Data analytics and reporting platform",
@@ -3840,7 +4225,8 @@
       "pct": 75,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-384"
     },
     {
       "title": "عرض تقرير مقترح الاسم + عرض الخطه الإعلامية",
@@ -3850,7 +4236,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-385"
     },
     {
       "title": "تحديث دليل الخدمات",
@@ -3860,7 +4247,8 @@
       "pct": 90,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-386"
     },
     {
       "title": "الطلبات المقدمة للدعم الفني",
@@ -3870,7 +4258,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-387"
     },
     {
       "title": "تقرير منصة تجاوب لشهر 8",
@@ -3880,7 +4269,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-388"
     },
     {
       "title": "محاور لقاء المدراء",
@@ -3890,7 +4280,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-389"
     },
     {
       "title": "متابعة فحص المساعد الذكي",
@@ -3900,7 +4291,8 @@
       "pct": 65,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-390"
     },
     {
       "title": "الموقف التنفيذي لحالات عدم المطابقة والفرص التحسينية",
@@ -3910,7 +4302,8 @@
       "pct": 0,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-391"
     },
     {
       "title": "أبرز مؤشرات التواصل ورضا المستفيدين - اجتماع مجلس الإدارة 2026",
@@ -3920,7 +4313,8 @@
       "pct": 0,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-392"
     },
     {
       "title": "إطار قياس ومتابعة جودة قنوات الخدمة",
@@ -3930,7 +4324,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-393"
     },
     {
       "title": "تحليل ومعالجة تكرار زيارات المتعاملين",
@@ -3940,7 +4335,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-394"
     },
     {
       "title": "محاضر ايسا",
@@ -3950,7 +4346,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-395"
     },
     {
       "title": "ملتقى المتعاملين",
@@ -3960,7 +4357,8 @@
       "pct": 70,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-396"
     },
     {
       "title": "الخطة التشغيلية 2027",
@@ -3970,7 +4368,8 @@
       "pct": 100,
       "date": "",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-397"
     },
     {
       "title": "عرض تصور الخدمة خارج ساعات العمل الرسمي",
@@ -3980,7 +4379,8 @@
       "pct": 95,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-398"
     },
     {
       "title": "توزيع درجات الاختبار الثاني لتعزيز المعرفة",
@@ -3990,7 +4390,8 @@
       "pct": 90,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-399"
     },
     {
       "title": "معجم مصطلحات خدمة العملاء",
@@ -4000,7 +4401,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-400"
     },
     {
       "title": "خطة ترويج الخدمات و القنوات الرقمية",
@@ -4010,7 +4412,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-401"
     },
     {
       "title": "ملتقى الإدارة",
@@ -4020,7 +4423,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-402"
     },
     {
       "title": "مقترح حوكمة تجربة العملاء",
@@ -4030,7 +4434,8 @@
       "pct": 0,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-403"
     },
     {
       "title": "تحليل مؤشرات مركز الاتصال ووقت فراغ الموظفين",
@@ -4040,7 +4445,8 @@
       "pct": 50,
       "date": "",
       "status": "قيد الإجراء",
-      "overdue": false
+      "overdue": false,
+      "id": "central-404"
     },
     {
       "title": "التصميم المؤسسي للسترة والزي الميداني",
@@ -4050,7 +4456,8 @@
       "pct": 100,
       "date": "16 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-405"
     },
     {
       "title": "استمارة تقيم الهيئات الحكومية 2026",
@@ -4060,7 +4467,8 @@
       "pct": 100,
       "date": "15 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-406"
     },
     {
       "title": "أسباب مسار تصعيد الطلبات عبر المنصة الوطنية\" تجاوب\" يوليو- أغسطس",
@@ -4070,7 +4478,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-407"
     },
     {
       "title": "الورشة الإفتراضية للمنصة الوطنية \"تجاوب \"",
@@ -4080,7 +4489,8 @@
       "pct": 100,
       "date": "17 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-408"
     },
     {
       "title": "التقرير الشهري لقسم إدارة علاقات المتعاملين خلال الفترة يناير- أغسطس",
@@ -4090,7 +4500,8 @@
       "pct": 100,
       "date": "16 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-409"
     },
     {
       "title": "اجتماع دورة حياة المستفيدين في المحفظة الالكترونية",
@@ -4100,7 +4511,8 @@
       "pct": 100,
       "date": "13 سبتمبر",
       "status": "منجز",
-      "overdue": false
+      "overdue": false,
+      "id": "central-410"
     }
   ]
 }
