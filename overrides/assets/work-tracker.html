@@ -527,9 +527,9 @@ const DEFAULT_DATA = [{"title": "الردود النموذجية للمنصة", 
 const GITHUB_OWNER='Azzan909';
 const GITHUB_REPO='spf-customer-services';
 const TASKS_REPO_PATH='overrides/assets/tasks-data.json';
-const OWNER_TOKEN_KEY='spf-github-owner-token-v1';
+const AUTH_PROXY='https://customer-compass-github-auth.spf2040.chatgpt.site';
 const FILTER_STORAGE_KEY='spf-work-tracker-filters-v1';
-let isOwner=false;
+let isOwner=false,ownerAccessToken='';
 function cloneDefaults(){return DEFAULT_DATA.map((r,index)=>({...r,id:r.id||`source-${index+1}`}));}
 async function loadTasks(){
   try{
@@ -569,24 +569,29 @@ async function verifyOwnerToken(token){
   if(!repositoryAccess.ok)throw await githubError(repositoryAccess,'تعذر الوصول إلى ملف بيانات المنصة');
   return true;
 }
+function ownerOauthPanel(code,url){
+  const panel=document.createElement('div');panel.id='owner-oauth-panel';panel.style.cssText='position:fixed;inset:0;z-index:999;display:grid;place-items:center;padding:20px;background:rgba(20,42,35,.76);backdrop-filter:blur(6px)';
+  panel.innerHTML=`<div style="width:min(430px,100%);padding:30px;border-radius:22px;background:#fff;text-align:center"><span style="color:#b9934c;font-weight:800">تسجيل دخول المالك</span><h3 style="color:#254e44">أدخل الرمز في GitHub</h3><strong style="display:block;margin:16px;padding:12px;border:1px dashed #b9934c;border-radius:13px;font:800 28px monospace;letter-spacing:4px">${code}</strong><a href="${url}" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border-radius:10px;background:#254e44;color:#fff;text-decoration:none">فتح GitHub</a><p style="color:#68746f;font-size:12px">بانتظار الموافقة…</p></div>`;document.body.appendChild(panel);return panel;
+}
+async function githubDeviceLogin(){
+  const popup=window.open('about:blank','github-oauth','width=720,height=760');
+  const start=await fetch(`${AUTH_PROXY}/device/code`,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(!start.ok)throw new Error('تعذر بدء تسجيل GitHub');
+  const flow=await start.json();if(popup)popup.location.href=flow.verification_uri;const panel=ownerOauthPanel(flow.user_code,flow.verification_uri),started=Date.now(),interval=Math.max(5,Number(flow.interval)||5)*1000;
+  try{while(Date.now()-started<(Number(flow.expires_in)||900)*1000){await new Promise(r=>setTimeout(r,interval));const response=await fetch(`${AUTH_PROXY}/oauth/access-token`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({device_code:flow.device_code})});const result=await response.json();if(result.access_token){await verifyOwnerToken(result.access_token);return result.access_token}if(result.error&&!["authorization_pending","slow_down"].includes(result.error))throw new Error('لم تكتمل موافقة GitHub')}throw new Error('انتهت مهلة تسجيل الدخول')}finally{panel.remove();if(popup&&!popup.closed)popup.close()}
+}
 async function loginOwner(){
-  if(isOwner){sessionStorage.removeItem(OWNER_TOKEN_KEY);isOwner=false;updateOwnerUI();return;}
-  const token=prompt('أدخل مفتاح GitHub محدود الصلاحية (Contents: Read and write) للمستودع. يُحفظ خلال جلسة المتصفح فقط.');
-  if(!token)return;
+  if(isOwner){ownerAccessToken='';isOwner=false;updateOwnerUI();return;}
   const button=document.getElementById('owner-login-button');if(button)button.textContent='جارٍ التحقق…';
   try{
-    await verifyOwnerToken(token.trim());
-    sessionStorage.setItem(OWNER_TOKEN_KEY,token.trim());isOwner=true;updateOwnerUI();
+    ownerAccessToken=await githubDeviceLogin();isOwner=true;updateOwnerUI();
   }catch(error){isOwner=false;updateOwnerUI();alert(error.message||'تعذر تسجيل دخول المالك');}
 }
 async function restoreOwnerSession(){
-  const token=sessionStorage.getItem(OWNER_TOKEN_KEY);if(!token){updateOwnerUI();return;}
-  try{isOwner=await verifyOwnerToken(token);}catch(_){isOwner=false;}
-  if(!isOwner)sessionStorage.removeItem(OWNER_TOKEN_KEY);updateOwnerUI();
+  ownerAccessToken='';isOwner=false;updateOwnerUI();
 }
 async function saveTasks(){
   if(!isOwner)throw new Error('يلزم تسجيل دخول المالك قبل الحفظ');
-  const token=sessionStorage.getItem(OWNER_TOKEN_KEY);if(!token)throw new Error('انتهت جلسة المالك');
+  const token=ownerAccessToken;if(!token)throw new Error('انتهت جلسة المالك');
   const endpoint=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TASKS_REPO_PATH}`;
   const current=await fetch(`${endpoint}?ref=main`,{headers:githubHeaders(token)});
   if(!current.ok)throw await githubError(current,'تعذر قراءة النسخة الحالية من GitHub');
@@ -594,7 +599,7 @@ async function saveTasks(){
   const document={version:Number(metadata.sha?1:0)+1,updated_at:new Date().toISOString(),tasks:DATA};
   const response=await fetch(endpoint,{method:'PUT',headers:{...githubHeaders(token),'Content-Type':'application/json'},body:JSON.stringify({message:`Update work tracker (${DATA.length} tasks)`,content:encodeBase64(JSON.stringify(document,null,2)+'\n'),sha:metadata.sha,branch:'main'})});
   if(!response.ok)throw await githubError(response,'تعذر نشر التحديث إلى GitHub');
-  publishSummary();
+  publishSummary();ownerAccessToken='';isOwner=false;updateOwnerUI();
 }
 function completionSummary(){
   const names={'مركز الاتصال':'contact','إدارة علاقات المتعاملين':'crm','إدارة وتطوير الخدمات':'service-dev','شؤون الدوائر والمنافذ':'branches','التنسيق والمتابعة':'coord'};
