@@ -21,6 +21,9 @@ replace_required(
     '<title>خدمات المتعاملين | العرض المؤسسي</title>',
     '<title>بوصلة المتعامل | المنصة التنفيذية لخدمات المتعاملين</title>')
 replace_required(
+    '        <a href="#work-tracker">متابعة الأعمال</a>\n        <a href="#performance">الأداء والمؤشرات</a>',
+    '        <a href="#work-tracker">متابعة الأعمال</a>\n        <a href="#risk-register">سجل المخاطر</a>\n        <a href="#performance">الأداء والمؤشرات</a>')
+replace_required(
 '''        <div class="page-heading">
           <span class="eyebrow">صندوق الحماية الاجتماعية · سلطنة عُمان</span>
           <h1>المديرية العامة لخدمات المتعاملين</h1>
@@ -51,6 +54,91 @@ replace_required(
     '<button class="btn secondary" id="privacyLockButton">قفل العرض</button>\n          <button class="btn secondary" id="updateGuide">دليل التحديث</button>')
 replace_required('الأهداف التشغيلية السبعة', 'الأهداف التشغيلية التسعة')
 replace_required('سبعة أهداف رئيسية تقود التنفيذ', 'تسعة أهداف رئيسية تقود التنفيذ')
+
+risk_section = '''        <section class="section-block risk-register-section" id="risk-register">
+          <div class="section-heading">
+            <div><span class="section-kicker">07 · سجل المخاطر</span><h2>المخاطر المصاحبة لأنشطة المديرية لعام 2026</h2></div>
+            <span class="section-note">4 مخاطر تشغيلية نشطة · آخر تحديث 5 أبريل 2026</span>
+          </div>
+          <div class="risk-summary" aria-label="الملخص التنفيذي لسجل المخاطر">
+            <article><span>إجمالي المخاطر</span><strong>4</strong><small>جميعها نشطة وتشغيلية</small></article>
+            <article class="risk-before"><span>متوسط الخطر المتأصل</span><strong>14</strong><small>مرتفع قبل تطبيق الضوابط</small></article>
+            <article class="risk-after"><span>متوسط الخطر المتبقي</span><strong>7</strong><small>معتدل بعد تطبيق الضوابط</small></article>
+            <article class="risk-reduction"><span>خفض مستوى التعرض</span><strong>52%</strong><small>من 56 إلى 27 نقطة إجمالية</small></article>
+          </div>
+          <div class="risk-scale" aria-label="مفتاح تصنيف المخاطر"><span><i class="risk-dot high"></i>متأصل كبير</span><span><i class="risk-dot medium"></i>متبقٍ معتدل</span><span><i class="risk-dot active"></i>الحالة: نشط</span><small>اضغط على أي خطر لعرض الضوابط وخطة المعالجة كاملة.</small></div>
+          <div class="risk-cards">
+            <details class="risk-card" open>
+              <summary>
+                <span class="risk-ref">R01</span><div class="risk-title"><small>إدارة العمليات التشغيلية لخدمات المتعاملين</small><h3>ارتفاع حجم الأعباء التشغيلية على موظفي خدمات المتعاملين ومركز الاتصال</h3><div><span class="risk-chip">تشغيلي</span><span class="risk-chip active">نشط</span><span class="risk-date">المعالجة المستهدفة: الربع الأول 2027</span></div></div>
+                <div class="risk-score-flow"><span class="score inherent"><b>12</b><small>كبير · متأصل</small></span><i>←</i><span class="score residual"><b>6</b><small>معتدل · متبقٍ</small></span></div>
+              </summary>
+              <div class="risk-detail-grid">
+                <article class="risk-description"><h4>وصف الخطر</h4><p>تزايد المهام والمسؤوليات التشغيلية على موظفي خدمات المتعاملين ومركز الاتصال بما يفوق الطاقة التشغيلية، بسبب التغيرات على منظومة الحماية الاجتماعية وعدم كفاية نقل المعرفة من التقسيمات الإدارية؛ بما قد يؤثر في كفاءة الأداء وجودة الخدمات ورضا المتعاملين والسمعة المؤسسية.</p></article>
+                <article><h4>التقييم المتأصل</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>محتمل · 3</b></li><li><span>الأثر التشغيلي</span><b>عالٍ · 4</b></li><li><span>الأثر الاستراتيجي</span><b>معتدل · 3</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article><h4>الضوابط الداخلية · C1</h4><p class="control-name">تعزيز الموارد البشرية والتوعية المجتمعية</p><ul><li>طلب تعزيز المديرية بالتعيين أو الندب أو التدوير الوظيفي أو العقود والتدريب حسب الموارد المتاحة.</li><li>زيادة التوعية باستخدام القنوات الرقمية لتقليل الحضور الشخصي وعبء الأعمال.</li></ul><div class="control-meta"><span>وقائي</span><span>يدوي</span><span>دوري</span><span>التصميم: فعال 3</span><span>التشغيل: فعال جزئيًا 2</span><span>الرقابة: كافية جزئيًا</span></div></article>
+                <article><h4>التقييم المتبقي</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>نادر · 2</b></li><li><span>الأثر التشغيلي</span><b>معتدل · 3</b></li><li><span>الأثر الاستراتيجي</span><b>لا ينطبق · 0</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article class="risk-actions"><h4>الإجراءات الإضافية لمعالجة الخطر</h4><ol><li>العمل مع دائرة رأس المال البشري لاستحداث معايير قياسية تجمع الأبعاد الكمية والنوعية لتحديد الاحتياج، وإدراج المخرجات ضمن آليات الاستقطاب والاختيار الوظيفي.</li><li>تعزيز الكوادر البشرية بالندب أو التدريب أو التعيين أو التدوير لشغل الشواغر المتاحة.</li><li>تمكين موظفي تقديم الخدمة ومركز الاتصال من البيانات والمعلومات في الأنظمة التقنية.</li></ol></article>
+                <article class="risk-accountability"><h4>الملكية والمسؤولية</h4><dl><div><dt>مالك الخطر</dt><dd>مدير عام المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤول الخطر والضابط</dt><dd>المديرية العامة لخدمات المتعاملين بالتنسيق مع المديرية العامة للدعم المؤسسي</dd></div><div><dt>مسؤولية التنفيذ</dt><dd>المديرية العامة للدعم المؤسسي، التقسيمات الإدارية المعنية، والمديرية العامة لخدمات المتعاملين</dd></div><div><dt>النطاق</dt><dd>جميع التقسيمات، ودائرة إدارة وتطوير الخدمات، ودوائر الحماية الاجتماعية والمنافذ في المحافظات</dd></div><div><dt>التواريخ</dt><dd>التعرف: 4 نوفمبر 2025 · آخر تحديث: 4 أبريل 2026</dd></div></dl></article>
+              </div>
+            </details>
+
+            <details class="risk-card">
+              <summary>
+                <span class="risk-ref">R02</span><div class="risk-title"><small>معالجة طلبات المستفيدين</small><h3>ضعف كفاءة الاستجابة لمعالجة طلبات المتعاملين</h3><div><span class="risk-chip">تشغيلي</span><span class="risk-chip active">نشط</span><span class="risk-date">المعالجة المستهدفة: الربع الثاني 2027</span></div></div>
+                <div class="risk-score-flow"><span class="score inherent"><b>16</b><small>كبير · متأصل</small></span><i>←</i><span class="score residual"><b>6</b><small>معتدل · متبقٍ</small></span></div>
+              </summary>
+              <div class="risk-detail-grid">
+                <article class="risk-description"><h4>وصف الخطر</h4><p>ضعف الاستجابة وإنجاز طلبات المتعاملين من التقسيمات الإدارية أو الجهات الخارجية في معاملات المنافع، ومنها منفعة الإعاقة ودعم دخل الأسر والحقيبة المدرسية ومستحقات منافع كبار السن والطفولة وطلبات الاسترداد؛ نتيجة عدم اكتمال الربط بين الجهات المعنية والمديرية، مما يؤثر في سرعة الإنجاز وجودة الخدمة ورضا المتعاملين والتقييم المؤسسي.</p></article>
+                <article><h4>التقييم المتأصل</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>مرجح · 4</b></li><li><span>الأثر التشغيلي</span><b>عالٍ · 4</b></li><li><span>الأثر الاستراتيجي</span><b>معتدل · 3</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article><h4>الضوابط الداخلية · C2</h4><p class="control-name">التنسيق الداخلي ومعالجة طلبات المستفيدين</p><ul><li>المتابعة المستمرة مع التقسيمات والجهات المعنية لتسريع كفاءة الاستجابة.</li><li>تقديم بلاغ عبر نظام الدعم الفني لتنفيذ المعالجات المطلوبة في البيانات.</li><li>المتابعة واتخاذ إجراءات التصعيد المعمول بها.</li></ul><div class="control-meta"><span>تصحيحي</span><span>يدوي</span><span>دوري</span><span>التصميم: فعال جزئيًا 2</span><span>التشغيل: فعال 3</span><span>الرقابة: كافية جزئيًا</span></div></article>
+                <article><h4>التقييم المتبقي</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>نادر · 2</b></li><li><span>الأثر التشغيلي</span><b>معتدل · 3</b></li><li><span>الأثر الاستراتيجي</span><b>منخفض · 2</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article class="risk-actions"><h4>الإجراءات الإضافية لمعالجة الخطر</h4><ol><li>التنسيق مع المديرية العامة للحلول الرقمية ونظم المعلومات لتسريع الربط مع الجهات المعنية.</li><li>إعداد آلية تصعيد واضحة ومتابعة تنفيذها.</li></ol></article>
+                <article class="risk-accountability"><h4>الملكية والمسؤولية</h4><dl><div><dt>مالك الخطر</dt><dd>مدير عام المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤول الخطر والضابط</dt><dd>المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤولية التنفيذ</dt><dd>المديرية العامة للحلول الرقمية ونظم المعلومات، المديرية العامة لخدمات المتعاملين، ودائرة التخطيط ومتابعة الرؤية</dd></div><div><dt>النطاق</dt><dd>جميع التقسيمات، ودائرة إدارة وتطوير الخدمات، ودوائر الحماية الاجتماعية والمنافذ في المحافظات</dd></div><div><dt>التواريخ</dt><dd>التعرف: 4 نوفمبر 2025 · آخر تحديث: 4 أبريل 2026</dd></div></dl></article>
+              </div>
+            </details>
+
+            <details class="risk-card">
+              <summary>
+                <span class="risk-ref">R03</span><div class="risk-title"><small>إدارة العمليات التشغيلية لخدمات المتعاملين</small><h3>توقف قنوات تقديم الخدمات</h3><div><span class="risk-chip">تشغيلي</span><span class="risk-chip active">نشط</span><span class="risk-date urgent">المعالجة المستهدفة: الربع الرابع 2026</span></div></div>
+                <div class="risk-score-flow"><span class="score inherent"><b>16</b><small>كبير · متأصل</small></span><i>←</i><span class="score residual"><b>9</b><small>معتدل · متبقٍ</small></span></div>
+              </summary>
+              <div class="risk-detail-grid">
+                <article class="risk-description"><h4>وصف الخطر</h4><p>توقف الخدمات المقدمة للمتعاملين عبر الموقع الإلكتروني ومركز الاتصال والتطبيق الإلكتروني ووسائل التواصل الاجتماعي ونظام «ثقة»، إضافة إلى توقف أو تأثر مواقع تقديم الخدمات المباشرة بسبب انقطاع الإنترنت أو الكهرباء أو العوامل الطبيعية مثل الأعاصير والأمراض المعدية أو أي ظروف طارئة واستثنائية.</p></article>
+                <article><h4>التقييم المتأصل</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>مرجح · 4</b></li><li><span>الأثر التشغيلي</span><b>عالٍ · 4</b></li><li><span>الأثر الاستراتيجي</span><b>منخفض · 2</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article><h4>الضوابط الداخلية · C3</h4><p class="control-name">استمرارية الأعمال</p><ul><li>العمل عن بعد عند انقطاع الكهرباء وفي الحالات الاستثنائية للوظائف الملائمة.</li><li>تشغيل الحد الأدنى من العمليات واستخدام النماذج اليدوية كبدائل.</li><li>التنسيق مع دوائر المحافظات لتوفير مواقع بديلة لاستقبال المتعاملين.</li><li>إشعار المتعاملين بتوقف الخدمة عبر الوسائل الإعلامية.</li><li>تفعيل خطة استمرارية الأعمال والتوعية بالقنوات الرقمية البديلة.</li></ul><div class="control-meta"><span>تصحيحي</span><span>آلي</span><span>دوري</span><span>التصميم: فعال جزئيًا 2</span><span>التشغيل: فعال جزئيًا 2</span><span>الرقابة: كافية جزئيًا</span></div></article>
+                <article><h4>التقييم المتبقي</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>محتمل · 3</b></li><li><span>الأثر التشغيلي</span><b>معتدل · 3</b></li><li><span>الأثر الاستراتيجي</span><b>منخفض · 2</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article class="risk-actions"><h4>الإجراءات الإضافية لمعالجة الخطر</h4><ol><li>استخدام مولد كهربائي لضمان استمرارية تقديم الخدمة في الدوائر.</li><li>تعزيز التوعية والاستعانة بدليل الاستجابة السريعة للمخاطر الصحية والنفسية والعامة والمرتبطة بالأنظمة، بالتنسيق مع دائرة الحوكمة وإدارة المخاطر والامتثال.</li></ol></article>
+                <article class="risk-accountability"><h4>الملكية والمسؤولية</h4><dl><div><dt>مالك الخطر</dt><dd>مدير عام المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤول الخطر والضابط</dt><dd>المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤولية التنفيذ</dt><dd>المديرية العامة لخدمات المتعاملين، المديرية العامة للحلول الرقمية ونظم المعلومات، دائرة الحوكمة وإدارة المخاطر والامتثال، ودائرة التواصل والإعلام</dd></div><div><dt>النطاق</dt><dd>دوائر الحماية الاجتماعية بالمحافظات، ودائرة إدارة وتطوير الخدمات، والدوائر والمنافذ</dd></div><div><dt>التواريخ</dt><dd>التعرف: 4 ديسمبر 2025 · آخر تحديث: 5 أبريل 2026</dd></div></dl></article>
+              </div>
+            </details>
+
+            <details class="risk-card">
+              <summary>
+                <span class="risk-ref">R04</span><div class="risk-title"><small>إدارة إطلاق وتعميم البرامج التأمينية</small><h3>عدم جاهزية مقدم الخدمة وموظفي مركز الاتصال عند إطلاق برامج وتحديثات جديدة</h3><div><span class="risk-chip">تشغيلي</span><span class="risk-chip active">نشط</span><span class="risk-date">المعالجة المستهدفة: الربع الأول 2027</span></div></div>
+                <div class="risk-score-flow"><span class="score inherent"><b>12</b><small>كبير · متأصل</small></span><i>←</i><span class="score residual"><b>6</b><small>معتدل · متبقٍ</small></span></div>
+              </summary>
+              <div class="risk-detail-grid">
+                <article class="risk-description"><h4>وصف الخطر</h4><p>عدم إشراك مديرية خدمات المتعاملين عند إطلاق برامج أو تنفيذ تحديثات على الأنظمة دون تنسيق مسبق وكافٍ، مما يؤدي إلى عدم جاهزية مقدمي الخدمة وموظفي مركز الاتصال ومنصة تجاوب وحساب العناية بالمتعاملين في منصة «إكس» من حيث التأهيل والتدريب، ويرفع الضغط التشغيلي ويؤثر سلبًا في جودة الخدمة ورضا المتعاملين وسمعة الصندوق وتقييمه المؤسسي.</p></article>
+                <article><h4>التقييم المتأصل</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>محتمل · 3</b></li><li><span>الأثر التشغيلي</span><b>معتدل · 3</b></li><li><span>الأثر الاستراتيجي</span><b>عالٍ · 4</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article><h4>الضوابط الداخلية · C4</h4><p class="control-name">التواصل الداخلي وبناء القدرات التشغيلية</p><p>بعد اطلاع المديرية بالمستجدات، يجري التنسيق الفوري مع التقسيمات المعنية وعقد لقاءات لموظفي خدمات المتعاملين ومركز الاتصال لشرح المستجدات وتعزيز الفهم والتطبيق الصحيح للإجراءات وضمان الجاهزية.</p><div class="control-meta"><span>وقائي</span><span>يدوي</span><span>دوري</span><span>التصميم: فعال 3</span><span>التشغيل: فعال جزئيًا 2</span><span>الرقابة: كافية جزئيًا</span></div></article>
+                <article><h4>التقييم المتبقي</h4><ul class="risk-metrics"><li><span>الاحتمالية</span><b>نادر · 2</b></li><li><span>الأثر التشغيلي</span><b>معتدل · 3</b></li><li><span>الأثر الاستراتيجي</span><b>منخفض · 2</b></li><li><span>الأثر المالي</span><b>منخفض · 1</b></li><li><span>أثر الامتثال</span><b>لا ينطبق · 0</b></li></ul></article>
+                <article class="risk-actions"><h4>الإجراءات الإضافية لمعالجة الخطر</h4><ol><li>إعداد منهجية واضحة للخدمات والبرامج الجديدة والمنقولة من جهات خارجية، ودورة مستندية للتعاميم تضمن وضوح الإجراءات والمتابعة والتنفيذ.</li><li>إعداد مواد إعلامية توضّح تسلسل الإجراءات والرسائل المطلوب نشرها، بالتنسيق مع التقسيمات المختصة.</li><li>إعداد أدلة إرشادية وتنفيذ ورش عمل لمقدمي الخدمة وموظفي مركز الاتصال قبل إطلاق البرامج أو القرارات الجديدة.</li></ol></article>
+                <article class="risk-accountability"><h4>الملكية والمسؤولية</h4><dl><div><dt>مالك الخطر</dt><dd>مدير عام المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤول الخطر والضابط</dt><dd>المديرية العامة لخدمات المتعاملين</dd></div><div><dt>مسؤولية التنفيذ</dt><dd>التقسيمات الإدارية المعنية، دائرة التواصل والإعلام، ودائرة التخطيط ومتابعة الرؤية</dd></div><div><dt>النطاق</dt><dd>جميع التقسيمات، ودائرة إدارة وتطوير الخدمات، ودوائر الحماية الاجتماعية والمنافذ في المحافظات</dd></div><div><dt>التواريخ</dt><dd>التعرف: 4 نوفمبر 2025 · آخر تحديث: 4 أبريل 2026</dd></div></dl></article>
+              </div>
+            </details>
+          </div>
+          <p class="risk-source-note">المصدر: سجل المخاطر المصاحبة لأنشطة المديرية العامة لخدمات المتعاملين لعام 2026م. التصنيف المتأصل لجميع المخاطر «كبير»، والتصنيف المتبقي لجميعها «معتدل» بعد تطبيق الضوابط.</p>
+        </section>
+
+'''
+
+replace_required('        <section class="section-block" id="performance">', risk_section + '        <section class="section-block" id="performance">')
+replace_required('07 · الأداء وحجم الأعمال', '08 · الأداء وحجم الأعمال')
+replace_required('08 · منصة تجاوب', '09 · منصة تجاوب')
+replace_required('09 · الحضور المؤسسي', '10 · الحضور المؤسسي')
+replace_required('10 · محفظة التطوير', '11 · محفظة التطوير')
+replace_required('11 · الريادة والشراكة المجتمعية', '12 · الريادة والشراكة المجتمعية')
 
 replace_required(
 '''            <article class="method-application">
