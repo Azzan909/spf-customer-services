@@ -155,6 +155,9 @@ performance_section = '''        <section class="section-block performance-prior
             <symbol id="pi-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1M14 10h1M9 14h1M14 14h1M10 21v-3h4v3"/></symbol>
             <symbol id="pi-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
             <symbol id="pi-bot" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01M8 16h8"/></symbol>
+            <symbol id="pi-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+            <symbol id="pi-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M9 2h6M12 5v2M18 7l2-2M12 13l3-2"/></symbol>
+            <symbol id="pi-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 10h.01M16 10h.01M8 15c1.2 1.3 2.5 2 4 2s2.8-.7 4-2"/></symbol>
           </svg>
 
           <article class="primary-kpi-hero" aria-label="مؤشر التواصل ورضا المستفيدين">
@@ -203,8 +206,8 @@ performance_section = '''        <section class="section-block performance-prior
             </article>
             <article class="workload-group contact-workload">
               <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-headset"/></svg><div><span>مركز الاتصال</span><h3>المكالمات وجودة الاستجابة</h3></div></div><b>184,197 مكالمة</b></div>
-              <div class="contact-workload-lead"><strong>184,197</strong><span>مكالمة مستلمة خلال ستة أشهر</span></div>
-              <div class="workload-metrics compact"><div><span>متوسط الانتظار</span><strong>52</strong><small>ثانية</small></div><div><span>متوسط المكالمة</span><strong>3:15</strong><small>دقيقة</small></div><div><span>الرضا عن الخدمة الهاتفية</span><strong>86.7%</strong><small>نتيجة القياس</small></div></div>
+              <div class="contact-workload-lead"><svg class="contact-lead-icon"><use href="#pi-headset"/></svg><strong>184,197</strong><span>مكالمة مستلمة خلال ستة أشهر</span></div>
+              <div class="workload-metrics compact contact-visual-metrics"><div><svg class="contact-metric-icon"><use href="#pi-clock"/></svg><span>متوسط الانتظار</span><strong>52</strong><small>ثانية</small></div><div><svg class="contact-metric-icon"><use href="#pi-timer"/></svg><span>متوسط المكالمة</span><strong>3:15</strong><small>دقيقة</small></div><div><svg class="contact-metric-icon"><use href="#pi-smile"/></svg><span>الرضا عن الخدمة الهاتفية</span><strong>86.7%</strong><small>نتيجة القياس</small></div></div>
             </article>
             <article class="workload-group digital-workload">
               <div class="workload-group-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-bot"/></svg><div><span>القنوات التفاعلية</span><h3>المساعد الذكي ومنصات التواصل</h3></div></div><b>42,803 خدمة</b></div>
