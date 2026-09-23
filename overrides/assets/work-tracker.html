@@ -1007,14 +1007,18 @@ function closeDrawer(){
   document.getElementById('drawer').classList.remove('open');
 }
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function syncTaskStatusProgress(form){
+  const pctInput=form?.elements?.pct;
+  if(form?.elements?.status?.value==='منجز'&&pctInput)pctInput.value='100';
+}
 function taskForm(r,idx,isNew=false){
-  const pct=r.pct==null?'':r.pct;
+  const pct=r.status==='منجز'?100:(r.pct==null?'':r.pct);
   return `<form class="drawer-form" id="task-edit-form" onsubmit="saveTaskEdit(event,${idx},${isNew})">
     <label>عنوان المهمة<input name="title" required value="${esc(r.title)}"></label>
     <label>القسم<input name="dept" required list="dept-options" value="${esc(r.dept)}"><datalist id="dept-options">${[...new Set(DATA.map(x=>x.dept))].map(d=>`<option value="${esc(d)}">`).join('')}</datalist></label>
     <label>الموظف أو الفريق<input name="emp" value="${esc(r.emp)}"></label>
     <div class="drawer-form-grid">
-      <label>الحالة<select name="status"><option${r.status==='منجز'?' selected':''}>منجز</option><option${r.status==='قيد الإجراء'?' selected':''}>قيد الإجراء</option><option${r.status==='متأخر'?' selected':''}>متأخر</option></select></label>
+      <label>الحالة<select name="status" onchange="syncTaskStatusProgress(this.form)"><option${r.status==='منجز'?' selected':''}>منجز</option><option${r.status==='قيد الإجراء'?' selected':''}>قيد الإجراء</option><option${r.status==='متأخر'?' selected':''}>متأخر</option></select></label>
       <label>نسبة الإنجاز<input name="pct" type="number" min="0" max="100" step="1" value="${esc(pct)}" placeholder="0–100"></label>
     </div>
     <div class="drawer-form-grid"><label>تاريخ الاستلام<input name="received" value="${esc(r.received)}" placeholder="مثال: 17 سبتمبر"></label><label>التاريخ / موعد التسليم<input name="due" value="${esc(r.due||r.date)}" placeholder="مثال: 30 سبتمبر"></label></div>
@@ -1047,12 +1051,13 @@ function openNewTaskDrawer(){
 async function saveTaskEdit(event,idx,isNew){
   event.preventDefault();const fd=new FormData(event.currentTarget);
   const rawPct=String(fd.get('pct')||'').trim();
+  const selectedStatus=String(fd.get('status')||'قيد الإجراء');
   const task={
     id:isNew?`task-${Date.now()}`:(DATA[idx].id||`task-${Date.now()}`),
     title:String(fd.get('title')||'').trim(),dept:String(fd.get('dept')||'').trim(),emp:String(fd.get('emp')||'').trim(),
-    status:String(fd.get('status')||'قيد الإجراء'),pct:rawPct===''?null:Math.max(0,Math.min(100,Number(rawPct))),
+    status:selectedStatus,pct:selectedStatus==='منجز'?100:(rawPct===''?null:Math.max(0,Math.min(100,Number(rawPct)))),
     received:String(fd.get('received')||'').trim()||null,due:String(fd.get('due')||'').trim()||null,
-    date:String(fd.get('due')||'').trim()||null,tech:String(fd.get('tech')||'').trim(),overdue:String(fd.get('status'))==='متأخر'
+    date:String(fd.get('due')||'').trim()||null,tech:String(fd.get('tech')||'').trim(),overdue:selectedStatus==='متأخر'
   };
   if(!task.title||!task.dept)return;
   const previous=DATA.map(item=>({...item}));
