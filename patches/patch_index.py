@@ -145,6 +145,17 @@ performance_section = '''        <section class="section-block performance-prior
             <div><span class="section-kicker">08 · الأداء والمؤشرات</span><h2>المؤشر الرئيسي للمديرية ثم الأداء التشغيلي وحجم الأعمال</h2></div>
             <span class="section-note">يناير–يونيو 2026</span>
           </div>
+          <svg class="performance-icon-sprite" aria-hidden="true">
+            <symbol id="pi-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></symbol>
+            <symbol id="pi-message" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 8h8M8 12h5"/></symbol>
+            <symbol id="pi-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2M18 19h-2v-6h4v4a2 2 0 0 1-2 2ZM6 19H4a2 2 0 0 1-2-2v-4h4v6ZM18 19c0 2-2 3-5 3"/></symbol>
+            <symbol id="pi-inbox" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 14h4l2 3h4l2-3h4"/></symbol>
+            <symbol id="pi-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+            <symbol id="pi-digital" viewBox="0 0 24 24"><rect x="3" y="3" width="14" height="12" rx="2"/><path d="M8 21h8M12 15v6M19 8h2v11h-5"/></symbol>
+            <symbol id="pi-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1M14 10h1M9 14h1M14 14h1M10 21v-3h4v3"/></symbol>
+            <symbol id="pi-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+            <symbol id="pi-bot" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01M8 16h8"/></symbol>
+          </svg>
 
           <article class="primary-kpi-hero" aria-label="مؤشر التواصل ورضا المستفيدين">
             <div class="primary-kpi-copy">
@@ -157,7 +168,7 @@ performance_section = '''        <section class="section-block performance-prior
 
           <div class="kpi-components" aria-label="مكونات المؤشر الرئيسي وأوزانها">
             <article class="component-card satisfaction-component">
-              <div class="component-head"><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div><b>70%<small>الوزن</small></b></div>
+              <div class="component-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-heart"/></svg><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div></div><b>70%<small>الوزن</small></b></div>
               <div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div><div class="component-weight-visual"><b>70%</b><span>من وزن المؤشر الرئيسي</span><i><em style="width:70%"></em></i></div></div>
               <div class="quarter-comparison"><div><span>الربع الأول</span><b>82%</b></div><div><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div>
               <div class="satisfaction-sources">
@@ -166,7 +177,7 @@ performance_section = '''        <section class="section-block performance-prior
               </div>
             </article>
             <article class="component-card communication-component">
-              <div class="component-head"><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div><b>30%<small>الوزن</small></b></div>
+              <div class="component-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-message"/></svg><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div></div><b>30%<small>الوزن</small></b></div>
               <div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div><div class="component-weight-visual"><b>30%</b><span>من وزن المؤشر الرئيسي</span><i><em style="width:30%"></em></i></div></div>
               <div class="quarter-comparison"><div><span>الربع الأول</span><b>90%</b></div><div><span>الربع الثاني</span><b>86%</b><small>انخفاض 4 نقاط</small></div></div>
             </article>
@@ -174,29 +185,29 @@ performance_section = '''        <section class="section-block performance-prior
 
           <div class="performance-tier-heading"><div><span>المستوى الثاني</span><h3>المؤشرات التشغيلية ذات الأولوية</h3></div><small>مؤشران مباشران لكفاءة الاستجابة</small></div>
           <div class="operational-priority-grid">
-            <article><div class="operational-rank">01</div><div><span>كفاءة استجابة مركز الخدمة الهاتفية</span><strong>100%</strong></div><div class="target-achievement target-ring" style="--target:90"><b>90%</b><small>المستهدف</small><em>+10</em></div></article>
-            <article><div class="operational-rank">02</div><div><span>الاستجابة لطلبات منصة تجاوب</span><strong>100%</strong></div><div class="target-achievement target-ring" style="--target:85"><b>85%</b><small>المستهدف</small><em>+15</em></div></article>
+            <article><div class="operational-rank"><svg class="card-icon"><use href="#pi-headset"/></svg></div><div><span>كفاءة استجابة مركز الخدمة الهاتفية</span><strong>100%</strong></div><div class="target-achievement target-ring" style="--target:90"><b>90%</b><small>المستهدف</small><em>+10</em></div></article>
+            <article><div class="operational-rank"><svg class="card-icon"><use href="#pi-inbox"/></svg></div><div><span>الاستجابة لطلبات منصة تجاوب</span><strong>100%</strong></div><div class="target-achievement target-ring" style="--target:85"><b>85%</b><small>المستهدف</small><em>+15</em></div></article>
           </div>
 
           <div class="performance-tier-heading workload-heading"><div><span>المستوى الثالث</span><h3>حجم الأعمال حسب قناة تقديم الخدمة</h3></div><small>تفاصيل تشغيلية بعد المؤشرات الرئيسية</small></div>
           <div class="workload-overview">
-            <article class="workload-total"><span>إجمالي حجم الأعمال</span><strong>452,453</strong><small>خدمة خلال ستة أشهر · 3,428 خدمة يوميًا</small></article>
-            <article class="channel-share"><div class="performance-share-ring" style="--share:62"><b>62%</b></div><div><span>القنوات الرقمية</span><strong>279,580</strong><small>من إجمالي الأعمال</small></div></article>
-            <article class="channel-share physical-share"><div class="performance-share-ring" style="--share:38"><b>38%</b></div><div><span>القنوات غير الرقمية</span><strong>172,873</strong><small>من إجمالي الأعمال</small></div></article>
+            <article class="workload-total"><svg class="summary-icon"><use href="#pi-layers"/></svg><span>إجمالي حجم الأعمال</span><strong>452,453</strong><small>خدمة خلال ستة أشهر · 3,428 خدمة يوميًا</small></article>
+            <article class="channel-share"><div class="performance-share-ring" style="--share:62"><svg class="ring-icon"><use href="#pi-digital"/></svg><b>62%</b></div><div><span>القنوات الرقمية</span><strong>279,580</strong><small>من إجمالي الأعمال</small></div></article>
+            <article class="channel-share physical-share"><div class="performance-share-ring" style="--share:38"><svg class="ring-icon"><use href="#pi-building"/></svg><b>38%</b></div><div><span>القنوات غير الرقمية</span><strong>172,873</strong><small>من إجمالي الأعمال</small></div></article>
           </div>
 
           <div class="workload-groups">
             <article class="workload-group branches-workload">
-              <div class="workload-group-head"><div><span>دوائر ومنافذ المحافظات</span><h3>الوصول والخدمات المباشرة</h3></div><b>6 مؤشرات</b></div>
+              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-building"/></svg><div><span>دوائر ومنافذ المحافظات</span><h3>الوصول والخدمات المباشرة</h3></div></div><b>6 مؤشرات</b></div>
               <div class="workload-metrics visual-metrics"><div style="--v:62"><span>حجوزات المواعيد</span><strong>94,081</strong><i></i><small>713 يوميًا</small></div><div style="--v:100"><span>استخدام تقييم QR</span><strong>151,117</strong><i></i><small>الأعلى حجمًا</small></div><div style="--v:16"><span>الخدمات الميدانية</span><strong>24,773</strong><i></i><small>188 يوميًا</small></div><div style="--v:3"><span>الخدمات الاستباقية</span><strong>4,294</strong><i></i><small>33 يوميًا</small></div><div style="--v:11"><span>الخدمات الذاتية</span><strong>17,160</strong><i></i><small>130 يوميًا</small></div><div style="--v:1"><span>الأنشطة الإعلامية</span><strong>313</strong><i></i><small>52 شهريًا</small></div></div>
             </article>
             <article class="workload-group contact-workload">
-              <div class="workload-group-head"><div><span>مركز الاتصال</span><h3>المكالمات وجودة الاستجابة</h3></div><b>184,197 مكالمة</b></div>
+              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-headset"/></svg><div><span>مركز الاتصال</span><h3>المكالمات وجودة الاستجابة</h3></div></div><b>184,197 مكالمة</b></div>
               <div class="contact-workload-lead"><strong>184,197</strong><span>مكالمة مستلمة خلال ستة أشهر</span></div>
               <div class="workload-metrics compact"><div><span>متوسط الانتظار</span><strong>52</strong><small>ثانية</small></div><div><span>متوسط المكالمة</span><strong>3:15</strong><small>دقيقة</small></div><div><span>الرضا عن الخدمة الهاتفية</span><strong>86.7%</strong><small>نتيجة القياس</small></div></div>
             </article>
             <article class="workload-group digital-workload">
-              <div class="workload-group-head"><div><span>القنوات التفاعلية</span><h3>المساعد الذكي ومنصات التواصل</h3></div><b>42,803 خدمة</b></div>
+              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-bot"/></svg><div><span>القنوات التفاعلية</span><h3>المساعد الذكي ومنصات التواصل</h3></div></div><b>42,803 خدمة</b></div>
               <div class="digital-workload-row"><div><img src="assets/channels/whatsapp.png" alt=""><span>المساعد الذكي وواتساب</span><strong>40,736</strong></div><div><img src="assets/channels/x.png" alt=""><span>منصة X</span><strong>2,067</strong></div></div>
             </article>
           </div>
