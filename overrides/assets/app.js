@@ -277,12 +277,40 @@
     try{const saved=JSON.parse(localStorage.getItem(TRACKER_SUMMARY_KEY)||"null");return saved&&Array.isArray(saved.depts)?saved:defaultTrackerSummary()}catch(_){return defaultTrackerSummary()}
   }
 
+  function trackerSummaryFromTasks(tasks){
+    const names={'مركز الاتصال':'contact','إدارة علاقات المتعاملين':'crm','إدارة وتطوير الخدمات':'service-dev','شؤون الدوائر والمنافذ':'branches','التنسيق والمتابعة':'coord'};
+    const grouped={};
+    tasks.forEach(task=>{
+      const name=task.dept||'غير محدد';
+      const group=grouped[name]||(grouped[name]={id:names[name]||`dept-${Object.keys(grouped).length+1}`,name,done:0,total:0});
+      group.total++;
+      if(task.status==='منجز')group.done++;
+    });
+    const total=tasks.length;
+    const done=tasks.filter(task=>task.status==='منجز').length;
+    const late=tasks.filter(task=>task.status==='متأخر').length;
+    const progress=tasks.filter(task=>task.status==='قيد الإجراء').length;
+    return {depts:Object.values(grouped),total,done,late,progress,rate:total?Math.round(done/total*100):0};
+  }
+
+  async function refreshTrackerSummary(){
+    try{
+      const response=await fetch(`assets/tasks-data.json?v=${Date.now()}`,{cache:'no-store'});
+      if(!response.ok)throw new Error('tracker data unavailable');
+      const document=await response.json();
+      if(!Array.isArray(document.tasks))throw new Error('invalid tracker data');
+      const summary=trackerSummaryFromTasks(document.tasks);
+      try{localStorage.setItem(TRACKER_SUMMARY_KEY,JSON.stringify(summary))}catch(_){/* private mode */}
+      renderTrackerBoard(summary);
+    }catch(_){renderTrackerBoard(readTrackerSummary())}
+  }
+
   function renderTrackerBoard(summary=readTrackerSummary()){
     const depts=summary.depts||[];
     const totalDone=Number(summary.done)||0;
     const totalItems=Number(summary.total)||0;
     const rate=totalItems?Math.round(totalDone/totalItems*100):0;
-    const inProgress=Math.max(0,totalItems-totalDone);
+    const inProgress=Number.isFinite(Number(summary.progress))?Number(summary.progress):Math.max(0,totalItems-totalDone-(Number(summary.late)||0));
 
     const setTxt=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
     const setWidth=(id,w)=>{const el=document.getElementById(id);if(el)el.style.width=w};
@@ -333,5 +361,13 @@
     renderTrackerBoard(summary);
   });
 
+  window.addEventListener("storage",event=>{
+    if(event.key!==TRACKER_SUMMARY_KEY||!event.newValue)return;
+    try{const summary=JSON.parse(event.newValue);if(Array.isArray(summary.depts))renderTrackerBoard(summary)}catch(_){/* ignore invalid data */}
+  });
+  window.addEventListener("focus",refreshTrackerSummary);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshTrackerSummary()});
+
   renderTrackerBoard();
+  refreshTrackerSummary();
 })();
