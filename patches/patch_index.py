@@ -15,6 +15,24 @@ def replace_required(old, new):
 
 
 replace_required(
+    '<meta name="description" content="منصة المديرية العامة لخدمات المتعاملين بصندوق الحماية الاجتماعية" />',
+    '<meta name="description" content="بوصلة المتعامل — المنصة التنفيذية للمديرية العامة لخدمات المتعاملين بصندوق الحماية الاجتماعية" />')
+replace_required(
+    '<title>خدمات المتعاملين | العرض المؤسسي</title>',
+    '<title>بوصلة المتعامل | المنصة التنفيذية لخدمات المتعاملين</title>')
+replace_required(
+'''        <div class="page-heading">
+          <span class="eyebrow">صندوق الحماية الاجتماعية · سلطنة عُمان</span>
+          <h1>المديرية العامة لخدمات المتعاملين</h1>
+        </div>''',
+'''        <div class="page-heading platform-identity">
+          <span class="eyebrow">صندوق الحماية الاجتماعية · سلطنة عُمان</span>
+          <h1>بوصلة المتعامل</h1>
+          <small>المنصة التنفيذية للمديرية العامة لخدمات المتعاملين</small>
+        </div>''')
+
+
+replace_required(
 '''          <div class="plan-summary">
             <article><span>إجمالي بنود الخطة</span><strong>20</strong><small>هدفًا ومبادرة</small></article>
             <article><span>الأهداف التشغيلية</span><strong>7</strong><small>أهداف رئيسية مفصلة</small></article>
