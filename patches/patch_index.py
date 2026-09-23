@@ -140,6 +140,80 @@ replace_required('09 · الحضور المؤسسي', '10 · الحضور الم
 replace_required('10 · محفظة التطوير', '11 · محفظة التطوير')
 replace_required('11 · الريادة والشراكة المجتمعية', '12 · الريادة والشراكة المجتمعية')
 
+performance_section = '''        <section class="section-block performance-priority" id="performance">
+          <div class="section-heading">
+            <div><span class="section-kicker">08 · الأداء والمؤشرات</span><h2>المؤشر الرئيسي للمديرية ثم الأداء التشغيلي وحجم الأعمال</h2></div>
+            <span class="section-note">يناير–يونيو 2026</span>
+          </div>
+
+          <article class="primary-kpi-hero" aria-label="مؤشر التواصل ورضا المستفيدين">
+            <div class="primary-kpi-copy">
+              <span>المؤشر المؤسسي الرئيسي للمديرية</span>
+              <h3>مؤشر التواصل ورضا المستفيدين</h3>
+              <p>النتيجة الرسمية المعتمدة للنصف الأول من عام 2026، وتجمع بين رضا المستفيدين والتواصل والتفاعل وفق الأوزان المعتمدة.</p>
+              <div class="primary-kpi-trend"><b>82%</b><i>منتصف 2025</i><span>← تحسن 4 نقاط مئوية ←</span><b>86%</b><i>النصف الأول 2026</i></div>
+            </div>
+            <div class="primary-kpi-score"><div class="score-ring"><strong>86%</strong><span>النتيجة المعتمدة</span></div><small>التقييم العام · جيد</small></div>
+          </article>
+
+          <div class="kpi-components" aria-label="مكونات المؤشر الرئيسي وأوزانها">
+            <article class="component-card satisfaction-component">
+              <div class="component-head"><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div><b>70%<small>الوزن</small></b></div>
+              <div class="component-result"><strong>86%</strong><span>نتيجة النصف الأول</span><i><em style="width:86%"></em></i></div>
+              <div class="quarter-comparison"><div><span>الربع الأول</span><b>82%</b></div><div><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div>
+              <div class="satisfaction-sources">
+                <span>المؤشرات الفرعية المعتمدة</span>
+                <div><article><i>01</i><b>المركز الوطني للإحصاء والمعلومات</b><small>وفق مؤشرات المركز</small></article><article><i>02</i><b>وزارة العمل</b><small>وفق مؤشرات الوزارة</small></article><article><i>03</i><b>منصة تجاوب</b><small>المقترحات والشكاوى والبلاغات</small></article></div>
+              </div>
+            </article>
+            <article class="component-card communication-component">
+              <div class="component-head"><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div><b>30%<small>الوزن</small></b></div>
+              <div class="component-result"><strong>88%</strong><span>نتيجة النصف الأول</span><i><em style="width:88%"></em></i></div>
+              <div class="quarter-comparison"><div><span>الربع الأول</span><b>90%</b></div><div><span>الربع الثاني</span><b>86%</b><small>انخفاض 4 نقاط</small></div></div>
+              <div class="component-insight"><span>قراءة الأداء</span><p>يحافظ المؤشر على مستوى مرتفع خلال النصف الأول، مع حاجة إلى متابعة التراجع بين الربعين الأول والثاني.</p></div>
+            </article>
+          </div>
+
+          <div class="performance-tier-heading"><div><span>المستوى الثاني</span><h3>المؤشرات التشغيلية ذات الأولوية</h3></div><small>مؤشران مباشران لكفاءة الاستجابة</small></div>
+          <div class="operational-priority-grid">
+            <article><div class="operational-rank">01</div><div><span>كفاءة استجابة مركز الخدمة الهاتفية</span><strong>100%</strong><small>النتيجة المحققة في النصف الأول</small></div><div class="target-achievement"><b>المستهدف 90%</b><em>+10 نقاط</em><i><u style="width:100%"></u></i></div></article>
+            <article><div class="operational-rank">02</div><div><span>الاستجابة لطلبات منصة تجاوب</span><strong>100%</strong><small>النتيجة المحققة في النصف الأول</small></div><div class="target-achievement"><b>المستهدف 85%</b><em>+15 نقطة</em><i><u style="width:100%"></u></i></div></article>
+          </div>
+
+          <div class="performance-tier-heading workload-heading"><div><span>المستوى الثالث</span><h3>حجم الأعمال حسب قناة تقديم الخدمة</h3></div><small>تفاصيل تشغيلية بعد المؤشرات الرئيسية</small></div>
+          <div class="workload-overview">
+            <article class="workload-total"><span>إجمالي حجم الأعمال</span><strong>452,453</strong><small>خدمة خلال ستة أشهر · 3,428 خدمة يوميًا</small></article>
+            <article><div><span>القنوات الرقمية</span><strong>279,580</strong></div><i><em style="width:62%"></em></i><small>62% من إجمالي الأعمال</small></article>
+            <article><div><span>القنوات غير الرقمية</span><strong>172,873</strong></div><i><em class="gold" style="width:38%"></em></i><small>38% من إجمالي الأعمال</small></article>
+          </div>
+
+          <div class="workload-groups">
+            <article class="workload-group branches-workload">
+              <div class="workload-group-head"><div><span>دوائر ومنافذ المحافظات</span><h3>الوصول والخدمات المباشرة</h3></div><b>6 مؤشرات</b></div>
+              <div class="workload-metrics"><div><span>حجوزات المواعيد</span><strong>94,081</strong><small>713 يوميًا</small></div><div><span>استخدام تقييم QR</span><strong>151,117</strong><small>استخدامًا</small></div><div><span>الخدمات الميدانية</span><strong>24,773</strong><small>188 يوميًا</small></div><div><span>الخدمات الاستباقية</span><strong>4,294</strong><small>33 يوميًا</small></div><div><span>الخدمات الذاتية</span><strong>17,160</strong><small>130 يوميًا</small></div><div><span>الأنشطة الإعلامية</span><strong>313</strong><small>52 شهريًا</small></div></div>
+            </article>
+            <article class="workload-group contact-workload">
+              <div class="workload-group-head"><div><span>مركز الاتصال</span><h3>المكالمات وجودة الاستجابة</h3></div><b>184,197 مكالمة</b></div>
+              <div class="contact-workload-lead"><strong>184,197</strong><span>مكالمة مستلمة خلال ستة أشهر</span></div>
+              <div class="workload-metrics compact"><div><span>متوسط الانتظار</span><strong>52</strong><small>ثانية</small></div><div><span>متوسط المكالمة</span><strong>3:15</strong><small>دقيقة</small></div><div><span>الرضا عن الخدمة الهاتفية</span><strong>86.7%</strong><small>نتيجة القياس</small></div></div>
+            </article>
+            <article class="workload-group digital-workload">
+              <div class="workload-group-head"><div><span>القنوات التفاعلية</span><h3>المساعد الذكي ومنصات التواصل</h3></div><b>42,803 خدمة</b></div>
+              <div class="digital-workload-row"><div><img src="assets/channels/whatsapp.png" alt=""><span>المساعد الذكي وواتساب</span><strong>40,736</strong></div><div><img src="assets/channels/x.png" alt=""><span>منصة X</span><strong>2,067</strong></div></div>
+            </article>
+          </div>
+        </section>'''
+
+text, performance_replacements = re.subn(
+    r'        <section class="section-block" id="performance">.*?        </section>',
+    performance_section,
+    text,
+    count=1,
+    flags=re.S,
+)
+if performance_replacements != 1:
+    raise SystemExit("Expected the performance section once")
+
 replace_required(
 '''            <article class="method-application">
               <span>كيف تُطبّقها المديرية؟</span>
