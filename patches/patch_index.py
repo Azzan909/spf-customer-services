@@ -172,7 +172,7 @@ performance_section = '''        <section class="section-block performance-prior
           <div class="kpi-components" aria-label="مكونات المؤشر الرئيسي وأوزانها">
             <article class="component-card satisfaction-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-heart"/></svg><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div></div><b>70%<small>الوزن</small></b></div>
-              <div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div><div class="component-weight-visual"><b>70%</b><span>من وزن المؤشر الرئيسي</span><i><em style="width:70%"></em></i></div></div>
+              <div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div>
               <div class="quarter-comparison"><div><span>الربع الأول</span><b>82%</b></div><div><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div>
               <div class="satisfaction-sources">
                 <span>المؤشرات الفرعية المعتمدة</span>
@@ -181,7 +181,7 @@ performance_section = '''        <section class="section-block performance-prior
             </article>
             <article class="component-card communication-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-message"/></svg><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div></div><b>30%<small>الوزن</small></b></div>
-              <div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div><div class="component-weight-visual"><b>30%</b><span>من وزن المؤشر الرئيسي</span><i><em style="width:30%"></em></i></div></div>
+              <div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div>
               <div class="quarter-comparison"><div><span>الربع الأول</span><b>90%</b></div><div><span>الربع الثاني</span><b>86%</b><small>انخفاض 4 نقاط</small></div></div>
             </article>
           </div>
