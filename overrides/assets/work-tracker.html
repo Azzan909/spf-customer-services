@@ -601,7 +601,8 @@ function completionSummary(){
   const grouped={};
   DATA.forEach(r=>{const key=r.dept||'غير محدد';(grouped[key]||(grouped[key]={id:names[key]||`dept-${Object.keys(grouped).length+1}`,name:key,done:0,total:0})).total++;if(r.status==='منجز')grouped[key].done++;});
   const total=DATA.length,done=DATA.filter(r=>r.status==='منجز').length,late=DATA.filter(r=>r.status==='متأخر').length;
-  return {total,done,late,progress:Math.max(0,total-done),rate:total?Math.round(done/total*100):0,depts:Object.values(grouped)};
+  const progress=DATA.filter(r=>r.status==='قيد الإجراء').length;
+  return {total,done,late,progress,rate:total?Math.round(done/total*100):0,depts:Object.values(grouped)};
 }
 function publishSummary(){
   const summary=completionSummary();
@@ -807,13 +808,13 @@ function switchTab(name){
 // KPI / HERO
 // ═══════════════════════════════════════════════
 function renderHero(){
-  const total = filtered.length;
-  const done = filtered.filter(r=>r.status==='منجز').length;
-  const prog = filtered.filter(r=>r.status==='قيد الإجراء').length;
-  const late = filtered.filter(r=>r.status==='متأخر').length;
+  const total = DATA.length;
+  const done = DATA.filter(r=>r.status==='منجز').length;
+  const prog = DATA.filter(r=>r.status==='قيد الإجراء').length;
+  const late = DATA.filter(r=>r.status==='متأخر').length;
   const rate = total ? Math.round(done/total*100) : 0;
-  const depts = new Set(filtered.map(r=>r.dept)).size;
-  const empSet = new Set(); filtered.forEach(r=>splitEmps(r.emp).forEach(n=>empSet.add(n)));
+  const depts = new Set(DATA.map(r=>r.dept)).size;
+  const empSet = new Set(); DATA.forEach(r=>splitEmps(r.emp).forEach(n=>empSet.add(n)));
 
   document.getElementById('hero-rate').innerHTML = rate + '<span class="unit">%</span>';
   document.querySelector('.hero-figure').style.setProperty('--rate', rate);
@@ -826,7 +827,7 @@ function renderHero(){
   document.getElementById('context-total').textContent = `${DATA.length} بندًا تشغيليًا`;
   document.getElementById('context-depts').textContent = `${new Set(DATA.map(r=>r.dept)).size} أقسام`;
 
-  document.getElementById('filter-count').textContent = `عرض ${total} من أصل ${DATA.length} مهمة`;
+  document.getElementById('filter-count').textContent = `عرض ${filtered.length} من أصل ${DATA.length} مهمة`;
 }
 
 function renderAll(){
