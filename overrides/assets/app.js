@@ -3,9 +3,11 @@
   const grid=$("#projectsGrid"), planGrid=$("#operationalPlanGrid"), committeesGrid=$("#committeesGrid"), modal=$("#projectModal"), updateModal=$("#updateModal");
   const STORAGE_KEY="spf-exhibition-manual-edits-v1";
   const PLAN_STORAGE_KEY="spf-operational-plan-delivery-v1";
+  const AUTH_PROXY="https://customer-compass-github-auth.spf2040.chatgpt.site";
+  const GITHUB_OWNER="Azzan909",GITHUB_REPO="spf-customer-services",GLOBAL_EDITS_PATH="overrides/assets/dashboard-edits.json";
   const editorToolbar=$("#editorToolbar"), editButton=$("#editContent"), saveNotice=$("#saveNotice");
   const defaultValues=new Map();
-  let savedEdits=readSavedEdits(), workingEdits={...savedEdits}, planDelivery=readPlanDelivery(), editing=false, currentProjectId="";
+  let savedEdits={}, workingEdits={}, planDelivery={}, editing=false, currentProjectId="",editAccessToken="";
 
   function readSavedEdits(){
     try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")||{}}catch(_){return {}}
@@ -14,6 +16,45 @@
     try{return JSON.parse(localStorage.getItem(PLAN_STORAGE_KEY)||"{}")||{}}catch(_){return {}}
   }
   function savePlanDelivery(){localStorage.setItem(PLAN_STORAGE_KEY,JSON.stringify(planDelivery))}
+  async function loadGlobalEdits(){
+    try{
+      const response=await fetch(`assets/dashboard-edits.json?v=${Date.now()}`,{cache:"no-store"});
+      if(!response.ok)throw new Error();
+      const payload=await response.json();savedEdits=payload.edits||{};workingEdits={...savedEdits};planDelivery=payload.planDelivery||{};applyValues(savedEdits);
+      renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");
+    }catch(_){savedEdits=readSavedEdits();workingEdits={...savedEdits};planDelivery=readPlanDelivery();applyValues(savedEdits)}
+  }
+  function oauthPanel(code,url){
+    let panel=$("#githubOauthPanel");if(panel)panel.remove();panel=document.createElement("div");panel.id="githubOauthPanel";panel.className="github-oauth-panel";
+    panel.innerHTML=`<div><span>تسجيل دخول المالك</span><h3>أدخل الرمز في GitHub</h3><strong>${escapeHtml(code)}</strong><p>ستُغلق جلسة التحرير بعد نشر التحديث.</p><a href="${escapeHtml(url)}" target="_blank" rel="noopener">فتح GitHub وإدخال الرمز</a><small>بانتظار الموافقة…</small></div>`;document.body.appendChild(panel);return panel;
+  }
+  async function authorizeGithub(){
+    const popup=window.open("about:blank","github-oauth","width=720,height=760");
+    const start=await fetch(`${AUTH_PROXY}/device/code`,{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});if(!start.ok)throw new Error("تعذر بدء تسجيل GitHub");
+    const flow=await start.json();if(popup)popup.location.href=flow.verification_uri;const panel=oauthPanel(flow.user_code,flow.verification_uri);
+    const started=Date.now(),interval=Math.max(5,Number(flow.interval)||5)*1000;
+    try{
+      while(Date.now()-started<(Number(flow.expires_in)||900)*1000){
+        await new Promise(resolve=>setTimeout(resolve,interval));
+        const response=await fetch(`${AUTH_PROXY}/oauth/access-token`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({device_code:flow.device_code})});const result=await response.json();
+        if(result.access_token){
+          const user=await fetch("https://api.github.com/user",{headers:{Authorization:`Bearer ${result.access_token}`,Accept:"application/vnd.github+json"}}).then(r=>r.ok?r.json():Promise.reject());
+          if(String(user.login||"").toLowerCase()!==GITHUB_OWNER.toLowerCase())throw new Error("هذا الحساب غير مخول بتحرير المنصة");
+          return result.access_token;
+        }
+        if(result.error&&!["authorization_pending","slow_down"].includes(result.error))throw new Error("لم تكتمل موافقة GitHub");
+      }
+      throw new Error("انتهت مهلة تسجيل الدخول");
+    }finally{panel.remove();if(popup&&!popup.closed)popup.close()}
+  }
+  function encodeBase64(value){const bytes=new TextEncoder().encode(value);let binary="";bytes.forEach(byte=>binary+=String.fromCharCode(byte));return btoa(binary)}
+  async function publishGlobalEdits(token,edits){
+    const endpoint=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GLOBAL_EDITS_PATH}`,headers={Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+    const current=await fetch(`${endpoint}?ref=main`,{headers});if(!current.ok)throw new Error("تعذر قراءة ملف التحديث المركزي");const metadata=await current.json();
+    const payload={version:3,updatedAt:new Date().toISOString(),edits,planDelivery};
+    const saved=await fetch(endpoint,{method:"PUT",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({message:"Publish dashboard content updates",content:encodeBase64(JSON.stringify(payload,null,2)+"\n"),sha:metadata.sha,branch:"main"})});
+    if(!saved.ok)throw new Error("تعذر نشر التحديث إلى GitHub");
+  }
   function projectValue(project,field){
     const key=`project.${project.id}.${field}`;
     return Object.prototype.hasOwnProperty.call(workingEdits,key)?workingEdits[key]:project[field];
@@ -223,11 +264,13 @@
     doc.href=safeValue||"#";doc.classList.toggle("disabled",!safeValue);safeValue?doc.removeAttribute("aria-disabled"):doc.setAttribute("aria-disabled","true");
   });
 
-  editButton.addEventListener("click",()=>{workingEdits={...savedEdits};setEditing(true);toast("يمكنك الآن تعديل النصوص والأرقام مباشرة")});
-  $("#saveEdits").addEventListener("click",()=>{
-    savedEdits=collectEdits();workingEdits={...savedEdits};localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم حفظ التعديلات على هذا المتصفح");
+  editButton.addEventListener("click",async()=>{editButton.disabled=true;editButton.textContent="جارٍ تسجيل الدخول…";try{editAccessToken=await authorizeGithub();workingEdits={...savedEdits};setEditing(true);toast("تم التحقق من حساب GitHub — يمكنك التحرير الآن")}catch(error){editAccessToken="";editButton.disabled=false;editButton.textContent="تحرير المحتوى";toast(error.message||"تعذر تسجيل الدخول")}});
+  $("#saveEdits").addEventListener("click",async()=>{
+    if(!editAccessToken){toast("انتهت جلسة GitHub؛ ابدأ التحرير من جديد");return}
+    const nextEdits=collectEdits();toast("جارٍ نشر التحديث للجميع…");
+    try{await publishGlobalEdits(editAccessToken,nextEdits);savedEdits=nextEdits;workingEdits={...savedEdits};localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم النشر؛ سيظهر التحديث للجميع خلال دقائق")}catch(error){toast(error.message||"تعذر نشر التحديث")}finally{editAccessToken=""}
   });
-  $("#cancelEdits").addEventListener("click",()=>{workingEdits={...savedEdits};applyValues(savedEdits);setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم إلغاء التعديلات غير المحفوظة")});
+  $("#cancelEdits").addEventListener("click",()=>{editAccessToken="";workingEdits={...savedEdits};applyValues(savedEdits);setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم إلغاء التعديلات وإغلاق جلسة GitHub")});
   $("#resetEdits").addEventListener("click",()=>{
     if(!confirm("هل تريد استعادة جميع محتويات النسخة الأصلية؟"))return;
     localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(PLAN_STORAGE_KEY);savedEdits={};workingEdits={};planDelivery={};applyValues({});setEditing(false);renderProjects("all");renderOperationalPlan("all");toast("تمت استعادة النسخة الأصلية");
@@ -256,7 +299,7 @@
   const sections=$$("section[id]"),navLinks=$$(".top-navigation a");
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+entry.target.id))}),{rootMargin:"-25% 0px -65% 0px"});
   // Chapter navigation is managed by exhibition.js in this independent edition.
-  prepareEditable();applyValues(savedEdits);
+  prepareEditable();loadGlobalEdits();
 
   // ── Work Tracker Module ──────────────────────────────────────────────────
   const TRACKER_SUMMARY_KEY="spf-work-tracker-summary-v3";
