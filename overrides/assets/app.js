@@ -18,7 +18,7 @@
   function savePlanDelivery(){localStorage.setItem(PLAN_STORAGE_KEY,JSON.stringify(planDelivery))}
   function sanitizeGlobalEdits(edits){
     const protectedPrefixes=[
-      "#performance>div:7>",
+      "#performance>",
       "#tajawob>",
       "#boardModePanel>main:1>section:3>"
     ];
