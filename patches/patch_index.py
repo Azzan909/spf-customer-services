@@ -273,13 +273,13 @@ replace_required(
             <article><span class="board-line-icon">◷</span><strong>52</strong><span>ثانية انتظار</span></article>
             <article><span class="board-line-icon">♡</span><strong>86.7%</strong><span>رضا الخدمة الهاتفية</span></article>
             <article><img src="assets/channels/whatsapp.png" alt=""><strong>40,736</strong><span>خدمة ذكية وواتساب</span></article>
-            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>تفاعل عبر منصة X</span></article>''',
+            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>خدمة عبر X</span></article>''',
 '''            <article><img src="assets/channels/contact-center.png" alt=""><strong>184,197</strong><span>مكالمة مستلمة</span></article>
             <article><span class="board-line-icon">✓</span><strong>100%</strong><span>كفاءة الاستجابة</span></article>
             <article><span class="board-line-icon">◷</span><strong>52</strong><span>ثانية انتظار</span></article>
             <article><span class="board-line-icon">♡</span><strong>86.7%</strong><span>رضا الخدمة الهاتفية</span></article>
             <article><img src="assets/channels/whatsapp.png" alt=""><strong>7,728</strong><span>طلب واتساب · يوليو–أغسطس</span></article>
-            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>خدمة عبر X</span></article>''')
+            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>تفاعل عبر منصة X</span></article>''')
 
 replace_required(
 '''            <article class="method-application">
