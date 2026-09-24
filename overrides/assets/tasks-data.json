@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-24T06:48:06.793Z",
+  "updated_at": "2026-09-24T06:49:17.310Z",
   "tasks": [
     {
       "id": "central-1",
@@ -3756,17 +3756,6 @@
       "status": "منجز",
       "overdue": false,
       "id": "central-343"
-    },
-    {
-      "title": "مستشار صندوق الحماية",
-      "dept": "إدارة وتطوير الخدمات",
-      "emp": "سهى البلوشي",
-      "tech": "تحديث المنهجية",
-      "pct": 0,
-      "date": null,
-      "status": "قيد الإجراء",
-      "overdue": false,
-      "id": "central-344"
     },
     {
       "title": "تصور ملتقى المدراء",
