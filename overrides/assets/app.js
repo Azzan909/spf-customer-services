@@ -37,12 +37,16 @@
   }
   function oauthPanel(code,url){
     let panel=$("#githubOauthPanel");if(panel)panel.remove();panel=document.createElement("div");panel.id="githubOauthPanel";panel.className="github-oauth-panel";
-    panel.innerHTML=`<div><span>تسجيل دخول المالك</span><h3>أدخل الرمز في GitHub</h3><strong>${escapeHtml(code)}</strong><p>ستُغلق جلسة التحرير بعد نشر التحديث.</p><a href="${escapeHtml(url)}" target="_blank" rel="noopener">فتح GitHub وإدخال الرمز</a><small>بانتظار الموافقة…</small></div>`;document.body.appendChild(panel);return panel;
+    panel.innerHTML=`<div><span>دخول المنسقة</span><h3>أدخل الرمز في GitHub</h3><strong>${escapeHtml(code)}</strong><p>تبقى جلسة التحرير حتى إغلاق الصفحة.</p><a href="${escapeHtml(url)}" target="_blank" rel="noopener">فتح GitHub وإدخال الرمز</a><small>بانتظار الموافقة…</small></div>`;document.body.appendChild(panel);return panel;
   }
   async function verifyDashboardToken(token){
     const headers={Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
     const userResponse=await fetch("https://api.github.com/user",{headers});if(!userResponse.ok)throw new Error("رمز GitHub غير صالح أو انتهت صلاحيته");
-    const user=await userResponse.json();if(String(user.login||"").toLowerCase()!==GITHUB_OWNER.toLowerCase())throw new Error("هذا الحساب غير مخول بتحرير المنصة");
+    const user=await userResponse.json();
+    const permissionResponse=await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`,{headers});
+    if(!permissionResponse.ok)throw new Error("تعذر التحقق من صلاحية حساب المنسقة");
+    const repository=await permissionResponse.json();
+    if(!repository.permissions?.push)throw new Error(`الحساب ${user.login||"الحالي"} يحتاج صلاحية كتابة على مستودع المنصة`);
     const repoResponse=await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GLOBAL_EDITS_PATH}?ref=main`,{headers});
     if(repoResponse.status===403)throw new Error("الرمز يحتاج صلاحية Contents: Read and write للمستودع spf-customer-services");
     if(!repoResponse.ok)throw new Error("تعذر الوصول إلى ملف تحديث المنصة بهذا الرمز");
@@ -51,7 +55,7 @@
   function loginChoicePanel(){
     return new Promise((resolve,reject)=>{
       let panel=$("#githubLoginChoice");if(panel)panel.remove();panel=document.createElement("div");panel.id="githubLoginChoice";panel.className="github-oauth-panel owner-login-choice";
-      panel.innerHTML=`<div><button class="owner-login-close" type="button" aria-label="إغلاق">×</button><span>تسجيل دخول المالك</span><h3>اختر طريقة الدخول</h3><p>داخل شبكة العمل استخدم رمز وصول مؤقت؛ يبقى في الذاكرة لهذه الجلسة فقط ولا يُحفظ في المنصة أو المتصفح.</p><label><small>رمز الوصول المؤقت</small><input type="password" autocomplete="off" placeholder="github_pat_… أو ghp_…"></label><button class="owner-token-submit" type="button">تحقق وابدأ التحرير</button><small class="owner-login-error" role="status"></small><a class="owner-token-help" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">إنشاء رمز: اختر المستودع spf-customer-services وصلاحية Contents: Read and write</a><i>أو</i><button class="owner-oauth-start" type="button">الدخول عبر GitHub خارج شبكة العمل</button></div>`;
+      panel.innerHTML=`<div><button class="owner-login-close" type="button" aria-label="إغلاق">×</button><span>دخول المنسقة</span><h3>اختر طريقة الدخول</h3><p>داخل شبكة العمل استخدم رمز وصول مؤقت؛ يبقى في الذاكرة لهذه الجلسة فقط ولا يُحفظ في المنصة أو المتصفح.</p><label><small>رمز الوصول المؤقت</small><input type="password" autocomplete="off" placeholder="github_pat_… أو ghp_…"></label><button class="owner-token-submit" type="button">تحقق وابدأ التحرير</button><small class="owner-login-error" role="status"></small><a class="owner-token-help" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">إنشاء رمز: استخدمي حسابك المضاف متعاونًا في المستودع، واختاري صلاحية Contents: Read and write</a><i>أو</i><button class="owner-oauth-start" type="button">الدخول عبر GitHub خارج شبكة العمل</button></div>`;
       document.body.appendChild(panel);const input=$("input",panel),error=$(".owner-login-error",panel),submit=$(".owner-token-submit",panel);
       $(".owner-login-close",panel).onclick=()=>{panel.remove();reject(new Error("تم إلغاء تسجيل الدخول"))};
       $(".owner-oauth-start",panel).onclick=()=>{panel.remove();resolve({mode:"oauth"})};
@@ -295,13 +299,13 @@
     doc.href=safeValue||"#";doc.classList.toggle("disabled",!safeValue);safeValue?doc.removeAttribute("aria-disabled"):doc.setAttribute("aria-disabled","true");
   });
 
-  editButton.addEventListener("click",async()=>{editButton.disabled=true;editButton.textContent="جارٍ تسجيل الدخول…";try{editAccessToken=await authorizeGithub();workingEdits={...savedEdits};setEditing(true);toast("تم التحقق من حساب GitHub — يمكنك التحرير الآن")}catch(error){editAccessToken="";editButton.disabled=false;editButton.textContent="تحرير المحتوى";toast(error.message||"تعذر تسجيل الدخول")}});
+  editButton.addEventListener("click",async()=>{editButton.disabled=true;editButton.textContent="جارٍ التحقق…";try{if(!editAccessToken)editAccessToken=await authorizeGithub();workingEdits={...savedEdits};setEditing(true);toast("يمكنك التحرير الآن")}catch(error){editAccessToken="";editButton.disabled=false;editButton.textContent="تحرير المحتوى";toast(error.message||"تعذر تسجيل الدخول")}});
   $("#saveEdits").addEventListener("click",async()=>{
     if(!editAccessToken){toast("انتهت جلسة GitHub؛ ابدأ التحرير من جديد");return}
     const nextEdits=collectEdits();toast("جارٍ نشر التحديث للجميع…");
-    try{await publishGlobalEdits(editAccessToken,nextEdits);savedEdits=nextEdits;workingEdits={...savedEdits};localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم النشر؛ سيظهر التحديث للجميع خلال دقائق")}catch(error){toast(error.message||"تعذر نشر التحديث")}finally{editAccessToken=""}
+    try{await publishGlobalEdits(editAccessToken,nextEdits);savedEdits=nextEdits;workingEdits={...savedEdits};localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم النشر؛ سيظهر التحديث للجميع خلال دقائق")}catch(error){toast(error.message||"تعذر نشر التحديث")}
   });
-  $("#cancelEdits").addEventListener("click",()=>{editAccessToken="";workingEdits={...savedEdits};applyValues(savedEdits);setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم إلغاء التعديلات وإغلاق جلسة GitHub")});
+  $("#cancelEdits").addEventListener("click",()=>{workingEdits={...savedEdits};applyValues(savedEdits);setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم إلغاء التعديلات")});
   $("#resetEdits").addEventListener("click",()=>{
     if(!confirm("هل تريد استعادة جميع محتويات النسخة الأصلية؟"))return;
     localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(PLAN_STORAGE_KEY);savedEdits={};workingEdits={};planDelivery={};applyValues({});setEditing(false);renderProjects("all");renderOperationalPlan("all");toast("تمت استعادة النسخة الأصلية");
