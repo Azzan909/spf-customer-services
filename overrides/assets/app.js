@@ -16,11 +16,22 @@
     try{return JSON.parse(localStorage.getItem(PLAN_STORAGE_KEY)||"{}")||{}}catch(_){return {}}
   }
   function savePlanDelivery(){localStorage.setItem(PLAN_STORAGE_KEY,JSON.stringify(planDelivery))}
+  function sanitizeGlobalEdits(edits){
+    const protectedPrefixes=[
+      "#performance>div:7>",
+      "#tajawob>",
+      "#boardModePanel>main:1>section:3>"
+    ];
+    const protectedKeys=new Set(["#overview>div:1>div:1>span:1"]);
+    return Object.fromEntries(Object.entries(edits||{}).filter(([key])=>
+      !protectedKeys.has(key)&&!protectedPrefixes.some(prefix=>key.startsWith(prefix))
+    ));
+  }
   async function loadGlobalEdits(){
     try{
       const response=await fetch(`assets/dashboard-edits.json?v=${Date.now()}`,{cache:"no-store"});
       if(!response.ok)throw new Error();
-      const payload=await response.json();savedEdits=payload.edits||{};workingEdits={...savedEdits};planDelivery=payload.planDelivery||{};applyValues(savedEdits);
+      const payload=await response.json();savedEdits=sanitizeGlobalEdits(payload.edits);workingEdits={...savedEdits};planDelivery=payload.planDelivery||{};applyValues(savedEdits);
       renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");
     }catch(_){savedEdits=readSavedEdits();workingEdits={...savedEdits};planDelivery=readPlanDelivery();applyValues(savedEdits)}
   }
