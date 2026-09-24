@@ -199,16 +199,12 @@ performance_section = '''        <section class="section-block performance-prior
 
           <div class="workload-groups">
             <article class="workload-group branches-workload">
-              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-building"/></svg><div><span>دوائر ومنافذ المحافظات</span><h3>الوصول والخدمات المباشرة</h3></div></div><b>6 مؤشرات</b></div>
-              <div class="workload-metrics visual-metrics"><div style="--v:62"><span>حجوزات المواعيد</span><strong>94,081</strong><i></i><small>713 يوميًا</small></div><div style="--v:100"><span>استخدام تقييم QR</span><strong>151,117</strong><i></i><small>الأعلى حجمًا</small></div><div style="--v:16"><span>الخدمات الميدانية</span><strong>24,773</strong><i></i><small>188 يوميًا</small></div><div style="--v:3"><span>الخدمات الاستباقية</span><strong>4,294</strong><i></i><small>33 يوميًا</small></div><div style="--v:11"><span>الخدمات الذاتية</span><strong>17,160</strong><i></i><small>130 يوميًا</small></div><div style="--v:1"><span>الأنشطة الإعلامية</span><strong>313</strong><i></i><small>52 شهريًا</small></div></div>
+              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-building"/></svg><div><span>دوائر ومنافذ المحافظات</span><h3>الوصول والخدمات المباشرة</h3></div></div><b>7 مؤشرات</b></div>
+              <div class="workload-metrics visual-metrics"><div style="--v:62"><span>حجوزات المواعيد</span><strong>94,081</strong><i></i><small>713 يوميًا</small></div><div style="--v:100"><span>استخدام تقييم QR</span><strong>151,117</strong><i></i><small>الأعلى حجمًا</small></div><div style="--v:16"><span>الخدمات الميدانية</span><strong>24,773</strong><i></i><small>188 يوميًا</small></div><div style="--v:3"><span>الخدمات الاستباقية</span><strong>4,294</strong><i></i><small>33 يوميًا</small></div><div style="--v:11"><span>الخدمات الذاتية</span><strong>17,160</strong><i></i><small>130 يوميًا</small></div><div style="--v:1"><span>الأنشطة الإعلامية</span><strong>313</strong><i></i><small>52 شهريًا</small></div><div class="branch-whatsapp-metric"><img src="assets/channels/whatsapp.png" alt="واتساب"><span>الخدمات المقدمة عبر واتساب دوائر المحافظات</span><strong>7,728</strong><small>يوليو–أغسطس 2026</small></div></div>
             </article>
             <article class="workload-group contact-workload">
               <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-headset"/></svg><div><span>مركز الاتصال</span><h3>المكالمات وجودة الاستجابة والتفاعل</h3></div></div><b>7 مؤشرات</b></div>
-              <div class="contact-kpi-grid"><div class="contact-primary-metric"><svg class="contact-lead-icon"><use href="#pi-headset"/></svg><strong>184,197</strong><span>مكالمة مستلمة</span></div><div class="contact-satisfaction-metric"><svg class="contact-metric-icon"><use href="#pi-smile"/></svg><strong>86.7%</strong><span>الرضا عن الخدمة الهاتفية</span><small>المؤشر الأهم</small></div><div><svg class="contact-metric-icon"><use href="#pi-inbox"/></svg><strong>100%</strong><span>كفاءة الاستجابة</span></div><div><svg class="contact-metric-icon"><use href="#pi-clock"/></svg><strong>52</strong><span>ثانية متوسط الانتظار</span></div><div><svg class="contact-metric-icon"><use href="#pi-timer"/></svg><strong>3:15</strong><span>متوسط مدة المكالمة</span></div><div class="contact-wide"><svg class="contact-metric-icon"><use href="#pi-bot"/></svg><strong>40,736</strong><span>خدمة عبر المساعد الذكي</span></div><div class="contact-x-metric"><img src="assets/channels/x.png" alt="منصة X"><strong>2,067</strong><span>تفاعل عبر منصة X</span><small>يناير–يونيو</small></div></div>
-            </article>
-            <article class="workload-group digital-workload">
-              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-bot"/></svg><div><span>القنوات التفاعلية بالمحافظات</span><h3>واتساب دوائر المحافظات</h3></div></div><b>يوليو–أغسطس 2026</b></div>
-              <div class="digital-workload-row updated-channels whatsapp-only"><div><img src="assets/channels/whatsapp.png" alt="واتساب"><span>طلبات واتساب دوائر المحافظات<small>الفترة المتوفرة في المصدر</small></span><strong>7,728</strong></div></div>
+              <div class="contact-kpi-grid"><div class="contact-primary-metric"><svg class="contact-lead-icon"><use href="#pi-headset"/></svg><strong>184,197</strong><span>مكالمة مستلمة</span></div><div class="contact-satisfaction-metric"><svg class="contact-metric-icon"><use href="#pi-smile"/></svg><strong>86.7%</strong><span>الرضا عن الخدمة الهاتفية</span><small>المؤشر الأهم</small></div><div><svg class="contact-metric-icon"><use href="#pi-inbox"/></svg><strong>100%</strong><span>كفاءة الاستجابة</span></div><div><svg class="contact-metric-icon"><use href="#pi-clock"/></svg><strong>52</strong><span>ثانية متوسط الانتظار</span></div><div><svg class="contact-metric-icon"><use href="#pi-timer"/></svg><strong>3:15</strong><span>متوسط مدة المكالمة</span></div><div class="contact-wide"><svg class="contact-metric-icon"><use href="#pi-bot"/></svg><strong>40,736</strong><span>خدمة عبر المساعد الذكي</span></div><div class="contact-x-metric"><img src="assets/channels/x.png" alt="منصة X"><strong>2,067</strong><span>خدمات مقدمة عبر منصة X</span><small>يناير–يونيو</small></div></div>
             </article>
           </div>
         </section>'''
@@ -279,7 +275,7 @@ replace_required(
             <article><span class="board-line-icon">◷</span><strong>52</strong><span>ثانية انتظار</span></article>
             <article><span class="board-line-icon">♡</span><strong>86.7%</strong><span>رضا الخدمة الهاتفية</span></article>
             <article><img src="assets/channels/whatsapp.png" alt=""><strong>7,728</strong><span>طلب واتساب · يوليو–أغسطس</span></article>
-            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>تفاعل عبر منصة X</span></article>''')
+            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>خدمات مقدمة عبر منصة X</span></article>''')
 
 replace_required(
 '''            <article class="method-application">
@@ -352,10 +348,10 @@ replace_required(
     '<a class="btn secondary" href="assets/work-tracker.html" target="_blank" rel="noopener">فتح وتحديث البيان التفصيلي</a>')
 replace_required(
     '  <script src="assets/app.js"></script>',
-    '  <script src="assets/app.js?v=20260924-4"></script>\n  <script src="assets/privacy-lock.js"></script>')
+    '  <script src="assets/app.js?v=20260924-5"></script>\n  <script src="assets/privacy-lock.js"></script>')
 replace_required(
     '<link rel="stylesheet" href="assets/styles.css" />',
-    '<link rel="stylesheet" href="assets/styles.css?v=20260924-4" />')
+    '<link rel="stylesheet" href="assets/styles.css?v=20260924-5" />')
 
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
 path.write_text(text, encoding="utf-8")
