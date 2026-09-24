@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-09-24T07:58:22.707Z",
+  "updatedAt": "2026-09-24T07:59:42.786Z",
   "edits": {
     "div:1>main:1>header:1>div:1>span:1": "صندوق الحماية الاجتماعية · سلطنة عُمان",
     "div:1>main:1>header:1>div:1>h1:1": "بوصلة المتعامل",
@@ -57,8 +57,8 @@
     "#directorate>div:3>article:1>div:2>div:3>span:2": "علاقات المتعاملين",
     "#directorate>div:3>article:1>div:2>div:3>span:3": "إدارة وتطوير الخدمات",
     "#directorate>div:3>article:1>div:2>div:3>span:4": "مركز الخدمة الهاتفية",
-    "#directorate>div:3>article:2>div:1>h3:1": "القوى العاملة",
-    "#directorate>div:3>article:2>div:1>span:1": "ملف التوزيع المحدّث",
+    "#directorate>div:3>article:2>div:1>h3:1": "الكوادر البشرية",
+    "#directorate>div:3>article:2>div:1>span:1": "",
     "#directorate>div:3>article:2>div:2>strong:1": "239",
     "#directorate>div:3>article:2>div:2>span:1": "موظفًا وموظفة",
     "#directorate>div:3>article:2>div:3>div:1>b:1": "129",
@@ -212,7 +212,7 @@
     "#channels>div:2>article:2>div:2>span:1": "الدعم البشري اليومي في مركز الاتصال",
     "#channels>div:2>article:2>div:3>b:1": "8ص–2م",
     "#channels>div:2>article:2>div:3>span:1": "دوائر المحافظات من الأحد إلى الخميس",
-    "#channels>div:2>article:2>div:4>b:1": "5م–8م",
+    "#channels>div:2>article:2>div:4>b:1": "2م–8م",
     "#channels>div:2>article:2>div:4>span:1": "فترة مسائية إضافية في منفذ العريمي بوليفارد بولاية السيب",
     "#channels>div:3>article:1>div:1>h3:1": "القنوات الرقمية والتفاعلية",
     "#channels>div:3>article:1>div:1>span:1": "وصول متعدد القنوات",
