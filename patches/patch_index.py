@@ -143,7 +143,7 @@ replace_required('11 · الريادة والشراكة المجتمعية', '12
 performance_section = '''        <section class="section-block performance-priority" id="performance">
           <div class="section-heading">
             <div><span class="section-kicker">08 · الأداء والمؤشرات</span><h2>المؤشر الرئيسي للمديرية ثم الأداء التشغيلي وحجم الأعمال</h2></div>
-            <span class="section-note">يناير–يونيو 2026</span>
+            <span class="section-note">حتى أغسطس 2026 · وفق فترة توفر كل مصدر</span>
           </div>
           <svg class="performance-icon-sprite" aria-hidden="true">
             <symbol id="pi-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></symbol>
@@ -172,8 +172,7 @@ performance_section = '''        <section class="section-block performance-prior
           <div class="kpi-components" aria-label="مكونات المؤشر الرئيسي وأوزانها">
             <article class="component-card satisfaction-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-heart"/></svg><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div></div><b>70%<small>الوزن</small></b></div>
-              <div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div>
-              <div class="quarter-comparison"><div><span>الربع الأول</span><b>82%</b></div><div><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div>
+              <div class="component-score-layout"><div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div><div class="quarter-comparison"><div><span>الربع الأول</span><b>82%</b></div><div><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div></div>
               <div class="satisfaction-sources">
                 <span>المؤشرات الفرعية المعتمدة</span>
                 <div><article><i>01</i><b>المركز الوطني للإحصاء والمعلومات</b><small>وفق مؤشرات المركز</small></article><article><i>02</i><b>وزارة العمل</b><small>وفق مؤشرات الوزارة</small></article><article><i>03</i><b>منصة تجاوب</b><small>المقترحات والشكاوى والبلاغات</small></article></div>
@@ -181,8 +180,8 @@ performance_section = '''        <section class="section-block performance-prior
             </article>
             <article class="component-card communication-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-message"/></svg><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div></div><b>30%<small>الوزن</small></b></div>
-              <div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div>
-              <div class="quarter-comparison"><div><span>الربع الأول</span><b>90%</b></div><div><span>الربع الثاني</span><b>86%</b><small>انخفاض 4 نقاط</small></div></div>
+              <div class="component-score-layout"><div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div><div class="quarter-comparison"><div><span>الربع الأول</span><b>90%</b></div><div><span>الربع الثاني</span><b>86%</b><small>انخفاض 4 نقاط</small></div></div></div>
+              <div class="communication-evidence"><span>قنوات القياس الداعمة</span><div><article><svg class="evidence-icon"><use href="#pi-headset"/></svg><b>184,197</b><small>مكالمة مستلمة</small></article><article><svg class="evidence-icon"><use href="#pi-bot"/></svg><b>40,736</b><small>خدمة عبر المساعد الذكي</small></article><article><img src="assets/channels/x.png" alt=""><b>2,067</b><small>خدمة مقدمة عبر X</small></article></div></div>
             </article>
           </div>
 
@@ -206,12 +205,11 @@ performance_section = '''        <section class="section-block performance-prior
             </article>
             <article class="workload-group contact-workload">
               <div class="workload-group-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-headset"/></svg><div><span>مركز الاتصال</span><h3>المكالمات وجودة الاستجابة</h3></div></div><b>184,197 مكالمة</b></div>
-              <div class="contact-workload-lead"><svg class="contact-lead-icon"><use href="#pi-headset"/></svg><strong>184,197</strong><span>مكالمة مستلمة خلال ستة أشهر</span></div>
-              <div class="workload-metrics compact contact-visual-metrics"><div><svg class="contact-metric-icon"><use href="#pi-clock"/></svg><span>متوسط الانتظار</span><strong>52</strong><small>ثانية</small></div><div><svg class="contact-metric-icon"><use href="#pi-timer"/></svg><span>متوسط المكالمة</span><strong>3:15</strong><small>دقيقة</small></div><div><svg class="contact-metric-icon"><use href="#pi-smile"/></svg><span>الرضا عن الخدمة الهاتفية</span><strong>86.7%</strong><small>نتيجة القياس</small></div></div>
+              <div class="contact-kpi-grid"><div class="contact-primary-metric"><svg class="contact-lead-icon"><use href="#pi-headset"/></svg><strong>184,197</strong><span>مكالمة مستلمة</span></div><div><svg class="contact-metric-icon"><use href="#pi-inbox"/></svg><strong>100%</strong><span>كفاءة الاستجابة</span></div><div><svg class="contact-metric-icon"><use href="#pi-clock"/></svg><strong>52</strong><span>ثانية متوسط الانتظار</span></div><div><svg class="contact-metric-icon"><use href="#pi-timer"/></svg><strong>3:15</strong><span>متوسط مدة المكالمة</span></div><div><svg class="contact-metric-icon"><use href="#pi-smile"/></svg><strong>86.7%</strong><span>الرضا عن الخدمة الهاتفية</span></div><div><svg class="contact-metric-icon"><use href="#pi-bot"/></svg><strong>40,736</strong><span>خدمة عبر المساعد الذكي</span></div></div>
             </article>
             <article class="workload-group digital-workload">
-              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-bot"/></svg><div><span>القنوات التفاعلية</span><h3>المساعد الذكي ومنصات التواصل</h3></div></div><b>42,803 خدمة</b></div>
-              <div class="digital-workload-row"><div><img src="assets/channels/whatsapp.png" alt=""><span>المساعد الذكي وواتساب</span><strong>40,736</strong></div><div><img src="assets/channels/x.png" alt=""><span>منصة X</span><strong>2,067</strong></div></div>
+              <div class="workload-group-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-bot"/></svg><div><span>القنوات التفاعلية</span><h3>واتساب المحافظات ومنصة X</h3></div></div><b>حتى أغسطس 2026</b></div>
+              <div class="digital-workload-row updated-channels"><div><img src="assets/channels/whatsapp.png" alt=""><span>واتساب دوائر المحافظات<small>يوليو–أغسطس</small></span><strong>7,728</strong></div><div><img src="assets/channels/x.png" alt=""><span>الخدمات المقدمة عبر X<small>يناير–يونيو</small></span><strong>2,067</strong></div><div class="data-availability"><svg class="contact-metric-icon"><use href="#pi-chart"/></svg><span>زيارات وانطباعات حساب X<small>لم ترد أرقامها في الملفات المرفقة</small></span><strong>—</strong></div></div>
             </article>
           </div>
         </section>'''
@@ -225,6 +223,64 @@ text, performance_replacements = re.subn(
 )
 if performance_replacements != 1:
     raise SystemExit("Expected the performance section once")
+
+tajawob_section = '''        <section class="section-block tajawob-updated" id="tajawob">
+          <div class="section-heading">
+            <div><span class="section-kicker">09 · منصة تجاوب</span><h2>صوت المتعامل في مسار قابل للقياس</h2></div>
+            <span class="section-note">يناير–أغسطس 2026</span>
+          </div>
+          <div class="tajawob-hero updated">
+            <div><span>إجمالي الطلبات</span><strong>5,610</strong><small>خلال ثمانية أشهر</small></div>
+            <div><span>متوسط نسبة الإنجاز</span><strong>97.8%</strong><small>المستهدف 100%</small></div>
+            <div><span>الطلبات المنجزة</span><strong>5,488</strong><small>مقابل 122 غير منجز</small></div>
+            <div><span>عدد الأشهر</span><strong>8</strong><small>يناير إلى أغسطس 2026</small></div>
+          </div>
+          <div class="tajawob-flow" aria-label="مسار معالجة طلب المتعامل في منصة تجاوب">
+            <article><i>1</i><b>استقبال الطلب</b><span>شكوى أو استفسار أو مقترح أو بلاغ</span></article>
+            <article><i>2</i><b>التصنيف والإسناد</b><span>تحديد الجهة والمدة المستهدفة</span></article>
+            <article><i>3</i><b>المعالجة والإغلاق</b><span>متابعة جودة الاستجابة وإتمام الحل</span></article>
+            <article><i>4</i><b>قياس التجربة</b><span>قراءة الإنجاز والاتجاهات الزمنية</span></article>
+          </div>
+          <div class="tajawob-type-grid" aria-label="طلبات منصة تجاوب حسب النوع">
+            <article style="--rate:98"><span>المقترحات</span><strong>212</strong><b>208 منجزة · 98%</b><i><em></em></i></article>
+            <article style="--rate:96"><span>الشكاوى</span><strong>1,879</strong><b>1,811 منجزة · 96%</b><i><em></em></i></article>
+            <article style="--rate:65"><span>البلاغات</span><strong>20</strong><b>13 منجزة · 65%</b><i><em></em></i></article>
+            <article style="--rate:99"><span>الاستفسارات</span><strong>3,499</strong><b>3,456 منجزة · 99%</b><i><em></em></i></article>
+          </div>
+          <div class="tajawob-compare">
+            <article><div><span>عام 2025</span><strong>3,481 طلبًا</strong></div><p>معدل الإنجاز 74% وفق التقرير السابق.</p></article>
+            <article><div><span>يناير–أغسطس 2026</span><strong>5,610 طلبات</strong></div><p>زيادة حجم الطلبات مع بلوغ متوسط الإنجاز 97.8%.</p></article>
+          </div>
+          <div class="tajawob-peaks" aria-label="أوقات الذروة في منصة تجاوب">
+            <article><span>أكثر يوم ازدحامًا</span><strong>الاثنين 27 أبريل</strong><small>97 طلبًا</small></article>
+            <article><span>أكثر أيام الأسبوع</span><strong>الأحد</strong><small>811 طلبًا إجمالًا</small></article>
+            <article><span>أكثر ساعة ازدحامًا</span><strong>11:00 صباحًا</strong><small>362 طلبًا</small></article>
+          </div>
+        </section>'''
+
+text, tajawob_replacements = re.subn(
+    r'        <section class="section-block" id="tajawob">.*?        </section>',
+    tajawob_section,
+    text,
+    count=1,
+    flags=re.S,
+)
+if tajawob_replacements != 1:
+    raise SystemExit("Expected the Tajawob section once")
+
+replace_required('الفترة المرجعية: يناير–يونيو 2026', 'الفترة المرجعية: يناير–أغسطس 2026')
+replace_required(
+'''            <article><img src="assets/channels/contact-center.png" alt=""><strong>184,197</strong><span>مكالمة مستلمة</span></article>
+            <article><span class="board-line-icon">◷</span><strong>52</strong><span>ثانية انتظار</span></article>
+            <article><span class="board-line-icon">♡</span><strong>86.7%</strong><span>رضا الخدمة الهاتفية</span></article>
+            <article><img src="assets/channels/whatsapp.png" alt=""><strong>40,736</strong><span>خدمة ذكية وواتساب</span></article>
+            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>خدمة عبر X</span></article>''',
+'''            <article><img src="assets/channels/contact-center.png" alt=""><strong>184,197</strong><span>مكالمة مستلمة</span></article>
+            <article><span class="board-line-icon">✓</span><strong>100%</strong><span>كفاءة الاستجابة</span></article>
+            <article><span class="board-line-icon">◷</span><strong>52</strong><span>ثانية انتظار</span></article>
+            <article><span class="board-line-icon">♡</span><strong>86.7%</strong><span>رضا الخدمة الهاتفية</span></article>
+            <article><img src="assets/channels/whatsapp.png" alt=""><strong>7,728</strong><span>طلب واتساب · يوليو–أغسطس</span></article>
+            <article><img src="assets/channels/x.png" alt=""><strong>2,067</strong><span>خدمة عبر X</span></article>''')
 
 replace_required(
 '''            <article class="method-application">
