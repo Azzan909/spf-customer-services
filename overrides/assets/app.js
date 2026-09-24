@@ -28,24 +28,44 @@
     let panel=$("#githubOauthPanel");if(panel)panel.remove();panel=document.createElement("div");panel.id="githubOauthPanel";panel.className="github-oauth-panel";
     panel.innerHTML=`<div><span>تسجيل دخول المالك</span><h3>أدخل الرمز في GitHub</h3><strong>${escapeHtml(code)}</strong><p>ستُغلق جلسة التحرير بعد نشر التحديث.</p><a href="${escapeHtml(url)}" target="_blank" rel="noopener">فتح GitHub وإدخال الرمز</a><small>بانتظار الموافقة…</small></div>`;document.body.appendChild(panel);return panel;
   }
-  async function authorizeGithub(){
-    const popup=window.open("about:blank","github-oauth","width=720,height=760");
+  async function verifyDashboardToken(token){
+    const headers={Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+    const userResponse=await fetch("https://api.github.com/user",{headers});if(!userResponse.ok)throw new Error("رمز GitHub غير صالح أو انتهت صلاحيته");
+    const user=await userResponse.json();if(String(user.login||"").toLowerCase()!==GITHUB_OWNER.toLowerCase())throw new Error("هذا الحساب غير مخول بتحرير المنصة");
+    const repoResponse=await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GLOBAL_EDITS_PATH}?ref=main`,{headers});
+    if(repoResponse.status===403)throw new Error("الرمز يحتاج صلاحية Contents: Read and write للمستودع spf-customer-services");
+    if(!repoResponse.ok)throw new Error("تعذر الوصول إلى ملف تحديث المنصة بهذا الرمز");
+    return token;
+  }
+  function loginChoicePanel(){
+    return new Promise((resolve,reject)=>{
+      let panel=$("#githubLoginChoice");if(panel)panel.remove();panel=document.createElement("div");panel.id="githubLoginChoice";panel.className="github-oauth-panel owner-login-choice";
+      panel.innerHTML=`<div><button class="owner-login-close" type="button" aria-label="إغلاق">×</button><span>تسجيل دخول المالك</span><h3>اختر طريقة الدخول</h3><p>داخل شبكة العمل استخدم رمز وصول مؤقت؛ يبقى في الذاكرة لهذه الجلسة فقط ولا يُحفظ في المنصة أو المتصفح.</p><label><small>رمز الوصول المؤقت</small><input type="password" autocomplete="off" placeholder="github_pat_… أو ghp_…"></label><button class="owner-token-submit" type="button">تحقق وابدأ التحرير</button><small class="owner-login-error" role="status"></small><a class="owner-token-help" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">إنشاء رمز: اختر المستودع spf-customer-services وصلاحية Contents: Read and write</a><i>أو</i><button class="owner-oauth-start" type="button">الدخول عبر GitHub خارج شبكة العمل</button></div>`;
+      document.body.appendChild(panel);const input=$("input",panel),error=$(".owner-login-error",panel),submit=$(".owner-token-submit",panel);
+      $(".owner-login-close",panel).onclick=()=>{panel.remove();reject(new Error("تم إلغاء تسجيل الدخول"))};
+      $(".owner-oauth-start",panel).onclick=()=>{panel.remove();resolve({mode:"oauth"})};
+      submit.onclick=async()=>{const token=input.value.trim();if(!token){error.textContent="أدخل رمز الوصول المؤقت";return}submit.disabled=true;submit.textContent="جارٍ التحقق…";try{await verifyDashboardToken(token);panel.remove();resolve({mode:"token",token})}catch(err){error.textContent=err.message;submit.disabled=false;submit.textContent="تحقق وابدأ التحرير"}};
+    });
+  }
+  async function githubDeviceLogin(){
     const start=await fetch(`${AUTH_PROXY}/device/code`,{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});if(!start.ok)throw new Error("تعذر بدء تسجيل GitHub");
-    const flow=await start.json();if(popup)popup.location.href=flow.verification_uri;const panel=oauthPanel(flow.user_code,flow.verification_uri);
+    const flow=await start.json();const panel=oauthPanel(flow.user_code,flow.verification_uri);
     const started=Date.now(),interval=Math.max(5,Number(flow.interval)||5)*1000;
     try{
       while(Date.now()-started<(Number(flow.expires_in)||900)*1000){
         await new Promise(resolve=>setTimeout(resolve,interval));
         const response=await fetch(`${AUTH_PROXY}/oauth/access-token`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({device_code:flow.device_code})});const result=await response.json();
         if(result.access_token){
-          const user=await fetch("https://api.github.com/user",{headers:{Authorization:`Bearer ${result.access_token}`,Accept:"application/vnd.github+json"}}).then(r=>r.ok?r.json():Promise.reject());
-          if(String(user.login||"").toLowerCase()!==GITHUB_OWNER.toLowerCase())throw new Error("هذا الحساب غير مخول بتحرير المنصة");
-          return result.access_token;
+          return verifyDashboardToken(result.access_token);
         }
         if(result.error&&!["authorization_pending","slow_down"].includes(result.error))throw new Error("لم تكتمل موافقة GitHub");
       }
       throw new Error("انتهت مهلة تسجيل الدخول");
-    }finally{panel.remove();if(popup&&!popup.closed)popup.close()}
+    }finally{panel.remove()}
+  }
+  async function authorizeGithub(){
+    const choice=await loginChoicePanel();
+    return choice.mode==="token"?choice.token:githubDeviceLogin();
   }
   function encodeBase64(value){const bytes=new TextEncoder().encode(value);let binary="";bytes.forEach(byte=>binary+=String.fromCharCode(byte));return btoa(binary)}
   async function publishGlobalEdits(token,edits){
