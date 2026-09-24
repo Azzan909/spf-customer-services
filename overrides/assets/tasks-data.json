@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-24T07:01:11.107Z",
+  "updated_at": "2026-09-24T08:04:34.842Z",
   "tasks": [
     {
       "id": "central-1",
@@ -4222,15 +4222,17 @@
       "id": "central-389"
     },
     {
+      "id": "central-390",
       "title": "متابعة فحص المساعد الذكي",
       "dept": "إدارة وتطوير الخدمات",
       "emp": "عبدالعزيز الغيثي-سهى",
+      "status": "منجز",
+      "pct": 100,
+      "received": null,
+      "due": null,
+      "date": null,
       "tech": "جاري المتابعة — تحديث الشركة بالملاحظات",
-      "pct": 65,
-      "date": "",
-      "status": "قيد الإجراء",
-      "overdue": false,
-      "id": "central-390"
+      "overdue": false
     },
     {
       "id": "central-391",
