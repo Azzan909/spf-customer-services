@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-23T09:53:35.917Z",
+  "updated_at": "2026-09-24T06:23:28.258Z",
   "tasks": [
     {
       "id": "central-1",
@@ -4394,15 +4394,17 @@
       "overdue": false
     },
     {
+      "id": "central-399",
       "title": "توزيع درجات الاختبار الثاني لتعزيز المعرفة",
       "dept": "إدارة وتطوير الخدمات",
       "emp": "فاطمة",
+      "status": "منجز",
+      "pct": 100,
+      "received": null,
+      "due": null,
+      "date": null,
       "tech": "تم الانتهاء من تحليل النتائج ، يتطلب توزيعها على مدراء الدوائر",
-      "pct": 90,
-      "date": "",
-      "status": "قيد الإجراء",
-      "overdue": false,
-      "id": "central-399"
+      "overdue": false
     },
     {
       "title": "معجم مصطلحات خدمة العملاء",
