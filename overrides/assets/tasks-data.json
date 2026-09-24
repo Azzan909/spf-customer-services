@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-24T06:53:09.302Z",
+  "updated_at": "2026-09-24T06:55:21.501Z",
   "tasks": [
     {
       "id": "central-1",
@@ -4382,17 +4382,6 @@
       "status": "قيد الإجراء",
       "overdue": false,
       "id": "central-401"
-    },
-    {
-      "title": "ملتقى الإدارة",
-      "dept": "إدارة وتطوير الخدمات",
-      "emp": "احمد -حسناء",
-      "tech": "التوجهات المستقبيلة",
-      "pct": 50,
-      "date": "",
-      "status": "قيد الإجراء",
-      "overdue": false,
-      "id": "central-402"
     },
     {
       "id": "central-403",
