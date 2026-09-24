@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-24T06:50:23.042Z",
+  "updated_at": "2026-09-24T06:53:09.302Z",
   "tasks": [
     {
       "id": "central-1",
@@ -3598,19 +3598,6 @@
       "status": "قيد الإجراء",
       "overdue": false,
       "id": "central-328"
-    },
-    {
-      "id": "central-329",
-      "title": "تحديث إطار جودة الخدمات",
-      "dept": "إدارة وتطوير الخدمات",
-      "emp": "عبدالعزيز الغيثي",
-      "status": "منجز",
-      "pct": 100,
-      "received": null,
-      "due": null,
-      "date": null,
-      "tech": "",
-      "overdue": false
     },
     {
       "title": "الاجتماع الأسبوعي لملتقى المدراء ومناقشة الأمور التشغيلية",
