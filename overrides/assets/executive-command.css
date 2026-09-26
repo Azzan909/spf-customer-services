@@ -45,3 +45,5 @@
 #overview .hero-copy,#overview .impact-number { grid-row:2; position:relative; z-index:1; }
 .executive-view #overview .hero-copy,.executive-view #overview .impact-number { display:none; }
 @media (max-width:600px) { #overview .command-center { order:-1; } }
+
+.executive-view .hero-metrics { display:none !important; }

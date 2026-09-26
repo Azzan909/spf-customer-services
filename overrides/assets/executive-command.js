@@ -76,6 +76,10 @@
     const risks = document.querySelectorAll('#risk-register .risk-card .risk-chip.active').length;
     const projectIds = ['I19', 'I28', 'I34'];
     const projects = (window.SPF_PROJECTS || []).filter(item => projectIds.includes(item.id));
+    const inventoryCount = (window.SPF_PROJECTS || []).filter(item => item.status === 'inventory').length;
+    const inventoryTab = $('.project-tabs [data-filter="inventory"]');
+    const inventoryLabel = `المشاريع والمبادرات · ${inventoryCount}`;
+    if (inventoryTab && inventoryTab.textContent !== inventoryLabel) inventoryTab.textContent = inventoryLabel;
     const items = [
       {value:main,label:'التواصل ورضا المستفيدين',previous:history[0],href:'performance'},
       {value:plan,label:'إنجاز الخطة التشغيلية',target:planTarget,href:'operational-plan',unverified:number(plan) === 0, note:number(plan) === 0 ? 'بانتظار إدخال حالات التسليم للتحقق من الإنجاز' : undefined},
@@ -90,7 +94,8 @@
     kpis.innerHTML = items.map(tile).join('');
     const late = number(content('#planLateCount')) || 0;
     const pending = number(content('#trackerProgressCount')) || 0;
-    attention.innerHTML = `<strong>يحتاج إلى انتباه الإدارة</strong><div><a href="#work-tracker" data-exec-route>${pending.toLocaleString('en-US')} عملًا قيد الإجراء</a><a href="#operational-plan" data-exec-route>${late} مبادرة متأخرة وفق تحديث الخطة</a><a href="#risk-register" data-exec-route>${risks} مخاطر نشطة</a></div>`;
+    const planAlert = number(plan) === 0 && late === 0 ? 'حالات تسليم الخطة بانتظار التحديث' : `${late} مبادرة متأخرة وفق تحديث الخطة`;
+    attention.innerHTML = `<strong>يحتاج إلى انتباه الإدارة</strong><div><a href="#work-tracker" data-exec-route>${pending.toLocaleString('en-US')} عملًا قيد الإجراء</a><a href="#operational-plan" data-exec-route>${planAlert}</a><a href="#risk-register" data-exec-route>${risks} مخاطر نشطة</a></div>`;
   }
   const sources = ['#performance', '#operational-plan', '#work-tracker', '#risk-register', '#projects'];
   let queued = false;
