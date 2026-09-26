@@ -348,7 +348,7 @@ replace_required(
     '<a class="btn secondary" href="assets/work-tracker.html" target="_blank" rel="noopener">فتح وتحديث البيان التفصيلي</a>')
 replace_required(
     '  <script src="assets/app.js"></script>',
-    '  <script src="assets/app.js?v=20260924-5"></script>\n  <script src="assets/privacy-lock.js"></script>')
+    '  <script src="assets/app.js?v=20260926-1"></script>\n  <script src="assets/privacy-lock.js"></script>')
 replace_required(
     '<link rel="stylesheet" href="assets/styles.css" />',
     '<link rel="stylesheet" href="assets/styles.css?v=20260924-5" />')
