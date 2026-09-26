@@ -6,26 +6,23 @@
   const AUTH_PROXY="https://customer-compass-github-auth.spf2040.chatgpt.site";
   const GITHUB_OWNER="Azzan909",GITHUB_REPO="spf-customer-services",GLOBAL_EDITS_PATH="overrides/assets/dashboard-edits.json";
   const editorToolbar=$("#editorToolbar"), editButton=$("#editContent"), saveNotice=$("#saveNotice");
+  editButton.disabled=true;
   const defaultValues=new Map();
   let savedEdits={}, workingEdits={}, planDelivery={}, editing=false, currentProjectId="",editAccessToken="";
 
-  function readSavedEdits(){
-    try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")||{}}catch(_){return {}}
-  }
-  function readPlanDelivery(){
-    try{return JSON.parse(localStorage.getItem(PLAN_STORAGE_KEY)||"{}")||{}}catch(_){return {}}
-  }
   function savePlanDelivery(){localStorage.setItem(PLAN_STORAGE_KEY,JSON.stringify(planDelivery))}
   function sanitizeGlobalEdits(edits){
-    const protectedPrefixes=[
-      "#performance>",
-      "#tajawob>",
-      "#boardModePanel>main:1>section:3>"
-    ];
-    const protectedKeys=new Set(["#overview>div:1>div:1>span:1","#governorateTotalWork"]);
+    // These values come from the task register or a calculated governorate total.
+    // Labels and figures in the other sections are authored content and must load for everyone.
     return Object.fromEntries(Object.entries(edits||{}).filter(([key])=>
-      !protectedKeys.has(key)&&!protectedPrefixes.some(prefix=>key.startsWith(prefix))
+      !isCalculatedKey(key)
     ));
+  }
+  function isCalculatedKey(key){
+    return key==="#governorateTotalWork" ||
+      ["#trackerRate","#trackerRateSummary","#trackerTotalCount","#trackerCountSummary","#trackerDoneCount","#trackerProgressCount","#boardRate","#boardDone","#boardProgress","#boardTotalItems>strong:1"].includes(key) ||
+      key.startsWith("#boardModePanel>main:1>section:5>") ||
+      /^#work-tracker>div:3>article:\d+>(?:div:1>b:1|small:1)$/.test(key);
   }
   async function loadGlobalEdits(){
     try{
@@ -33,7 +30,8 @@
       if(!response.ok)throw new Error();
       const payload=await response.json();savedEdits=sanitizeGlobalEdits(payload.edits);workingEdits={...savedEdits};planDelivery=payload.planDelivery||{};applyValues(savedEdits);
       renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");
-    }catch(_){savedEdits=readSavedEdits();workingEdits={...savedEdits};planDelivery=readPlanDelivery();applyValues(savedEdits)}
+      editButton.disabled=false;
+    }catch(_){savedEdits={};workingEdits={};planDelivery={};applyValues({});editButton.disabled=true;toast("تعذر تحميل التعديلات المركزية؛ لن تتاح الكتابة حتى إعادة فتح الصفحة بعد التحقق من الاتصال.")}
   }
   function oauthPanel(code,url){
     let panel=$("#githubOauthPanel");if(panel)panel.remove();panel=document.createElement("div");panel.id="githubOauthPanel";panel.className="github-oauth-panel";
@@ -118,7 +116,7 @@
     return $$("h1,h2,h3,p,li,th,td,time,span,strong,b,small,em",root).filter(el=>
       !el.querySelector("h1,h2,h3,p,li,th,td,time,span,strong,b,small,em") &&
       !el.closest(".editor-toolbar,.top-navigation,button,.document-editor,.modal-close") &&
-      !el.classList.contains("project-id") && el.id!=="governorateTotalWork" && (el.dataset.editKey||el.textContent.trim())
+      !el.classList.contains("project-id") && !isCalculatedKey(stablePath(el)) && (el.dataset.editKey||el.textContent.trim())
     );
   }
   function prepareEditable(root=document){
@@ -150,8 +148,7 @@
   function collectEdits(){
     const values={...workingEdits};
     $$("[data-edit-key]").forEach(el=>values[el.dataset.editKey]=el.textContent.trim());
-    delete values["#governorateTotalWork"];
-    return values;
+    return sanitizeGlobalEdits(values);
   }
   // The displayed total is the six categories performed by governorate staff.
   // Appointments and QR evaluations remain visible as context, outside this sum.
@@ -329,7 +326,7 @@
   $("#cancelEdits").addEventListener("click",()=>{workingEdits={...savedEdits};applyValues(savedEdits);setEditing(false);renderProjects($(".project-tabs button.active")?.dataset.filter||"inventory");renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");toast("تم إلغاء التعديلات")});
   $("#resetEdits").addEventListener("click",()=>{
     if(!confirm("هل تريد استعادة جميع محتويات النسخة الأصلية؟"))return;
-    localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(PLAN_STORAGE_KEY);savedEdits={};workingEdits={};planDelivery={};applyValues({});setEditing(false);renderProjects("all");renderOperationalPlan("all");toast("تمت استعادة النسخة الأصلية");
+    localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(PLAN_STORAGE_KEY);savedEdits={};workingEdits={};planDelivery={};applyValues({});setEditing(false);renderProjects("all");renderOperationalPlan("all");toast("عُرضت النسخة الأصلية محليًا؛ انقر تحرير المحتوى ثم حفظ لنشرها للجميع");
   });
   $("#exportEdits").addEventListener("click",()=>{
     const payload={type:"spf-dashboard-edits",version:2,exportedAt:new Date().toISOString(),edits:collectEdits(),planDelivery};
@@ -338,7 +335,7 @@
   });
   $("#importEdits").addEventListener("change",async e=>{
     const file=e.target.files[0];if(!file)return;
-    try{const payload=JSON.parse(await file.text());if(payload.type!=="spf-dashboard-edits"||!payload.edits)throw new Error();workingEdits={...payload.edits};savedEdits={...payload.edits};planDelivery=payload.planDelivery||{};localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));savePlanDelivery();renderProjects("all");renderOperationalPlan("all");applyValues(savedEdits);setEditing(false);toast("تم استيراد التعديلات وحفظها")}catch(_){toast("تعذر قراءة ملف التعديلات")}
+    try{const payload=JSON.parse(await file.text());if(payload.type!=="spf-dashboard-edits"||!payload.edits)throw new Error();workingEdits=sanitizeGlobalEdits(payload.edits);savedEdits={...workingEdits};planDelivery=payload.planDelivery||{};localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));savePlanDelivery();renderProjects("all");renderOperationalPlan("all");applyValues(savedEdits);setEditing(false);toast("تم استيرادها على هذا الجهاز فقط؛ استخدم تحرير المحتوى ثم حفظ لنشرها للجميع")}catch(_){toast("تعذر قراءة ملف التعديلات")}
     e.target.value="";
   });
   $("#importWorkbook")?.addEventListener("change",async e=>{
