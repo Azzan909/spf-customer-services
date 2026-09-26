@@ -354,4 +354,49 @@ replace_required(
     '<link rel="stylesheet" href="assets/styles.css?v=20260924-5" />')
 
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
+
+# Add the executive layer to the existing chapters. All original sections and
+# their editing keys remain intact; this layer reads their rendered values.
+executive_dashboard = '''
+          <div class="command-center" id="commandCenter" aria-label="لوحة القيادة التنفيذية">
+            <div class="command-heading"><div><span class="section-kicker">لوحة القيادة التنفيذية · 2026</span><h2>حالة المديرية في لمحة</h2><p>المؤشرات المعتمدة من أقسام المنصة الحالية، مع إظهار ما يحتاج إلى متابعة.</p></div><a href="#work-tracker" data-exec-route class="command-action">افتح الموقف التنفيذي ←</a></div>
+            <div class="command-kpis" id="commandKpis" aria-live="polite"></div>
+            <div class="command-attention" id="commandAttention" aria-live="polite"></div>
+            <div class="command-questions"><div class="command-question-title"><span>ستة أسئلة تقود القراءة الإدارية</span><small>اختر سؤالًا للانتقال إلى البيانات التفصيلية</small></div><div id="commandQuestionCards" class="command-question-grid"></div></div>
+          </div>'''
+replace_required(
+    '''          </div>
+        </section>
+
+        <section class="metric-grid hero-metrics"''',
+    '''          </div>''' + executive_dashboard + '''
+        </section>
+
+        <section class="metric-grid hero-metrics"''')
+replace_required(
+    '''          <button class="btn secondary" id="privacyLockButton">قفل العرض</button>''',
+    '''          <button class="btn secondary" id="executiveViewToggle" type="button" aria-pressed="false" aria-controls="executiveQuestionNav">العرض التنفيذي</button>
+          <button class="btn secondary" id="privacyLockButton">قفل العرض</button>''')
+replace_required(
+    '''      </nav>
+
+      <aside class="editor-toolbar"''',
+    '''      </nav>
+      <nav class="executive-question-nav" id="executiveQuestionNav" aria-label="الأسئلة الإدارية الستة" hidden></nav>
+
+      <aside class="editor-toolbar"''')
+replace_required(
+    '''  <script src="assets/data.js"></script>
+  <script src="assets/plan-data-2026.js"></script>''',
+    '''  <script src="assets/data.js"></script>
+  <script src="assets/executive-projects.js?v=20260926-1"></script>
+  <script src="assets/plan-data-2026.js"></script>''')
+replace_required(
+    '''  <script src="assets/executive-mode.js"></script>''',
+    '''  <script src="assets/executive-mode.js"></script>
+  <script src="assets/executive-command.js?v=20260926-1"></script>''')
+replace_required(
+    '''  <link rel="stylesheet" href="assets/exhibition.css" />''',
+    '''  <link rel="stylesheet" href="assets/exhibition.css" />
+  <link rel="stylesheet" href="assets/executive-command.css?v=20260926-1" />''')
 path.write_text(text, encoding="utf-8")
