@@ -22,7 +22,7 @@
       "#tajawob>",
       "#boardModePanel>main:1>section:3>"
     ];
-    const protectedKeys=new Set(["#overview>div:1>div:1>span:1"]);
+    const protectedKeys=new Set(["#overview>div:1>div:1>span:1","#governorateTotalWork"]);
     return Object.fromEntries(Object.entries(edits||{}).filter(([key])=>
       !protectedKeys.has(key)&&!protectedPrefixes.some(prefix=>key.startsWith(prefix))
     ));
@@ -118,7 +118,7 @@
     return $$("h1,h2,h3,p,li,th,td,time,span,strong,b,small,em",root).filter(el=>
       !el.querySelector("h1,h2,h3,p,li,th,td,time,span,strong,b,small,em") &&
       !el.closest(".editor-toolbar,.top-navigation,button,.document-editor,.modal-close") &&
-      !el.classList.contains("project-id") && (el.dataset.editKey||el.textContent.trim())
+      !el.classList.contains("project-id") && el.id!=="governorateTotalWork" && (el.dataset.editKey||el.textContent.trim())
     );
   }
   function prepareEditable(root=document){
@@ -150,7 +150,28 @@
   function collectEdits(){
     const values={...workingEdits};
     $$("[data-edit-key]").forEach(el=>values[el.dataset.editKey]=el.textContent.trim());
+    delete values["#governorateTotalWork"];
     return values;
+  }
+  // The displayed total is the six categories performed by governorate staff.
+  // Appointments and QR evaluations remain visible as context, outside this sum.
+  const GOVERNORATE_WORK_IDS=["govTransactions","govWhatsapp","govProactive","govCommunity","govField","govSelfService"];
+  function governorateCount(value){
+    const digits=String(value||"").replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-0x660)).replace(/[۰-۹]/g,d=>String(d.charCodeAt(0)-0x6f0));
+    const number=Number(digits.replace(/[\s,،٬]/g,""));
+    return Number.isFinite(number)?number:0;
+  }
+  function updateGovernorateWorkTotal(){
+    const total=document.getElementById("governorateTotalWork");
+    const metrics=GOVERNORATE_WORK_IDS.map(id=>document.getElementById(id));
+    if(!total||metrics.some(el=>!el))return;
+    const value=new Intl.NumberFormat("en-US").format(metrics.reduce((sum,el)=>sum+governorateCount(el.textContent),0));
+    if(total.textContent.trim()!==value)total.textContent=value;
+  }
+  const governorateInspector=document.getElementById("governorateInspector");
+  if(governorateInspector){
+    new MutationObserver(updateGovernorateWorkTotal).observe(governorateInspector,{childList:true,characterData:true,subtree:true});
+    updateGovernorateWorkTotal();
   }
   function safeDocumentUrl(value){
     try{const url=new URL(value,location.href);return ["http:","https:"].includes(url.protocol)?url.href:""}catch(_){return ""}
