@@ -394,9 +394,9 @@ replace_required(
 replace_required(
     '''  <script src="assets/executive-mode.js"></script>''',
     '''  <script src="assets/executive-mode.js"></script>
-  <script src="assets/executive-command.js?v=20260926-1"></script>''')
+  <script src="assets/executive-command.js?v=20260926-2"></script>''')
 replace_required(
     '''  <link rel="stylesheet" href="assets/exhibition.css" />''',
     '''  <link rel="stylesheet" href="assets/exhibition.css" />
-  <link rel="stylesheet" href="assets/executive-command.css?v=20260926-1" />''')
+  <link rel="stylesheet" href="assets/executive-command.css?v=20260926-2" />''')
 path.write_text(text, encoding="utf-8")
