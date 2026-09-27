@@ -348,10 +348,10 @@ replace_required(
     '<a class="btn secondary" href="assets/work-tracker.html" target="_blank" rel="noopener">فتح وتحديث البيان التفصيلي</a>')
 replace_required(
     '  <script src="assets/app.js"></script>',
-    '  <script src="assets/app.js?v=20260927-2"></script>\n  <script src="assets/platform-enhancements.js?v=20260927-4"></script>\n  <script src="assets/privacy-lock.js"></script>')
+    '  <script src="assets/app.js?v=20260927-2"></script>\n  <script src="assets/platform-enhancements.js?v=20260927-5"></script>\n  <script src="assets/privacy-lock.js"></script>')
 replace_required(
     '<link rel="stylesheet" href="assets/styles.css" />',
-    '<link rel="stylesheet" href="assets/styles.css?v=20260927-4" />')
+    '<link rel="stylesheet" href="assets/styles.css?v=20260927-5" />')
 
 # Final approved community-activity count across every presentation view.
 text = text.replace('<strong>316</strong>', '<strong>313</strong>')
