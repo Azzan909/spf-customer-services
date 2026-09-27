@@ -33,7 +33,7 @@
       inspector.appendChild(population);
     }
     const update=()=>{
-      $("article",inspector).forEach(card=>{
+      Array.from(inspector.querySelectorAll("article")).forEach(card=>{
         const label=$("span",card); if(!label)return;
         if(label.textContent.trim()==="القوى العاملة") label.textContent="الكوادر البشرية";
         if(label.textContent.includes("الحصة من موظفي المحافظات")) label.textContent="نسبة الموظفين من إجمالي موظفي المديرية";
