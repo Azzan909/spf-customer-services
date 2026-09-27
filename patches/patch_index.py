@@ -353,8 +353,8 @@ replace_required(
     '<link rel="stylesheet" href="assets/styles.css" />',
     '<link rel="stylesheet" href="assets/styles.css?v=20260927-4" />')
 
-# Final approved community-activity count.
-text = text.replace('<strong>316</strong><span>فعالية ونشاطًا</span>', '<strong>313</strong><span>فعالية ونشاطًا</span>')
+# Final approved community-activity count across every presentation view.
+text = text.replace('<strong>316</strong>', '<strong>313</strong>')
 
 # Inject standalone community/media chapters before exhibition.js builds its chapter list.
 if 'href="#community-line"' not in text:
