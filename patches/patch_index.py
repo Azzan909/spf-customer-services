@@ -357,6 +357,10 @@ replace_required(
 text = text.replace('<strong>316</strong>', '<strong>313</strong>')
 
 # Inject standalone community/media chapters before exhibition.js builds its chapter list.
+# Remove any stale/partial links first so both the navigation and section markup
+# are generated together in one deterministic build.
+text = text.replace('        <a href="#community-line">خط التواصل المجتمعي</a>\n', '')
+text = text.replace('        <a href="#media-center">المركز الإعلامي</a>\n', '')
 if 'href="#community-line"' not in text:
     text = text.replace(
         '        <a href="#projects">المشاريع</a>\n        <a href="#achievements">الريادة والمجتمع</a>',
