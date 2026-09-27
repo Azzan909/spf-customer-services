@@ -94,50 +94,8 @@
     });
   }
 
-  function installReliableChapterRouter(){
-    const nav=document.querySelector(".top-navigation");
-    const main=document.querySelector("main");
-    if(!nav||!main)return;
-    const links=Array.from(nav.querySelectorAll('a[href^="#"]'));
-    const chapters=Array.from(main.querySelectorAll(":scope > section[id]"));
-    if(!links.length||!chapters.length)return;
-
-    const show=(hash,replaceHistory=false)=>{
-      let id=(hash||"#overview").replace(/^#/,"");
-      let target=document.getElementById(id);
-      if(!target || !chapters.includes(target)){
-        id="overview"; target=document.getElementById(id)||chapters[0];
-      }
-      chapters.forEach(section=>{
-        const active=section===target;
-        section.hidden=!active;
-        section.style.display=active?"":"none";
-        section.setAttribute("aria-hidden",active?"false":"true");
-      });
-      links.forEach(link=>{
-        const active=link.getAttribute("href")==="#"+id;
-        link.classList.toggle("active",active);
-        link.setAttribute("aria-current",active?"page":"false");
-      });
-      if(replaceHistory && location.hash!=="#"+id) history.replaceState(null,"","#"+id);
-      window.scrollTo({top:0,behavior:"auto"});
-    };
-
-    links.forEach(link=>link.addEventListener("click",event=>{
-      const href=link.getAttribute("href");
-      if(!href||!href.startsWith("#"))return;
-      event.preventDefault();
-      if(location.hash===href) show(href,false);
-      else history.pushState(null,"",href),show(href,false);
-    }));
-    window.addEventListener("hashchange",()=>show(location.hash,true));
-    window.addEventListener("popstate",()=>show(location.hash,true));
-    show(location.hash||"#overview",true);
-  }
-
   function boot(){
     enhanceGovernorateInspector(); addGovernoratePerformanceFilter(); correctDirectorateEmployeeCount();
-    installReliableChapterRouter();
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,0)); else setTimeout(boot,0);
 })();
