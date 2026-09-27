@@ -456,5 +456,15 @@ if 'id="community-line"' not in text:
 text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')
 text = text.replace('src="assets/platform-enhancements.js?v=20260927-5"', 'src="assets/platform-enhancements.js?v=20260927-final"')
 
+# Force a single fresh asset generation for the verified platform build.
+for asset in [
+    "data.js","plan-data-2026.js","excel-import.js","app.js",
+    "platform-enhancements.js","privacy-lock.js","exhibition.js","executive-mode.js"
+]:
+    text = re.sub(rf'src="assets/{re.escape(asset)}(?:\\?v=[^"]*)?"', f'src="assets/{asset}?v=20260927-verified"', text)
+text = re.sub(r'href="assets/styles.css(?:\\?v=[^"]*)?"', 'href="assets/styles.css?v=20260927-verified"', text)
+text = re.sub(r'href="assets/exhibition.css(?:\\?v=[^"]*)?"', 'href="assets/exhibition.css?v=20260927-verified"', text)
+text = re.sub(r'src="assets/work-tracker.html(?:\\?v=[^"]*)?"', 'src="assets/work-tracker.html?v=20260927-verified"', text)
+
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
 path.write_text(text, encoding="utf-8")
