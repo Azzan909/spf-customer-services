@@ -20,7 +20,7 @@
   }
   function isCalculatedKey(key){
     return key==="#governorateTotalWork" ||
-      ["#trackerRate","#trackerRateSummary","#trackerTotalCount","#trackerCountSummary","#trackerDoneCount","#trackerProgressCount","#boardRate","#boardDone","#boardProgress","#boardTotalItems>strong:1"].includes(key) ||
+      ["#trackerRate","#trackerRateSummary","#trackerTotalCount","#trackerCountSummary","#trackerDoneCount","#trackerProgressCount","#boardRate","#boardDone","#boardProgressCount","#boardTotalItems>strong:1"].includes(key) ||
       key.startsWith("#boardModePanel>main:1>section:5>") ||
       /^#work-tracker>div:3>article:\d+>(?:div:1>b:1|small:1)$/.test(key);
   }
@@ -468,7 +468,7 @@
     setTxt("boardRate",rate+"%");
     setWidth("boardRateBar",rate+"%");
     setTxt("boardDone",totalDone+" منجزًا");
-    setTxt("boardProgress",inProgress+" قيد الإجراء");
+    setTxt("boardProgressCount",inProgress+" قيد الإجراء");
 
     depts.forEach(dept=>{
       const deptRate=dept.total?Math.round(dept.done/dept.total*100):0;
