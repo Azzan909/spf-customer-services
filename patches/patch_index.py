@@ -348,10 +348,102 @@ replace_required(
     '<a class="btn secondary" href="assets/work-tracker.html" target="_blank" rel="noopener">فتح وتحديث البيان التفصيلي</a>')
 replace_required(
     '  <script src="assets/app.js"></script>',
-    '  <script src="assets/app.js?v=20260927-2"></script>\n  <script src="assets/platform-enhancements.js?v=20260927-2"></script>\n  <script src="assets/privacy-lock.js"></script>')
+    '  <script src="assets/app.js?v=20260927-2"></script>\n  <script src="assets/platform-enhancements.js?v=20260927-4"></script>\n  <script src="assets/privacy-lock.js"></script>')
 replace_required(
     '<link rel="stylesheet" href="assets/styles.css" />',
-    '<link rel="stylesheet" href="assets/styles.css?v=20260927-2" />')
+    '<link rel="stylesheet" href="assets/styles.css?v=20260927-4" />')
+
+# Inject standalone community/media chapters before exhibition.js builds its chapter list.
+if 'href="#community-line"' not in text:
+    text = text.replace(
+        '        <a href="#projects">المشاريع</a>\n        <a href="#achievements">الريادة والمجتمع</a>',
+        '        <a href="#projects">المشاريع</a>\n        <a href="#community-line">خط التواصل المجتمعي</a>\n        <a href="#media-center">المركز الإعلامي</a>\n        <a href="#achievements">الريادة والمجتمع</a>',
+        1,
+    )
+
+community_media_sections = r'''        <section class="section-block community-v2" id="community-line">
+          <div class="community-hero-v2">
+            <div class="community-hero-copy">
+              <span class="community-eyebrow">خط التواصل المجتمعي · يناير–أغسطس 2026</span>
+              <h2>نقترب من المجتمع، ونحوّل المعرفة إلى أثر</h2>
+              <p>خطة سنوية متكاملة تعمل عبر ثلاثة مسارات: التمكين، التعريف والتوعية، والشراكة المجتمعية.</p>
+              <div class="community-paths"><span>↗ التمكين</span><span>● التعريف والتوعية</span><span>◇ الشراكة المجتمعية</span></div>
+            </div>
+            <div class="community-main-number"><span>إجمالي الأنشطة والفعاليات</span><strong>313</strong><small>العدد النهائي المعتمد</small></div>
+          </div>
+          <div class="community-impact-grid">
+            <article class="impact-a"><i>◫</i><span>الأنشطة والفعاليات</span><strong>313</strong><small>يناير–أغسطس 2026</small></article>
+            <article class="impact-b"><i>◎</i><span>المستفيدون والمشاركون</span><strong>17,093</strong><small>نطاق أثر مجتمعي مباشر</small></article>
+            <article class="impact-c"><i>✓</i><span>الشركاء</span><strong>+255</strong><small>جهة وشريكًا في المحافظات</small></article>
+            <article class="impact-d"><i>⌂</i><span>التغطية الجغرافية</span><strong>11</strong><small>محافظة</small></article>
+          </div>
+          <div class="community-story-grid-v2">
+            <article class="community-roadmap-card">
+              <div class="community-card-title"><span>كيف نعمل؟</span><h3>رحلة التواصل المجتمعي</h3></div>
+              <div class="community-roadmap">
+                <div><b>01</b><i>▣</i><span>التخطيط</span><small>تقويم سنوي ورسائل موحّدة</small></div>
+                <div><b>02</b><i>⌂</i><span>الوصول</span><small>تنفيذ عبر دوائر المحافظات</small></div>
+                <div><b>03</b><i>◎</i><span>التفاعل</span><small>ورش ولقاءات وحملات ومبادرات</small></div>
+                <div><b>04</b><i>↗</i><span>قياس الأثر</span><small>جمهور، شركاء ونطاق وصول</small></div>
+              </div>
+            </article>
+            <article class="community-calendar-card">
+              <div class="community-card-title"><span>محطات موثقة</span><h3>نماذج من الأنشطة والفعاليات</h3></div>
+              <div class="community-event-stream">
+                <div><time>يناير</time><span></span><p><b>جلسة تصوير محتوى إعلامي للأطفال</b><small>الوسطى – الدقم</small></p></div>
+                <div><time>فبراير</time><span></span><p><b>قافلة عُمان وفعاليات شتاء الوسطى</b><small>مسندم · الوسطى</small></p></div>
+                <div><time>مارس</time><span></span><p><b>اليوم العالمي للسمع وساعة الأرض وورش توعوية</b><small>عدة محافظات</small></p></div>
+                <div><time>أبريل</time><span></span><p><b>اليوم العالمي للتوحد والسلامة المهنية</b><small>الظاهرة · ظفار</small></p></div>
+                <div><time>مايو</time><span></span><p><b>اليوم العالمي للعمال وحوارات مجتمعية</b><small>عدة محافظات</small></p></div>
+                <div><time>يونيو</time><span></span><p><b>مبادرات توعوية ولقاءات تعريفية</b><small>عدة محافظات</small></p></div>
+                <div class="event-future"><time>يوليو–أغسطس</time><span></span><p><b>استكمال تنفيذ الخطة المجتمعية بالمحافظات</b><small>ضمن إجمالي 313 نشاطًا وفعالية</small></p></div>
+              </div>
+            </article>
+          </div>
+          <div class="community-channel-strip">
+            <div><i>01</i><b>التمكين</b><span>رفع القدرة على فهم الأنظمة والخدمات والاستفادة منها</span></div>
+            <div><i>02</i><b>التعريف والتوعية</b><span>تعزيز المعرفة بموضوعات وأنظمة الحماية الاجتماعية</span></div>
+            <div><i>03</i><b>الشراكة المجتمعية</b><span>توسيع نطاق الوصول وبناء شراكات ذات أثر</span></div>
+          </div>
+        </section>
+
+        <section class="section-block media-v2" id="media-center">
+          <div class="media-hero-v2">
+            <div><span class="media-eyebrow">المركز الإعلامي للمديرية</span><h2>مكتبة التقارير والنشرات في مكان واحد</h2><p>مرجع بصري موحّد للإدارة العليا يعرض التقارير الدورية والربع سنوية، مع قابلية التوسع لإضافة النشرات والتقارير القادمة.</p></div>
+            <div class="media-orbit" aria-hidden="true"><span></span><i>PDF</i><b>2026</b></div>
+          </div>
+          <div class="media-stat-strip">
+            <article><i>▤</i><span>التقارير المتاحة</span><strong>2</strong></article>
+            <article><i>◷</i><span>دورية التحديث</span><strong>ربع سنوي</strong></article>
+            <article><i>↗</i><span>آخر فترة موثقة</span><strong>يونيو 2026</strong></article>
+          </div>
+          <div class="media-shelf">
+            <article class="report-cover q1">
+              <div class="report-cover-top"><span>Q1</span><i>▤</i></div>
+              <div class="report-cover-body"><small>يناير–مارس 2026</small><h3>التقرير الربع سنوي</h3><strong>الربع الأول</strong><p>ملخص تنفيذي · الأداء · الخطة التشغيلية · التواصل المجتمعي · حجم الأعمال</p></div>
+              <details><summary>أبرز المؤشرات</summary><ul><li>158 نشاطًا وفعالية مجتمعية</li><li>10,619 من الجمهور المستهدف</li><li>135,841 إجمالي حجم الأعمال المنجزة بالمحافظات</li><li>37,752 مكالمة مستلمة بمركز الاتصال</li></ul></details>
+            </article>
+            <article class="report-cover q2">
+              <div class="report-cover-top"><span>Q2</span><i>▤</i></div>
+              <div class="report-cover-body"><small>أبريل–يونيو 2026</small><h3>التقرير الربع سنوي</h3><strong>الربع الثاني</strong><p>مقارنة ربعية · مؤشرات الأداء · الفرق واللجان · التواصل المجتمعي · أداء المحافظات</p></div>
+              <details><summary>أبرز المؤشرات</summary><ul><li>161 نشاطًا وفعالية مجتمعية خلال الربع الثاني</li><li>6,474 من الجمهور المستهدف</li><li>146,807 إجمالي حجم الأعمال المنجزة بالمحافظات</li><li>42,596 مكالمة مستلمة بمركز الاتصال</li><li>236 موظفًا إجمالي موظفي المديرية</li></ul></details>
+            </article>
+            <article class="report-cover upcoming">
+              <div class="report-cover-top"><span>+</span><i>＋</i></div>
+              <div class="report-cover-body"><small>قادم</small><h3>نشرات وتقارير جديدة</h3><strong>تُضاف تباعًا</strong><p>نشرات شهرية · تقارير دورية · تقارير ربع سنوية لاحقة</p></div>
+              <div class="upcoming-note">جاهز لإضافة الملفات الجديدة فور إرفاقها</div>
+            </article>
+          </div>
+          <div class="media-flow-v2"><span>مصدر واحد موثوق</span><i>←</i><span>قراءة سريعة للإدارة العليا</span><i>←</i><span>تحديث دوري منظم</span></div>
+        </section>
+
+'''
+
+if 'id="community-line"' not in text:
+    achievement_marker = '        <section class="section-block" id="achievements">'
+    if achievement_marker not in text:
+        raise SystemExit("Expected achievements section for standalone chapter insertion")
+    text = text.replace(achievement_marker, community_media_sections + achievement_marker, 1)
 
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
 path.write_text(text, encoding="utf-8")
