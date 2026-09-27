@@ -19,7 +19,7 @@
     section.id="community-line";
     section.innerHTML=`
       <div class="section-heading">
-        <div><span class="section-kicker">05 · خط التواصل المجتمعي</span><h2>الأنشطة والفعاليات المجتمعية بالأرقام والتفاصيل</h2></div>
+        <div><span class="section-kicker">خط التواصل المجتمعي</span><h2>الأنشطة والفعاليات المجتمعية بالأرقام والتفاصيل</h2></div>
         <span class="section-note">يناير–أغسطس 2026 · سجل تفاعلي قابل للتحديث</span>
       </div>
       <div class="community-kpis">
@@ -90,7 +90,7 @@
     section.id="media-center";
     section.innerHTML=`
       <div class="section-heading">
-        <div><span class="section-kicker">06 · المركز الإعلامي</span><h2>النشرات والتقارير الدورية للمديرية</h2></div>
+        <div><span class="section-kicker">المركز الإعلامي</span><h2>النشرات والتقارير الدورية للمديرية</h2></div>
         <span class="section-note">مكتبة مرجعية موحدة للإدارة العليا</span>
       </div>
       <div class="media-kpis">
@@ -140,7 +140,7 @@
     let extra=$("#governorateProductivity",inspector);
     if(!extra && total){
       extra=document.createElement("div"); extra.id="governorateProductivity"; extra.className="governorate-productivity";
-      extra.innerHTML=`<article><span>متوسط الأعمال لكل موظف</span><b id="govWorkPerEmployee">—</b><small>يناير–أغسطس</small></article><article><span>المعدل اليومي لكل موظف</span><b id="govDailyPerEmployee">—</b><small>على أساس 173 يوم عمل (الأحد–الخميس)</small></article>`;
+      extra.innerHTML=`<article><span>متوسط الأعمال لكل موظف</span><b id="govWorkPerEmployee">—</b><small>يناير–أغسطس</small></article><article><span>المعدل اليومي لكل موظف</span><b id="govDailyPerEmployee">—</b><small>متوسط تقريبي على أساس 173 يومًا من الأحد–الخميس</small></article>`;
       total.closest("div")?.parentElement?.appendChild(extra);
     }
     let population=$("#governoratePopulation",inspector);
@@ -150,6 +150,12 @@
       inspector.appendChild(population);
     }
     const update=()=>{
+      $("article",inspector).forEach(card=>{
+        const label=$("span",card); if(!label)return;
+        if(label.textContent.trim()==="القوى العاملة") label.textContent="الكوادر البشرية";
+        if(label.textContent.includes("الحصة من موظفي المحافظات")) label.textContent="نسبة الموظفين من إجمالي موظفي المديرية";
+      });
+      const currentShareSmall=share?.parentElement?.querySelector("small"); if(currentShareSmall) currentShareSmall.textContent="من إجمالي 236 موظفًا في المديرية";
       const s=Number(String(staff?.textContent||"").replace(/[^0-9.]/g,""))||0;
       const w=Number(String(total?.textContent||"").replace(/[^0-9.]/g,""))||0;
       if(share && s) share.textContent=(s/236*100).toFixed(1)+"%";
