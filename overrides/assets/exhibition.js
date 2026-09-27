@@ -58,6 +58,9 @@
     if(previous)previous.disabled=current===0;
     if(next)next.disabled=current===entries.length-1;
 
+    // Keep the selected tab reachable in the horizontally scrolling RTL bar.
+    entries[current].link.scrollIntoView({block:"nearest",inline:"nearest"});
+
     const hash="#"+entries[current].id;
     if(location.hash!==hash){
       if(historyMode==="push")history.pushState({chapter:current},"",hash);

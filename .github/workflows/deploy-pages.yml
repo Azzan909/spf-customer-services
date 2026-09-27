@@ -144,6 +144,16 @@ jobs:
           if audit.nav != required_tabs:
               raise SystemExit(f"Navigation order mismatch: {audit.nav}")
 
+          revision = __import__("os").environ["GITHUB_SHA"][:12]
+          expected_navigation_css = f"assets/navigation-reliability.css?v={revision}"
+          if not audit.styles or audit.styles[-1] != expected_navigation_css:
+              raise SystemExit("RTL navigation override must load after all other styles")
+          if any(f"?v={revision}" not in asset for asset in audit.scripts + audit.styles):
+              raise SystemExit("All runtime assets must use the current commit revision")
+          nav_css = (html_path.parent / "assets/navigation-reliability.css").read_text()
+          if "justify-content: flex-start" not in nav_css or "direction: rtl" not in nav_css:
+              raise SystemExit("RTL navigation must start on the right")
+
           for asset in audit.scripts + audit.styles:
               parsed=urlparse(asset)
               if parsed.scheme or asset.startswith("//"):

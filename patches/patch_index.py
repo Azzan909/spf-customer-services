@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 import re
 import sys
 
@@ -456,15 +457,22 @@ if 'id="community-line"' not in text:
 text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')
 text = text.replace('src="assets/platform-enhancements.js?v=20260927-5"', 'src="assets/platform-enhancements.js?v=20260927-final"')
 
-# Force a single fresh asset generation for the verified platform build.
+# A different asset URL for every deployment avoids mixing cached JavaScript
+# from an earlier publication with this page's current chapter markup.
+asset_revision = os.environ.get("GITHUB_SHA", "local-preview")[:12]
 for asset in [
     "data.js","plan-data-2026.js","excel-import.js","app.js",
     "platform-enhancements.js","privacy-lock.js","exhibition.js","executive-mode.js"
 ]:
-    text = re.sub(rf'src="assets/{re.escape(asset)}(?:\\?v=[^"]*)?"', f'src="assets/{asset}?v=20260927-verified"', text)
-text = re.sub(r'href="assets/styles.css(?:\\?v=[^"]*)?"', 'href="assets/styles.css?v=20260927-verified"', text)
-text = re.sub(r'href="assets/exhibition.css(?:\\?v=[^"]*)?"', 'href="assets/exhibition.css?v=20260927-verified"', text)
-text = re.sub(r'src="assets/work-tracker.html(?:\\?v=[^"]*)?"', 'src="assets/work-tracker.html?v=20260927-verified"', text)
+    text = re.sub(rf'src="assets/{re.escape(asset)}(?:\?v=[^"]*)?"', f'src="assets/{asset}?v={asset_revision}"', text)
+text = re.sub(r'href="assets/styles.css(?:\?v=[^"]*)?"', f'href="assets/styles.css?v={asset_revision}"', text)
+text = re.sub(r'href="assets/exhibition.css(?:\?v=[^"]*)?"', f'href="assets/exhibition.css?v={asset_revision}"', text)
+text = re.sub(r'src="assets/work-tracker.html(?:\?v=[^"]*)?"', f'src="assets/work-tracker.html?v={asset_revision}"', text)
+
+# Load this last: the upstream exhibition stylesheet centers an overflowing
+# tab row, placing its first tabs beyond the right edge on some screens.
+navigation_css = f'  <link rel="stylesheet" href="assets/navigation-reliability.css?v={asset_revision}" />'
+text = text.replace('</head>', navigation_css + '\n</head>', 1)
 
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
 path.write_text(text, encoding="utf-8")
