@@ -328,7 +328,7 @@ replace_required(
     '<div class="board-slide-heading"><span>05 · الموقف التنفيذي</span><h2>لوحة واحدة لمتابعة 354 بندًا تشغيليًا</h2><p>قراءة تنفيذية لحالة الأعمال حسب القسم وفق تحديث 17 سبتمبر 2026.</p></div>')
 replace_required(
     '<article class="board-maturity"><span>البنود المنجزة</span><strong>71%</strong><i><em style="width:71%"></em></i><div><b>252 منجزًا</b><b>102 قيد الإجراء</b></div></article>',
-    '<article class="board-maturity"><span>البنود المنجزة</span><strong id="boardRate">71%</strong><i><em id="boardRateBar" style="width:71%"></em></i><div><b id="boardDone">252 منجزًا</b><b id="boardProgress">102 قيد الإجراء</b></div></article>')
+    '<article class="board-maturity"><span>البنود المنجزة</span><strong id="boardRate">71%</strong><i><em id="boardRateBar" style="width:71%"></em></i><div><b id="boardDone">252 منجزًا</b><b id="boardProgressCount">102 قيد الإجراء</b></div></article>')
 replace_required(
     '<div class="board-proof"><article><strong>95%</strong><span>مركز الاتصال</span></article><article><strong>83%</strong><span>علاقات المتعاملين</span></article><article><strong>59%</strong><span>إدارة وتطوير الخدمات</span></article></div>',
     '<div class="board-proof"><article data-board-dept="contact"><strong>95%</strong><span>مركز الاتصال</span></article><article data-board-dept="crm"><strong>83%</strong><span>علاقات المتعاملين</span></article><article data-board-dept="branches"><strong>48%</strong><span>شؤون الدوائر والمنافذ</span></article></div>')
