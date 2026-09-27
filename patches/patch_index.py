@@ -452,5 +452,9 @@ if 'id="community-line"' not in text:
         raise SystemExit("Expected achievements section for standalone chapter insertion")
     text = text.replace(achievement_marker, community_media_sections + achievement_marker, 1)
 
+# Force fresh navigation and presentation scripts after routing fixes.
+text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')
+text = text.replace('src="assets/platform-enhancements.js?v=20260927-5"', 'src="assets/platform-enhancements.js?v=20260927-final"')
+
 text = re.sub(r'<script>\(function\(\)\{function c\(\).*?</script>', '', text, flags=re.S)
 path.write_text(text, encoding="utf-8")
