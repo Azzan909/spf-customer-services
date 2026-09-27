@@ -190,10 +190,19 @@
     return match?new Date(2026,PLAN_MONTHS[match[2]],Number(match[1])):null;
   }
   function finalThresholdDate(item,field){return parsePlanDate(thresholdForResult(item,field,item.results.length-1))}
-  function planEvaluation(item){
-    const state=planDelivery[item.id]||{},actual=parsePlanDate(state.date);
-    const expected=finalThresholdDate(item,"expected")||parsePlanDate(planValue(item,"deadline"));
-    const above=finalThresholdDate(item,"above");
+  function ensurePlanState(item){
+    const state=planDelivery[item.id]||{};
+    if(!Array.isArray(state.results)) state.results=item.results.map(()=>({delivered:"",date:""}));
+    while(state.results.length<item.results.length) state.results.push({delivered:"",date:""});
+    if(!state.final) state.final={delivered:state.delivered||"",date:state.date||""};
+    delete state.delivered; delete state.date;
+    planDelivery[item.id]=state;
+    return state;
+  }
+  function resultEvaluation(item,index){
+    const state=ensurePlanState(item).results[index]||{},actual=parsePlanDate(state.date);
+    const expected=parsePlanDate(thresholdForResult(item,"expected",index));
+    const above=parsePlanDate(thresholdForResult(item,"above",index));
     if(state.delivered==="yes"){
       if(!actual)return {code:"needs-date",label:"أدخل تاريخ التسليم"};
       if(above&&actual<=above)return {code:"above",label:"يفوق التوقعات"};
@@ -206,16 +215,34 @@
     }
     return {code:"pending",label:"بانتظار التحديث"};
   }
+  function planEvaluation(item){
+    const state=ensurePlanState(item),actual=parsePlanDate(state.final.date);
+    const expected=finalThresholdDate(item,"expected")||parsePlanDate(planValue(item,"deadline"));
+    const above=finalThresholdDate(item,"above");
+    if(state.final.delivered==="yes"){
+      if(!actual)return {code:"needs-date",label:"أدخل تاريخ التسليم"};
+      if(above&&actual<=above)return {code:"above",label:"يفوق التوقعات"};
+      if(expected&&actual<=expected)return {code:"expected",label:"يحقق التوقعات"};
+      return {code:"below",label:"دون التوقعات"};
+    }
+    if(state.final.delivered==="no"){
+      if(expected&&new Date()>expected)return {code:"late",label:"متأخرة"};
+      return {code:"progress",label:"قيد التنفيذ"};
+    }
+    return {code:"pending",label:"بانتظار التسليم النهائي"};
+  }
   function renderPlanHero(){
     const items=window.SPF_OPERATIONAL_PLAN,total=items.length;
-    const delivered=items.filter(item=>{const state=planDelivery[item.id]||{};return state.delivered==="yes"&&!!state.date}).length;
-    const evaluations=items.map(planEvaluation);
+    const allResults=items.flatMap(item=>item.results.map((_,index)=>({item,index,state:ensurePlanState(item).results[index]})));
+    const deliveredResults=allResults.filter(x=>x.state.delivered==="yes"&&!!x.state.date).length;
+    const evaluations=allResults.map(x=>resultEvaluation(x.item,x.index));
     const onTime=evaluations.filter(result=>["expected","above"].includes(result.code)).length;
     const late=evaluations.filter(result=>["below","late"].includes(result.code)).length;
-    $("#planCompletionRate").textContent=`${total?Math.round(delivered/total*100):0}%`;
+    $("#planCompletionRate").textContent=`${allResults.length?Math.round(deliveredResults/allResults.length*100):0}%`;
     $("#planOnTimeCount").textContent=onTime;
     $("#planLateCount").textContent=late;
     $("#planTotalCount").textContent=total;
+    const completionSmall=$("#planCompletionRate")?.parentElement?.querySelector("small"); if(completionSmall) completionSmall.textContent="النتائج المسلّمة من إجمالي نتائج الخطة";
   }
   function resultScheduleRows(item){
     return item.results.map((value,index)=>`<div class="plan-result-row">
@@ -239,16 +266,25 @@
   function renderOperationalPlan(filter="core"){
     const items=window.SPF_OPERATIONAL_PLAN.filter(item=>filter==="all"||item.group===filter);
     renderPlanHero();
-    planGrid.innerHTML=items.map(item=>{const state=planDelivery[item.id]||{},evaluation=planEvaluation(item);return `<article class="plan-card ${item.group}">
+    planGrid.innerHTML=items.map(item=>{const state=ensurePlanState(item),evaluation=planEvaluation(item);return `<article class="plan-card ${item.group}">
       <div class="plan-card-head"><span>${item.id.replace("O","")}</span><b data-edit-key="plan.${item.id}.category">${planValue(item,"category")}</b></div>
       <h3 data-edit-key="plan.${item.id}.title">${planValue(item,"title")}</h3>
       <div class="plan-leadership">
         <div><span>رئيس المبادرة</span><b data-edit-key="plan.${item.id}.owner">${planValue(item,"owner")}</b></div>
         <div><span>نائب المبادرة</span><b data-edit-key="plan.${item.id}.deputy">${planValue(item,"deputy")}</b></div>
       </div>
-      <div class="plan-delivery-box">
-        <label><span>هل تم تسليم المبادرة؟</span><select data-plan-delivered="${item.id}"><option value="" ${!state.delivered?"selected":""}>غير محدد</option><option value="yes" ${state.delivered==="yes"?"selected":""}>تم التسليم</option><option value="no" ${state.delivered==="no"?"selected":""}>لم يتم التسليم</option></select></label>
-        <label><span>تاريخ التسليم الفعلي</span><input type="date" data-plan-date="${item.id}" value="${escapeHtml(state.date||"")}" ${state.delivered!=="yes"?"disabled":""}></label>
+      <div class="plan-result-deliveries">
+        <div class="plan-result-deliveries-head"><span>تسليم النتائج المرحلية</span><small>يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا</small></div>
+        ${item.results.map((result,index)=>{const rs=state.results[index]||{},re=resultEvaluation(item,index);return `<div class="plan-result-delivery-row">
+          <div class="plan-result-delivery-title"><span>النتيجة ${index+1}</span><b>${escapeHtml(planListValue(item,"results",index))}</b></div>
+          <label><span>الحالة</span><select data-plan-result-delivered="${item.id}" data-result-index="${index}"><option value="" ${!rs.delivered?"selected":""}>غير محدد</option><option value="yes" ${rs.delivered==="yes"?"selected":""}>تم التسليم</option><option value="no" ${rs.delivered==="no"?"selected":""}>لم يتم التسليم</option></select></label>
+          <label><span>تاريخ التسليم</span><input type="date" data-plan-result-date="${item.id}" data-result-index="${index}" value="${escapeHtml(rs.date||"")}" ${rs.delivered!=="yes"?"disabled":""}></label>
+          <div class="plan-calculated-result ${re.code}"><span>التقييم</span><strong>${re.label}</strong></div>
+        </div>`}).join("")}
+      </div>
+      <div class="plan-delivery-box plan-final-delivery">
+        <label><span>تسليم المبادرة كاملة</span><select data-plan-final-delivered="${item.id}"><option value="" ${!state.final.delivered?"selected":""}>غير محدد</option><option value="yes" ${state.final.delivered==="yes"?"selected":""}>تم التسليم النهائي</option><option value="no" ${state.final.delivered==="no"?"selected":""}>لم يتم التسليم</option></select></label>
+        <label><span>تاريخ التسليم النهائي</span><input type="date" data-plan-final-date="${item.id}" value="${escapeHtml(state.final.date||"")}" ${state.final.delivered!=="yes"?"disabled":""}></label>
         <div class="plan-calculated-result ${evaluation.code}"><span>نتيجة المبادرة</span><strong>${evaluation.label}</strong></div>
       </div>
       <details class="plan-details" ${item.group==="core"?"open":""}>
@@ -263,11 +299,21 @@
   renderOperationalPlan("core");
 
   planGrid.addEventListener("change",e=>{
-    const delivered=e.target.closest("[data-plan-delivered]"),date=e.target.closest("[data-plan-date]");
-    const id=delivered?.dataset.planDelivered||date?.dataset.planDate;if(!id)return;
-    const state=planDelivery[id]||{};
-    if(delivered){state.delivered=delivered.value;if(delivered.value!=="yes")state.date=""}
-    if(date)state.date=date.value;
+    const resultDelivered=e.target.closest("[data-plan-result-delivered]"),resultDate=e.target.closest("[data-plan-result-date]");
+    const finalDelivered=e.target.closest("[data-plan-final-delivered]"),finalDate=e.target.closest("[data-plan-final-date]");
+    const id=resultDelivered?.dataset.planResultDelivered||resultDate?.dataset.planResultDate||finalDelivered?.dataset.planFinalDelivered||finalDate?.dataset.planFinalDate;
+    if(!id)return;
+    const item=window.SPF_OPERATIONAL_PLAN.find(x=>x.id===id); if(!item)return;
+    const state=ensurePlanState(item);
+    if(resultDelivered||resultDate){
+      const index=Number((resultDelivered||resultDate).dataset.resultIndex);
+      const rs=state.results[index]||{delivered:"",date:""};
+      if(resultDelivered){rs.delivered=resultDelivered.value;if(resultDelivered.value!=="yes")rs.date=""}
+      if(resultDate)rs.date=resultDate.value;
+      state.results[index]=rs;
+    }
+    if(finalDelivered){state.final.delivered=finalDelivered.value;if(finalDelivered.value!=="yes")state.final.date=""}
+    if(finalDate)state.final.date=finalDate.value;
     planDelivery[id]=state;savePlanDelivery();
     renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");
   });
