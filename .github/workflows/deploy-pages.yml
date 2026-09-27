@@ -79,6 +79,91 @@ jobs:
           cp -R overrides/. _site/legacy/
           python patches/patch_index.py _site/legacy/index.html
 
+      - name: Validate deployed platform
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check _site/legacy/assets/app.js
+          node --check _site/legacy/assets/exhibition.js
+          node --check _site/legacy/assets/platform-enhancements.js
+          node --check _site/legacy/assets/privacy-lock.js
+          node --check _site/legacy/assets/plan-data-2026.js
+          node --check _site/legacy/assets/excel-import.js
+          node --check _site/legacy/assets/executive-mode.js
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          html_path = Path("_site/legacy/index.html")
+          text = html_path.read_text(encoding="utf-8")
+
+          required_tabs = [
+              "overview","directorate","methodology","coverage","channels",
+              "operational-plan","work-tracker","risk-register","performance",
+              "tajawob","committees","projects","community-line","media-center","achievements"
+          ]
+
+          class Audit(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.ids=[]
+                  self.nav=[]
+                  self.scripts=[]
+                  self.styles=[]
+                  self.in_nav=False
+              def handle_starttag(self, tag, attrs):
+                  a=dict(attrs)
+                  if "id" in a:
+                      self.ids.append(a["id"])
+                  if tag=="nav" and "top-navigation" in a.get("class","").split():
+                      self.in_nav=True
+                  if self.in_nav and tag=="a" and a.get("href","").startswith("#"):
+                      self.nav.append(a["href"][1:])
+                  if tag=="script" and a.get("src"):
+                      self.scripts.append(a["src"])
+                  if tag=="link" and a.get("rel")=="stylesheet" and a.get("href"):
+                      self.styles.append(a["href"])
+              def handle_endtag(self, tag):
+                  if tag=="nav" and self.in_nav:
+                      self.in_nav=False
+
+          audit=Audit()
+          audit.feed(text)
+          ids=set(audit.ids)
+          missing=[tab for tab in required_tabs if tab not in ids]
+          missing_nav=[tab for tab in required_tabs if tab not in audit.nav]
+          duplicate_ids=sorted({x for x in audit.ids if audit.ids.count(x)>1})
+
+          if missing:
+              raise SystemExit(f"Missing required tab sections: {missing}")
+          if missing_nav:
+              raise SystemExit(f"Missing required navigation links: {missing_nav}")
+          if duplicate_ids:
+              raise SystemExit(f"Duplicate HTML ids found: {duplicate_ids[:20]}")
+          if audit.nav != required_tabs:
+              raise SystemExit(f"Navigation order mismatch: {audit.nav}")
+
+          for asset in audit.scripts + audit.styles:
+              parsed=urlparse(asset)
+              if parsed.scheme or asset.startswith("//"):
+                  continue
+              rel=parsed.path.lstrip("/")
+              target=html_path.parent / rel
+              if not target.exists():
+                  raise SystemExit(f"Referenced asset does not exist: {asset}")
+
+          if "316" in text:
+              raise SystemExit("Deprecated community total 316 still exists in generated page")
+          if text.count('id="community-line"') != 1 or text.count('id="media-center"') != 1:
+              raise SystemExit("Community/media chapters must appear exactly once")
+
+          print("Platform audit passed")
+          print("Tabs:", len(required_tabs))
+          print("Scripts:", len(audit.scripts))
+          print("Styles:", len(audit.styles))
+          PY
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
