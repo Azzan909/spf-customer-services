@@ -340,3 +340,10 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 .governorate-inspector .governorate-productivity article span{min-height:43px}
 @media(max-width:1050px){#governorates-map .governorate-inspector{grid-template-columns:minmax(0,1fr)}#governorates-map .governorate-inspector>*{grid-column:1;grid-row:auto}.governorate-inspector .governorate-work{align-self:auto}.governorate-inspector .work-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){#governorates-map .governorate-inspector{padding:13px;gap:9px}.governorate-inspector .inspector-heading{flex-wrap:wrap;gap:8px}.governorate-inspector .work-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.governorate-inspector .work-metrics article span{min-height:56px}.governorate-inspector .inspector-kpis article{min-height:150px}.governorate-inspector .inspector-title h3{font-size:20px}}
+/* Keep the population figure below both columns so neither side ends in a blank panel. */
+@media(min-width:1051px){
+  .governorate-inspector .governorate-work{grid-row:1 / 7}
+  .governorate-inspector .governorate-population{grid-column:1 / -1;grid-row:7;display:grid;grid-template-columns:minmax(0,1fr) 240px;align-items:center;gap:16px;min-height:92px}
+  .governorate-inspector .population-head{margin:0}
+  .governorate-inspector .population-grid article{padding:8px 14px}
+}
