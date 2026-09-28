@@ -24,6 +24,7 @@
   const next=document.getElementById("nextChapter");
   const output=document.getElementById("chapterPosition");
   const heroMetrics=document.querySelector(".hero-metrics");
+  const overviewGuide=document.querySelector(".overview-guide");
 
   function normalizeIndex(index){
     if(!Number.isFinite(index))return 0;
@@ -53,6 +54,11 @@
       heroMetrics.classList.toggle("chapter-hidden",!overviewActive);
       heroMetrics.hidden=!overviewActive;
     }
+    if(overviewGuide){
+      const overviewActive=entries[current].id==="overview";
+      overviewGuide.classList.toggle("chapter-hidden",!overviewActive);
+      overviewGuide.hidden=!overviewActive;
+    }
 
     if(output)output.textContent=`${String(current+1).padStart(2,"0")} / ${entries.length} — ${entries[current].link.textContent.trim()}`;
     if(previous)previous.disabled=current===0;
@@ -78,6 +84,25 @@
     });
   });
 
+  // Chapter shortcuts in the overview use the same routing as the tab bar.
+  document.querySelectorAll('.overview-guide a[href^="#"]').forEach(link=>{
+    link.addEventListener("click",event=>{
+      const index=entries.findIndex(item=>item.id===link.hash.slice(1));
+      if(index<0)return;
+      event.preventDefault();
+      applyChapter(index,{historyMode:"push",scroll:true});
+    });
+  });
+
+  nav.addEventListener("keydown",event=>{
+    if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
+    event.preventDefault();
+    const index=event.key==="Home"?0:event.key==="End"?entries.length-1:
+      current+(event.key==="ArrowLeft"?1:-1);
+    applyChapter(normalizeIndex(index),{historyMode:"push",scroll:true});
+    entries[current].link.focus();
+  });
+
   if(previous)previous.addEventListener("click",()=>applyChapter(current-1,{historyMode:"push",scroll:true}));
   if(next)next.addEventListener("click",()=>applyChapter(current+1,{historyMode:"push",scroll:true}));
 
@@ -85,7 +110,7 @@
   window.addEventListener("popstate",()=>applyChapter(indexFromHash(location.hash),{historyMode:"replace",scroll:true}));
 
   document.addEventListener("keydown",event=>{
-    if(event.target?.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName||"")||document.querySelector(".modal.open"))return;
+    if(nav.contains(event.target)||event.target?.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName||"")||document.querySelector(".modal.open"))return;
     if(event.key==="ArrowLeft")applyChapter(current+1,{historyMode:"push",scroll:true});
     if(event.key==="ArrowRight")applyChapter(current-1,{historyMode:"push",scroll:true});
   });
