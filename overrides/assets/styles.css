@@ -297,3 +297,46 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 .governorate-population .population-grid span,.governorate-population .population-grid small{font-size:13px;line-height:1.6;color:#43584e}
 .governorate-population .population-grid b{font-size:25px}
 @media(max-width:750px){.media-shelf,.governorate-population .population-grid{grid-template-columns:1fr}.report-cover.upcoming{grid-column:auto}}
+
+/* Governorates: map first, with an information panel that uses the full card width. */
+#governorates-map{background:#fbfaf6;border-color:#e3dac5}
+#governorates-map .interactive-map-layout{display:grid;grid-template-columns:minmax(0,1fr)!important;gap:18px;align-items:start}
+#governorates-map .oman-map-scroll{width:100%;margin:0;overflow-x:auto;border-radius:18px;background:linear-gradient(155deg,#fff,#f7f8f4)}
+#governorates-map .oman-vector-map{width:100%;max-width:none}
+#governorates-map .governorate-inspector{display:grid;grid-template-columns:minmax(0,43fr) minmax(0,57fr);grid-template-rows:repeat(7,auto);gap:8px 18px;align-content:start;width:100%;min-width:0;padding:20px;border:1px solid #d9e2db;border-radius:20px;background:#fff;color:#263f35;box-shadow:0 13px 30px rgba(30,57,45,.08)}
+.governorate-inspector .inspector-heading{grid-column:1;grid-row:1;align-items:center;padding:0 0 8px;border:0}
+.governorate-inspector .inspector-heading>span{font-size:15px;font-weight:800;color:#285243}
+.governorate-inspector .inspector-heading select{max-width:215px;min-height:42px;padding:8px 11px;border:1px solid #b8cbc0;border-radius:10px;background:#fff;color:#244b3e;font-size:14px;font-weight:700;cursor:pointer}
+.governorate-inspector .inspector-title{grid-column:1;grid-row:2;padding:11px 15px;border-radius:13px;background:linear-gradient(120deg,#285548,#204236);color:#fff}
+.governorate-inspector .inspector-title small{color:#e5d6ad!important;font-size:13px!important}
+.governorate-inspector .inspector-title h3{margin:2px 0 0;color:#fff;font-size:23px;line-height:1.4}
+.governorate-inspector .inspector-kpis{grid-column:1;grid-row:3;gap:9px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.governorate-inspector .inspector-kpis article,.governorate-inspector .work-metrics article,.governorate-inspector .governorate-productivity article{min-height:112px;padding:14px!important;border-radius:13px;box-shadow:none!important}
+.governorate-inspector .inspector-kpis article{min-height:142px}
+.governorate-inspector .governorate-card-icon{top:11px;left:11px;right:auto;width:30px;height:30px;padding:6px}
+.governorate-inspector .inspector-kpis article span,.governorate-inspector .work-metrics article span,.governorate-inspector .governorate-productivity article span{display:block;max-width:calc(100% - 33px);min-height:42px;color:#334940!important;font-size:14px!important;font-weight:700;line-height:1.45!important}
+.governorate-inspector .inspector-kpis article strong,.governorate-inspector .work-metrics article b,.governorate-inspector .governorate-productivity article b{display:block;margin-top:3px;font-size:27px!important;line-height:1.2}
+.governorate-inspector .inspector-kpis article small,.governorate-inspector .governorate-productivity article small{display:block;margin-top:5px;font-size:12px!important;line-height:1.4!important;color:#56685f!important}
+.governorate-inspector .comparison-meter{grid-column:1;grid-row:4;margin:0;padding:12px 15px;border:1px solid #eadfc5;border-radius:12px;background:#fffaf0;color:#465549}
+.governorate-inspector .comparison-meter span,.governorate-inspector .comparison-meter small{font-size:12px!important;color:#465549!important}
+.governorate-inspector .inspector-contact{grid-column:1;grid-row:5;min-height:67px;margin:0;border:1px solid #cfe3d4;border-radius:12px;background:#f1f8f3;color:#284b39}
+.governorate-inspector .inspector-contact span,.governorate-inspector .inspector-hours span{font-size:13px!important;color:#3a5549!important}
+.governorate-inspector .inspector-hours{grid-column:1;grid-row:6;min-height:61px;margin:0;border:1px solid #e5e9e2;border-radius:12px;background:#f6f8f5;color:#284b39}
+.governorate-inspector .governorate-population{grid-column:1;grid-row:7;margin:0;padding:11px 14px;border:1px solid #dce6da;border-radius:12px;background:#f5f9f3}
+.governorate-inspector .population-head{display:flex;flex-wrap:wrap;gap:3px 12px;margin-bottom:7px}
+.governorate-inspector .population-head span{font-size:14px!important;font-weight:800;color:#294e42!important}
+.governorate-inspector .population-head a{font-size:12px;line-height:1.5}
+.governorate-inspector .population-grid article{min-height:0;padding:7px 11px;border:0;background:#fff}
+.governorate-inspector .population-grid span{font-size:13px!important}.governorate-inspector .population-grid b{font-size:25px}
+.governorate-inspector .governorate-work{grid-column:2;grid-row:1 / 8;align-self:stretch;min-width:0;margin:0;padding:16px;border:1px solid #dce5dd;border-radius:15px;background:#f7f9f6;color:#28483b}
+.governorate-inspector .governorate-work>div:first-child span,.governorate-inspector .governorate-work>div:first-child b{font-size:14px!important;color:#355a49!important}
+.governorate-inspector .governorate-work>div:nth-child(2) span{font-size:13px!important;color:#3c5b4b!important}
+.governorate-inspector .work-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.governorate-inspector .work-metrics article{min-width:0;min-height:124px}
+.governorate-inspector .work-metrics article span{min-height:61px;font-size:13px!important}
+.governorate-inspector .work-metrics article b{font-size:23px!important;overflow-wrap:anywhere}
+.governorate-inspector .governorate-productivity{gap:9px;margin-top:10px}
+.governorate-inspector .governorate-productivity article{min-height:112px}
+.governorate-inspector .governorate-productivity article span{min-height:43px}
+@media(max-width:1050px){#governorates-map .governorate-inspector{grid-template-columns:minmax(0,1fr)}#governorates-map .governorate-inspector>*{grid-column:1;grid-row:auto}.governorate-inspector .governorate-work{align-self:auto}.governorate-inspector .work-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){#governorates-map .governorate-inspector{padding:13px;gap:9px}.governorate-inspector .inspector-heading{flex-wrap:wrap;gap:8px}.governorate-inspector .work-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.governorate-inspector .work-metrics article span{min-height:56px}.governorate-inspector .inspector-kpis article{min-height:150px}.governorate-inspector .inspector-title h3{font-size:20px}}

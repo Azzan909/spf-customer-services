@@ -418,7 +418,7 @@ community_media_sections = r'''        <section class="section-block community-v
         <section class="section-block media-v2" id="media-center">
           <div class="media-hero-v2">
             <div><span class="media-eyebrow">المركز الإعلامي للمديرية</span><h2>مكتبة التقارير والنشرات في مكان واحد</h2><p>مرجع بصري موحّد للإدارة العليا يعرض التقارير الدورية والربع سنوية، مع قابلية التوسع لإضافة النشرات والتقارير القادمة.</p></div>
-            <div class="media-orbit" aria-hidden="true"><span></span><i>PDF</i><b>2026</b></div>
+            <div class="media-orbit" aria-hidden="true"><span></span><i>2026</i><b>التقارير</b></div>
           </div>
           <div class="media-stat-strip">
             <article><i>▤</i><span>التقارير المتاحة</span><strong>2</strong></article>
