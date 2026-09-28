@@ -471,7 +471,7 @@ header{height:72px;padding:0 34px;background:rgba(20,56,47,.97);border:0;color:#
   <!-- TABLE -->
   <div class="tab-panel" id="panel-table">
     <div class="card table-card">
-      <div class="table-actions"><p>يمكن للجميع الاطلاع على البيانات. يدخل المالك أو الحساب المخوّل بالكتابة لتحديث السجل ونشره للجميع. تبقى الجلسة فعالة حتى الخروج أو إغلاق الصفحة.</p><div class="owner-access"><span class="owner-status" id="owner-status">وضع العرض</span><button class="btn-secondary" id="owner-login-button" type="button" onclick="loginOwner()">دخول المالك</button><button class="btn-primary" id="add-task-button" type="button" onclick="openNewTaskDrawer()" hidden>إضافة مهمة</button></div></div>
+      <div class="table-actions"><p>يمكن للجميع الاطلاع على البيانات. يدخل الحساب المخوّل مرة واحدة للتعديل المتكرر؛ تبقى الجلسة فعالة حتى الخروج أو إغلاق التبويب.</p><div class="owner-access"><span class="owner-status" id="owner-status">وضع العرض</span><button class="btn-secondary" id="owner-login-button" type="button" onclick="loginOwner()">دخول المالك</button><button class="btn-secondary" id="refresh-tasks-button" type="button" onclick="refreshTasksFromGithub()" hidden>تحديث السجل</button><button class="btn-primary" id="add-task-button" type="button" onclick="openNewTaskDrawer()" hidden>إضافة مهمة</button></div></div>
       <p id="tracker-load-error" role="alert" style="padding:12px;color:#8e2948" hidden>تعذر تحميل ملف بيانات المهام. حدّث الصفحة قبل إجراء أي تعديل.</p>
       <div class="import-panel" id="import-panel" hidden>
         <h3>تحديث وإضافة المهام من ملف</h3>
@@ -538,7 +538,8 @@ const GITHUB_REPO='spf-customer-services';
 const TASKS_REPO_PATH='overrides/assets/tasks-data.json';
 const AUTH_PROXY='https://customer-compass-github-auth.spf2040.chatgpt.site';
 const FILTER_STORAGE_KEY='spf-work-tracker-filters-v1';
-let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,pendingTaskImport=null;
+const OWNER_SESSION_KEY='spf-work-tracker-owner-session-v1';
+let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,loadedTasksSha=null,pendingTaskImport=null,taskMutationInFlight=false;
 // Keep distinct people with the same first name (e.g. سعيد) separate.
 const EMPLOYEE_ALIASES={'يسرى الراسبية':'يسرى','يسرى الراسبي':'يسرى','سهى البلوشي':'سهى','سهى ا':'سهى','أحمد العبري':'أحمد','عزان الريامي':'عزان','فاطمة الجرادي':'فاطمة','عبدالله البوسعيدي':'عبدالله','زكية الوهيبي':'زكية','زهرة المصلحي':'زهرة','زهره المصلحي':'زهرة','حسناء المنجية':'حسناء','حسناء المنجي':'حسناء','ميعاد العلوي':'ميعاد','عبدالعزيز الغيثي':'عبدالعزيز'};
 function normalizeEmployees(value){
@@ -568,14 +569,51 @@ async function githubError(response,fallback){
     return new Error('المفتاح لا يملك صلاحية التعديل على هذا المستودع. في إعداد المفتاح اختر Resource owner: Azzan909، ثم Only select repositories: spf-customer-services، ثم Repository permissions → Contents: Read and write. بعد تعديل المفتاح سجّل خروج المالك ثم ادخل بالمفتاح المحدّث.');
   }
   if(response.status===404)return new Error('المفتاح لا يستطيع الوصول إلى مستودع المنصة. تأكد من اختيار المستودع spf-customer-services عند إنشاء المفتاح.');
+  if(response.status===409)return new Error('نُشرت تغييرات أخرى في الوقت نفسه. اضغط «تحديث السجل» ثم أعد المحاولة؛ جلسة الدخول ما زالت فعالة.');
   return new Error(message||fallback);
 }
 function updateOwnerUI(){
-  const login=document.getElementById('owner-login-button'),add=document.getElementById('add-task-button'),status=document.getElementById('owner-status'),importPanel=document.getElementById('import-panel');
+  const login=document.getElementById('owner-login-button'),add=document.getElementById('add-task-button'),refresh=document.getElementById('refresh-tasks-button'),status=document.getElementById('owner-status'),importPanel=document.getElementById('import-panel');
   if(login)login.textContent=isOwner?'خروج المالك':'دخول المالك';
   if(add)add.hidden=!isOwner;
+  if(refresh)refresh.hidden=!isOwner;
   if(importPanel)importPanel.hidden=!isOwner;
   if(status)status.textContent=isOwner?'وضع الإدارة — التحديثات تُنشر للجميع':'وضع العرض';
+}
+function clearOwnerSession(){
+  ownerAccessToken='';isOwner=false;
+  try{sessionStorage.removeItem(OWNER_SESSION_KEY)}catch(_){/* Storage can be unavailable. */}
+  updateOwnerUI();
+}
+function rememberOwnerSession(token){
+  ownerAccessToken=token;isOwner=true;
+  try{sessionStorage.setItem(OWNER_SESSION_KEY,token)}catch(_){/* The in-memory session still works. */}
+  updateOwnerUI();
+}
+async function fetchCurrentTaskSnapshot(token){
+  const endpoint=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TASKS_REPO_PATH}`;
+  const response=await fetch(`${endpoint}?ref=main&t=${Date.now()}`,{headers:githubHeaders(token),cache:'no-store'});
+  if(!response.ok)throw await githubError(response,'تعذر قراءة أحدث نسخة من سجل الأعمال');
+  const metadata=await response.json();
+  const bytes=Uint8Array.from(atob(metadata.content.replace(/\s/g,'')),ch=>ch.charCodeAt(0));
+  return {endpoint,metadata,payload:JSON.parse(new TextDecoder().decode(bytes))};
+}
+async function syncTasksFromGithub(token){
+  const {metadata,payload}=await fetchCurrentTaskSnapshot(token);
+  if(!Array.isArray(payload.tasks))throw new Error('ملف سجل الأعمال لا يحتوي على قائمة مهام صالحة.');
+  DATA=payload.tasks.map((task,index)=>({...task,emp:normalizeEmployees(task.emp),id:task.id||`central-${index+1}`}));
+  loadedTasksUpdatedAt=payload.updated_at||null;
+  loadedTasksSha=metadata.sha;
+  refreshFiltersAfterDataChange();
+  publishSummary();
+}
+async function refreshTasksFromGithub(){
+  if(!isOwner||taskMutationInFlight)return;
+  const button=document.getElementById('refresh-tasks-button');
+  if(button){button.disabled=true;button.textContent='جارٍ تحديث السجل…'}
+  try{await syncTasksFromGithub(ownerAccessToken);closeDrawer();}
+  catch(error){alert(error.message||'تعذر تحديث السجل. حاول مرة أخرى دون تسجيل الخروج.');}
+  finally{if(button){button.disabled=false;button.textContent='تحديث السجل'}}
 }
 async function verifyOwnerToken(token){
   const response=await fetch('https://api.github.com/user',{headers:githubHeaders(token)});
@@ -610,29 +648,49 @@ async function githubDeviceLogin(){
   try{while(Date.now()-started<(Number(flow.expires_in)||900)*1000){await new Promise(r=>setTimeout(r,interval));const response=await fetch(`${AUTH_PROXY}/oauth/access-token`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({device_code:flow.device_code})});const result=await response.json();if(result.access_token){await verifyOwnerToken(result.access_token);return result.access_token}if(result.error&&!["authorization_pending","slow_down"].includes(result.error))throw new Error('لم تكتمل موافقة GitHub')}throw new Error('انتهت مهلة تسجيل الدخول')}finally{panel.remove()}
 }
 async function loginOwner(){
-  if(isOwner){ownerAccessToken='';isOwner=false;updateOwnerUI();return;}
+  if(isOwner){clearOwnerSession();closeDrawer();return;}
   const button=document.getElementById('owner-login-button');if(button)button.textContent='جارٍ التحقق…';
   try{
-    const choice=await ownerLoginChoice();ownerAccessToken=choice.mode==='token'?choice.token:await githubDeviceLogin();isOwner=true;updateOwnerUI();
-  }catch(error){isOwner=false;updateOwnerUI();alert(error.message||'تعذر دخول المالك');}
+    const cached=ownerAccessToken||(()=>{try{return sessionStorage.getItem(OWNER_SESSION_KEY)}catch(_){return null}})();
+    let token;
+    if(cached){await verifyOwnerToken(cached);token=cached;}
+    else{const choice=await ownerLoginChoice();token=choice.mode==='token'?choice.token:await githubDeviceLogin();}
+    await syncTasksFromGithub(token);
+    rememberOwnerSession(token);
+  }catch(error){
+    if(/غير صالح|انتهت صلاحيته|لا يملك صلاحية|لا يستطيع الوصول/.test(error.message||''))clearOwnerSession();
+    else updateOwnerUI();
+    if(error.message!=='تم إلغاء تسجيل الدخول')alert(error.message||'تعذر دخول المالك');
+  }
 }
 async function restoreOwnerSession(){
-  ownerAccessToken='';isOwner=false;updateOwnerUI();
+  const token=(()=>{try{return sessionStorage.getItem(OWNER_SESSION_KEY)}catch(_){return null}})();
+  if(!token){updateOwnerUI();return;}
+  try{await verifyOwnerToken(token);await syncTasksFromGithub(token);rememberOwnerSession(token);}
+  catch(error){
+    if(/غير صالح|انتهت صلاحيته|لا يملك صلاحية|لا يستطيع الوصول/.test(error.message||''))clearOwnerSession();
+    else{ownerAccessToken=token;isOwner=false;updateOwnerUI();}
+  }
 }
 async function saveTasks(){
   if(!isOwner)throw new Error('يلزم دخول المالك قبل الحفظ');
   const token=ownerAccessToken;if(!token)throw new Error('انتهت جلسة التحرير');
-  const endpoint=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TASKS_REPO_PATH}`;
-  const current=await fetch(`${endpoint}?ref=main`,{headers:githubHeaders(token)});
-  if(!current.ok)throw await githubError(current,'تعذر قراءة النسخة الحالية من GitHub');
-  const metadata=await current.json();
-  const remoteBytes=Uint8Array.from(atob(metadata.content.replace(/\s/g,'')),ch=>ch.charCodeAt(0));
-  const remote=JSON.parse(new TextDecoder().decode(remoteBytes));
-  if(!loadedTasksUpdatedAt||remote.updated_at!==loadedTasksUpdatedAt)throw new Error('تغيّرت البيانات منذ فتح الصفحة. حدّث الصفحة وراجع الإضافات قبل النشر حتى لا تُستبدل أعمال أحدث.');
-  const document={version:(Number(remote.version)||0)+1,updated_at:new Date().toISOString(),tasks:DATA};
+  let snapshot=await fetchCurrentTaskSnapshot(token);
+  // GitHub's read endpoint may briefly return the version preceding our last save.
+  for(let attempt=0;attempt<2&&loadedTasksSha&&snapshot.metadata.sha!==loadedTasksSha&&Date.parse(snapshot.payload.updated_at)<Date.parse(loadedTasksUpdatedAt);attempt++){
+    await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)));
+    snapshot=await fetchCurrentTaskSnapshot(token);
+  }
+  const {endpoint,metadata,payload:remote}=snapshot;
+  if(!loadedTasksUpdatedAt||remote.updated_at!==loadedTasksUpdatedAt||loadedTasksSha&&metadata.sha!==loadedTasksSha)
+    throw new Error('تغيّرت البيانات في جلسة أخرى. اضغط «تحديث السجل» لمراجعة أحدث المهام، ثم أعد التعديل. جلسة الدخول ما زالت فعالة.');
+  const updatedAt=new Date(Math.max(Date.now(),Date.parse(remote.updated_at||'')+1||0)).toISOString();
+  const document={version:(Number(remote.version)||0)+1,updated_at:updatedAt,tasks:DATA};
   const response=await fetch(endpoint,{method:'PUT',headers:{...githubHeaders(token),'Content-Type':'application/json'},body:JSON.stringify({message:`Update work tracker (${DATA.length} tasks)`,content:encodeBase64(JSON.stringify(document,null,2)+'\n'),sha:metadata.sha,branch:'main'})});
   if(!response.ok)throw await githubError(response,'تعذر نشر التحديث إلى GitHub');
+  const saved=await response.json();
   loadedTasksUpdatedAt=document.updated_at;
+  loadedTasksSha=saved.content?.sha||null;
   publishSummary(); // Keep the authorized session for the next weekly edit.
 }
 function completionSummary(){
@@ -843,8 +901,9 @@ async function previewTaskImport(event){
   }catch(error){feedback.textContent=error.message||'تعذر قراءة الملف.';}
 }
 async function confirmTaskImport(){
-  if(!isOwner||!pendingTaskImport||(!pendingTaskImport.additions.length&&!pendingTaskImport.updates.length))return;
+  if(!isOwner||taskMutationInFlight||!pendingTaskImport||(!pendingTaskImport.additions.length&&!pendingTaskImport.updates.length))return;
   const button=document.getElementById('confirm-task-import'),feedback=document.getElementById('import-feedback');
+  taskMutationInFlight=true;
   button.disabled=true;feedback.textContent='جارٍ نشر تحديثات المهام وإضافاتها…';
   const previous=DATA,{additions,updates}=pendingTaskImport,copy=DATA.slice();
   for(const change of updates)copy[change.index]=change.task;
@@ -855,7 +914,7 @@ async function confirmTaskImport(){
     feedback.textContent=`تم نشر ${updates.length} تحديث و${newTasks.length} مهمة جديدة. ستظهر للجميع بعد اكتمال نشر المنصة.`;
     refreshFiltersAfterDataChange();
   }catch(error){DATA=previous;feedback.textContent=error.message||'تعذر نشر الملف. لم تتغير البيانات المنشورة.';}
-  finally{button.disabled=false;}
+  finally{button.disabled=false;taskMutationInFlight=false;}
 }
 function monthOf(str){
   if(!str) return null;
@@ -1233,29 +1292,39 @@ function openNewTaskDrawer(){
   openDrawer();
 }
 async function saveTaskEdit(event,idx,isNew){
-  event.preventDefault();const fd=new FormData(event.currentTarget);
+  event.preventDefault();
+  if(!isOwner||taskMutationInFlight)return;
+  taskMutationInFlight=true;
+  const form=event.currentTarget,submit=form.querySelector('[type="submit"]');
+  if(submit)submit.disabled=true;
+  const fd=new FormData(form);
   const rawPct=String(fd.get('pct')||'').trim();
   const selectedStatus=String(fd.get('status')||'قيد الإجراء');
   const task={
+    ...(isNew?{}:DATA[idx]),
     id:isNew?`task-${Date.now()}`:(DATA[idx].id||`task-${Date.now()}`),
     title:String(fd.get('title')||'').trim(),dept:String(fd.get('dept')||'').trim(),emp:normalizeEmployees(fd.get('emp')),
     status:selectedStatus,pct:selectedStatus==='منجز'?100:(rawPct===''?null:Math.max(0,Math.min(100,Number(rawPct)))),
     received:String(fd.get('received')||'').trim()||null,due:String(fd.get('due')||'').trim()||null,
     date:String(fd.get('due')||'').trim()||null,tech:String(fd.get('tech')||'').trim(),overdue:selectedStatus==='متأخر'
   };
-  if(!task.title||!task.dept)return;
+  if(!task.title||!task.dept){taskMutationInFlight=false;if(submit)submit.disabled=false;return;}
   const previous=DATA.map(item=>({...item}));
   if(isNew)DATA.push(task);else DATA[idx]=task;
   const note=document.getElementById('task-save-note');if(note)note.textContent='جارٍ نشر التحديث إلى GitHub…';
   try{
-    await saveTasks();refreshFiltersAfterDataChange();if(note)note.textContent='تم النشر. سيظهر التحديث لجميع الزوار خلال دقائق.';setTimeout(closeDrawer,900);
+    await saveTasks();refreshFiltersAfterDataChange();closeDrawer();
   }catch(error){DATA=previous;refreshFiltersAfterDataChange();if(note)note.textContent=error.message||'تعذر نشر التحديث';}
+  finally{taskMutationInFlight=false;if(submit)submit.disabled=false;}
 }
 async function deleteTask(idx){
   if(!isOwner){alert('يلزم دخول المالك للحذف.');return;}
+  if(taskMutationInFlight)return;
   const r=DATA[idx];if(!r||!confirm(`حذف المهمة «${r.title}»؟`))return;
+  taskMutationInFlight=true;
   const previous=DATA.map(item=>({...item}));DATA.splice(idx,1);refreshFiltersAfterDataChange();
   try{await saveTasks();closeDrawer();}catch(error){DATA=previous;refreshFiltersAfterDataChange();alert(error.message||'تعذر نشر الحذف');}
+  finally{taskMutationInFlight=false;}
 }
 
 // ═══════════════════════════════════════════════
