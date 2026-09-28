@@ -312,6 +312,7 @@ tbody tr:hover{background:var(--surface-alt);}
 .import-panel .import-actions{margin-top:12px}
 .import-panel details.import-skipped{margin-top:10px;padding:9px 12px;border:1px solid #e8d6ca;border-radius:9px;background:#fffaf7}.import-panel .import-skipped summary{cursor:pointer;font-weight:700}.import-panel .import-skipped ol{padding-right:20px;margin:9px 0 0}.import-panel .import-skipped li{padding:3px 0;line-height:1.6}
 .import-panel thead th{position:sticky;top:0;z-index:1}
+.import-mappings{display:grid;gap:10px;margin-top:12px}.import-mapping{padding:12px;border:1px solid #bfd4c8;border-radius:12px;background:#fff}.import-mapping h4{margin:0 0 7px;font-size:13px;color:var(--navy)}.import-mapping p{margin:0 0 9px}.import-mapping-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}.import-mapping label{display:grid;gap:5px;font-size:11px;font-weight:700}.import-mapping select,.import-mapping input{font:inherit;min-width:0;padding:7px;border:1px solid #b6c8bd;border-radius:7px;background:white}.import-mapping .btn-secondary{margin-top:10px}
 [hidden]{display:none!important}
 .btn-primary,.btn-danger,.btn-secondary{font-family:inherit;font-size:12px;font-weight:700;border-radius:10px 4px 10px 4px;padding:8px 14px;cursor:pointer;transition:all .15s}
 .btn-primary{color:#fff;background:var(--navy);border:1px solid var(--navy)}
@@ -483,12 +484,12 @@ header{height:72px;padding:0 34px;background:rgba(20,56,47,.97);border:0;color:#
       <p id="tracker-load-error" role="alert" style="padding:12px;color:#8e2948" hidden>تعذر تحميل ملف بيانات المهام. حدّث الصفحة قبل إجراء أي تعديل.</p>
       <div class="import-panel" id="import-panel" hidden>
         <h3>تحديث وإضافة المهام من ملف</h3>
-        <p>اختر عدة ملفات Excel أو CSV، أو اسحبها إلى المنطقة أدناه. سنتعرّف على المهمة والحالة والموظف والقسم في كل ملف، ثم نعرض نتيجة الملفات مجتمعة للمراجعة قبل النشر. الخانات الفارغة لا تمحو البيانات السابقة، ولا تُرفع الملفات الأصلية إلى الموقع.</p>
+        <p>اختر عدة ملفات Excel أو CSV، أو اسحبها إلى المنطقة أدناه. نتعرّف على المهمة والموظف والقسم والحالة ونسبة الإنجاز مهما اختلف ترتيب الأعمدة. إذا لم تتضح عناوين ورقة، اختر أعمدتها مرة واحدة من المعاينة دون تعديل الملف. الخانات الفارغة لا تمحو البيانات السابقة، ولا تُرفع الملفات الأصلية إلى الموقع.</p>
         <input type="file" id="tasks-import-file" accept=".xlsx,.xls,.csv,.tsv" aria-label="اختيار ملفات تحديث المهام" multiple hidden onchange="previewTaskImport(event.target.files)">
         <button type="button" class="import-dropzone" id="tasks-import-dropzone" onclick="document.getElementById('tasks-import-file').click()" ondragenter="taskImportDragEnter(event)" ondragover="taskImportDragOver(event)" ondragleave="taskImportDragLeave(event)" ondrop="taskImportDrop(event)"><span class="import-dropzone-icon" aria-hidden="true">⇧</span><span><strong>اسحب الملفات هنا أو انقر لاختيارها</strong><small>اختيار متعدد · Excel ‏(.xlsx / .xls) أو CSV / TSV</small></span></button>
         <div class="import-file-list" id="import-file-list" aria-live="polite"></div>
         <div class="import-actions"><button type="button" class="btn-primary" id="confirm-task-import" onclick="confirmTaskImport()" hidden>اعتماد التحديثات والإضافات ونشرها</button></div>
-        <div class="import-feedback" id="import-feedback" role="status"></div><div class="import-preview" id="import-preview"></div>
+        <div class="import-feedback" id="import-feedback" role="status"></div><div class="import-mappings" id="import-mappings"></div><div class="import-preview" id="import-preview"></div>
       </div>
       <div class="tbl-scroll">
         <table>
@@ -550,7 +551,7 @@ const TASKS_REPO_PATH='overrides/assets/tasks-data.json';
 const AUTH_PROXY='https://customer-compass-github-auth.spf2040.chatgpt.site';
 const FILTER_STORAGE_KEY='spf-work-tracker-filters-v1';
 const OWNER_SESSION_KEY='spf-work-tracker-owner-session-v1';
-let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,loadedTasksSha=null,pendingTaskImport=null,taskMutationInFlight=false,importReadInFlight=false;
+let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,loadedTasksSha=null,pendingTaskImport=null,taskMutationInFlight=false,importReadInFlight=false,importSheetLayouts=[];
 // Keep distinct people with the same first name (e.g. سعيد) separate.
 const EMPLOYEE_ALIASES={'يسرى الراسبية':'يسرى','يسرى الراسبي':'يسرى','سهى البلوشي':'سهى','سهى ا':'سهى','أحمد العبري':'أحمد','عزان الريامي':'عزان','فاطمة الجرادي':'فاطمة','عبدالله البوسعيدي':'عبدالله','زكية الوهيبي':'زكية','زهرة المصلحي':'زهرة','زهره المصلحي':'زهرة','حسناء المنجية':'حسناء','حسناء المنجي':'حسناء','ميعاد العلوي':'ميعاد','عبدالعزيز الغيثي':'عبدالعزيز'};
 function normalizeEmployees(value){
@@ -802,13 +803,13 @@ function importKey(task){
 }
 function importHeader(value){return String(value??'').normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/[^\p{L}\p{N}%]/gu,'').toLowerCase();}
 const IMPORT_COLUMNS={
-  title:['المهمة','اسمالمهمة','عنوانالمهمة','وصفالمهمة','المهام','العمل','الاعمال','العملالمطلوب','الموضوع','موضوع','الاجراءالمطلوب','المبادرة','task','tasks','title','description'],
-  dept:['القسم','القسمالمسؤول','القسمالمختص','الجههالمسؤولة','الجهةالمسؤولة','الجهةالمختصة','الدائرة','الدائرةالمسؤولة','الادارة','الادارةالمسؤولة','الفريقالمسؤول','الوحدةالمسؤولة','department','dept','unit','division'],
-  emp:['الموظف','اسمالموظف','الموظفون','الموظفالمسؤول','الموظفالمكلف','المكلف','المسؤول','المسؤولعنالتنفيذ','المكلفبالتنفيذ','المعني','منفذالمهمة','صاحبالمهمة','employee','owner','assignee','assignedto'],
+  title:['المهمة','اسمالمهمة','عنوانالمهمة','وصفالمهمة','المهام','العمل','الاعمال','العملالمطلوب','الموضوع','موضوع','الاجراءالمطلوب','المبادرة','التكليف','التكليفات','البند','بنودالعمل','النشاط','الانشطة','task','tasks','title','description','activity','item'],
+  dept:['القسم','القسمالمسؤول','القسمالمختص','الجههالمسؤولة','الجهةالمسؤولة','الجهةالمختصة','الدائرة','الدائرةالمسؤولة','الادارة','الادارةالمسؤولة','الفريقالمسؤول','الوحدةالمسؤولة','الجهةالمنفذة','الجهةالمالكة','القطاع','department','dept','unit','division','team','section'],
+  emp:['الموظف','اسمالموظف','الموظفون','الموظفالمسؤول','الموظفالمكلف','المكلف','المسؤول','المسؤولعنالتنفيذ','المكلفبالتنفيذ','المعني','منفذالمهمة','صاحبالمهمة','المسنداليه','مسندالى','القائمبالعمل','employee','owner','assignee','assignedto','responsibleperson'],
   tech:['الملاحظاتوالموقفالتنفيذي','الموقفالتنفيذي','التفاصيل','التحديث','الاجراءالمتخذ','الاجراءاتالمتخذة','الملاحظات','ملاحظات','التعليق','notes','details','update'],
   action:['الاجراءالمطلوب','العملالمطلوب','المطلوب','requiredaction'],
-  status:['الحالة','حالةالمهمة','حالةالعمل','حالةالتنفيذ','منجزقيدالاجراء','الموقف','وضعالمهمة','وضعالعمل','الوضع','status','state'],
-  pct:['نسبةالانجاز','الانجاز%','نسبةالاكتمال','نسبةالتنفيذ','progress','completion','pct'],
+  status:['الحالة','حالةالمهمة','حالةالعمل','حالةالتنفيذ','منجزقيدالاجراء','الموقف','الموقفالحالي','وضعالمهمة','وضعالعمل','الوضع','status','state','stage'],
+  pct:['نسبةالانجاز','الانجاز%','نسبةالاكتمال','نسبةالتنفيذ','معدلالانجاز','الانجاز','نسبةالتقدم','التقدم%','progress','completion','pct','percentcomplete'],
   received:['تاريخالاستلام','تاريخالبدء','received','startdate'],
   due:['موعدالتسليم','تاريخالتسليم','تاريخالاستحقاق','الموعدالنهائي','duedate','deadline','due']
 };
@@ -862,14 +863,14 @@ function importTitleSimilarity(left,right){
   }
   return 1-previous[b.length]/long;
 }
-function extractNewTasks(rows,filename,sheetName='',tasks=DATA){
+function extractNewTasks(rows,filename,sheetName='',tasks=DATA,layout=null){
   const scanned=rows.slice(0,30).map((row,index)=>({index,cols:importColumnIndexes(row)}));
-  const header=scanned.filter(({cols})=>cols.title>=0).sort((a,b)=>{
+  const header=layout?{index:layout.header,cols:layout.cols}:scanned.filter(({cols})=>cols.title>=0).sort((a,b)=>{
     const score=x=>['dept','emp','status','pct','tech','due'].filter(field=>x.cols[field]>=0).length;
     return score(b)-score(a)||a.index-b.index;
   })[0];
   if(!header)throw new Error('تعذّر تحديد عمود المهمة في هذه الورقة. اجعل عنوان العمود دالًا على المهمة أو العمل أو الموضوع.');
-  const context=importSheetContext(`${sheetName} ${filename}`,tasks,rows.slice(0,header.index));
+  const context=layout?.dept||importSheetContext(`${sheetName} ${filename}`,tasks,rows.slice(0,header.index));
   const cols=header.cols,existing=new Map(),changes=new Map(),additions=[],skipped=[];
   tasks.forEach((task,index)=>{const key=importKey(task);if(!existing.has(key))existing.set(key,[]);existing.get(key).push(index)});
   const candidateTasks=tasks.map((task,index)=>({index,task,dept:importHeader(task.dept)}));
@@ -920,6 +921,9 @@ function extractNewTasks(rows,filename,sheetName='',tasks=DATA){
     if(fields.pct===100&&!fields.status)fields.status='منجز';
     if(fields.status)fields.overdue=fields.status==='متأخر';
     if(fields.due)fields.date=fields.due;
+    if(!existing.has(matchKey)&&(!fields.emp||!fields.status||fields.pct==null)){
+      skipped.push(`${sheetName||'الملف'} · الصف ${line}: المهمة الجديدة تحتاج الموظف والحالة ونسبة الإنجاز؛ راجع الملف قبل الإضافة`);return;
+    }
     if(existing.has(matchKey)){
       if(existing.get(matchKey).length>1){skipped.push(`${sheetName||'الملف'} · الصف ${line}: توجد عدة مهام مطابقة في السجل؛ حدّد المهمة المطلوبة يدويًا`);return;}
       const index=existing.get(matchKey)[0],base=changes.get(matchKey)?.task||tasks[index],task={...base,...fields};
@@ -952,40 +956,93 @@ async function readTaskImportSheets(file){
   }
   throw new Error('الصيغة غير مدعومة؛ اختر Excel أو CSV فقط.');
 }
+const IMPORT_REQUIRED=['title','emp','dept','status','pct'];
+const IMPORT_LABELS={title:'المهمة',emp:'الموظف',dept:'القسم',status:'الحالة',pct:'نسبة الإنجاز'};
+function taskSheetLayout(file,name,rows){
+  const scanned=rows.slice(0,50).map((row,index)=>({index,cols:importColumnIndexes(row)}));
+  const found=scanned.sort((a,b)=>{
+    const score=x=>IMPORT_REQUIRED.filter(field=>x.cols[field]>=0).length*10+['tech','received','due'].filter(field=>x.cols[field]>=0).length;
+    return score(b)-score(a)||a.index-b.index;
+  })[0];
+  const header=found?.index??0,cols=found?.cols||importColumnIndexes(rows[0]||[]);
+  const dept=importSheetContext(`${name} ${file}`,DATA,rows.slice(0,header));
+  return {file,name,rows,header,cols,dept,ignored:false,manual:false};
+}
+function taskLayoutReady(layout){
+  const required=IMPORT_REQUIRED.map(field=>layout.cols[field]);
+  if(required.slice(0,2).some(index=>index<0)||required[3]<0||required[4]<0||required[2]<0&&!layout.dept)return false;
+  if(new Set(required.filter(index=>index>=0)).size!==required.filter(index=>index>=0).length)return false;
+  if(layout.manual)return true;
+  const values=layout.rows.slice(layout.header+1,layout.header+12).map(row=>String(row[layout.cols.status]??'').trim()).filter(Boolean);
+  return values.length>0&&values.some(value=>importStatus(value));
+}
+function taskImportMappingChange(index,field,value){
+  const layout=importSheetLayouts[index];if(!layout)return;
+  if(field==='header'){
+    layout.header=Number(value);layout.cols=importColumnIndexes(layout.rows[layout.header]||[]);
+  }else if(field==='dept')layout.dept=value.trim();
+  else if(field==='ignored')layout.ignored=!layout.ignored;
+  else layout.cols[field]=Number(value);
+  layout.manual=true;renderTaskImportResults();
+}
+function renderTaskImportMappings(){
+  const target=document.getElementById('import-mappings');
+  target.innerHTML=importSheetLayouts.map((layout,index)=>{
+    if(layout.ignored)return `<div class="import-mapping">${esc(layout.file)} · ${esc(layout.name)} — ورقة متجاهلة <button type="button" class="btn-secondary" onclick="taskImportMappingChange(${index},'ignored','')">إدراج الورقة</button></div>`;
+    const headerOptions=layout.rows.slice(0,Math.min(layout.rows.length,50)).map((row,i)=>`<option value="${i}" ${i===layout.header?'selected':''}>${i+1}: ${esc(row.filter(v=>String(v??'').trim()).slice(0,3).join(' · ').slice(0,90)||'صف فارغ')}</option>`).join('');
+    const maxCols=Math.max(...layout.rows.slice(layout.header,layout.header+8).map(row=>row.length),0);
+    const fields=IMPORT_REQUIRED.map(field=>{
+      const choices=Array.from({length:maxCols},(_,col)=>{
+        const label=String(layout.rows[layout.header]?.[col]??'').trim().slice(0,45)||`عمود ${col+1}`;
+        const sample=layout.rows.slice(layout.header+1,layout.header+5).map(row=>row[col]).find(v=>String(v??'').trim());
+        return `<option value="${col}" ${layout.cols[field]===col?'selected':''}>${esc(`${col+1}: ${label}${sample?` — ${String(sample).slice(0,34)}`:''}`)}</option>`;
+      }).join('');
+      return `<label>${IMPORT_LABELS[field]}<select aria-label="عمود ${IMPORT_LABELS[field]} في ${esc(layout.name)}" onchange="taskImportMappingChange(${index},'${field}',this.value)"><option value="-1">اختر العمود</option>${choices}</select></label>`;
+    }).join('');
+    return `<details class="import-mapping" ${!taskLayoutReady(layout)||layout.manual?'open':''}><summary>${esc(layout.file)} · ${esc(layout.name)} — ${taskLayoutReady(layout)?'الأعمدة محددة؛ اضغط للمراجعة':'حدد الأعمدة المطلوبة'}</summary><p>اختر الأعمدة من عينة الورقة، ثم راجع التغييرات أدناه.</p><div class="import-mapping-grid"><label>صف عناوين الأعمدة<select onchange="taskImportMappingChange(${index},'header',this.value)">${headerOptions}</select></label>${fields}<label>اسم القسم إذا كان في اسم الورقة أو خارج الجدول<input value="${esc(layout.dept)}" placeholder="اكتب القسم إن لم يوجد عمود" onchange="taskImportMappingChange(${index},'dept',this.value)"></label></div><button type="button" class="btn-secondary" onclick="taskImportMappingChange(${index},'ignored','')">تجاهل هذه الورقة</button></details>`;
+  }).join('');
+}
 async function previewTaskImport(selectedFiles){
   const files=Array.from(selectedFiles||[]),input=document.getElementById('tasks-import-file');
   if(input)input.value=''; // Allow selecting the same files again after a correction.
   if(!files.length||importReadInFlight||taskMutationInFlight)return;
   const feedback=document.getElementById('import-feedback'),preview=document.getElementById('import-preview'),confirmButton=document.getElementById('confirm-task-import'),fileList=document.getElementById('import-file-list');
-  pendingTaskImport=null;confirmButton.hidden=true;preview.innerHTML='';
+  pendingTaskImport=null;importSheetLayouts=[];confirmButton.hidden=true;preview.innerHTML='';document.getElementById('import-mappings').innerHTML='';
   if(!isOwner){feedback.textContent='يلزم دخول المالك قبل قراءة ملفات المهام.';return;}
   importReadInFlight=true;
   fileList.innerHTML=`${files.length} ${files.length===1?'ملف محدد':'ملفات محددة'}: ${files.slice(0,10).map(file=>`<span>${esc(file.name)}</span>`).join('')}${files.length>10?'…':''}`;
   feedback.textContent='جارٍ قراءة الملفات وتجميع التغييرات…';
   try{
-    const working=DATA.slice(),originalById=new Map(DATA.map((task,index)=>[String(task.id),index])),originalKeys=new Set(DATA.map(importKey)),sources=new Map(),skipped=[];
-    let acceptedFiles=0,ignoredSheets=0;
+    const errors=[];
     for(const file of files){
       try{
         const sheets=await readTaskImportSheets(file);
-        let recognized=false;
         for(const [name,rows] of sheets){
           if(!rows.some(row=>row.some(value=>String(value??'').trim())))continue;
-          try{
-            const result=extractNewTasks(rows,file.name,name,working);
-            for(const change of result.updates){working[change.index]=change.task;const key=importKey(change.task);if(!sources.has(key))sources.set(key,new Set());sources.get(key).add(file.name)}
-            for(const task of result.additions){working.push(task);const key=importKey(task);if(!sources.has(key))sources.set(key,new Set());sources.get(key).add(file.name)}
-            skipped.push(...result.skipped.map(message=>`${file.name} · ${message}`));
-            recognized=true;
-          }catch(error){
-            if(error.message?.startsWith('تعذّر تحديد عمود المهمة'))ignoredSheets++;
-            else skipped.push(`${file.name} · ${name}: ${error.message}`);
-          }
+          importSheetLayouts.push(taskSheetLayout(file.name,name,rows));
         }
-        if(recognized)acceptedFiles++;
-        else if(!sheets.length||sheets.every(([,rows])=>!rows.length))skipped.push(`${file.name}: الملف فارغ`);
-      }catch(error){skipped.push(`${file.name}: ${error.message}`)}
+        if(!sheets.length||sheets.every(([,rows])=>!rows.length))errors.push(`${file.name}: الملف فارغ`);
+      }catch(error){errors.push(`${file.name}: ${error.message}`)}
     }
+    renderTaskImportResults(errors);
+  }catch(error){feedback.textContent=error.message||'تعذر قراءة الملفات.';}
+  finally{importReadInFlight=false;}
+}
+function renderTaskImportResults(errors=[]){
+  const feedback=document.getElementById('import-feedback'),preview=document.getElementById('import-preview'),confirmButton=document.getElementById('confirm-task-import');
+  pendingTaskImport=null;confirmButton.hidden=true;renderTaskImportMappings();
+  const working=DATA.slice(),originalById=new Map(DATA.map((task,index)=>[String(task.id),index])),originalKeys=new Set(DATA.map(importKey)),sources=new Map(),skipped=[...errors];
+  const waiting=importSheetLayouts.filter(layout=>!layout.ignored&&!taskLayoutReady(layout));
+  for(const layout of importSheetLayouts){
+    if(layout.ignored||!taskLayoutReady(layout))continue;
+    try{
+      const result=extractNewTasks(layout.rows,layout.file,layout.name,working,layout);
+      for(const change of result.updates){working[change.index]=change.task;const key=importKey(change.task);if(!sources.has(key))sources.set(key,new Set());sources.get(key).add(layout.file)}
+      for(const task of result.additions){working.push(task);const key=importKey(task);if(!sources.has(key))sources.set(key,new Set());sources.get(key).add(layout.file)}
+      skipped.push(...result.skipped.map(message=>`${layout.file} · ${message}`));
+    }catch(error){skipped.push(`${layout.file} · ${layout.name}: ${error.message}`)}
+  }
+  try{
     const additions=[],updates=[];
     for(const task of working){
       const key=importKey(task),index=originalById.get(String(task.id)),filesForTask=[...(sources.get(key)||[])].join('، ');
@@ -993,13 +1050,12 @@ async function previewTaskImport(selectedFiles){
       const changed=['emp','tech','status','pct','received','due','date','overdue'].filter(field=>String(DATA[index][field]??'')!==String(task[field]??''));
       if(changed.length)updates.push({index,task,changed,files:filesForTask});
     }
-    pendingTaskImport={additions,updates};
-    feedback.textContent=`قُرئ ${acceptedFiles} من ${files.length} ملف؛ ${additions.length} مهمة جديدة و${updates.length} مهمة ستُحدّث؛ ${skipped.length} صف أو ملف بحاجة مراجعة${ignoredSheets?`؛ تجاهلنا ${ignoredSheets} أوراق لا تحتوي جدول مهام`:''}. راجع المعاينة قبل النشر.`;
+    pendingTaskImport=waiting.length?null:{additions,updates};
+    feedback.textContent=`${waiting.length?`تحتاج ${waiting.length} ورقة إلى تحديد الأعمدة قبل النشر. `:''}${additions.length} مهمة جديدة و${updates.length} مهمة ستُحدّث؛ ${skipped.length} صف أو ملف بحاجة مراجعة. راجع المعاينة قبل النشر.`;
     const items=[...updates.map(change=>({type:'تحديث',...change.task,changed:change.changed.join('، '),files:change.files})),...additions.map(task=>({type:'إضافة',...task,changed:'—',files:[...(sources.get(importKey(task))||[])].join('، ')}))];
-    preview.innerHTML=(items.length?`<table><thead><tr><th>الإجراء</th><th>المهمة</th><th>القسم</th><th>الموظف</th><th>الحالة</th><th>الملف</th><th>الحقول المتغيرة</th></tr></thead><tbody>${items.map(task=>`<tr><td>${esc(task.type)}</td><td>${esc(task.title)}</td><td>${esc(task.dept)}</td><td>${esc(task.emp)}</td><td>${esc(task.status)}</td><td>${esc(task.files)}</td><td>${esc(task.changed)}</td></tr>`).join('')}</tbody></table>`:'')+(skipped.length?`<details class="import-skipped"><summary>عرض جميع الصفوف التي تحتاج مراجعة (${skipped.length})</summary><ol>${skipped.map(message=>`<li>${esc(message)}</li>`).join('')}</ol></details>`:'');
-    confirmButton.hidden=!items.length;
-  }catch(error){feedback.textContent=error.message||'تعذر قراءة الملفات.';}
-  finally{importReadInFlight=false;}
+    preview.innerHTML=(items.length?`<table><thead><tr><th>الإجراء</th><th>المهمة</th><th>القسم</th><th>الموظف</th><th>الحالة</th><th>نسبة الإنجاز</th><th>الملف</th><th>الحقول المتغيرة</th></tr></thead><tbody>${items.map(task=>`<tr><td>${esc(task.type)}</td><td>${esc(task.title)}</td><td>${esc(task.dept)}</td><td>${esc(task.emp)}</td><td>${esc(task.status)}</td><td>${task.pct==null?'—':`${esc(task.pct)}%`}</td><td>${esc(task.files)}</td><td>${esc(task.changed)}</td></tr>`).join('')}</tbody></table>`:'')+(skipped.length?`<details class="import-skipped"><summary>عرض جميع الصفوف التي تحتاج مراجعة (${skipped.length})</summary><ol>${skipped.map(message=>`<li>${esc(message)}</li>`).join('')}</ol></details>`:'');
+    confirmButton.hidden=!items.length||!!waiting.length;
+  }catch(error){feedback.textContent=error.message||'تعذر تحليل الأوراق.';}
 }
 async function confirmTaskImport(){
   if(!isOwner||taskMutationInFlight||!pendingTaskImport||(!pendingTaskImport.additions.length&&!pendingTaskImport.updates.length))return;
