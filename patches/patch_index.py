@@ -421,8 +421,8 @@ community_media_sections = r'''        <section class="section-block community-v
             <div class="media-orbit" aria-hidden="true"><span></span><i>2026</i><b>التقارير</b></div>
           </div>
           <div class="media-stat-strip">
-            <article><i>▤</i><span>التقارير المتاحة</span><strong>2</strong></article>
-            <article><i>◷</i><span>دورية التحديث</span><strong>ربع سنوي</strong></article>
+            <article><i>▤</i><span>التقارير المتاحة</span><strong>9</strong></article>
+            <article><i>◷</i><span>دورية التحديث</span><strong>ربع سنوي وسنوي</strong></article>
             <article><i>↗</i><span>آخر فترة موثقة</span><strong>يونيو 2026</strong></article>
           </div>
           <div class="media-shelf">
@@ -438,10 +438,36 @@ community_media_sections = r'''        <section class="section-block community-v
               <div class="report-cover-body"><small>أبريل–يونيو 2026</small><h3><a href="reports/q2-2026.pdf" target="_blank" rel="noopener">التقرير الربع سنوي</a></h3><strong>الربع الثاني</strong><p>مقارنة ربعية · مؤشرات الأداء · الفرق واللجان · التواصل المجتمعي · أداء المحافظات</p><a class="report-open-link" href="reports/q2-2026.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
               <details><summary>أبرز المؤشرات</summary><ul><li>161 نشاطًا وفعالية مجتمعية خلال الربع الثاني</li><li>6,474 من الجمهور المستهدف</li><li>146,807 إجمالي حجم الأعمال المنجزة بالمحافظات</li><li>42,596 مكالمة مستلمة بمركز الاتصال</li><li>236 موظفًا إجمالي موظفي المديرية</li></ul></details>
             </article>
-            <article class="report-cover upcoming">
-              <div class="report-cover-top"><span>+</span><i>＋</i></div>
-              <div class="report-cover-body"><small>قادم</small><h3>نشرات وتقارير جديدة</h3><strong>تُضاف تباعًا</strong><p>نشرات شهرية · تقارير دورية · تقارير ربع سنوية لاحقة</p></div>
-              <div class="upcoming-note">جاهز لإضافة الملفات الجديدة فور إرفاقها</div>
+          </div>
+          <div class="media-archive-heading"><span>أرشيف التقارير</span><h3>تقارير الأعوام السابقة</h3><p>اضغط على غلاف أي تقرير لقراءة نسخته الكاملة.</p></div>
+          <div class="media-archive-grid">
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/annual-2025.pdf" target="_blank" rel="noopener" aria-label="قراءة التقرير السنوي 2025 كاملًا"><img src="reports/annual-2025-cover-01.jpg" alt="غلاف التقرير السنوي 2025" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2025 · يناير–نوفمبر 2025</small><h4><a href="reports/annual-2025.pdf" target="_blank" rel="noopener">التقرير السنوي</a></h4><a href="reports/annual-2025.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
+            </article>
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/q3-2025.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الثالث 2025 كاملًا"><img src="reports/q3-2025-cover-01.jpg" alt="غلاف تقرير الربع الثالث 2025" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2025 · يوليو–سبتمبر 2025</small><h4><a href="reports/q3-2025.pdf" target="_blank" rel="noopener">تقرير الربع الثالث</a></h4><a href="reports/q3-2025.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
+            </article>
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/q2-2025.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الثاني 2025 كاملًا"><img src="reports/q2-2025-cover-01.jpg" alt="غلاف تقرير الربع الثاني 2025" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2025 · أبريل–يونيو 2025</small><h4><a href="reports/q2-2025.pdf" target="_blank" rel="noopener">تقرير الربع الثاني</a></h4><a href="reports/q2-2025.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
+            </article>
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/q1-2025.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الأول 2025 كاملًا"><img src="reports/q1-2025-cover-01.jpg" alt="غلاف تقرير الربع الأول 2025" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2025 · يناير–مارس 2025</small><h4><a href="reports/q1-2025.pdf" target="_blank" rel="noopener">تقرير الربع الأول</a></h4><a href="reports/q1-2025.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
+            </article>
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/q3-2024.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الثالث 2024 كاملًا"><img src="reports/q3-2024-cover-01.jpg" alt="غلاف تقرير الربع الثالث 2024" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2024 · يوليو–سبتمبر 2024</small><h4><a href="reports/q3-2024.pdf" target="_blank" rel="noopener">تقرير الربع الثالث</a></h4><a href="reports/q3-2024.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a><a href="reports/q3-2024.pptx" download>تنزيل الملف الأصلي PowerPoint ↓</a></div>
+            </article>
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/q2-2024.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الثاني 2024 كاملًا"><img src="reports/q2-2024-cover-01.jpg" alt="غلاف تقرير الربع الثاني 2024" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2024 · أبريل–يونيو 2024</small><h4><a href="reports/q2-2024.pdf" target="_blank" rel="noopener">تقرير الربع الثاني</a></h4><a href="reports/q2-2024.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a><a href="reports/q2-2024.pptx" download>تنزيل الملف الأصلي PowerPoint ↓</a></div>
+            </article>
+            <article class="media-archive-card">
+              <a class="media-archive-preview" href="reports/q1-2024.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الأول 2024 كاملًا"><img src="reports/q1-2024-cover-01.jpg" alt="غلاف تقرير الربع الأول 2024" loading="lazy"><span>قراءة التقرير ↗</span></a>
+              <div class="media-archive-info"><small>2024 · يناير–مارس 2024</small><h4><a href="reports/q1-2024.pdf" target="_blank" rel="noopener">تقرير الربع الأول</a></h4><a href="reports/q1-2024.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a><a href="reports/q1-2024.pptx" download>تنزيل الملف الأصلي PowerPoint ↓</a></div>
             </article>
           </div>
           <div class="media-flow-v2"><span>مصدر واحد موثوق</span><i>←</i><span>قراءة سريعة للإدارة العليا</span><i>←</i><span>تحديث دوري منظم</span></div>
@@ -454,6 +480,10 @@ if 'id="community-line"' not in text:
     if achievement_marker not in text:
         raise SystemExit("Expected achievements section for standalone chapter insertion")
     text = text.replace(achievement_marker, community_media_sections + achievement_marker, 1)
+
+# Add the 2026 governorate directorates award before earlier timeline entries.
+award_anchor = '<div class="timeline">\n            <article><time>2025</time>'
+replace_required(award_anchor, '<div class="timeline">\n            <article class="award-2026"><time>2026</time><div><h3>جائزة التميز المؤسسي لأفضل منفذ خدمة</h3><p>حصلت 8 دوائر في المحافظات على جائزة التميز المؤسسي لأفضل منفذ خدمة.</p></div></article>\n            <article><time>2025</time>')
 
 # Force fresh navigation and presentation scripts after routing fixes.
 text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')

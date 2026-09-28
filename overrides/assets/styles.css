@@ -347,3 +347,25 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
   .governorate-inspector .population-head{margin:0}
   .governorate-inspector .population-grid article{padding:8px 14px}
 }
+
+/* Media archive: readable covers and direct access to the complete original reports. */
+.media-archive-heading{margin:28px 0 16px;border-right:4px solid #b98c47;padding:2px 16px}
+.media-archive-heading span{color:#a17738;font-size:12px;font-weight:800}
+.media-archive-heading h3{margin:4px 0;font-size:23px;color:#243f36}
+.media-archive-heading p{margin:0;color:#66766f;font-size:13px}
+.media-archive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.media-archive-card{min-width:0;overflow:hidden;background:#fff;border:1px solid #e0e8e2;border-radius:18px;box-shadow:0 8px 23px rgba(29,55,44,.07);transition:transform .2s,box-shadow .2s}
+.media-archive-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(29,55,44,.13)}
+.media-archive-preview{display:block;position:relative;overflow:hidden;background:#dce8e2}
+.media-archive-preview img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top center}
+.media-archive-preview span{position:absolute;bottom:0;right:0;left:0;padding:25px 14px 11px;background:linear-gradient(transparent,rgba(18,48,37,.88));color:white;font-size:14px;font-weight:800}
+.media-archive-info{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:15px 17px 18px}
+.media-archive-info small{color:#99723f;font-size:12px;font-weight:700}
+.media-archive-info h4{margin:1px 0 6px;font-size:18px;color:#244337}
+.media-archive-info a{color:#245c47;font-size:12px;font-weight:800;text-decoration:none}
+.media-archive-info a:hover{text-decoration:underline;text-underline-offset:3px}
+.media-archive-info h4 a{color:inherit;font-size:inherit}
+.media-archive-preview:focus-visible,.media-archive-info a:focus-visible{outline:3px solid #ac7b39;outline-offset:2px}
+#achievements .timeline .award-2026{background:#f4f8f2;border-right:4px solid #ab8448;border-radius:12px;padding:12px}
+@media(max-width:1000px){.media-archive-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.media-archive-grid{grid-template-columns:1fr}}

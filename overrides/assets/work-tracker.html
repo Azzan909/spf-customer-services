@@ -474,9 +474,9 @@ header{height:72px;padding:0 34px;background:rgba(20,56,47,.97);border:0;color:#
       <div class="table-actions"><p>يمكن للجميع الاطلاع على البيانات. يدخل المالك أو الحساب المخوّل بالكتابة لتحديث السجل ونشره للجميع. تبقى الجلسة فعالة حتى الخروج أو إغلاق الصفحة.</p><div class="owner-access"><span class="owner-status" id="owner-status">وضع العرض</span><button class="btn-secondary" id="owner-login-button" type="button" onclick="loginOwner()">دخول المالك</button><button class="btn-primary" id="add-task-button" type="button" onclick="openNewTaskDrawer()" hidden>إضافة مهمة</button></div></div>
       <p id="tracker-load-error" role="alert" style="padding:12px;color:#8e2948" hidden>تعذر تحميل ملف بيانات المهام. حدّث الصفحة قبل إجراء أي تعديل.</p>
       <div class="import-panel" id="import-panel" hidden>
-        <h3>إضافة مهام جديدة من ملف</h3>
-        <p>ارفع ملف Excel أو CSV يحتوي على عمودي «المهمة» و«القسم» على الأقل. تُعرض الإضافات للمراجعة، وتُتجاوز المهام الموجودة بنفس العنوان والقسم. لا يُرفع الملف الأصلي إلى الموقع.</p>
-        <div class="import-actions"><input type="file" id="tasks-import-file" accept=".xlsx,.xls,.csv,.tsv" aria-label="ملف المهام الجديدة" onchange="previewTaskImport(event)"><button type="button" class="btn-secondary" onclick="downloadTaskTemplate()">تنزيل قالب CSV</button><button type="button" class="btn-primary" id="confirm-task-import" onclick="confirmTaskImport()" hidden>اعتماد الإضافات ونشرها</button></div>
+        <h3>تحديث وإضافة المهام من ملف</h3>
+        <p>ارفع ملف Excel أو CSV بالشكل الذي تستخدمه. سنتعرّف على المهمة والحالة والموظف والقسم من العناوين أو ورقة العمل، ثم نعرض الإضافات والتغييرات للمراجعة قبل النشر. الخانات الفارغة لا تمحو البيانات السابقة، ولا يُرفع الملف الأصلي إلى الموقع.</p>
+        <div class="import-actions"><input type="file" id="tasks-import-file" accept=".xlsx,.xls,.csv,.tsv" aria-label="ملف تحديث المهام" onchange="previewTaskImport(event)"><button type="button" class="btn-primary" id="confirm-task-import" onclick="confirmTaskImport()" hidden>اعتماد التحديثات والإضافات ونشرها</button></div>
         <div class="import-feedback" id="import-feedback" role="status"></div><div class="import-preview" id="import-preview"></div>
       </div>
       <div class="tbl-scroll">
@@ -538,7 +538,7 @@ const GITHUB_REPO='spf-customer-services';
 const TASKS_REPO_PATH='overrides/assets/tasks-data.json';
 const AUTH_PROXY='https://customer-compass-github-auth.spf2040.chatgpt.site';
 const FILTER_STORAGE_KEY='spf-work-tracker-filters-v1';
-let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,pendingTaskImport=[];
+let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,pendingTaskImport=null;
 // Keep distinct people with the same first name (e.g. سعيد) separate.
 const EMPLOYEE_ALIASES={'يسرى الراسبية':'يسرى','يسرى الراسبي':'يسرى','سهى البلوشي':'سهى','سهى ا':'سهى','أحمد العبري':'أحمد','عزان الريامي':'عزان','فاطمة الجرادي':'فاطمة','عبدالله البوسعيدي':'عبدالله','زكية الوهيبي':'زكية','زهرة المصلحي':'زهرة','زهره المصلحي':'زهرة','حسناء المنجية':'حسناء','حسناء المنجي':'حسناء','ميعاد العلوي':'ميعاد','عبدالعزيز الغيثي':'عبدالعزيز'};
 function normalizeEmployees(value){
@@ -731,19 +731,37 @@ function importKey(task){
   const clean=value=>String(value||'').normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/\s+/g,' ').trim().toLowerCase();
   return `${clean(task.dept)}|${clean(task.title)}`;
 }
-function importHeader(value){return String(value||'').normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640\s_]/g,'').trim().toLowerCase();}
+function importHeader(value){return String(value??'').normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/[^\p{L}\p{N}%]/gu,'').toLowerCase();}
 const IMPORT_COLUMNS={
-  title:['المهمة','عنوانالمهمة','اسمالمهمة','العمل','اسمالعمل','عنوانالعمل','title','task'],
-  dept:['القسم','الدائرة','الجهة','القسمالمختص','department','dept'],
-  emp:['الموظف','الموظفون','المسؤول','المكلف','الموظفأوالفريق','employee','owner'],
-  tech:['الموقفالتنفيذي','التفاصيل','التحديث','الإنجاز','الاجراءالمتخذ','الإجراءالمتخذ','details','notes'],
-  status:['الحالة','حالةالمهمة','status'],pct:['نسبةالإنجاز','نسبةالانجاز','الإنجاز%','progress','pct'],
-  received:['تاريخالاستلام','received'],due:['موعدالتسليم','تاريخالتسليم','التاريخ','تاريخالاستحقاق','duedate','due']
+  title:['المهمة','اسمالمهمة','عنوانالمهمة','وصفالمهمة','المهام','العمل','الاعمال','العملالمطلوب','الموضوع','موضوع','الاجراءالمطلوب','المبادرة','task','tasks','title','description'],
+  dept:['القسم','القسمالمسؤول','القسمالمختص','الجههالمسؤولة','الجهةالمسؤولة','الجهةالمختصة','الدائرة','الدائرةالمسؤولة','الادارة','الادارةالمسؤولة','الفريقالمسؤول','الوحدةالمسؤولة','department','dept','unit','division'],
+  emp:['الموظف','اسمالموظف','الموظفون','الموظفالمسؤول','الموظفالمكلف','المكلف','المسؤول','المسؤولعنالتنفيذ','المكلفبالتنفيذ','المعني','منفذالمهمة','صاحبالمهمة','employee','owner','assignee','assignedto'],
+  tech:['الموقفالتنفيذي','التفاصيل','التحديث','الاجراءالمتخذ','الاجراءاتالمتخذة','الملاحظات','ملاحظات','التعليق','notes','details','update'],
+  status:['الحالة','حالةالمهمة','حالةالعمل','حالةالتنفيذ','الموقف','وضعالمهمة','وضعالعمل','الوضع','status','state'],
+  pct:['نسبةالانجاز','الانجاز%','نسبةالاكتمال','نسبةالتنفيذ','progress','completion','pct'],
+  received:['تاريخالاستلام','تاريخالبدء','received','startdate'],
+  due:['موعدالتسليم','تاريخالتسليم','تاريخالاستحقاق','الموعدالنهائي','duedate','deadline','due']
 };
 function importColumnIndexes(header){
   const normalized=header.map(importHeader),columns={};
-  for(const [field,aliases] of Object.entries(IMPORT_COLUMNS))columns[field]=normalized.findIndex(value=>aliases.includes(value));
+  for(const [field,aliases] of Object.entries(IMPORT_COLUMNS)){
+    columns[field]=normalized.findIndex(value=>value&&aliases.some(alias=>importHeader(alias)===value));
+    if(columns[field]<0)columns[field]=normalized.findIndex(value=>value&&aliases.some(alias=>value.startsWith(importHeader(alias))&&value.length-importHeader(alias).length<16));
+  }
   return columns;
+}
+function importSheetContext(name){
+  const known=[...new Set(DATA.map(task=>task.dept).filter(Boolean))];
+  const normalized=importHeader(name);
+  return known.find(dept=>normalized===importHeader(dept)||normalized.includes(importHeader(dept)))||'';
+}
+function importStatus(value){
+  const v=importHeader(value);
+  if(!v)return null;
+  if(/منجز|مكتمل|مكتمله|منتهي|تمالانجاز|done|completed|finished|closed/.test(v))return 'منجز';
+  if(/متاخر|متعثر|overdue|late|delayed/.test(v))return 'متأخر';
+  if(/قيد|جار|جاري|مستمر|جديد|لميبدا|مفتوح|تحتالاجراء|ongoing|progress|pending|open|active/.test(v))return 'قيد الإجراء';
+  return null;
 }
 function parseDelimited(text){
   const line=String(text).replace(/^\uFEFF/,'').split(/\r?\n/,1)[0];
@@ -759,65 +777,84 @@ function parseDelimited(text){
   row.push(cell);if(row.some(v=>String(v).trim()))rows.push(row);
   return rows;
 }
-function extractNewTasks(rows,filename){
-  const headerIndex=rows.slice(0,12).findIndex(row=>{const c=importColumnIndexes(row);return c.title>=0&&c.dept>=0;});
-  if(headerIndex<0)throw new Error('لم أجد عمودي «المهمة» و«القسم». استخدم القالب أو سمِّ العمودين بهذه الأسماء.');
-  const cols=importColumnIndexes(rows[headerIndex]),existing=new Set(DATA.map(importKey)),additions=[],skipped=[];
-  rows.slice(headerIndex+1).forEach((row,offset)=>{
-    const get=field=>cols[field]<0?'':String(row[cols[field]]??'').trim();
+function extractNewTasks(rows,filename,sheetName=''){
+  const context=importSheetContext(sheetName),scanned=rows.slice(0,30).map((row,index)=>({index,cols:importColumnIndexes(row)}));
+  const header=scanned.filter(({cols})=>cols.title>=0).sort((a,b)=>{
+    const score=x=>['dept','emp','status','pct','tech','due'].filter(field=>x.cols[field]>=0).length;
+    return score(b)-score(a)||a.index-b.index;
+  })[0];
+  if(!header)throw new Error('تعذّر تحديد عمود المهمة في هذه الورقة. اجعل عنوان العمود دالًا على المهمة أو العمل أو الموضوع.');
+  const cols=header.cols,existing=new Map(DATA.map((task,index)=>[importKey(task),index])),changes=new Map(),additions=[],skipped=[];
+  rows.slice(header.index+1).forEach((row,offset)=>{
     if(!row.some(value=>String(value??'').trim()))return;
-    const title=get('title'),dept=get('dept'),line=headerIndex+offset+2;
-    if(!title||!dept){skipped.push(`الصف ${line}: ينقصه عنوان المهمة أو القسم`);return;}
-    const key=importKey({title,dept});
-    if(existing.has(key)){skipped.push(`الصف ${line}: المهمة موجودة مسبقًا أو مكررة في الملف`);return;}
-    existing.add(key);
-    const statusText=get('status'),pctText=get('pct').replace(/[٪%]/g,'').replace('٫','.');
-    const status=/منجز|مكتمل|completed|done/i.test(statusText)?'منجز':/متأخر|late|overdue/i.test(statusText)?'متأخر':'قيد الإجراء';
-    const numeric=Number(pctText),pct=status==='منجز'?100:(pctText!==''&&Number.isFinite(numeric)?Math.max(0,Math.min(100,numeric)):null);
-    const due=get('due');
-    additions.push({id:`import-${globalThis.crypto?.randomUUID?.()||`${Date.now()}-${line}`}`,title,dept,emp:normalizeEmployees(get('emp')),tech:get('tech'),status,pct,received:get('received')||null,due:due||null,date:due||null,overdue:status==='متأخر',source_file:filename,imported_at:new Date().toISOString()});
+    const get=field=>cols[field]<0?'':String(row[cols[field]]??'').trim();
+    const title=get('title'),dept=get('dept')||context,line=header.index+offset+2;
+    if(!title||!dept){skipped.push(`${sheetName||'الملف'} · الصف ${line}: تعذّر تحديد المهمة أو القسم المسؤول`);return;}
+    if(importColumnIndexes(row).title>=0&&importHeader(title)===importHeader(rows[header.index][cols.title]))return;
+    const key=importKey({title,dept}),statusRaw=get('status'),status=importStatus(statusRaw);
+    if(statusRaw&&!status){skipped.push(`${sheetName||'الملف'} · الصف ${line}: حالة غير معروفة «${statusRaw}»`);return;}
+    const pctRaw=get('pct').replace(/[٪%]/g,'').replace('٫','.').replace(/,/g,'.'),numeric=Number(pctRaw);
+    if(pctRaw&&(!Number.isFinite(numeric)||numeric<0||numeric>100)){skipped.push(`${sheetName||'الملف'} · الصف ${line}: نسبة إنجاز غير صالحة`);return;}
+    const fields={};
+    for(const field of ['emp','tech','received','due'])if(get(field))fields[field]=field==='emp'?normalizeEmployees(get(field)):get(field);
+    if(status)fields.status=status;
+    if(pctRaw)fields.pct=numeric;
+    if(fields.status==='منجز')fields.pct=100;
+    if(fields.pct===100&&!fields.status)fields.status='منجز';
+    if(fields.status)fields.overdue=fields.status==='متأخر';
+    if(fields.due)fields.date=fields.due;
+    if(existing.has(key)){
+      const index=existing.get(key),base=changes.get(key)?.task||DATA[index],task={...base,...fields};
+      const changed=Object.keys(fields).filter(field=>String(base[field]??'')!==String(task[field]??''));
+      if(changed.length)changes.set(key,{index,task,changed,title,dept});
+      else skipped.push(`${sheetName||'الملف'} · الصف ${line}: لا يوجد تغيير في المهمة`);
+    }else{
+      const repeated=additions.findIndex(task=>importKey(task)===key);
+      const task={id:`import-${globalThis.crypto?.randomUUID?.()||`${Date.now()}-${line}`}`,title,dept,emp:'',tech:'',status:'قيد الإجراء',pct:null,received:null,due:null,date:null,overdue:false,...fields,source_file:filename,imported_at:new Date().toISOString()};
+      if(repeated>=0)additions[repeated]=task;else additions.push(task);
+    }
   });
-  return {additions,skipped};
-}
-function downloadTaskTemplate(){
-  const columns=['المهمة','القسم','الموظف','الموقف التنفيذي','الحالة','نسبة الإنجاز','تاريخ الاستلام','موعد التسليم'];
-  const blob=new Blob(['\uFEFF'+columns.join(',')+'\r\n'],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');
-  link.href=url;link.download='قالب-المهام-الجديدة.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  return {additions,updates:[...changes.values()],skipped};
 }
 async function previewTaskImport(event){
-  pendingTaskImport=[];
+  pendingTaskImport=null;
   const feedback=document.getElementById('import-feedback'),preview=document.getElementById('import-preview'),confirmButton=document.getElementById('confirm-task-import');
   confirmButton.hidden=true;preview.innerHTML='';feedback.textContent='';
   const file=event.target.files?.[0];if(!file)return;
   if(!isOwner){feedback.textContent='يلزم دخول المالك قبل رفع ملف المهام.';return;}
   try{
-    let rows;
-    if(/\.(csv|tsv)$/i.test(file.name))rows=parseDelimited(await file.text());
+    let sheets=[];
+    if(/\.(csv|tsv)$/i.test(file.name))sheets=[[file.name,parseDelimited(await file.text())]];
     else if(/\.(xlsx|xls)$/i.test(file.name)){
       if(!window.XLSX)throw new Error('تعذر تحميل قارئ Excel. أعد فتح الصفحة أو احفظ الملف بصيغة CSV.');
       const workbook=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:true});
-      const sheet=workbook.SheetNames.find(name=>{const data=XLSX.utils.sheet_to_json(workbook.Sheets[name],{header:1,defval:'',raw:false});return data.slice(0,12).some(row=>{const c=importColumnIndexes(row);return c.title>=0&&c.dept>=0;});});
-      if(!sheet)throw new Error('لم أجد ورقة فيها عمودا «المهمة» و«القسم».');
-      rows=XLSX.utils.sheet_to_json(workbook.Sheets[sheet],{header:1,defval:'',raw:false});
+      sheets=workbook.SheetNames.map(name=>[name,XLSX.utils.sheet_to_json(workbook.Sheets[name],{header:1,defval:'',raw:false})]);
     }else throw new Error('اختر ملف Excel أو CSV فقط.');
-    const {additions,skipped}=extractNewTasks(rows,file.name);pendingTaskImport=additions;
-    feedback.textContent=`${additions.length} مهمة جديدة جاهزة للإضافة؛ ${skipped.length} صف متجاوز أو بحاجة مراجعة. لن تُحذف المهام الحالية.`;
-    preview.innerHTML=(additions.length?`<table><thead><tr><th>المهمة</th><th>القسم</th><th>الموظف</th><th>الحالة</th></tr></thead><tbody>${additions.slice(0,12).map(task=>`<tr><td>${esc(task.title)}</td><td>${esc(task.dept)}</td><td>${esc(task.emp)}</td><td>${esc(task.status)}</td></tr>`).join('')}</tbody></table>${additions.length>12?`<p>تظهر أول 12 مهمة من أصل ${additions.length}.</p>`:''}`:'')+(skipped.length?`<p class="import-skipped">${skipped.slice(0,8).map(esc).join('<br>')}${skipped.length>8?'<br>…':''}</p>`:'');
-    confirmButton.hidden=!additions.length;
+    const results=sheets.filter(([,rows])=>rows.some(row=>row.some(value=>String(value??'').trim()))).map(([name,rows])=>{
+      try{return extractNewTasks(rows,file.name,name)}catch(error){return {additions:[],updates:[],skipped:[`${name}: ${error.message}`]}}
+    });
+    const additions=[],updates=new Map(),skipped=[];
+    for(const result of results){for(const task of result.additions)if(!additions.some(item=>importKey(item)===importKey(task)))additions.push(task);for(const change of result.updates)updates.set(importKey(change.task),change);skipped.push(...result.skipped)}
+    pendingTaskImport={additions,updates:[...updates.values()]};
+    feedback.textContent=`${additions.length} مهمة جديدة و${updates.size} مهمة ستُحدّث؛ ${skipped.length} صف لم يُعتمد. راجع المعاينة قبل النشر.`;
+    const rows=[...pendingTaskImport.updates.map(change=>({type:'تحديث',...change.task,changed:change.changed.join('، ')})),...additions.map(task=>({type:'إضافة',...task,changed:'—'}))];
+    preview.innerHTML=(rows.length?`<table><thead><tr><th>الإجراء</th><th>المهمة</th><th>القسم</th><th>الموظف</th><th>الحالة</th><th>الحقول المتغيرة</th></tr></thead><tbody>${rows.slice(0,30).map(task=>`<tr><td>${esc(task.type)}</td><td>${esc(task.title)}</td><td>${esc(task.dept)}</td><td>${esc(task.emp)}</td><td>${esc(task.status)}</td><td>${esc(task.changed)}</td></tr>`).join('')}</tbody></table>${rows.length>30?`<p>تظهر أول 30 مهمة من أصل ${rows.length}.</p>`:''}`:'')+(skipped.length?`<p class="import-skipped">${skipped.slice(0,12).map(esc).join('<br>')}${skipped.length>12?'<br>…':''}</p>`:'');
+    confirmButton.hidden=!rows.length;
   }catch(error){feedback.textContent=error.message||'تعذر قراءة الملف.';}
 }
 async function confirmTaskImport(){
-  if(!isOwner||!pendingTaskImport.length)return;
+  if(!isOwner||!pendingTaskImport||(!pendingTaskImport.additions.length&&!pendingTaskImport.updates.length))return;
   const button=document.getElementById('confirm-task-import'),feedback=document.getElementById('import-feedback');
-  button.disabled=true;feedback.textContent='جارٍ نشر المهام الجديدة…';
-  const previous=DATA,existing=new Set(DATA.map(importKey)),newTasks=pendingTaskImport.filter(task=>!existing.has(importKey(task)));
-  if(!newTasks.length){feedback.textContent='كل المهام موجودة بالفعل. لا توجد إضافات للنشر.';button.hidden=true;button.disabled=false;return;}
-  DATA=[...DATA,...newTasks];
+  button.disabled=true;feedback.textContent='جارٍ نشر تحديثات المهام وإضافاتها…';
+  const previous=DATA,{additions,updates}=pendingTaskImport,copy=DATA.slice();
+  for(const change of updates)copy[change.index]=change.task;
+  const existing=new Set(copy.map(importKey)),newTasks=additions.filter(task=>!existing.has(importKey(task)));
+  DATA=[...copy,...newTasks];
   try{
-    await saveTasks();pendingTaskImport=[];document.getElementById('tasks-import-file').value='';button.hidden=true;
-    feedback.textContent=`تم نشر ${newTasks.length} مهمة جديدة. ستظهر للجميع بعد اكتمال نشر المنصة.`;
+    await saveTasks();pendingTaskImport=null;document.getElementById('tasks-import-file').value='';button.hidden=true;
+    feedback.textContent=`تم نشر ${updates.length} تحديث و${newTasks.length} مهمة جديدة. ستظهر للجميع بعد اكتمال نشر المنصة.`;
     refreshFiltersAfterDataChange();
-  }catch(error){DATA=previous;feedback.textContent=error.message||'تعذر نشر الإضافات. لم تتغير البيانات المنشورة.';}
+  }catch(error){DATA=previous;feedback.textContent=error.message||'تعذر نشر الملف. لم تتغير البيانات المنشورة.';}
   finally{button.disabled=false;}
 }
 function monthOf(str){
