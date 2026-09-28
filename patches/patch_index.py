@@ -481,9 +481,9 @@ if 'id="community-line"' not in text:
         raise SystemExit("Expected achievements section for standalone chapter insertion")
     text = text.replace(achievement_marker, community_media_sections + achievement_marker, 1)
 
-# Add the 2026 governorate directorates award before earlier timeline entries.
-award_anchor = '<div class="timeline">\n            <article><time>2025</time>'
-replace_required(award_anchor, '<div class="timeline">\n            <article class="award-2026"><time>2026</time><div><h3>جائزة التميز المؤسسي لأفضل منفذ خدمة</h3><p>حصلت 8 دوائر في المحافظات على جائزة التميز المؤسسي لأفضل منفذ خدمة.</p></div></article>\n            <article><time>2025</time>')
+# Append after earlier entries so saved edits to their positions remain intact.
+award_anchor = '<article><time>2024</time><div><h3>شهادة التميز في جودة الخدمات</h3><p>تطبيق المبادئ التوجيهية للجمعية الدولية للضمان الاجتماعي (ISSA).</p></div></article>\n          </div>'
+replace_required(award_anchor, '<article><time>2024</time><div><h3>شهادة التميز في جودة الخدمات</h3><p>تطبيق المبادئ التوجيهية للجمعية الدولية للضمان الاجتماعي (ISSA).</p></div></article>\n            <article class="award-2026"><time>2026</time><div><h3>جائزة التميز المؤسسي لأفضل منفذ خدمة</h3><p>حصلت 8 دوائر في المحافظات على جائزة التميز المؤسسي لأفضل منفذ خدمة.</p></div></article>\n          </div>')
 
 # Force fresh navigation and presentation scripts after routing fixes.
 text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')
