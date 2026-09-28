@@ -453,6 +453,27 @@ if 'id="community-line"' not in text:
         raise SystemExit("Expected achievements section for standalone chapter insertion")
     text = text.replace(achievement_marker, community_media_sections + achievement_marker, 1)
 
+# The executive overview retains its existing hero and four approved metrics.
+# Add a concise reading path after them, using links to the existing chapters.
+overview_guide = '''        <div class="overview-guide" aria-label="دليل قراءة الملخص التنفيذي">
+          <div class="overview-guide-heading">
+            <div><span class="section-kicker">الملخص التنفيذي · مسار القراءة</span><h2>ابدأ بالصورة العامة، ثم افتح ما يهمك</h2><p>الأرقام العليا أعلاه تقدم المشهد في دقيقة. المسارات التالية تقود إلى البيانات والتفسير والإجراءات.</p></div>
+            <a class="overview-guide-spotlight" href="#performance"><span>المؤشر الرئيسي للمديرية</span><strong>التواصل ورضا المستفيدين</strong><small>اقرأ النتيجة ومكوناتها ومصادرها ←</small></a>
+          </div>
+          <div class="overview-paths" aria-label="أسئلة الإدارة الستة">
+            <a href="#directorate"><span class="overview-path-number">01</span><strong>من نحن؟</strong><small>الدور والهيكل ومركزية المتعامل</small><span class="overview-path-arrow" aria-hidden="true">←</span></a>
+            <a href="#coverage"><span class="overview-path-number">02</span><strong>من نخدم وكيف نصل إليه؟</strong><small>التغطية والمحافظات وقنوات الخدمة</small><span class="overview-path-arrow" aria-hidden="true">←</span></a>
+            <a href="#performance"><span class="overview-path-number">03</span><strong>كيف أداؤنا؟</strong><small>النتائج والاتجاه ومصادر المؤشرات</small><span class="overview-path-arrow" aria-hidden="true">←</span></a>
+            <a href="#operational-plan"><span class="overview-path-number">04</span><strong>ماذا ننجز الآن؟</strong><small>الخطة التشغيلية وتقدم الأعمال</small><span class="overview-path-arrow" aria-hidden="true">←</span></a>
+            <a href="#risk-register"><span class="overview-path-number">05</span><strong>ما الذي يحتاج قرارًا؟</strong><small>المخاطر والموقف التنفيذي والمتابعة</small><span class="overview-path-arrow" aria-hidden="true">←</span></a>
+            <a href="#community-line"><span class="overview-path-number">06</span><strong>ما أثر تواصلنا؟</strong><small>التواصل المجتمعي والمركز الإعلامي</small><span class="overview-path-arrow" aria-hidden="true">←</span></a>
+          </div>
+          <details class="overview-read-more"><summary>كيف أقرأ بيانات المنصة؟</summary><p>تُعرض الفترة المرجعية في مقدمة كل قسم. افتح تبويب الأداء لقراءة تعريف المؤشر ومكوناته، وتبويب متابعة الأعمال للاطلاع على الإجراءات التفصيلية. راجع تاريخ ومصدر كل بيان قبل استخدامه في تقرير جديد.</p></details>
+        </div>
+
+'''
+replace_required('        <section class="section-block" id="directorate">', overview_guide + '        <section class="section-block" id="directorate">')
+
 # Force fresh navigation and presentation scripts after routing fixes.
 text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')
 text = text.replace('src="assets/platform-enhancements.js?v=20260927-5"', 'src="assets/platform-enhancements.js?v=20260927-final"')
@@ -467,6 +488,7 @@ for asset in [
     text = re.sub(rf'src="assets/{re.escape(asset)}(?:\?v=[^"]*)?"', f'src="assets/{asset}?v={asset_revision}"', text)
 text = re.sub(r'href="assets/styles.css(?:\?v=[^"]*)?"', f'href="assets/styles.css?v={asset_revision}"', text)
 text = re.sub(r'href="assets/exhibition.css(?:\?v=[^"]*)?"', f'href="assets/exhibition.css?v={asset_revision}"', text)
+text = text.replace('</head>', f'  <link rel="stylesheet" href="assets/overview-guide.css?v={asset_revision}" />\n</head>', 1)
 text = re.sub(r'src="assets/work-tracker.html(?:\?v=[^"]*)?"', f'src="assets/work-tracker.html?v={asset_revision}"', text)
 
 # Load this last: the upstream exhibition stylesheet centers an overflowing
