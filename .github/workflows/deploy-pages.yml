@@ -163,6 +163,13 @@ jobs:
               if not target.exists():
                   raise SystemExit(f"Referenced asset does not exist: {asset}")
 
+          for report in ("reports/q1-2026.pdf", "reports/q2-2026.pdf"):
+              target=html_path.parent / report
+              if f'href="{report}"' not in text or not target.is_file():
+                  raise SystemExit(f"Quarterly report link or file missing: {report}")
+              if target.stat().st_size < 1_000_000 or target.open("rb").read(4) != b"%PDF":
+                  raise SystemExit(f"Quarterly report is not a complete PDF: {report}")
+
           if "316" in text:
               raise SystemExit("Deprecated community total 316 still exists in generated page")
           if text.count('id="community-line"') != 1 or text.count('id="media-center"') != 1:

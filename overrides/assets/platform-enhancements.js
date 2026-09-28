@@ -2,6 +2,12 @@
   "use strict";
   const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
   const fmt=n=>new Intl.NumberFormat("en-US").format(Number(n)||0);
+  // NCSI September 2026 monthly bulletin, table 1: registered Omanis at end of August.
+  const omanisByGovernorate={
+    "مسقط":612670,"ظفار":247723,"مسندم":36932,"البريمي":77161,
+    "الداخلية":416156,"شمال الباطنة":615828,"جنوب الباطنة":384828,
+    "جنوب الشرقية":254642,"شمال الشرقية":217200,"الظاهرة":182044,"الوسطى":27915
+  };
 
   // Community and media-center chapters are injected server-side by patch_index.py.
   // Keeping their chapter markup out of this runtime enhancement script prevents
@@ -32,7 +38,7 @@
     let population=$("#governoratePopulation",inspector);
     if(!population){
       population=document.createElement("div"); population.id="governoratePopulation"; population.className="governorate-population";
-      population.innerHTML=`<div class="population-head"><span>التركيبة السكانية للمحافظة</span><small>بانتظار تقرير السكان المخصص للمحافظات</small></div><div class="population-grid"><article><span>المواطنون</span><b>—</b></article><article><span>العاملون</span><b>—</b></article><article><span>غيرهم من السكان</span><b>—</b></article><article><span>إجمالي السكان</span><b>—</b></article></div>`;
+      population.innerHTML=`<div class="population-head"><span>العمانيون في المحافظة · أغسطس 2026</span><a href="reports/population-aug-2026.pdf" target="_blank" rel="noopener">المصدر: النشرة الإحصائية لشهر سبتمبر 2026 ↗</a></div><div class="population-grid"><article><span>عدد العمانيين</span><b id="govOmaniPopulation">—</b></article></div>`;
       inspector.appendChild(population);
     }
     const update=()=>{
@@ -41,6 +47,12 @@
         if(label.textContent.trim()==="القوى العاملة") label.textContent="الكوادر البشرية";
         if(label.textContent.includes("الحصة من موظفي المحافظات")) label.textContent="نسبة الموظفين من إجمالي موظفي المديرية";
       });
+      const workCards=$$(".work-metrics article",inspector);
+      setText(workCards[0]?.querySelector("span"),"زيارة إلى المقر");
+      setText(workCards[7]?.querySelector("span"),"تقييم عبر QR الإجادة المؤسسية - وزارة العمل");
+      const name=String($("#governorateName")?.textContent||"").trim().replace(/^محافظة\s*/,"");
+      const omanCount=omanisByGovernorate[name];
+      setText($("#govOmaniPopulation",population),omanCount?fmt(omanCount):"—");
       const currentShareSmall=share?.parentElement?.querySelector("small");
       setText(currentShareSmall,"من إجمالي 236 موظفًا في المديرية");
       const s=Number(String(staff?.textContent||"").replace(/[^0-9.]/g,""))||0;
@@ -54,37 +66,36 @@
     new MutationObserver(update).observe(inspector,{subtree:true,childList:true,characterData:true});
   }
 
-  const governorateQ2={
-    "مسقط":{visitors:19014,appointments:"58%",field:751,proactive:38,self:1348,community:0,whatsapp:1747},
-    "ظفار":{visitors:5968,appointments:"88%",field:2537,proactive:142,self:827,community:14,whatsapp:1747},
-    "مسندم":{visitors:2189,appointments:"69%",field:228,proactive:39,self:681,community:4,whatsapp:33},
-    "البريمي":{visitors:5800,appointments:"84%",field:1285,proactive:14,self:1393,community:9,whatsapp:76},
-    "الداخلية":{visitors:3951,appointments:"100%",field:731,proactive:137,self:1393,community:8,whatsapp:350},
-    "شمال الباطنة":{visitors:9051,appointments:"87%",field:2277,proactive:17,self:1007,community:14,whatsapp:479},
-    "جنوب الباطنة":{visitors:7739,appointments:"60%",field:3452,proactive:112,self:1198,community:30,whatsapp:1686},
-    "جنوب الشرقية":{visitors:3403,appointments:"100%",field:600,proactive:227,self:376,community:9,whatsapp:663},
-    "شمال الشرقية":{visitors:3988,appointments:"59%",field:610,proactive:4,self:265,community:36,whatsapp:686},
-    "الظاهرة":{visitors:3693,appointments:"84%",field:696,proactive:425,self:1057,community:13,whatsapp:238},
-    "الوسطى":{visitors:890,appointments:"84%",field:440,proactive:84,self:170,community:18,whatsapp:1373}
-  };
-
-  function addGovernoratePerformanceFilter(){
-    const host=$(".branches-workload"); if(!host || $("#governoratePerformanceFilter",host)) return;
-    const names=Object.keys(governorateQ2);
-    const panel=document.createElement("div"); panel.id="governoratePerformanceFilter"; panel.className="governorate-performance-filter";
-    panel.innerHTML=`<div class="gov-filter-head"><div><span>استعراض حسب المحافظة</span><h4>اختر محافظة لتحديث البطاقة</h4></div><select aria-label="اختيار المحافظة">${names.map(n=>`<option value="${n}">${n}</option>`).join("")}</select></div><div class="gov-performance-card"></div><small class="gov-performance-source">الفترة: الربع الثاني 2026 · القيم مستخرجة من التقرير الربع سنوي للمديرية.</small>`;
-    const metrics=$(".workload-metrics",host); metrics?.before(panel);
-    const card=$(".gov-performance-card",panel),select=$("select",panel);
-    const render=()=>{const d=governorateQ2[select.value]; card.innerHTML=`
-      <div class="gov-card-title"><b>${select.value}</b><span>دائرة الحماية الاجتماعية</span></div>
-      <article><span>المراجعون</span><strong>${fmt(d.visitors)}</strong></article>
-      <article><span>نسبة حجز المواعيد</span><strong>${d.appointments}</strong></article>
-      <article><span>خدمات ميدانية</span><strong>${fmt(d.field)}</strong></article>
-      <article><span>خدمات استباقية</span><strong>${fmt(d.proactive)}</strong></article>
-      <article><span>خدمات ذاتية</span><strong>${fmt(d.self)}</strong></article>
-      <article><span>تواصل مجتمعي</span><strong>${fmt(d.community)}</strong></article>
-      <article><span>واتساب</span><strong>${fmt(d.whatsapp)}</strong></article>`;};
-    select.addEventListener("change",render); render();
+  function decorateGovernorateCards(){
+    const inspector=$("#governorateInspector"); if(!inspector)return;
+    const icons={
+      staff:'<circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 9a3 3 0 0 1 0 6m2 2a4 4 0 0 1 2 3"/>',
+      share:'<path d="M12 3v9h9A9 9 0 0 0 12 3Z"/><path d="M9 4a9 9 0 1 0 11 11H9Z"/>',
+      transaction:'<path d="M5 3h14v18l-3-2-4 2-4-2-3 2V3Z"/><path d="M8 8h8M8 12h8"/>',
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/>',
+      message:'<path d="M4 4h16v12H9l-5 4V4Z"/><path d="M8 9h8m-8 3h5"/>',
+      field:'<path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12Z"/><circle cx="12" cy="9" r="2"/>',
+      proactive:'<path d="m12 3-2 6H4l5 4-2 7 5-4 5 4-2-7 5-4h-6l-2-6Z"/>',
+      self:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M10 17h4"/>',
+      community:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/>',
+      qr:'<path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h2m4 0v3m-6 3h6"/>',
+      productivity:'<path d="M4 19h16M6 16l4-5 3 2 5-7"/><path d="M15 6h3v3"/>',
+      daily:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>'
+    };
+    const groups=[
+      [".inspector-kpis article",["staff","share"]],
+      [".work-metrics article",["transaction","calendar","message","field","proactive","self","community","qr"]],
+      [".governorate-productivity article",["productivity","daily"]]
+    ];
+    groups.forEach(([selector,kinds])=>$$(selector,inspector).forEach((card,index)=>{
+      const kind=kinds[index]; if(!kind||card.querySelector(".governorate-card-icon"))return;
+      card.classList.add("gov-kind-"+kind);
+      const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.setAttribute("class","governorate-card-icon");svg.setAttribute("viewBox","0 0 24 24");
+      svg.setAttribute("fill","none");svg.setAttribute("stroke","currentColor");
+      svg.setAttribute("stroke-width","1.8");svg.setAttribute("stroke-linecap","round");svg.setAttribute("stroke-linejoin","round");
+      svg.setAttribute("aria-hidden","true");svg.innerHTML=icons[kind];card.prepend(svg);
+    }));
   }
 
   function correctDirectorateEmployeeCount(){
@@ -99,7 +110,7 @@
   }
 
   function boot(){
-    enhanceGovernorateInspector(); addGovernoratePerformanceFilter(); correctDirectorateEmployeeCount();
+    enhanceGovernorateInspector(); decorateGovernorateCards(); correctDirectorateEmployeeCount();
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,0)); else setTimeout(boot,0);
 })();

@@ -365,14 +365,14 @@ text = text.replace('        <a href="#media-center">المركز الإعلام
 if 'href="#community-line"' not in text:
     text = text.replace(
         '        <a href="#projects">المشاريع</a>\n        <a href="#achievements">الريادة والمجتمع</a>',
-        '        <a href="#projects">المشاريع</a>\n        <a href="#community-line">خط التواصل المجتمعي</a>\n        <a href="#media-center">المركز الإعلامي</a>\n        <a href="#achievements">الريادة والمجتمع</a>',
+        '        <a href="#projects">المشاريع</a>\n        <a href="#community-line">خطة التواصل المجتمعي</a>\n        <a href="#media-center">المركز الإعلامي</a>\n        <a href="#achievements">الريادة والمجتمع</a>',
         1,
     )
 
 community_media_sections = r'''        <section class="section-block community-v2" id="community-line">
           <div class="community-hero-v2">
             <div class="community-hero-copy">
-              <span class="community-eyebrow">خط التواصل المجتمعي · يناير–أغسطس 2026</span>
+              <span class="community-eyebrow">خطة التواصل المجتمعي · يناير–أغسطس 2026</span>
               <h2>نقترب من المجتمع، ونحوّل المعرفة إلى أثر</h2>
               <p>خطة سنوية متكاملة تعمل عبر ثلاثة مسارات: التمكين، التعريف والتوعية، والشراكة المجتمعية.</p>
               <div class="community-paths"><span>↗ التمكين</span><span>● التعريف والتوعية</span><span>◇ الشراكة المجتمعية</span></div>
@@ -427,13 +427,15 @@ community_media_sections = r'''        <section class="section-block community-v
           </div>
           <div class="media-shelf">
             <article class="report-cover q1">
-              <div class="report-cover-top"><span>Q1</span><i>▤</i></div>
-              <div class="report-cover-body"><small>يناير–مارس 2026</small><h3>التقرير الربع سنوي</h3><strong>الربع الأول</strong><p>ملخص تنفيذي · الأداء · الخطة التشغيلية · التواصل المجتمعي · حجم الأعمال</p></div>
+              <div class="report-cover-top"><span>Q1</span><span class="report-format">30 صفحة · PDF</span></div>
+              <a class="report-preview" href="reports/q1-2026.pdf" target="_blank" rel="noopener" aria-label="قراءة التقرير الربع سنوي الأول الكامل"><img src="reports/q1-cover-01.jpg" alt="غلاف التقرير الربع سنوي الأول 2026" loading="lazy"><span>قراءة التقرير الكامل ↗</span></a>
+              <div class="report-cover-body"><small>يناير–مارس 2026</small><h3><a href="reports/q1-2026.pdf" target="_blank" rel="noopener">التقرير الربع سنوي</a></h3><strong>الربع الأول</strong><p>ملخص تنفيذي · الأداء · الخطة التشغيلية · التواصل المجتمعي · حجم الأعمال</p><a class="report-open-link" href="reports/q1-2026.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
               <details><summary>أبرز المؤشرات</summary><ul><li>158 نشاطًا وفعالية مجتمعية</li><li>10,619 من الجمهور المستهدف</li><li>135,841 إجمالي حجم الأعمال المنجزة بالمحافظات</li><li>37,752 مكالمة مستلمة بمركز الاتصال</li></ul></details>
             </article>
             <article class="report-cover q2">
-              <div class="report-cover-top"><span>Q2</span><i>▤</i></div>
-              <div class="report-cover-body"><small>أبريل–يونيو 2026</small><h3>التقرير الربع سنوي</h3><strong>الربع الثاني</strong><p>مقارنة ربعية · مؤشرات الأداء · الفرق واللجان · التواصل المجتمعي · أداء المحافظات</p></div>
+              <div class="report-cover-top"><span>Q2</span><span class="report-format">41 صفحة · PDF</span></div>
+              <a class="report-preview" href="reports/q2-2026.pdf" target="_blank" rel="noopener" aria-label="قراءة التقرير الربع سنوي الثاني الكامل"><img src="reports/q2-cover-01.jpg" alt="غلاف التقرير الربع سنوي الثاني 2026" loading="lazy"><span>قراءة التقرير الكامل ↗</span></a>
+              <div class="report-cover-body"><small>أبريل–يونيو 2026</small><h3><a href="reports/q2-2026.pdf" target="_blank" rel="noopener">التقرير الربع سنوي</a></h3><strong>الربع الثاني</strong><p>مقارنة ربعية · مؤشرات الأداء · الفرق واللجان · التواصل المجتمعي · أداء المحافظات</p><a class="report-open-link" href="reports/q2-2026.pdf" target="_blank" rel="noopener">فتح التقرير الكامل PDF ↗</a></div>
               <details><summary>أبرز المؤشرات</summary><ul><li>161 نشاطًا وفعالية مجتمعية خلال الربع الثاني</li><li>6,474 من الجمهور المستهدف</li><li>146,807 إجمالي حجم الأعمال المنجزة بالمحافظات</li><li>42,596 مكالمة مستلمة بمركز الاتصال</li><li>236 موظفًا إجمالي موظفي المديرية</li></ul></details>
             </article>
             <article class="report-cover upcoming">
