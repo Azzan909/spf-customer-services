@@ -9,6 +9,9 @@
 
   function enhanceGovernorateInspector(){
     const inspector=$("#governorateInspector"); if(!inspector) return;
+    const setText=(element,value)=>{
+      if(element && element.textContent!==value) element.textContent=value;
+    };
     const titleCards=$$("article",inspector);
     titleCards.forEach(card=>{
       const span=$("span",card); if(!span)return;
@@ -17,9 +20,9 @@
     });
     const staff=$("#governorateStaff"),share=$("#governorateShare"),total=$("#governorateTotalWork");
     const shareSmall=share?.parentElement?.querySelector("small");
-    if(shareSmall) shareSmall.textContent="من إجمالي 236 موظفًا في المديرية";
+    setText(shareSmall,"من إجمالي 236 موظفًا في المديرية");
     const oldAverage=[...inspector.querySelectorAll("small")].find(x=>x.textContent.includes("المتوسط:"));
-    if(oldAverage) oldAverage.textContent="تُحسب النسبة من إجمالي موظفي المديرية: 236";
+    setText(oldAverage,"تُحسب النسبة من إجمالي موظفي المديرية: 236");
     let extra=$("#governorateProductivity",inspector);
     if(!extra && total){
       extra=document.createElement("div"); extra.id="governorateProductivity"; extra.className="governorate-productivity";
@@ -38,13 +41,14 @@
         if(label.textContent.trim()==="القوى العاملة") label.textContent="الكوادر البشرية";
         if(label.textContent.includes("الحصة من موظفي المحافظات")) label.textContent="نسبة الموظفين من إجمالي موظفي المديرية";
       });
-      const currentShareSmall=share?.parentElement?.querySelector("small"); if(currentShareSmall) currentShareSmall.textContent="من إجمالي 236 موظفًا في المديرية";
+      const currentShareSmall=share?.parentElement?.querySelector("small");
+      setText(currentShareSmall,"من إجمالي 236 موظفًا في المديرية");
       const s=Number(String(staff?.textContent||"").replace(/[^0-9.]/g,""))||0;
       const w=Number(String(total?.textContent||"").replace(/[^0-9.]/g,""))||0;
-      if(share && s) share.textContent=(s/236*100).toFixed(1)+"%";
+      if(share && s) setText(share,(s/236*100).toFixed(1)+"%");
       const per=$("#govWorkPerEmployee"),daily=$("#govDailyPerEmployee");
-      if(per) per.textContent=s?fmt(Math.round(w/s)):"—";
-      if(daily) daily.textContent=s?(w/s/173).toFixed(1):"—";
+      setText(per,s?fmt(Math.round(w/s)):"—");
+      setText(daily,s?(w/s/173).toFixed(1):"—");
     };
     update();
     new MutationObserver(update).observe(inspector,{subtree:true,childList:true,characterData:true});
