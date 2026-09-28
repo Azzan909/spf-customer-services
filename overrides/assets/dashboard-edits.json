@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-09-27T08:37:04.856Z",
+  "updatedAt": "2026-09-28T06:16:37.905Z",
   "edits": {
     "div:1>main:1>header:1>div:1>span:1": "صندوق الحماية الاجتماعية · سلطنة عُمان",
     "div:1>main:1>header:1>div:1>h1:1": "بوصلة المتعامل",
@@ -244,7 +244,7 @@
     "#governorateStaff": "30",
     "#governorateInspector>div:3>article:1>small:1": "موظفًا وموظفة",
     "#governorateInspector>div:3>article:2>span:1": "نسبة الموظفين من إجمالي موظفي المديرية",
-    "#governorateShare": "17.8%",
+    "#governorateShare": "12.7%",
     "#governorateInspector>div:3>article:2>small:1": "من إجمالي 236 موظفًا في المديرية",
     "#governorateInspector>div:4>div:1>span:1": "مقارنة بمتوسط المحافظات",
     "#governorateComparison": "أعلى بـ 95%",
@@ -256,9 +256,8 @@
     "#governorateInspector>div:6>div:1>span:1": "حجم الأعمال حسب الملف المرفق",
     "#governorateInspector>div:6>div:1>b:1": "يناير–أغسطس 2026",
     "#governorateInspector>div:6>div:2>span:1": "إجمالي الأعمال المنجزة",
-    "#governorateTotalWork": "69,184",
     "#govTransactions": "50,643",
-    "#governorateInspector>div:6>div:3>article:1>span:1": "معاملة",
+    "#governorateInspector>div:6>div:3>article:1>span:1": "زيارة إلى المقر",
     "#govAppointments": "28,513",
     "#governorateInspector>div:6>div:3>article:2>span:1": "حجز موعد",
     "#govWhatsapp": "5,123",
@@ -272,7 +271,7 @@
     "#govCommunity": "12",
     "#governorateInspector>div:6>div:3>article:7>span:1": "نشاطًا مجتمعيًا",
     "#govQr": "29,111",
-    "#governorateInspector>div:6>div:3>article:8>span:1": "تقييم QR",
+    "#governorateInspector>div:6>div:3>article:8>span:1": "تقييم عبر QR الإجادة المؤسسية - وزارة العمل",
     "#channels>div:4>span:1": "كفاءة الكادر الوظيفي",
     "#channels>div:4>div:1>b:1": "9 لغات مختلفة",
     "#channels>div:4>div:1>b:2": "مهارات لغة الإشارة",
@@ -692,32 +691,16 @@
     "#work-tracker>div:1>div:1>h2:1": "الموقف التنفيذي وكفاءة الاستجابة",
     "#work-tracker>div:1>span:1": "آخر تحديث أسبوعي · 17 سبتمبر 2026",
     "#work-tracker>div:2>article:1>span:1": "نسبة البنود المنجزة",
-    "#trackerRate": "76%",
-    "#trackerRateSummary": "303 من أصل 401 بندًا",
     "#work-tracker>div:2>article:2>span:1": "إجمالي الأعمال",
-    "#trackerTotalCount": "401",
-    "#trackerCountSummary": "5 أقسام تشغيلية",
     "#work-tracker>div:2>article:3>span:1": "منجز",
-    "#trackerDoneCount": "303",
     "#work-tracker>div:2>article:3>small:1": "أُغلقت بنودها",
     "#work-tracker>div:2>article:4>span:1": "قيد الإجراء",
-    "#trackerProgressCount": "98",
     "#work-tracker>div:2>article:4>small:1": "تتطلب متابعة",
     "#work-tracker>div:3>article:1>div:1>span:1": "مركز الاتصال",
-    "#work-tracker>div:3>article:1>div:1>b:1": "111 / 119",
-    "#work-tracker>div:3>article:1>small:1": "93% من البنود منجزة",
     "#work-tracker>div:3>article:2>div:1>span:1": "التنسيق والمتابعة",
-    "#work-tracker>div:3>article:2>div:1>b:1": "7 / 7",
-    "#work-tracker>div:3>article:2>small:1": "100% من البنود منجزة",
     "#work-tracker>div:3>article:3>div:1>span:1": "إدارة علاقات المتعاملين",
-    "#work-tracker>div:3>article:3>div:1>b:1": "42 / 48",
-    "#work-tracker>div:3>article:3>small:1": "88% من البنود منجزة",
     "#work-tracker>div:3>article:4>div:1>span:1": "إدارة وتطوير الخدمات",
-    "#work-tracker>div:3>article:4>div:1>b:1": "98 / 143",
-    "#work-tracker>div:3>article:4>small:1": "69% من البنود منجزة",
     "#work-tracker>div:3>article:5>div:1>span:1": "شؤون الدوائر والمنافذ",
-    "#work-tracker>div:3>article:5>div:1>b:1": "45 / 84",
-    "#work-tracker>div:3>article:5>small:1": "54% من البنود منجزة",
     "#work-tracker>article:1>div:1>div:1>h3:1": "اللوحة التفاعلية التفصيلية",
     "#work-tracker>article:1>div:1>div:1>p:1": "تصفية حسب القسم والموظف والشهر والحالة، مع سجل تفصيلي وجودة البيانات.",
     "#work-tracker>div:4>div:1>span:1": "تبويب خاص",
@@ -1268,27 +1251,10 @@
     "#boardModePanel>main:1>section:4>div:2>div:2>div:1>span:6": "التحول الرقمي",
     "#boardModePanel>main:1>section:4>div:3>b:1": "متابعة مجلس الإدارة",
     "#boardModePanel>main:1>section:4>div:3>span:1": "ربط كل هدف بالنتيجة الحالية والمالك التنفيذي والإجراء التصحيحي عند استكمال تحديث النتائج الفعلية.",
-    "#boardModePanel>main:1>section:5>div:1>span:1": "05 · الموقف التنفيذي",
-    "#boardModePanel>main:1>section:5>div:1>h2:1": "لوحة واحدة لمتابعة 401 بندًا تشغيليًا",
-    "#boardModePanel>main:1>section:5>div:1>p:1": "قراءة تنفيذية لحالة الأعمال حسب القسم وفق تحديث 17 سبتمبر 2026.",
-    "#boardModePanel>main:1>section:5>div:2>article:1>span:1": "البنود المنجزة",
-    "#boardRate": "76%",
-    "#boardDone": "303 منجزًا",
     "#boardProgress": "98 قيد الإجراء",
-    "#boardModePanel>main:1>section:5>div:2>div:1>article:1>strong:1": "93%",
-    "#boardModePanel>main:1>section:5>div:2>div:1>article:1>span:1": "مركز الاتصال",
-    "#boardModePanel>main:1>section:5>div:2>div:1>article:2>strong:1": "88%",
-    "#boardModePanel>main:1>section:5>div:2>div:1>article:2>span:1": "علاقات المتعاملين",
-    "#boardModePanel>main:1>section:5>div:2>div:1>article:3>strong:1": "54%",
-    "#boardModePanel>main:1>section:5>div:2>div:1>article:3>span:1": "شؤون الدوائر والمنافذ",
-    "#boardModePanel>main:1>section:5>div:2>div:2>article:1>strong:1": "69%",
-    "#boardModePanel>main:1>section:5>div:2>div:2>article:1>span:1": "إدارة وتطوير الخدمات",
     "#boardDeptCount>strong:1": "5",
     "#boardDeptCount>span:1": "أقسام ضمن المتابعة",
-    "#boardTotalItems>strong:1": "401",
     "#boardTotalItems>span:1": "بندًا في التحديث الأسبوعي",
-    "#boardModePanel>main:1>section:5>div:3>b:1": "أولوية المتابعة",
-    "#boardModePanel>main:1>section:5>div:3>span:1": "توجيه المراجعة نحو البنود قيد الإجراء والأقسام ذات نسب الإغلاق الأقل، مع فتح السجل التفصيلي لمعرفة المالك والحالة.",
     "#boardModePanel>main:1>section:6>div:1>span:1": "06 · الأثر ومحاور القرار",
     "#boardModePanel>main:1>section:6>div:1>h2:1": "أثر مجتمعي يستند إلى شراكات واسعة",
     "#boardModePanel>main:1>section:6>div:1>p:1": "ملخص الأثر ومحاور النقاش المقترحة للاجتماع.",
@@ -1519,7 +1485,723 @@
     "#boardModePanel>main:1>section:3>div:2>div:1>article:6>strong:1": "2,067",
     "#boardModePanel>main:1>section:3>div:2>div:1>article:6>span:1": "خدمات مقدمة عبر منصة X",
     "#boardModePanel>main:1>section:3>div:3>b:1": "امتداد الخدمة",
-    "#boardModePanel>main:1>section:3>div:3>span:1": "24,773 خدمة ميدانية، و4,294 خدمة استباقية، و17,160 خدمة ذاتية خلال الفترة."
+    "#boardModePanel>main:1>section:3>div:3>span:1": "24,773 خدمة ميدانية، و4,294 خدمة استباقية، و17,160 خدمة ذاتية خلال الفترة.",
+    "#media-center>div:1>div:1>p:1": "",
+    "#media-center>div:1>div:1>h2:1": "مكتبة التقارير والنشرات",
+    "#media-center>div:3>article:1>div:1>span:2": "أبريل",
+    "#media-center>div:3>article:2>div:1>span:2": "يوليو",
+    "#media-center>div:3>article:1>div:1>span:1": "1",
+    "#media-center>div:3>article:2>div:1>span:1": "2",
+    "#media-center>div:2>article:3>span:1": "آخر فترة نشر",
+    "#media-center>div:2>article:3>strong:1": "يوليو 2026",
+    "#media-center>div:3>article:3>div:2>h3:1": "",
+    "#media-center>div:3>article:3>div:2>strong:1": "تقرير الربع الثالت للمديرية العامة لخدمات المتعاملين 2026",
+    "#community-line>div:3>article:2>div:1>span:1": "الأبرز",
+    "#governorateProductivity>article:1>span:1": "متوسط الأعمال لكل موظف",
+    "#govWorkPerEmployee": "2,036",
+    "#governorateProductivity>article:1>small:1": "يناير–أغسطس",
+    "#governorateProductivity>article:2>span:1": "المعدل اليومي لكل موظف",
+    "#govDailyPerEmployee": "11.8",
+    "#governorateProductivity>article:2>small:1": "متوسط تقريبي على أساس 173 يومًا من الأحد–الخميس",
+    "#governoratePopulation>div:1>span:1": "العمانيون في المحافظة · أغسطس 2026",
+    "#governoratePopulation>div:2>article:1>span:1": "عدد العمانيين",
+    "#govOmaniPopulation": "612,670",
+    "#operationalPlanGrid>article:1>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:1>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:1>div:3>div:2>div:1>b:1": "تحديد المبادرات المقترحة النهائية القابلة للتطبيق وتحديث وثيقة المخرجات",
+    "#operationalPlanGrid>article:1>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:1>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:1>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:1>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:1>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:1>div:3>div:3>div:1>b:1": "تسليم الوثيقة النهائية",
+    "#operationalPlanGrid>article:1>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:1>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:1>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:1>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:1>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:1>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:1>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:1>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:2>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:2>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:2>div:3>div:2>div:1>b:1": "التحديث الدوري لوثيقة استراتيجية مركزية العميل",
+    "#operationalPlanGrid>article:2>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:2>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:2>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:2>div:3>div:2>div:2>strong:1": "يفوق التوقعات",
+    "#operationalPlanGrid>article:2>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:2>div:3>div:3>div:1>b:1": "رفع تقرير نهائي للمدير العام يوضح الموقف التنفيذي للاستراتيجية وآلية تطبيقها",
+    "#operationalPlanGrid>article:2>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:2>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:2>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:2>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:2>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:2>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:2>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:2>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:3>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:3>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:3>div:3>div:2>div:1>b:1": "تحديث الموقف التنفيذي لسجل مخاطر المديرية",
+    "#operationalPlanGrid>article:3>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:3>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:3>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:3>div:3>div:2>div:2>strong:1": "يفوق التوقعات",
+    "#operationalPlanGrid>article:3>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:3>div:3>div:3>div:1>b:1": "متابعة تنفيذ الإجراءات والأنشطة المعالجة للخطر",
+    "#operationalPlanGrid>article:3>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:3>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:3>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:3>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:3>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:3>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:3>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:3>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:4>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:4>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:4>div:3>div:2>div:1>b:1": "إعداد الخطة الإعلامية للفعاليات والأنشطة",
+    "#operationalPlanGrid>article:4>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:4>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:4>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:4>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:4>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:4>div:3>div:3>div:1>b:1": "المشاركة في الفعاليات",
+    "#operationalPlanGrid>article:4>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:4>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:4>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:4>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:4>div:3>div:4>div:1>span:1": "النتيجة 3",
+    "#operationalPlanGrid>article:4>div:3>div:4>div:1>b:1": "تحقيق نسبة إنجاز في الخطة الإعلامية لا تقل عن 90% ربع سنويًا لكل محافظة",
+    "#operationalPlanGrid>article:4>div:3>div:4>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:4>div:3>div:4>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:4>div:3>div:4>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:4>div:3>div:4>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:4>div:3>div:5>div:1>span:1": "النتيجة 4",
+    "#operationalPlanGrid>article:4>div:3>div:5>div:1>b:1": "إعداد تقرير نهائي لتنفيذ الخطة الإعلامية",
+    "#operationalPlanGrid>article:4>div:3>div:5>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:4>div:3>div:5>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:4>div:3>div:5>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:4>div:3>div:5>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:4>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:4>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:4>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:4>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:5>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:5>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:5>div:3>div:2>div:1>b:1": "تقديم الخدمات الميدانية والاستباقية بنسبة لا تقل عن 15% من إجمالي المعاملات بنهاية نوفمبر 2026م",
+    "#operationalPlanGrid>article:5>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:5>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:5>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:5>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:5>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:5>div:3>div:3>div:1>b:1": "إعداد تقرير نهائي عن الخدمات الميدانية والاستباقية ورفعه للمدير العام",
+    "#operationalPlanGrid>article:5>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:5>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:5>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:5>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:5>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:5>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:5>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:5>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:6>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:6>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:6>div:3>div:2>div:1>b:1": "تنفيذ ما لا يقل عن 50 نشاطًا معرفيًا لقياس المعرفة حتى نهاية نوفمبر 2026",
+    "#operationalPlanGrid>article:6>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:6>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:6>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:6>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:6>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:6>div:3>div:3>div:1>b:1": "تنفيذ اختبارات تعزيز قياس المعرفة مرتين خلال النصف الثاني",
+    "#operationalPlanGrid>article:6>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:6>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:6>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:6>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:6>div:3>div:4>div:1>span:1": "النتيجة 3",
+    "#operationalPlanGrid>article:6>div:3>div:4>div:1>b:1": "إعداد مسودة منهجية اختيار مستشار الحماية الاجتماعية",
+    "#operationalPlanGrid>article:6>div:3>div:4>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:6>div:3>div:4>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:6>div:3>div:4>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:6>div:3>div:4>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:6>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:6>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:6>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:6>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:7>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:7>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:7>div:3>div:2>div:1>b:1": "تنفيذ الملتقى وفق المراحل المتفق عليها في خطة العمل",
+    "#operationalPlanGrid>article:7>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:7>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:7>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:7>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:7>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:7>div:3>div:3>div:1>b:1": "رفع تقرير نهائي بنتائج المبادرة للمدير العام",
+    "#operationalPlanGrid>article:7>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:7>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:7>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:7>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:7>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:7>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:7>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:7>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:8>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:8>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:8>div:3>div:2>div:1>b:1": "نسبة حجز المواعيد بأكثر من 30% من مجموعة المتغيرات المرتبطة بالعمل للنصف الثاني لعام 2026م",
+    "#operationalPlanGrid>article:8>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:8>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:8>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:8>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:8>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:8>div:3>div:3>div:1>b:1": "تحقيق مجموع الخدمة الذاتية بأكثر من 10% من مجموع حجم المعاملات للنصف الثاني لعام 2026م",
+    "#operationalPlanGrid>article:8>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:8>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:8>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:8>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:8>div:3>div:4>div:1>span:1": "النتيجة 3",
+    "#operationalPlanGrid>article:8>div:3>div:4>div:1>b:1": "تحقيق مجموع تقييم QR لوزارة العمل بما لا يقل عن 100 كل شهر لكل دائرة بالمحافظات",
+    "#operationalPlanGrid>article:8>div:3>div:4>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:8>div:3>div:4>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:8>div:3>div:4>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:8>div:3>div:4>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:8>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:8>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:8>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:8>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#operationalPlanGrid>article:9>div:3>div:1>small:1": "يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا",
+    "#operationalPlanGrid>article:9>div:3>div:2>div:1>span:1": "النتيجة 1",
+    "#operationalPlanGrid>article:9>div:3>div:2>div:1>b:1": "وفق مؤشرات المركز الوطني للإحصاء والمعلومات",
+    "#operationalPlanGrid>article:9>div:3>div:2>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:9>div:3>div:2>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:9>div:3>div:2>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:9>div:3>div:2>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:9>div:3>div:3>div:1>span:1": "النتيجة 2",
+    "#operationalPlanGrid>article:9>div:3>div:3>div:1>b:1": "وفق مؤشرات العمل",
+    "#operationalPlanGrid>article:9>div:3>div:3>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:9>div:3>div:3>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:9>div:3>div:3>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:9>div:3>div:3>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:9>div:3>div:4>div:1>span:1": "النتيجة 3",
+    "#operationalPlanGrid>article:9>div:3>div:4>div:1>b:1": "وفق مؤشرات المنصة الوطنية لتلقي الشكاوى والمقترحات والبلاغات (تجاوب)",
+    "#operationalPlanGrid>article:9>div:3>div:4>label:1>span:1": "الحالة",
+    "#operationalPlanGrid>article:9>div:3>div:4>label:2>span:1": "تاريخ التسليم",
+    "#operationalPlanGrid>article:9>div:3>div:4>div:2>span:1": "التقييم",
+    "#operationalPlanGrid>article:9>div:3>div:4>div:2>strong:1": "بانتظار التحديث",
+    "#operationalPlanGrid>article:9>div:4>label:1>span:1": "تسليم المبادرة كاملة",
+    "#operationalPlanGrid>article:9>div:4>label:2>span:1": "تاريخ التسليم النهائي",
+    "#operationalPlanGrid>article:9>div:4>div:1>span:1": "نتيجة المبادرة",
+    "#operationalPlanGrid>article:9>div:4>div:1>strong:1": "بانتظار التسليم النهائي",
+    "#community-line>div:1>div:1>span:1": "خطة التواصل المجتمعي · يناير–أغسطس 2026",
+    "#community-line>div:1>div:1>h2:1": "نقترب من المجتمع، ونحوّل المعرفة إلى أثر",
+    "#community-line>div:1>div:1>p:1": "خطة سنوية متكاملة تعمل عبر ثلاثة مسارات: التمكين، التعريف والتوعية، والشراكة المجتمعية.",
+    "#community-line>div:1>div:1>div:1>span:1": "↗ التمكين",
+    "#community-line>div:1>div:1>div:1>span:2": "● التعريف والتوعية",
+    "#community-line>div:1>div:1>div:1>span:3": "◇ الشراكة المجتمعية",
+    "#community-line>div:1>div:2>span:1": "إجمالي الأنشطة والفعاليات",
+    "#community-line>div:1>div:2>strong:1": "313",
+    "#community-line>div:1>div:2>small:1": "العدد النهائي المعتمد",
+    "#community-line>div:2>article:1>span:1": "الأنشطة والفعاليات",
+    "#community-line>div:2>article:1>strong:1": "313",
+    "#community-line>div:2>article:1>small:1": "يناير–أغسطس 2026",
+    "#community-line>div:2>article:2>span:1": "المستفيدون والمشاركون",
+    "#community-line>div:2>article:2>strong:1": "17,093",
+    "#community-line>div:2>article:2>small:1": "نطاق أثر مجتمعي مباشر",
+    "#community-line>div:2>article:3>span:1": "الشركاء",
+    "#community-line>div:2>article:3>strong:1": "+255",
+    "#community-line>div:2>article:3>small:1": "جهة وشريكًا في المحافظات",
+    "#community-line>div:2>article:4>span:1": "التغطية الجغرافية",
+    "#community-line>div:2>article:4>strong:1": "11",
+    "#community-line>div:2>article:4>small:1": "محافظة",
+    "#community-line>div:3>article:1>div:1>span:1": "كيف نعمل؟",
+    "#community-line>div:3>article:1>div:1>h3:1": "رحلة التواصل المجتمعي",
+    "#community-line>div:3>article:1>div:2>div:1>b:1": "01",
+    "#community-line>div:3>article:1>div:2>div:1>span:1": "التخطيط",
+    "#community-line>div:3>article:1>div:2>div:1>small:1": "تقويم سنوي ورسائل موحّدة",
+    "#community-line>div:3>article:1>div:2>div:2>b:1": "02",
+    "#community-line>div:3>article:1>div:2>div:2>span:1": "الوصول",
+    "#community-line>div:3>article:1>div:2>div:2>small:1": "تنفيذ عبر دوائر المحافظات",
+    "#community-line>div:3>article:1>div:2>div:3>b:1": "03",
+    "#community-line>div:3>article:1>div:2>div:3>span:1": "التفاعل",
+    "#community-line>div:3>article:1>div:2>div:3>small:1": "ورش ولقاءات وحملات ومبادرات",
+    "#community-line>div:3>article:1>div:2>div:4>b:1": "04",
+    "#community-line>div:3>article:1>div:2>div:4>span:1": "قياس الأثر",
+    "#community-line>div:3>article:1>div:2>div:4>small:1": "جمهور، شركاء ونطاق وصول",
+    "#community-line>div:3>article:2>div:1>h3:1": "نماذج من الأنشطة والفعاليات",
+    "#community-line>div:3>article:2>div:2>div:1>time:1": "يناير",
+    "#community-line>div:3>article:2>div:2>div:1>p:1>b:1": "جلسة تصوير محتوى إعلامي للأطفال",
+    "#community-line>div:3>article:2>div:2>div:1>p:1>small:1": "الوسطى – الدقم",
+    "#community-line>div:3>article:2>div:2>div:2>time:1": "فبراير",
+    "#community-line>div:3>article:2>div:2>div:2>p:1>b:1": "قافلة عُمان وفعاليات شتاء الوسطى",
+    "#community-line>div:3>article:2>div:2>div:2>p:1>small:1": "مسندم · الوسطى",
+    "#community-line>div:3>article:2>div:2>div:3>time:1": "مارس",
+    "#community-line>div:3>article:2>div:2>div:3>p:1>b:1": "اليوم العالمي للسمع وساعة الأرض وورش توعوية",
+    "#community-line>div:3>article:2>div:2>div:3>p:1>small:1": "عدة محافظات",
+    "#community-line>div:3>article:2>div:2>div:4>time:1": "أبريل",
+    "#community-line>div:3>article:2>div:2>div:4>p:1>b:1": "اليوم العالمي للتوحد والسلامة المهنية",
+    "#community-line>div:3>article:2>div:2>div:4>p:1>small:1": "الظاهرة · ظفار",
+    "#community-line>div:3>article:2>div:2>div:5>time:1": "مايو",
+    "#community-line>div:3>article:2>div:2>div:5>p:1>b:1": "اليوم العالمي للعمال وحوارات مجتمعية",
+    "#community-line>div:3>article:2>div:2>div:5>p:1>small:1": "عدة محافظات",
+    "#community-line>div:3>article:2>div:2>div:6>time:1": "يونيو",
+    "#community-line>div:3>article:2>div:2>div:6>p:1>b:1": "مبادرات توعوية ولقاءات تعريفية",
+    "#community-line>div:3>article:2>div:2>div:6>p:1>small:1": "عدة محافظات",
+    "#community-line>div:3>article:2>div:2>div:7>time:1": "يوليو–أغسطس",
+    "#community-line>div:3>article:2>div:2>div:7>p:1>b:1": "استكمال تنفيذ الخطة المجتمعية بالمحافظات",
+    "#community-line>div:3>article:2>div:2>div:7>p:1>small:1": "ضمن إجمالي 313 نشاطًا وفعالية",
+    "#community-line>div:4>div:1>b:1": "التمكين",
+    "#community-line>div:4>div:1>span:1": "رفع القدرة على فهم الأنظمة والخدمات والاستفادة منها",
+    "#community-line>div:4>div:2>b:1": "التعريف والتوعية",
+    "#community-line>div:4>div:2>span:1": "تعزيز المعرفة بموضوعات وأنظمة الحماية الاجتماعية",
+    "#community-line>div:4>div:3>b:1": "الشراكة المجتمعية",
+    "#community-line>div:4>div:3>span:1": "توسيع نطاق الوصول وبناء شراكات ذات أثر",
+    "#community-line>div:5>div:1>span:1": "تبويب خاص",
+    "#community-line>div:5>div:1>h3:1": "خطة التواصل المجتمعي",
+    "#community-line>div:5>div:1>p:1": "أدخل رمز العرض لإزالة التشويش خلال هذه الجلسة.",
+    "#media-center>div:1>div:1>span:1": "المركز الإعلامي للمديرية",
+    "#media-center>div:1>div:2>b:1": "التقارير",
+    "#media-center>div:2>article:1>span:1": "التقارير المتاحة",
+    "#media-center>div:2>article:1>strong:1": "2",
+    "#media-center>div:2>article:2>span:1": "دورية التحديث",
+    "#media-center>div:2>article:2>strong:1": "ربع سنوي",
+    "#media-center>div:3>article:1>a:1>span:1": "قراءة التقرير الكامل ↗",
+    "#media-center>div:3>article:1>div:2>small:1": "يناير–مارس 2026",
+    "#media-center>div:3>article:1>div:2>h3:1": "التقرير الربع سنوي",
+    "#media-center>div:3>article:1>div:2>strong:1": "الربع الأول",
+    "#media-center>div:3>article:1>div:2>p:1": "ملخص تنفيذي · الأداء · الخطة التشغيلية · التواصل المجتمعي · حجم الأعمال",
+    "#media-center>div:3>article:1>details:1>ul:1>li:1": "158 نشاطًا وفعالية مجتمعية",
+    "#media-center>div:3>article:1>details:1>ul:1>li:2": "10,619 من الجمهور المستهدف",
+    "#media-center>div:3>article:1>details:1>ul:1>li:3": "135,841 إجمالي حجم الأعمال المنجزة بالمحافظات",
+    "#media-center>div:3>article:1>details:1>ul:1>li:4": "37,752 مكالمة مستلمة بمركز الاتصال",
+    "#media-center>div:3>article:2>a:1>span:1": "قراءة التقرير الكامل ↗",
+    "#media-center>div:3>article:2>div:2>small:1": "أبريل–يونيو 2026",
+    "#media-center>div:3>article:2>div:2>h3:1": "التقرير الربع سنوي",
+    "#media-center>div:3>article:2>div:2>strong:1": "الربع الثاني",
+    "#media-center>div:3>article:2>div:2>p:1": "مقارنة ربعية · مؤشرات الأداء · الفرق واللجان · التواصل المجتمعي · أداء المحافظات",
+    "#media-center>div:3>article:2>details:1>ul:1>li:1": "161 نشاطًا وفعالية مجتمعية خلال الربع الثاني",
+    "#media-center>div:3>article:2>details:1>ul:1>li:2": "6,474 من الجمهور المستهدف",
+    "#media-center>div:3>article:2>details:1>ul:1>li:3": "146,807 إجمالي حجم الأعمال المنجزة بالمحافظات",
+    "#media-center>div:3>article:2>details:1>ul:1>li:4": "42,596 مكالمة مستلمة بمركز الاتصال",
+    "#media-center>div:3>article:2>details:1>ul:1>li:5": "236 موظفًا إجمالي موظفي المديرية",
+    "#media-center>div:3>article:3>div:1>span:1": "+",
+    "#media-center>div:3>article:3>div:2>small:1": "قادم",
+    "#media-center>div:3>article:3>div:2>p:1": "نشرات شهرية · تقارير دورية · تقارير ربع سنوية لاحقة",
+    "#media-center>div:4>span:1": "مصدر واحد موثوق",
+    "#media-center>div:4>span:2": "قراءة سريعة للإدارة العليا",
+    "#media-center>div:4>span:3": "تحديث دوري منظم",
+    "#media-center>div:5>div:1>span:1": "تبويب خاص",
+    "#media-center>div:5>div:1>h3:1": "المركز الإعلامي",
+    "#media-center>div:5>div:1>p:1": "أدخل رمز العرض لإزالة التشويش خلال هذه الجلسة."
   },
-  "planDelivery": {}
+  "planDelivery": {
+    "O01": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O02": {
+      "results": [
+        {
+          "delivered": "yes",
+          "date": "2026-09-13"
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O03": {
+      "results": [
+        {
+          "delivered": "yes",
+          "date": "2026-08-16"
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O04": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O05": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O06": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O07": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O08": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O09": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O10": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O11": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O12": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O13": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O14": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O15": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O16": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O17": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O18": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O19": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O20": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O21": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    },
+    "O22": {
+      "results": [
+        {
+          "delivered": "",
+          "date": ""
+        },
+        {
+          "delivered": "",
+          "date": ""
+        }
+      ],
+      "final": {
+        "delivered": "",
+        "date": ""
+      }
+    }
+  }
 }
