@@ -190,6 +190,17 @@
     return match?new Date(2026,PLAN_MONTHS[match[2]],Number(match[1])):null;
   }
   function finalThresholdDate(item,field){return parsePlanDate(thresholdForResult(item,field,item.results.length-1))}
+  function resultMilestone(item,index){
+    const expectedText=thresholdForResult(item,"expected",index),expectedDate=parsePlanDate(expectedText);
+    if(expectedDate)return {date:expectedDate,label:expectedText,source:"موعد النتيجة"};
+    const resultText=planListValue(item,"results",index),describedDate=parsePlanDate(resultText);
+    if(describedDate){
+      const match=String(resultText).match(/(\d{1,2}\s+(?:يناير|فبراير|مارس|أبريل|ابريل|مايو|يونيو|يوليو|أغسطس|اغسطس|سبتمبر|أكتوبر|اكتوبر|نوفمبر|ديسمبر)(?:\s+2026)?)/);
+      return {date:describedDate,label:match?.[1]||planValue(item,"deadline"),source:"موعد النتيجة"};
+    }
+    const deadlineText=planValue(item,"deadline");
+    return {date:parsePlanDate(deadlineText),label:deadlineText,source:"الموعد النهائي للهدف"};
+  }
   function ensurePlanState(item){
     const state=planDelivery[item.id]||{};
     if(!Array.isArray(state.results)) state.results=item.results.map(()=>({delivered:"",date:""}));
@@ -249,20 +260,19 @@
     const section=$("#operational-plan"),summary=$(".plan-summary",section);if(!section||!summary)return;
     let panel=$("#planMilestones");if(!panel){panel=document.createElement("div");panel.id="planMilestones";panel.className="plan-milestones";summary.insertAdjacentElement("afterend",panel)}
     const months=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
-    const items=window.SPF_OPERATIONAL_PLAN.filter(item=>item.group==="core").map(item=>{
-      const deadline=finalThresholdDate(item,"expected")||parsePlanDate(planValue(item,"deadline"));
-      return {item,deadline,evaluation:planEvaluation(item),state:ensurePlanState(item)};
-    });
-    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>مواعيد تسليم الأهداف التشغيلية</h3></div><small>الشريط يمتد حتى الموعد المستهدف، ولا يمثل نسبة الإنجاز الفعلي</small></div>
-      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>الهدف</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
-      ${items.map(({item,deadline,evaluation,state})=>{
-        const month=deadline?.getFullYear()===2026?deadline.getMonth()+1:-1;
+    const items=window.SPF_OPERATIONAL_PLAN.filter(item=>item.group==="core").flatMap(item=>
+      item.results.map((_,resultIndex)=>({item,resultIndex,milestone:resultMilestone(item,resultIndex),evaluation:resultEvaluation(item,resultIndex),state:ensurePlanState(item).results[resultIndex]||{}}))
+    );
+    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>مواعيد تسليم نتائج الأهداف التشغيلية</h3></div><small>كل صف يمثل نتيجة مستقلة، ويعرض تاريخ تسليمها على المخطط</small></div>
+      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>الهدف والنتيجة</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
+      ${items.map(({item,resultIndex,milestone,evaluation,state})=>{
+        const deadline=milestone.date,month=deadline?.getFullYear()===2026?deadline.getMonth()+1:-1;
         const valid=month>=1&&month<=12;
-        const delivered=state.final.delivered==="yes"&&!!state.final.date;
+        const delivered=state.delivered==="yes"&&!!state.date;
         const status=delivered?"مسلم":evaluation.code==="late"?"متأخر":"قيد المتابعة";
-        return `<div class="plan-milestone-row"><div class="plan-milestone-name"><b>${escapeHtml(item.id.replace("O",""))}</b><span>${escapeHtml(planValue(item,"title"))}</span></div>
-        ${months.map((_,index)=>`<div class="plan-milestone-cell ${valid&&month===index+1?"marked":""} ${valid&&index+1<month?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}">${valid&&month===index+1?`<i class="${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i><small>${escapeHtml(parsePlanDate(thresholdForResult(item,"expected",item.results.length-1))?thresholdForResult(item,"expected",item.results.length-1):planValue(item,"deadline"))}</small>`:valid&&index+1<month?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`).join("")}
-        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${valid?status:"موعد غير محدد"}</span></div>`;
+        return `<div class="plan-milestone-row"><div class="plan-milestone-name"><b>${escapeHtml(item.id.replace("O",""))}.${resultIndex+1}</b><span><strong>${escapeHtml(planValue(item,"title"))}</strong><small>النتيجة ${resultIndex+1}: ${escapeHtml(planListValue(item,"results",resultIndex))}</small></span></div>
+        ${months.map((_,index)=>`<div class="plan-milestone-cell ${valid&&month===index+1?"marked":""} ${valid&&index+1<month?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}">${valid&&month===index+1?`<i class="${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i><small><b>ن${resultIndex+1}</b>${escapeHtml(milestone.label)}</small><em>${escapeHtml(milestone.source)}</em>`:valid&&index+1<month?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`).join("")}
+        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${valid?`النتيجة ${resultIndex+1} · ${status}`:"موعد غير محدد"}</span></div>`;
       }).join("")}</div>`;
   }
   function resultScheduleRows(item){
@@ -507,7 +517,8 @@
       {code:"pending",label:"لم يبدأ",tone:"pending",icon:"○"},
       {code:"done",label:"منجز",tone:"done",icon:"✓"}
     ];
-    panel.innerHTML=`<div class="tracker-kanban-head"><div><span>المشهد التشغيلي</span><h3>المهام حسب الحالة</h3></div><small>الأعداد من السجل التفصيلي المباشر · تُعرض ثلاث مهام نموذجية من كل حالة</small></div>
+    const headerValue=(key,fallback)=>Object.prototype.hasOwnProperty.call(workingEdits,key)?workingEdits[key]:fallback;
+    panel.innerHTML=`<div class="tracker-kanban-head"><div><span data-edit-key="tracker.kanban.eyebrow">${escapeHtml(headerValue("tracker.kanban.eyebrow","المشهد التشغيلي"))}</span><h3 data-edit-key="tracker.kanban.title">${escapeHtml(headerValue("tracker.kanban.title","المهام حسب الحالة"))}</h3></div><small data-edit-key="tracker.kanban.subtitle">${escapeHtml(headerValue("tracker.kanban.subtitle","الأعداد من السجل التفصيلي المباشر · تُعرض ثلاث مهام نموذجية من كل حالة"))}</small></div>
     <div class="tracker-kanban-columns">${groups.map(group=>{
       const items=tasks.filter(task=>classify(task)===group.code);
       return `<section class="tracker-kanban-column ${group.tone}" aria-label="${group.label}: ${items.length} مهام"><h4><span><i aria-hidden="true">${group.icon}</i>${group.label}</span><strong>${items.length}</strong></h4><div class="tracker-kanban-list">${items.slice(0,3).map(task=>{
@@ -515,6 +526,7 @@
         return `<article><small>${escapeHtml(task.dept||"قسم غير محدد")}${task.id?` · ${escapeHtml(task.id)}`:""}</small><b>${escapeHtml(task.title)}</b><div class="tracker-kanban-progress"><i><em style="width:${valid?Math.max(0,Math.min(100,pct)):0}%"></em></i><span>${valid?`${Math.round(pct)}%`:"—"}</span></div><footer><span>${escapeHtml(task.emp||"غير محدد")}</span><time>${escapeHtml(task.date||task.due||"—")}</time></footer></article>`;
       }).join("")||'<p>لا توجد مهام بهذه الحالة</p>'}</div><a href="assets/work-tracker.html" target="_blank" rel="noopener">فتح السجل التفصيلي ←</a></section>`;
     }).join("")}</div>`;
+    prepareEditable(panel);
   }
 
   function renderTrackerBoard(summary=readTrackerSummary()){
@@ -571,6 +583,8 @@
     const summary=event.data.summary;if(!summary||!Array.isArray(summary.depts))return;
     try{localStorage.setItem(TRACKER_SUMMARY_KEY,JSON.stringify(summary))}catch(_){/* private mode */}
     renderTrackerBoard(summary);
+    if(Array.isArray(event.data.tasks))renderTrackerKanban(event.data.tasks);
+    else refreshTrackerSummary();
   });
 
   window.addEventListener("storage",event=>{
