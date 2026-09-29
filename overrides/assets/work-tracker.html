@@ -716,7 +716,7 @@ function completionSummary(){
 function publishSummary(){
   const summary=completionSummary();
   try{localStorage.setItem('spf-work-tracker-summary-v3',JSON.stringify(summary));}catch(_){/* storage can be blocked */}
-  if(window.parent&&window.parent!==window)window.parent.postMessage({type:'spf-work-tracker-summary',summary},window.location.origin);
+  if(window.parent&&window.parent!==window)window.parent.postMessage({type:'spf-work-tracker-summary',summary,tasks:DATA},window.location.origin);
 }
 
 // ═══════════════════════════════════════════════
