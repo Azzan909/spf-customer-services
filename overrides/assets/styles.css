@@ -526,3 +526,25 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 #work-tracker .section-heading h2{margin:0;color:#244f40;font-size:clamp(25px,2.4vw,34px);font-weight:900;line-height:1.35}
 #work-tracker .section-note{border:1px solid rgba(58,86,76,.1);background:#f0f5f1;color:#3f6355;font-weight:800}
 @media(max-width:700px){#work-tracker>.section-heading{align-items:flex-start;flex-direction:column}#work-tracker .section-heading h2{font-size:24px}}
+
+/* Official palette for the operational-plan and work-tracker executive cards. */
+#operational-plan .section-kicker{width:max-content;padding:6px 11px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:#f2e4c8;color:#573b22!important;font-size:12px;font-weight:900;letter-spacing:0;box-shadow:0 4px 13px rgba(25,62,49,.1)}
+#operational-plan .section-heading h2{color:#fff;font-weight:900;text-shadow:0 1px 1px rgba(17,57,43,.25)}
+#operational-plan .plan-summary article,#work-tracker .tracker-summary article{border:1px solid rgba(45,82,68,.13);box-shadow:0 12px 28px rgba(30,68,54,.09)}
+#operational-plan .plan-summary article:nth-child(1),#work-tracker .tracker-summary article:nth-child(1){background:linear-gradient(145deg,#712848,#4b1932);border-color:#712848;color:#fff}
+#operational-plan .plan-summary article:nth-child(2),#work-tracker .tracker-summary article:nth-child(3){background:linear-gradient(145deg,#356b56,#214c3d);border-color:#356b56;color:#fff}
+#operational-plan .plan-summary article:nth-child(3),#work-tracker .tracker-summary article:nth-child(4){background:linear-gradient(145deg,#fff,#fbf3f5);border-color:rgba(113,40,72,.2);color:#5b273e}
+#operational-plan .plan-summary article:nth-child(4),#work-tracker .tracker-summary article:nth-child(2){background:linear-gradient(145deg,#fff,#f4f7f3);border-color:rgba(53,107,86,.2);color:#285343}
+#operational-plan .plan-summary article:nth-child(-n+2) span,#operational-plan .plan-summary article:nth-child(-n+2) small,#work-tracker .tracker-summary article:nth-child(1) span,#work-tracker .tracker-summary article:nth-child(1) small,#work-tracker .tracker-summary article:nth-child(3) span,#work-tracker .tracker-summary article:nth-child(3) small{color:rgba(255,255,255,.78)!important}
+#operational-plan .plan-summary article:nth-child(-n+2) strong,#work-tracker .tracker-summary article:nth-child(1) strong,#work-tracker .tracker-summary article:nth-child(3) strong{color:#f4d89a!important}
+#operational-plan .plan-summary article:nth-child(3) span,#operational-plan .plan-summary article:nth-child(3) small,#work-tracker .tracker-summary article:nth-child(4) span,#work-tracker .tracker-summary article:nth-child(4) small{color:#795269!important}
+#operational-plan .plan-summary article:nth-child(3) strong,#work-tracker .tracker-summary article:nth-child(4) strong{color:#862f53!important}
+#operational-plan .plan-summary article:nth-child(4) span,#operational-plan .plan-summary article:nth-child(4) small,#work-tracker .tracker-summary article:nth-child(2) span,#work-tracker .tracker-summary article:nth-child(2) small{color:#64766f!important}
+#operational-plan .plan-summary article:nth-child(4) strong,#work-tracker .tracker-summary article:nth-child(2) strong{color:#315f4d!important}
+
+/* The work scene follows the platform's light executive-card system. */
+.tracker-kanban{background:#fff;color:#254b3d;border-color:rgba(45,85,65,.14);box-shadow:0 12px 30px rgba(24,63,48,.07)}
+.tracker-kanban-head{padding-bottom:13px;border-bottom:1px solid #e3e9e4}.tracker-kanban-head span{color:#8b6330}.tracker-kanban-head h3{color:#244f40}.tracker-kanban-head small{color:#64766d}
+.tracker-kanban-column{background:#f2f7f4;border-color:#d9e6df}.tracker-kanban-column.late{background:#fbf0f3;border-color:#ead2db}.tracker-kanban-column.risk{background:#fff8e9;border-color:#ecdcb9}.tracker-kanban-column.pending{background:#f5f2f5;border-color:#e3dbe3}.tracker-kanban-column.done{background:#edf7f1;border-color:#d2e8da}
+.tracker-kanban-column h4{color:#294f41}.tracker-kanban-column h4>span i{border-color:rgba(49,95,77,.15);background:#fff;color:#315f4d}.tracker-kanban-column h4 strong{background:#3f705e}.tracker-kanban-column.late h4 strong{background:#8a3557}.tracker-kanban-column.risk h4 strong{background:#9a6b28}.tracker-kanban-column.pending h4 strong{background:#765f7c}.tracker-kanban-column.done h4 strong{background:#337759}
+.tracker-kanban-list article{background:#fff;border-color:rgba(35,75,61,.11);box-shadow:0 6px 14px rgba(31,69,55,.045)}.tracker-kanban-list article>b{color:#24483b}.tracker-kanban-list article>small,.tracker-kanban-list p{color:#687970}.tracker-kanban-progress{color:#315643}.tracker-kanban-progress i{background:#e7ede8}.tracker-kanban-progress em{background:linear-gradient(90deg,#396f59,#c9a45f)}.tracker-kanban-list article footer{color:#64766d}.tracker-kanban-list article footer time{color:#8f682f}.tracker-kanban-column>a{color:#315f4d}
