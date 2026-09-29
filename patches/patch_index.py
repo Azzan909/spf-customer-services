@@ -141,6 +141,7 @@ replace_required('09 · الحضور المؤسسي', '10 · الحضور الم
 replace_required('10 · محفظة التطوير', '11 · محفظة التطوير')
 replace_required('11 · الريادة والشراكة المجتمعية', '12 · الريادة والشراكة المجتمعية')
 
+# Quarterly KPI cards use a visual journey: Q1 -> net change -> Q2.
 performance_section = '''        <section class="section-block performance-priority" id="performance">
           <div class="section-heading">
             <div><span class="section-kicker">08 · الأداء والمؤشرات</span><h2>المؤشر الرئيسي للمديرية ثم الأداء التشغيلي وحجم الأعمال</h2></div>
