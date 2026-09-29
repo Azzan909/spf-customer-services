@@ -369,3 +369,127 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 #achievements .timeline .award-2026{background:#f4f8f2;border-right:4px solid #ab8448;border-radius:12px;padding:12px}
 @media(max-width:1000px){.media-archive-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.media-archive-grid{grid-template-columns:1fr}}
+
+/* Presentation-inspired executive views, backed by live plan and task data. */
+#operational-plan,#work-tracker{background:linear-gradient(155deg,#eff4ef 0%,#fff 43%,#f7f5ee 100%)}
+#operational-plan .section-heading,#work-tracker .section-heading{padding:22px 25px;border-radius:19px;background:#234b3d;color:#fff;align-items:center}
+#operational-plan .section-heading h2,#work-tracker .section-heading h2{color:#fff;font-size:clamp(22px,2.5vw,31px)}
+#operational-plan .section-heading .section-note,#work-tracker .section-heading .section-note{background:rgba(255,255,255,.1);color:#f3e2b3}
+#operational-plan .plan-summary,#work-tracker .tracker-summary{gap:12px}
+#operational-plan .plan-summary article,#work-tracker .tracker-summary article{min-height:168px;padding:22px;border-radius:19px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 9px 25px rgba(24,63,48,.08)}
+#operational-plan .plan-summary span,#work-tracker .tracker-summary span{font-size:13px;font-weight:750}
+#operational-plan .plan-summary strong,#work-tracker .tracker-summary strong{font-size:clamp(39px,4.6vw,60px);line-height:1.1;letter-spacing:-.04em;margin:10px 0 4px;font-variant-numeric:tabular-nums}
+#operational-plan .plan-summary small,#work-tracker .tracker-summary small{font-size:11px;line-height:1.55}
+#operational-plan .plan-summary .plan-target,#work-tracker .tracker-summary .tracker-rate{background:linear-gradient(140deg,#1c493a,#34735c);color:white;border-color:#1c493a}
+#operational-plan .plan-summary .plan-target strong,#work-tracker .tracker-summary .tracker-rate strong{color:#f4d48d}
+#work-tracker .tracker-summary .tracker-rate span,#work-tracker .tracker-summary .tracker-rate small{color:#e2eee5}
+#work-tracker .tracker-summary article:nth-child(2){background:#f2e6cf}
+#work-tracker .tracker-summary article:nth-child(3){background:#e5f2e9}
+#work-tracker .tracker-summary article:nth-child(4){background:#e9f0f5}
+.plan-milestones,.tracker-kanban{margin:20px 0 24px;padding:22px;border-radius:19px;border:1px solid rgba(45,85,65,.14);background:#fff;box-shadow:0 10px 29px rgba(24,63,48,.055)}
+.plan-milestone-head,.tracker-kanban-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:14px}
+.plan-milestone-head span,.tracker-kanban-head span{display:block;color:#a07835;font-size:11px;font-weight:800}
+.plan-milestone-head h3,.tracker-kanban-head h3{margin:2px 0;color:#214b3c;font-size:20px}
+.plan-milestone-head small,.tracker-kanban-head small{color:#60736a;font-size:11px;line-height:1.5}
+.plan-milestone-scroll{overflow-x:auto}
+.plan-milestone-axis,.plan-milestone-row{display:grid;grid-template-columns:minmax(210px,2fr) repeat(5,minmax(82px,1fr)) minmax(100px,.8fr);min-width:800px;align-items:center}
+.plan-milestone-axis{border-radius:10px 10px 0 0;background:#234b3d;color:#fff;font-size:11px;font-weight:800}
+.plan-milestone-axis span,.plan-milestone-row>div,.plan-milestone-row>.plan-milestone-status{padding:10px 9px;text-align:center}
+.plan-milestone-axis span:first-child,.plan-milestone-name{text-align:right!important}
+.plan-milestone-row{border-bottom:1px solid #e1e9e2;font-size:11px;min-height:56px}
+.plan-milestone-row:nth-child(odd){background:#f8faf8}
+.plan-milestone-name{display:flex;gap:9px;align-items:center;line-height:1.4}
+.plan-milestone-name b{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:8px;background:#e9d3a3;color:#345143}
+.plan-milestone-name span{font-weight:700;color:#294638}
+.plan-milestone-cell{min-height:56px;border-inline-start:1px solid #e6ebe6;position:relative}
+.plan-milestone-cell.marked{background:#f5f0e4}
+.plan-milestone-cell i{display:block;width:13px;height:13px;margin:auto;border-radius:50%;background:#75a0b9;box-shadow:0 0 0 5px rgba(117,160,185,.16)}
+.plan-milestone-cell.active-range{background:linear-gradient(90deg,rgba(107,151,128,.08),rgba(107,151,128,.16))}.plan-milestone-cell i.range-line{width:100%;height:8px;border-radius:0;background:linear-gradient(90deg,#abcabb,#79a58f);box-shadow:none}
+.plan-milestone-cell i.done{background:#2f9363;box-shadow:0 0 0 5px rgba(47,147,99,.15)}
+.plan-milestone-cell i.late{background:#bf5c5c;box-shadow:0 0 0 5px rgba(191,92,92,.15)}
+.plan-milestone-cell small{display:block;margin-top:5px;color:#526b5d;font-size:9px;white-space:nowrap}
+.plan-milestone-status{font-size:10px;font-weight:800;color:#486a80}.plan-milestone-status.done{color:#247b52}.plan-milestone-status.late{color:#a33e44}
+.tracker-kanban-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tracker-kanban-column{min-width:0;padding:12px;border-radius:16px;background:#f0f5f7;border:1px solid #dce7ec}
+.tracker-kanban-column.late{background:#faf0ee;border-color:#eddad5}.tracker-kanban-column.done{background:#ecf5ee;border-color:#d9e9dc}
+.tracker-kanban-column h4{display:flex;align-items:center;justify-content:space-between;gap:9px;margin:0 0 12px;color:#284a3d;font-size:14px}
+.tracker-kanban-column h4 strong{display:grid;place-items:center;min-width:38px;min-height:38px;padding:4px;border-radius:11px;background:#577f95;color:#fff;font-size:20px;line-height:1}
+.tracker-kanban-column.late h4 strong{background:#b04d55}.tracker-kanban-column.done h4 strong{background:#32815a}
+.tracker-kanban-list{display:grid;gap:9px}.tracker-kanban-list article{padding:12px;background:#fff;border:1px solid rgba(35,75,61,.11);border-radius:12px;min-height:125px}
+.tracker-kanban-list article>b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#214436;font-size:12px;line-height:1.5}
+.tracker-kanban-list article>small{display:block;margin-top:6px;color:#63746b;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tracker-kanban-list p{margin:16px 0;color:#5e7167;font-size:12px}
+.tracker-kanban-progress{display:flex;align-items:center;gap:9px;margin-top:13px;color:#315643;font-size:10px;font-weight:800}
+.tracker-kanban-progress i{display:block;flex:1;height:7px;border-radius:8px;background:#e9eee9;overflow:hidden}
+.tracker-kanban-progress em{display:block;height:100%;background:#c7a15e;border-radius:8px}
+.tracker-kanban-column>a{display:block;margin-top:13px;color:#245c48;text-decoration:none;font-size:11px;font-weight:800}
+.tracker-kanban-column>a:hover{text-decoration:underline}
+@media(max-width:950px){.tracker-kanban-columns{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){#operational-plan .section-heading,#work-tracker .section-heading{padding:17px;align-items:start;flex-direction:column}#operational-plan .plan-summary,#work-tracker .tracker-summary{grid-template-columns:1fr 1fr}.plan-milestone-head,.tracker-kanban-head{align-items:start;flex-direction:column}.tracker-kanban-columns{grid-template-columns:1fr}.plan-milestones,.tracker-kanban{padding:14px}}
+
+/* Unified visual hierarchy: the same executive-number language across chapters. */
+.section-block:not(#operational-plan):not(#work-tracker):not(.community-v2):not(.media-v2)>.section-heading{position:relative;overflow:hidden;padding:20px 22px;border-radius:18px;background:linear-gradient(135deg,#edf3ee,#fbfaf5);border:1px solid rgba(58,86,76,.08);align-items:center}
+.section-block:not(#operational-plan):not(#work-tracker):not(.community-v2):not(.media-v2)>.section-heading:after{content:"";position:absolute;left:-55px;top:-65px;width:150px;height:150px;border:26px solid rgba(204,168,98,.09);border-radius:50%}
+.section-block>.section-heading h2{font-size:clamp(22px,2.25vw,30px);line-height:1.35}.section-block>.section-heading .section-kicker{font-size:12px}
+:is(.metric-card,.risk-summary article,.tajawob-hero>div,.workload-overview article,.ops-grid article,.kpi-board article,.population-grid article,.governorate-productivity article){position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(35,75,61,.055)}
+:is(.metric-card,.risk-summary article,.tajawob-hero>div,.workload-overview article,.ops-grid article,.kpi-board article,.population-grid article,.governorate-productivity article):after{content:"";position:absolute;width:82px;height:82px;border:15px solid rgba(58,86,76,.045);border-radius:50%;left:-35px;bottom:-43px;pointer-events:none}
+:is(.metric-card>strong,.risk-summary strong,.tajawob-hero strong,.workload-overview strong,.ops-grid strong,.kpi-board strong,.population-grid b,.governorate-productivity b,.people-num,.coverage-total strong,.reach-card>strong,.component-ring strong,.operational-priority-grid strong){font-variant-numeric:tabular-nums;letter-spacing:-.035em}
+.metric-card>strong{font-size:clamp(36px,3.3vw,48px);margin-top:11px}.people-num{font-size:42px}.coverage-total strong{font-size:42px}.reach-card>strong{font-size:42px}.ops-grid strong,.kpi-board strong{font-size:37px}.risk-summary strong{font-size:clamp(40px,4vw,54px)}.tajawob-hero strong{font-size:clamp(39px,4vw,52px)}.workload-overview strong{font-size:36px}.workload-overview .workload-total strong{font-size:48px}
+.metric-grid .metric-card:nth-child(1){background:linear-gradient(145deg,#f7edd8,#fff)}.metric-grid .metric-card:nth-child(2){background:linear-gradient(145deg,#eaf4ee,#fff)}.metric-grid .metric-card:nth-child(3){background:linear-gradient(145deg,#f2eaf1,#fff)}.metric-grid .metric-card:nth-child(4){background:linear-gradient(145deg,#eaf0f5,#fff)}
+.media-orbit i{font-size:82px;line-height:.95;color:#f3d38f;letter-spacing:-.06em}.media-orbit b{bottom:49px;font-size:13px}.media-orbit small{position:absolute;bottom:28px;color:rgba(255,255,255,.65);font-size:9px}
+.media-stat-strip article{min-height:112px;padding:20px}.media-stat-strip strong{font-size:20px;line-height:1.25}.media-stat-strip article:first-child{background:linear-gradient(140deg,#244f40,#36725b);border-color:#244f40}.media-stat-strip article:first-child i{background:rgba(255,255,255,.12);color:#f1d59c}.media-stat-strip article:first-child span{color:rgba(255,255,255,.72)!important}.media-stat-strip article:first-child strong{font-size:clamp(36px,3.6vw,50px);color:#f3d38f}
+.report-cover{transition:transform .22s ease,box-shadow .22s ease}.report-cover:hover{transform:translateY(-5px);box-shadow:0 25px 50px rgba(41,49,45,.2)}.report-cover-body strong{font-size:48px}.media-archive-card:nth-child(3n+2){background:#fbf6ea}.media-archive-card:nth-child(3n+3){background:#eef5f1}
+@media(max-width:700px){.section-block:not(#operational-plan):not(#work-tracker):not(.community-v2):not(.media-v2)>.section-heading{align-items:flex-start;flex-direction:column}.metric-card>strong,.risk-summary strong,.tajawob-hero strong{font-size:36px}.media-stat-strip article{min-height:94px}}
+
+/* Reference components on the platform's existing light canvas. */
+#operational-plan,#work-tracker{background:linear-gradient(180deg,#fbfaf6,#f5f7f2)!important}
+#operational-plan .section-heading,#work-tracker .section-heading{background:linear-gradient(125deg,#285a49,#36715b);border-radius:20px;color:#fff}
+#operational-plan .section-heading h2,#work-tracker .section-heading h2{color:#fff}
+#operational-plan .plan-summary article,#work-tracker .tracker-summary article{position:relative;overflow:hidden;min-height:180px;border-radius:22px;background:#254e40;border-color:#ffffff24;color:#fff;box-shadow:0 12px 30px #21493924}
+#operational-plan .plan-summary article:after,#work-tracker .tracker-summary article:after{content:"";position:absolute;left:-45px;bottom:-65px;width:125px;height:125px;border-radius:50%;border:22px solid #ffffff10}
+#operational-plan .plan-summary article:nth-child(1),#work-tracker .tracker-summary article:nth-child(1){background:linear-gradient(145deg,#6c2947,#421e32)}
+#operational-plan .plan-summary article:nth-child(2),#work-tracker .tracker-summary article:nth-child(2){background:linear-gradient(145deg,#256879,#194655)}
+#operational-plan .plan-summary article:nth-child(3),#work-tracker .tracker-summary article:nth-child(3){background:linear-gradient(145deg,#227454,#164e3a)}
+#operational-plan .plan-summary article:nth-child(4),#work-tracker .tracker-summary article:nth-child(4){background:linear-gradient(145deg,#b6843b,#795c2e)}
+#operational-plan .plan-summary span,#work-tracker .tracker-summary span{color:#fff!important;font-size:14px}
+#operational-plan .plan-summary strong,#work-tracker .tracker-summary strong{color:#ffe2a2!important;font-size:clamp(48px,5vw,70px);line-height:1.05;margin:13px 0 6px}
+#operational-plan .plan-summary small,#work-tracker .tracker-summary small{color:#ffffffc4!important;font-size:12px}
+.plan-milestones,.tracker-kanban{background:linear-gradient(135deg,#305f4e,#204638);color:#fff;border:1px solid #4d7a65;border-radius:19px;box-shadow:0 15px 35px #17433130}
+.plan-milestone-head span,.tracker-kanban-head span{color:#f4d391}.plan-milestone-head h3,.tracker-kanban-head h3{color:#fff}.plan-milestone-head small,.tracker-kanban-head small{color:#d0e0d4}
+.plan-milestone-axis,.plan-milestone-row{grid-template-columns:minmax(270px,2.3fr) repeat(12,minmax(72px,1fr)) minmax(105px,.85fr);min-width:1320px}
+.plan-milestone-axis{background:#ffffff14;border:1px solid #ffffff1c;color:#f3eedc}.plan-milestone-row{border-bottom-color:#ffffff24;color:#fff}.plan-milestone-row:nth-child(odd){background:#ffffff09}.plan-milestone-name{min-width:0}.plan-milestone-name b{background:linear-gradient(135deg,#f2d99d,#be944f);color:#244536}.plan-milestone-name span{color:#fff;font-size:12px}.plan-milestone-cell{border-inline-start-color:#ffffff22}.plan-milestone-cell.marked{background:#e1b76318}.plan-milestone-cell.active-range{background:#ffffff07}.plan-milestone-cell i.range-line{height:10px;background:#9ac6f2;box-shadow:0 0 12px #9ac6f266}.plan-milestone-cell i.done,.plan-milestone-cell i.range-line.done{background:#7ed3a8}.plan-milestone-cell i.late,.plan-milestone-cell i.range-line.late{background:#ff9a90}.plan-milestone-cell small{color:#f8dfa3}.plan-milestone-status{color:#a8c9ec}.plan-milestone-status.done{color:#8be0b0}.plan-milestone-status.late{color:#ffa59d}
+.plan-milestone-cell.current-month{box-shadow:inset 2px 0 #f1cf82,inset -2px 0 #f1cf82;background:#f1cf8210}
+.tracker-kanban-columns{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tracker-kanban-column{background:#153e33a8;border-color:#ffffff29;border-radius:18px}.tracker-kanban-column.late{background:#643f3b85;border-color:#ffacaa50}.tracker-kanban-column.done{background:#1c59438c;border-color:#8fe6ba44}.tracker-kanban-column h4{color:#fff;font-size:15px}.tracker-kanban-column h4 strong{background:#6097b9}.tracker-kanban-column.late h4 strong{background:#c97177}.tracker-kanban-column.done h4 strong{background:#72bd91}.tracker-kanban-list article{background:#ffffff16;border-color:#ffffff2a;min-height:138px}.tracker-kanban-list article>b{color:#fff;font-size:13px}.tracker-kanban-list article>small,.tracker-kanban-list p{color:#c5d8ce}.tracker-kanban-progress{color:#f7dfaa}.tracker-kanban-progress i{background:#ffffff24}.tracker-kanban-progress em{background:linear-gradient(90deg,#d6a85b,#f2d49a)}.tracker-kanban-column>a{color:#f4d796}
+.media-v2{background:linear-gradient(180deg,#fbfaf6,#f5f7f2)!important}.media-hero-v2{background:linear-gradient(125deg,#315d4d,#39745f);min-height:210px;border-radius:22px;padding:26px}.media-hero-v2 h2{font-size:30px!important}.media-orbit{width:145px;height:145px}.media-orbit i{font-size:57px}.media-orbit b{bottom:24px}.media-orbit small{bottom:10px}.media-stat-strip article{min-height:105px}.media-stat-strip article:first-child{background:#2e674f}.media-stat-strip article:first-child strong{color:#ffdfa0}.media-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.report-cover{min-height:360px;border-radius:20px;background:#fff!important;color:#254b3d;box-shadow:0 12px 29px #1949371e}.report-cover.q1 .report-preview{background:linear-gradient(135deg,#315e4a,#173b31)}.report-cover.q2 .report-preview{background:linear-gradient(135deg,#73294b,#40182d)}.report-cover-body h3,.report-cover-body h3 a{color:#244b3b!important}.report-cover-body strong{font-size:30px;color:#6c2947}.report-cover-body small,.report-cover-body p{color:#52655b!important}.report-cover details{border-color:#d9e4da}.report-cover summary{color:#32654e}.report-cover li{color:#50665a!important}.report-cover-top>span{background:#2d5847;color:#fff}.report-cover-top .report-format{color:#436555}.report-open-link{color:#2d684f!important}
+.media-archive-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.media-archive-card{background:#fff!important}.media-archive-heading h3{color:#244337}.media-archive-heading p{color:#66766f}
+@media(max-width:1050px){.media-archive-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tracker-kanban-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){#operational-plan .plan-summary,#work-tracker .tracker-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.tracker-kanban-columns,.media-shelf,.media-archive-grid{grid-template-columns:1fr}.plan-milestones,.tracker-kanban{padding:15px}.media-hero-v2{grid-template-columns:1fr}.media-orbit{width:120px;height:120px}.media-orbit i{font-size:45px}}
+
+/* Compact operational goals: summary first, comprehensive detail on click. */
+#operational-plan .plan-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.plan-goal-card{min-height:0;padding:0;border:0;background:transparent;box-shadow:none}
+.plan-goal-card:hover{transform:none;border:0;box-shadow:none}
+.plan-goal-open{width:100%;min-height:142px;display:grid;grid-template-columns:56px minmax(0,1fr) 118px 104px;gap:14px;align-items:center;text-align:right;padding:17px;border:1px solid #dfe6df;border-radius:17px;background:#fff;color:#244539;cursor:pointer;box-shadow:0 8px 22px #244b3d0d;transition:.2s}
+.plan-goal-open:hover,.plan-goal-open:focus-visible{border-color:#cba45c;box-shadow:0 14px 30px #244b3d1a;transform:translateY(-2px);outline:0}
+.plan-goal-id{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#f1d591,#c79742);color:#193f33;font-size:18px;font-weight:900}
+.plan-goal-copy{min-width:0}.plan-goal-copy small{display:block;color:#a17736;font-size:11px;font-style:normal}.plan-goal-copy strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:4px 0;color:#244a3c;font-size:14px;line-height:1.6}.plan-goal-copy em{display:block;color:#6c7d74;font-size:10px;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plan-goal-progress i{display:block;height:9px;border-radius:8px;background:#e5ebe6;overflow:hidden}.plan-goal-progress i b{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#cda456,#e5c785)}.plan-goal-progress small{display:block;margin-top:7px;color:#667970;font-size:10px;text-align:center}
+.plan-goal-state{display:inline-grid;place-items:center;min-height:38px;padding:7px 9px;border-radius:11px;background:#e9f0f5;color:#3e6b83;font-size:10px;font-weight:800;text-align:center}.plan-goal-state.done,.plan-goal-state.above,.plan-goal-state.expected{background:#e4f2e9;color:#26704e}.plan-goal-state.late,.plan-goal-state.below{background:#f8e7e4;color:#a04449}
+.plan-goal-panel{width:min(1080px,96vw);padding:31px 34px}.plan-goal-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:4px 42px 20px 0;border-bottom:1px solid var(--line)}.plan-goal-detail-head span{color:#b0833d;font-size:12px;font-weight:900}.plan-goal-detail-head h2{margin:5px 0 0;color:#244a3c;font-size:24px;line-height:1.45}.plan-goal-panel .plan-leadership{grid-template-columns:repeat(4,minmax(0,1fr));margin:16px 0}.plan-goal-panel .plan-result-delivery-row{grid-template-columns:minmax(240px,1.7fr) .65fr .85fr .75fr}.plan-goal-panel .plan-details{margin-top:15px}
+
+/* Five-column work overview, matching the visual grouping in the reference. */
+.tracker-kanban-columns{grid-template-columns:repeat(5,minmax(220px,1fr));overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity}
+.tracker-kanban-column{scroll-snap-align:start;min-height:530px}
+.tracker-kanban-column.risk{background:#604d2980;border-color:#f0cd8059}.tracker-kanban-column.pending{background:#304c458c;border-color:#bdcec54a}
+.tracker-kanban-column h4>span{display:flex;align-items:center;gap:8px}.tracker-kanban-column h4>span i{display:grid;place-items:center;width:30px;height:30px;border:1px solid #ffffff3a;border-radius:9px;color:#f5d897;font-size:14px;font-style:normal}
+.tracker-kanban-list article{display:flex;flex-direction:column}.tracker-kanban-list article>small{order:0;margin:0 0 7px}.tracker-kanban-list article>b{order:1}.tracker-kanban-progress{order:2;margin-top:13px}.tracker-kanban-list article footer{order:3;display:flex;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px;color:#d8e3dd;font-size:9px}.tracker-kanban-list article footer span{max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tracker-kanban-list article footer time{color:#f0d598}
+
+/* Media tiles mirror the reference's visual cards while opening real reports. */
+.media-tile-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:17px 0}
+.media-tile{overflow:hidden;display:flex;min-height:275px;flex-direction:column;border-radius:20px;background:#fff;color:#24483b;text-decoration:none;border:1px solid #dce5de;box-shadow:0 11px 27px #254b3c12;transition:.2s}
+.media-tile:hover,.media-tile:focus-visible{transform:translateY(-4px);box-shadow:0 18px 36px #254b3c24;outline:0}
+.media-tile-art{height:155px;display:grid;place-items:center}.media-tile-art svg{width:62px;height:62px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.media-tile.tile-green .media-tile-art{background:linear-gradient(145deg,#315e4e,#173c32)}.media-tile.tile-plum .media-tile-art{background:linear-gradient(145deg,#79294f,#42162d)}.media-tile.tile-gold .media-tile-art{background:linear-gradient(145deg,#c99743,#8f672d)}.media-tile.tile-charcoal .media-tile-art{background:linear-gradient(145deg,#343a38,#171a19)}
+.media-tile>span{align-self:flex-start;margin:13px 15px 0;padding:4px 8px;border-radius:999px;background:#edf2ee;color:#5c7066;font-size:9px}.media-tile>strong{margin:9px 15px 2px;color:#24483b;font-size:17px}.media-tile>small{margin:0 15px 16px;color:#77877f;font-size:10px}
+
+@media(max-width:1100px){#operational-plan .plan-grid{grid-template-columns:1fr}.media-tile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.plan-goal-panel .plan-leadership{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.plan-goal-open{grid-template-columns:48px minmax(0,1fr);min-height:0}.plan-goal-id{width:45px;height:45px}.plan-goal-progress,.plan-goal-open>.plan-goal-state{grid-column:2}.plan-goal-panel{padding:24px 16px}.plan-goal-detail-head{padding-right:0;flex-direction:column}.plan-goal-panel .plan-leadership,.media-tile-grid{grid-template-columns:1fr}.plan-goal-panel .plan-result-delivery-row{grid-template-columns:1fr}.tracker-kanban-column{min-height:420px}.media-tile{min-height:245px}}
