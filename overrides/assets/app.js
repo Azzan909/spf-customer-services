@@ -4,7 +4,7 @@
   const STORAGE_KEY="spf-exhibition-manual-edits-v1";
   const PLAN_STORAGE_KEY="spf-operational-plan-delivery-v1";
   const AUTH_PROXY="https://customer-compass-github-auth.spf2040.chatgpt.site";
-  const GITHUB_OWNER="Azzan909",GITHUB_REPO="spf-customer-services",GLOBAL_EDITS_PATH="overrides/assets/dashboard-edits.json";
+  const GITHUB_OWNER="CustomerServices2040",GITHUB_REPO="spf-customer-services",GLOBAL_EDITS_PATH="overrides/assets/dashboard-edits.json";
   const editorToolbar=$("#editorToolbar"), editButton=$("#editContent"), saveNotice=$("#saveNotice");
   editButton.disabled=true;
   const defaultValues=new Map();
@@ -243,6 +243,27 @@
     $("#planLateCount").textContent=late;
     $("#planTotalCount").textContent=total;
     const completionSmall=$("#planCompletionRate")?.parentElement?.querySelector("small"); if(completionSmall) completionSmall.textContent="النتائج المسلّمة من إجمالي نتائج الخطة";
+    renderPlanMilestones();
+  }
+  function renderPlanMilestones(){
+    const section=$("#operational-plan"),summary=$(".plan-summary",section);if(!section||!summary)return;
+    let panel=$("#planMilestones");if(!panel){panel=document.createElement("div");panel.id="planMilestones";panel.className="plan-milestones";summary.insertAdjacentElement("afterend",panel)}
+    const months=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+    const items=window.SPF_OPERATIONAL_PLAN.filter(item=>item.group==="core").map(item=>{
+      const deadline=finalThresholdDate(item,"expected")||parsePlanDate(planValue(item,"deadline"));
+      return {item,deadline,evaluation:planEvaluation(item),state:ensurePlanState(item)};
+    });
+    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>مواعيد تسليم الأهداف التشغيلية</h3></div><small>الشريط يمتد حتى الموعد المستهدف، ولا يمثل نسبة الإنجاز الفعلي</small></div>
+      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>الهدف</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
+      ${items.map(({item,deadline,evaluation,state})=>{
+        const month=deadline?.getFullYear()===2026?deadline.getMonth()+1:-1;
+        const valid=month>=1&&month<=12;
+        const delivered=state.final.delivered==="yes"&&!!state.final.date;
+        const status=delivered?"مسلم":evaluation.code==="late"?"متأخر":"قيد المتابعة";
+        return `<div class="plan-milestone-row"><div class="plan-milestone-name"><b>${escapeHtml(item.id.replace("O",""))}</b><span>${escapeHtml(planValue(item,"title"))}</span></div>
+        ${months.map((_,index)=>`<div class="plan-milestone-cell ${valid&&month===index+1?"marked":""} ${valid&&index+1<month?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}">${valid&&month===index+1?`<i class="${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i><small>${escapeHtml(parsePlanDate(thresholdForResult(item,"expected",item.results.length-1))?thresholdForResult(item,"expected",item.results.length-1):planValue(item,"deadline"))}</small>`:valid&&index+1<month?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`).join("")}
+        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${valid?status:"موعد غير محدد"}</span></div>`;
+      }).join("")}</div>`;
   }
   function resultScheduleRows(item){
     return item.results.map((value,index)=>`<div class="plan-result-row">
@@ -263,15 +284,14 @@
   }
   renderProjects("inventory");
 
-  function renderOperationalPlan(filter="core"){
-    const items=window.SPF_OPERATIONAL_PLAN.filter(item=>filter==="all"||item.group===filter);
-    renderPlanHero();
-    planGrid.innerHTML=items.map(item=>{const state=ensurePlanState(item),evaluation=planEvaluation(item);return `<article class="plan-card ${item.group}">
-      <div class="plan-card-head"><span>${item.id.replace("O","")}</span><b data-edit-key="plan.${item.id}.category">${planValue(item,"category")}</b></div>
-      <h3 data-edit-key="plan.${item.id}.title">${planValue(item,"title")}</h3>
+  function planDetailMarkup(item){
+    const state=ensurePlanState(item),evaluation=planEvaluation(item);
+    return `<div class="plan-goal-detail-head"><div><span>${escapeHtml(item.id)}</span><h2 data-edit-key="plan.${item.id}.title">${planValue(item,"title")}</h2></div><b class="plan-goal-state ${evaluation.code}">${evaluation.label}</b></div>
       <div class="plan-leadership">
         <div><span>رئيس المبادرة</span><b data-edit-key="plan.${item.id}.owner">${planValue(item,"owner")}</b></div>
         <div><span>نائب المبادرة</span><b data-edit-key="plan.${item.id}.deputy">${planValue(item,"deputy")}</b></div>
+        <div><span>الفئة</span><b data-edit-key="plan.${item.id}.category">${planValue(item,"category")}</b></div>
+        <div><span>الموعد النهائي</span><b data-edit-key="plan.${item.id}.deadline">${planValue(item,"deadline")}</b></div>
       </div>
       <div class="plan-result-deliveries">
         <div class="plan-result-deliveries-head"><span>تسليم النتائج المرحلية</span><small>يُحتسب الإنجاز من النتائج التي تم تسليمها فعليًا</small></div>
@@ -287,16 +307,36 @@
         <label><span>تاريخ التسليم النهائي</span><input type="date" data-plan-final-date="${item.id}" value="${escapeHtml(state.final.date||"")}" ${state.final.delivered!=="yes"?"disabled":""}></label>
         <div class="plan-calculated-result ${evaluation.code}"><span>نتيجة المبادرة</span><strong>${evaluation.label}</strong></div>
       </div>
-      <details class="plan-details" ${item.group==="core"?"open":""}>
-        <summary>عرض مواعيد النتائج والأنشطة</summary>
+      <details class="plan-details" open>
+        <summary>مواعيد النتائج ومستويات التقييم</summary>
         <div class="plan-result-schedule"><div class="plan-result-head"><b>النتيجة المستهدفة</b><span>دون التوقعات</span><span>يحقق</span><span>يفوق</span></div>${resultScheduleRows(item)}</div>
         ${item.activities.length?`<div class="plan-detail-group"><b>الأنشطة</b><ul>${item.activities.map((value,index)=>`<li data-edit-key="plan.${item.id}.activities.${index}">${planListValue(item,"activities",index)}</li>`).join("")}</ul></div>`:""}
-      </details>
-      <time data-edit-key="plan.${item.id}.deadline">${planValue(item,"deadline")}</time>
-    </article>`}).join("");
+      </details>`;
+  }
+  function renderOperationalPlan(filter="core"){
+    const items=window.SPF_OPERATIONAL_PLAN.filter(item=>filter==="all"||item.group===filter);
+    renderPlanHero();
+    planGrid.innerHTML=items.map(item=>{const state=ensurePlanState(item),evaluation=planEvaluation(item),delivered=state.results.filter(result=>result.delivered==="yes"&&result.date).length,total=item.results.length,completion=total?Math.round(delivered/total*100):0;return `<article class="plan-card plan-goal-card ${item.group}" data-plan-card="${item.id}">
+      <button class="plan-goal-open" type="button" data-plan-open="${item.id}" aria-label="عرض التفاصيل الشاملة للهدف ${escapeHtml(item.id)}">
+        <span class="plan-goal-id">${item.id.replace("O","G")}</span>
+        <span class="plan-goal-copy"><small data-edit-key="plan.${item.id}.category">${planValue(item,"category")}</small><strong data-edit-key="plan.${item.id}.title">${planValue(item,"title")}</strong><em>${escapeHtml(planValue(item,"owner"))} · ${escapeHtml(planValue(item,"deadline"))}</em></span>
+        <span class="plan-goal-progress"><i><b style="width:${completion}%"></b></i><small>${delivered} من ${total} نتائج</small></span>
+        <span class="plan-goal-state ${evaluation.code}">${evaluation.label}</span>
+      </button>
+    </article>`}).join("")+`<div class="modal plan-goal-modal" id="planGoalModal" aria-hidden="true"><div class="modal-backdrop" data-close-plan-goal></div><article class="modal-panel wide plan-goal-panel" role="dialog" aria-modal="true" aria-labelledby="planGoalTitle"><button class="modal-close" type="button" data-close-plan-goal aria-label="إغلاق">×</button><div id="planGoalDetail"></div></article></div>`;
     prepareEditable(planGrid);
   }
   renderOperationalPlan("core");
+
+  function openPlanGoal(id){
+    const item=window.SPF_OPERATIONAL_PLAN.find(x=>x.id===id),dialog=$("#planGoalModal"),detail=$("#planGoalDetail");if(!item||!dialog||!detail)return;
+    detail.innerHTML=planDetailMarkup(item);const title=detail.querySelector("h2");if(title)title.id="planGoalTitle";
+    prepareEditable(detail);dialog.classList.add("open");dialog.setAttribute("aria-hidden","false");
+  }
+  planGrid.addEventListener("click",e=>{
+    const opener=e.target.closest("[data-plan-open]");if(opener){openPlanGoal(opener.dataset.planOpen);return}
+    if(e.target.closest("[data-close-plan-goal]")){const dialog=$("#planGoalModal");dialog?.classList.remove("open");dialog?.setAttribute("aria-hidden","true")}
+  });
 
   planGrid.addEventListener("change",e=>{
     const resultDelivered=e.target.closest("[data-plan-result-delivered]"),resultDate=e.target.closest("[data-plan-result-date]");
@@ -316,6 +356,7 @@
     if(finalDate)state.final.date=finalDate.value;
     planDelivery[id]=state;savePlanDelivery();
     renderOperationalPlan($(".plan-controls button.active")?.dataset.planFilter||"core");
+    openPlanGoal(id);
   });
 
   function committeeData(){
@@ -444,7 +485,36 @@
       const summary=trackerSummaryFromTasks(document.tasks);
       try{localStorage.setItem(TRACKER_SUMMARY_KEY,JSON.stringify(summary))}catch(_){/* private mode */}
       renderTrackerBoard(summary);
+      renderTrackerKanban(document.tasks);
     }catch(_){renderTrackerBoard(readTrackerSummary())}
+  }
+
+  function renderTrackerKanban(tasks){
+    const section=$("#work-tracker"),departments=$(".tracker-departments",section);if(!section||!departments)return;
+    let panel=$("#trackerKanban");if(!panel){panel=document.createElement("div");panel.id="trackerKanban";panel.className="tracker-kanban";departments.insertAdjacentElement("afterend",panel)}
+    const classify=task=>{
+      const pct=Number(task.pct);
+      if(task.status==="منجز")return"done";
+      if(task.status==="متأخر"||task.overdue===true)return"late";
+      if(!Number.isFinite(pct)||pct<=0)return"pending";
+      if(pct<50)return"risk";
+      return"progress";
+    };
+    const groups=[
+      {code:"late",label:"متأخر",tone:"late",icon:"!"},
+      {code:"risk",label:"معرض للتأخير",tone:"risk",icon:"△"},
+      {code:"progress",label:"قيد التنفيذ",tone:"progress",icon:"◷"},
+      {code:"pending",label:"لم يبدأ",tone:"pending",icon:"○"},
+      {code:"done",label:"منجز",tone:"done",icon:"✓"}
+    ];
+    panel.innerHTML=`<div class="tracker-kanban-head"><div><span>المشهد التشغيلي</span><h3>المهام حسب الحالة</h3></div><small>الأعداد من السجل التفصيلي المباشر · تُعرض ثلاث مهام نموذجية من كل حالة</small></div>
+    <div class="tracker-kanban-columns">${groups.map(group=>{
+      const items=tasks.filter(task=>classify(task)===group.code);
+      return `<section class="tracker-kanban-column ${group.tone}" aria-label="${group.label}: ${items.length} مهام"><h4><span><i aria-hidden="true">${group.icon}</i>${group.label}</span><strong>${items.length}</strong></h4><div class="tracker-kanban-list">${items.slice(0,3).map(task=>{
+        const pct=Number(task.pct),valid=Number.isFinite(pct)&&task.pct!=null;
+        return `<article><small>${escapeHtml(task.dept||"قسم غير محدد")}${task.id?` · ${escapeHtml(task.id)}`:""}</small><b>${escapeHtml(task.title)}</b><div class="tracker-kanban-progress"><i><em style="width:${valid?Math.max(0,Math.min(100,pct)):0}%"></em></i><span>${valid?`${Math.round(pct)}%`:"—"}</span></div><footer><span>${escapeHtml(task.emp||"غير محدد")}</span><time>${escapeHtml(task.date||task.due||"—")}</time></footer></article>`;
+      }).join("")||'<p>لا توجد مهام بهذه الحالة</p>'}</div><a href="assets/work-tracker.html" target="_blank" rel="noopener">فتح السجل التفصيلي ←</a></section>`;
+    }).join("")}</div>`;
   }
 
   function renderTrackerBoard(summary=readTrackerSummary()){
