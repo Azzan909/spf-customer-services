@@ -565,3 +565,42 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 #operational-plan>.section-heading h2,#work-tracker>.section-heading h2{margin:3px 0 0;color:#264a3f;font-size:clamp(22px,2.25vw,30px);font-weight:900;line-height:1.35;text-shadow:none}
 #operational-plan>.section-heading .section-note,#work-tracker>.section-heading .section-note{position:relative;z-index:1;padding:7px 12px;border:0;border-radius:30px;background:#eff1ee;color:#597366;font-size:11px;font-weight:400}
 @media(max-width:700px){#operational-plan>.section-heading,#work-tracker>.section-heading{align-items:flex-start;flex-direction:column;padding:20px 22px}#operational-plan>.section-heading h2,#work-tracker>.section-heading h2{font-size:22px}}
+
+/* Overview: keep the supporting figures in cards 01 and 03 fully legible. */
+.hero-metrics .metric-card:nth-child(1) .micro-bar{height:9px;margin-top:15px;background:#dde7e1;box-shadow:inset 0 0 0 1px rgba(36,91,70,.08)}
+.hero-metrics .metric-card:nth-child(1) .micro-bar i{background:linear-gradient(90deg,#24644f,#3d8268);box-shadow:0 0 10px rgba(36,100,79,.2)}
+.hero-metrics .metric-card:nth-child(1) .split-label{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px;color:inherit}
+.hero-metrics .metric-card:nth-child(1) .split-label span{display:flex;align-items:center;justify-content:center;min-height:31px;padding:6px 8px;border:1px solid rgba(36,91,70,.14);border-radius:9px;background:#e6f0ea;color:#204f3e!important;font-size:11px!important;font-weight:900;line-height:1.25;opacity:1}
+.hero-metrics .metric-card:nth-child(1) .split-label span:last-child{border-color:rgba(169,118,47,.18);background:#f6ecda;color:#77531f!important}
+.hero-metrics .metric-card:nth-child(3) .trend.positive{display:flex;align-items:center;justify-content:center;gap:6px;width:max-content;max-width:100%;min-height:34px;margin-top:14px;padding:7px 11px;border:1px solid rgba(45,112,80,.2);border-radius:10px;background:#e4f1e9;color:#245b43!important;font-size:11px!important;font-weight:900;line-height:1.35;opacity:1;box-shadow:0 4px 12px rgba(36,91,67,.08)}
+.hero-metrics .metric-card:nth-child(3) .trend.positive:before{content:"↗";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#2f7454;color:#fff;font-size:12px;font-weight:900}
+
+/* Quarterly comparison: turn the two text boxes into compact visual score cards. */
+.component-score-layout .quarter-comparison{gap:9px}
+.component-score-layout .quarter-comparison>div{position:relative;overflow:hidden;justify-content:flex-start;min-height:126px!important;padding:14px 12px 13px;border:1px solid rgba(42,84,67,.13);border-radius:15px;background:linear-gradient(155deg,#fff,#f3f7f4);text-align:right!important;box-shadow:0 7px 18px rgba(31,72,55,.055)}
+.component-score-layout .quarter-comparison>div:before{content:"";position:absolute;right:0;bottom:0;width:100%;height:7px;background:linear-gradient(90deg,#d9e3dd,#d9e3dd)}
+.component-score-layout .quarter-comparison>div:after{content:"";position:absolute;right:0;bottom:0;width:calc(var(--quarter-score)*1%);height:7px;border-radius:7px 0 0 7px;background:linear-gradient(90deg,#2d6d54,#70a68d)}
+.component-score-layout .quarter-comparison span{color:#5e7269;font-size:10px;font-weight:800}
+.component-score-layout .quarter-comparison b{margin:7px 0 4px;color:#235440;font-size:29px;line-height:1;font-variant-numeric:tabular-nums}
+.component-score-layout .quarter-comparison small{width:max-content;max-width:100%;padding:4px 7px;border-radius:999px;background:#edf2ee;color:#5a7066;font-size:8px;font-weight:800}
+.component-score-layout .quarter-comparison .quarter-improved{border-color:rgba(45,112,80,.22);background:linear-gradient(155deg,#f8fcf9,#e8f3ec)}
+.component-score-layout .quarter-comparison .quarter-improved small{background:#dcefe4;color:#246046}
+.component-score-layout .quarter-comparison .quarter-declined{border-color:rgba(169,118,47,.22);background:linear-gradient(155deg,#fffdf8,#f8f0df)}
+.component-score-layout .quarter-comparison .quarter-declined:after{background:linear-gradient(90deg,#b68439,#ddb968)}
+.component-score-layout .quarter-comparison .quarter-declined small{background:#f2e4c8;color:#77531f}
+
+/* Tajawob year comparison: show volume, completion rings and growth at a glance. */
+.tajawob-compare{gap:14px;margin-top:15px}
+.tajawob-compare .tajawob-year-card{position:relative;isolation:isolate;overflow:hidden;min-height:188px;padding:23px 132px 22px 23px;border:1px solid rgba(45,85,65,.15);border-radius:20px;background:linear-gradient(145deg,#fff,#f1f5f2);box-shadow:0 10px 26px rgba(31,70,54,.07)}
+.tajawob-compare .tajawob-year-card:before{content:attr(data-rate);position:absolute;right:22px;top:50%;display:grid;place-items:center;width:88px;height:88px;border-radius:50%;background:radial-gradient(circle,#fff 55%,transparent 57%),conic-gradient(#356b56 calc(var(--year-rate)*1%),#dfe7e2 0);color:#245340;font-size:20px;font-weight:900;transform:translateY(-50%);font-variant-numeric:tabular-nums;box-shadow:0 7px 18px rgba(32,77,59,.08)}
+.tajawob-compare .tajawob-year-card:after{content:"معدل الإنجاز";position:absolute;right:23px;top:calc(50% + 49px);width:86px;color:#66796f;font-size:8px;font-weight:800;text-align:center}
+.tajawob-compare .tajawob-year-card>div{display:block}
+.tajawob-compare .tajawob-year-card span{display:inline-flex;padding:5px 9px;border-radius:999px;background:#e8efea;color:#315f4d;font-size:10px;font-weight:900}
+.tajawob-compare .tajawob-year-card strong{display:block;margin-top:12px;color:#245340;font-size:35px;line-height:1.1;font-variant-numeric:tabular-nums}
+.tajawob-compare .tajawob-year-card strong small{font-size:13px;font-weight:700;color:#60756b}
+.tajawob-compare .tajawob-year-card p{margin:11px 0 0;color:#536c60;font-size:10px;font-weight:700;line-height:1.65}
+.tajawob-compare .year-2026{border-color:rgba(180,137,66,.35);background:radial-gradient(circle at 100% 0,rgba(204,168,98,.18),transparent 42%),linear-gradient(145deg,#fffdf8,#f8f0df)}
+.tajawob-compare .year-2026:before{background:radial-gradient(circle,#fffaf0 55%,transparent 57%),conic-gradient(#b1843f calc(var(--year-rate)*1%),#eadfc9 0);color:#6d4c1f}
+.tajawob-compare .year-2026 span{background:#f1dfba;color:#6e4c1e}
+.tajawob-compare .year-2026 p:after{content:attr(data-growth) " نمو الطلبات";display:flex;align-items:center;justify-content:center;width:max-content;max-width:100%;margin-top:9px;padding:5px 9px;border-radius:999px;background:#e4f1e9;color:#245b43;font-size:9px;font-weight:900}
+@media(max-width:700px){.component-score-layout .quarter-comparison>div{min-height:115px!important}.component-score-layout .quarter-comparison b{font-size:25px}.tajawob-compare .tajawob-year-card{min-height:174px;padding:20px 118px 20px 18px}.tajawob-compare .tajawob-year-card:before{right:18px;width:76px;height:76px;font-size:17px}.tajawob-compare .tajawob-year-card:after{right:13px;top:calc(50% + 43px)}.tajawob-compare .tajawob-year-card strong{font-size:30px}}
