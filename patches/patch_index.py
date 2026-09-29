@@ -418,7 +418,25 @@ community_media_sections = r'''        <section class="section-block community-v
         <section class="section-block media-v2" id="media-center">
           <div class="media-hero-v2">
             <div><span class="media-eyebrow">المركز الإعلامي للمديرية</span><h2>مكتبة التقارير والنشرات في مكان واحد</h2><p>مرجع بصري موحّد للإدارة العليا يعرض التقارير الدورية والربع سنوية، مع قابلية التوسع لإضافة النشرات والتقارير القادمة.</p></div>
-            <div class="media-orbit" aria-hidden="true"><span></span><i>2026</i><b>التقارير</b></div>
+            <div class="media-orbit" aria-label="9 تقارير متاحة حتى عام 2026"><span></span><i>9</i><b>تقارير متاحة</b><small>حتى عام 2026</small></div>
+          </div>
+          <div class="media-tile-grid" aria-label="تقارير مختارة من مكتبة المديرية">
+            <a class="media-tile tile-green" href="reports/q1-2026.pdf" target="_blank" rel="noopener" aria-label="قراءة التقرير الربع سنوي الأول لعام 2026 كاملًا">
+              <div class="media-tile-art"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="17" y="8" width="30" height="48" rx="4"/><path d="M24 20h16M24 29h16M24 38h11"/></svg></div>
+              <span>تقرير ربع سنوي · 2026</span><strong>الربع الأول</strong><small>يناير – مارس 2026</small>
+            </a>
+            <a class="media-tile tile-plum" href="reports/q2-2026.pdf" target="_blank" rel="noopener" aria-label="قراءة التقرير الربع سنوي الثاني لعام 2026 كاملًا">
+              <div class="media-tile-art"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 52h39M19 43V31M31 43V20M43 43V12"/></svg></div>
+              <span>تقرير ربع سنوي · 2026</span><strong>الربع الثاني</strong><small>أبريل – يونيو 2026</small>
+            </a>
+            <a class="media-tile tile-gold" href="reports/annual-2025.pdf" target="_blank" rel="noopener" aria-label="قراءة التقرير السنوي لعام 2025 كاملًا">
+              <div class="media-tile-art"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="31" r="19"/><path d="M32 19v13l10 7M21 54h22"/></svg></div>
+              <span>التقارير السنوية</span><strong>التقرير السنوي</strong><small>عام 2025</small>
+            </a>
+            <a class="media-tile tile-charcoal" href="reports/q3-2025.pdf" target="_blank" rel="noopener" aria-label="قراءة تقرير الربع الثالث لعام 2025 كاملًا">
+              <div class="media-tile-art"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="15" width="34" height="36" rx="4"/><path d="M22 29h20M22 37h14M24 10v10M40 10v10"/></svg></div>
+              <span>من الأرشيف · 2025</span><strong>الربع الثالث</strong><small>يوليو – سبتمبر 2025</small>
+            </a>
           </div>
           <div class="media-stat-strip">
             <article><i>▤</i><span>التقارير المتاحة</span><strong>9</strong></article>
