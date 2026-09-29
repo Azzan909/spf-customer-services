@@ -173,7 +173,7 @@ performance_section = '''        <section class="section-block performance-prior
           <div class="kpi-components" aria-label="مكونات المؤشر الرئيسي وأوزانها">
             <article class="component-card satisfaction-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-heart"/></svg><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div></div><b>70%<small>الوزن</small></b></div>
-              <div class="component-score-layout"><div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div><div class="quarter-comparison"><div style="--quarter-score:82"><span>الربع الأول</span><b>82%</b><small>خط الأساس</small></div><div class="quarter-improved" style="--quarter-score:87"><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div></div>
+              <div class="component-score-layout"><div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div><div class="quarter-comparison" aria-label="تحسن رضا المستفيدين من 82 بالمئة في الربع الأول إلى 87 بالمئة في الربع الثاني"><div class="quarter-period quarter-q1"><span>الربع الأول</span><b>82%</b></div><div class="quarter-change quarter-up"><i>←</i><strong>+5</strong><small>نقاط</small></div><div class="quarter-period quarter-q2"><span>الربع الثاني</span><b>87%</b></div></div></div>
               <div class="satisfaction-sources">
                 <span>المؤشرات الفرعية المعتمدة</span>
                 <div><article><i>01</i><b>المركز الوطني للإحصاء والمعلومات</b><small>وفق مؤشرات المركز</small></article><article><i>02</i><b>وزارة العمل</b><small>وفق مؤشرات الوزارة</small></article><article><i>03</i><b>منصة تجاوب</b><small>المقترحات والشكاوى والبلاغات</small></article></div>
@@ -181,7 +181,7 @@ performance_section = '''        <section class="section-block performance-prior
             </article>
             <article class="component-card communication-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-message"/></svg><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div></div><b>30%<small>الوزن</small></b></div>
-              <div class="component-score-layout"><div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div><div class="quarter-comparison communication-quarters"><div style="--quarter-score:90"><span>الربع الأول</span><b>90%</b><small>خط الأساس</small></div><div class="quarter-declined" style="--quarter-score:86"><span>الربع الثاني</span><b>86%</b><small>↓ 4 نقاط</small></div></div></div>
+              <div class="component-score-layout"><div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div><div class="quarter-comparison communication-quarters" aria-label="انخفاض التواصل والتفاعل من 90 بالمئة في الربع الأول إلى 86 بالمئة في الربع الثاني"><div class="quarter-period quarter-q1"><span>الربع الأول</span><b>90%</b></div><div class="quarter-change quarter-down"><i>←</i><strong>−4</strong><small>نقاط</small></div><div class="quarter-period quarter-q2"><span>الربع الثاني</span><b>86%</b></div></div></div>
             </article>
           </div>
 
