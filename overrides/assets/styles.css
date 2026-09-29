@@ -518,3 +518,11 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 .media-v2 .report-cover-body h3,.media-v2 .report-cover-body h3 a{color:#fff!important;font-size:24px!important}.media-v2 .report-cover-body strong{font-size:38px!important;color:#fff!important}.media-v2 .report-cover-body small{color:#ebce94!important}.media-v2 .report-cover-body p{color:rgba(255,255,255,.74)!important}.media-v2 .report-cover summary{color:#f1d49c}.media-v2 .report-cover li{color:rgba(255,255,255,.82)!important}.media-v2 .report-cover-top>span{background:rgba(255,255,255,.12);color:#fff}.media-v2 .report-cover-top .report-format{color:#fff}.media-v2 .report-open-link{color:#fff!important;border-color:rgba(255,255,255,.55)}
 @media(max-width:1000px){.media-shelf{grid-template-columns:1fr 1fr}.media-hero-v2{grid-template-columns:1fr}.media-orbit{width:190px;height:190px}}
 @media(max-width:650px){.media-shelf{grid-template-columns:1fr}.media-hero-v2{padding:24px 18px}.media-hero-v2 h2{font-size:27px!important}.media-orbit{width:165px;height:165px}}
+
+/* Work-tracker section heading: high-contrast label on the light platform canvas. */
+#work-tracker>.section-heading{align-items:center;padding:4px 2px 16px;border-bottom:1px solid rgba(58,86,76,.12)}
+#work-tracker .section-heading>div{display:grid;gap:7px}
+#work-tracker .section-kicker{width:max-content;padding:6px 11px;border:1px solid rgba(108,41,71,.16);border-radius:999px;background:#f5eaf0;color:#6c2947!important;font-size:12px;font-weight:900;letter-spacing:0}
+#work-tracker .section-heading h2{margin:0;color:#244f40;font-size:clamp(25px,2.4vw,34px);font-weight:900;line-height:1.35}
+#work-tracker .section-note{border:1px solid rgba(58,86,76,.1);background:#f0f5f1;color:#3f6355;font-weight:800}
+@media(max-width:700px){#work-tracker>.section-heading{align-items:flex-start;flex-direction:column}#work-tracker .section-heading h2{font-size:24px}}
