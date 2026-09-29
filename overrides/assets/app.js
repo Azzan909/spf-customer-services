@@ -190,16 +190,21 @@
     return match?new Date(2026,PLAN_MONTHS[match[2]],Number(match[1])):null;
   }
   function finalThresholdDate(item,field){return parsePlanDate(thresholdForResult(item,field,item.results.length-1))}
-  function resultMilestone(item,index){
-    const expectedText=thresholdForResult(item,"expected",index),expectedDate=parsePlanDate(expectedText);
-    if(expectedDate)return {date:expectedDate,label:expectedText,source:"موعد النتيجة"};
-    const resultText=planListValue(item,"results",index),describedDate=parsePlanDate(resultText);
-    if(describedDate){
-      const match=String(resultText).match(/(\d{1,2}\s+(?:يناير|فبراير|مارس|أبريل|ابريل|مايو|يونيو|يوليو|أغسطس|اغسطس|سبتمبر|أكتوبر|اكتوبر|نوفمبر|ديسمبر)(?:\s+2026)?)/);
-      return {date:describedDate,label:match?.[1]||planValue(item,"deadline"),source:"موعد النتيجة"};
-    }
-    const deadlineText=planValue(item,"deadline");
-    return {date:parsePlanDate(deadlineText),label:deadlineText,source:"الموعد النهائي للهدف"};
+  function compactPlanDate(date){return date?`${String(date.getDate()).padStart(2,"0")}/${String(date.getMonth()+1).padStart(2,"0")}`:""}
+  function resultMilestones(item,index){
+    const levels=[
+      {field:"above",label:"يفوق التوقعات",short:"يفوق",tone:"above"},
+      {field:"expected",label:"يحقق التوقعات",short:"متوقع",tone:"expected"},
+      {field:"below",label:"دون التوقعات",short:"دون",tone:"below"}
+    ];
+    const dated=levels.map(level=>{
+      const value=thresholdForResult(item,level.field,index),date=parsePlanDate(value);
+      return date?{...level,value,date}:null;
+    }).filter(Boolean);
+    if(dated.length)return dated;
+    const deadlineText=planValue(item,"deadline"),deadline=parsePlanDate(deadlineText);
+    if(!deadline)return [];
+    return [{...levels[0],date:deadline,value:thresholdForResult(item,"above",index)||deadlineText,label:"يفوق التوقعات عند الموعد النهائي"}];
   }
   function ensurePlanState(item){
     const state=planDelivery[item.id]||{};
@@ -261,18 +266,21 @@
     let panel=$("#planMilestones");if(!panel){panel=document.createElement("div");panel.id="planMilestones";panel.className="plan-milestones";summary.insertAdjacentElement("afterend",panel)}
     const months=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
     const items=window.SPF_OPERATIONAL_PLAN.filter(item=>item.group==="core").flatMap(item=>
-      item.results.map((_,resultIndex)=>({item,resultIndex,milestone:resultMilestone(item,resultIndex),evaluation:resultEvaluation(item,resultIndex),state:ensurePlanState(item).results[resultIndex]||{}}))
+      item.results.map((_,resultIndex)=>({item,resultIndex,milestones:resultMilestones(item,resultIndex),evaluation:resultEvaluation(item,resultIndex),state:ensurePlanState(item).results[resultIndex]||{}}))
     );
-    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>مواعيد تسليم نتائج الأهداف التشغيلية</h3></div><small>كل صف يمثل نتيجة مستقلة، ويعرض تاريخ تسليمها على المخطط</small></div>
-      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>الهدف والنتيجة</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
-      ${items.map(({item,resultIndex,milestone,evaluation,state})=>{
-        const deadline=milestone.date,month=deadline?.getFullYear()===2026?deadline.getMonth()+1:-1;
-        const valid=month>=1&&month<=12;
+    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>مواعيد تسليم نتائج الأهداف التشغيلية</h3></div><div><small>كل صف يمثل نتيجة مستقلة وفق المستهدفات المعتمدة في الكشف</small><div class="plan-milestone-legend"><i class="above"></i>يفوق التوقعات <i class="expected"></i>يحقق التوقعات <i class="below"></i>دون التوقعات</div></div></div>
+      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>النتيجة</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
+      ${items.map(({item,resultIndex,milestones,evaluation,state})=>{
+        const valid=milestones.some(milestone=>milestone.date?.getFullYear()===2026);
+        const lastMonth=Math.max(0,...milestones.filter(milestone=>milestone.date?.getFullYear()===2026).map(milestone=>milestone.date.getMonth()+1));
         const delivered=state.delivered==="yes"&&!!state.date;
-        const status=delivered?"مسلم":evaluation.code==="late"?"متأخر":"قيد المتابعة";
-        return `<div class="plan-milestone-row"><div class="plan-milestone-name"><b>${escapeHtml(item.id.replace("O",""))}.${resultIndex+1}</b><span><strong>${escapeHtml(planValue(item,"title"))}</strong><small>النتيجة ${resultIndex+1}: ${escapeHtml(planListValue(item,"results",resultIndex))}</small></span></div>
-        ${months.map((_,index)=>`<div class="plan-milestone-cell ${valid&&month===index+1?"marked":""} ${valid&&index+1<month?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}">${valid&&month===index+1?`<i class="${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i><small><b>ن${resultIndex+1}</b>${escapeHtml(milestone.label)}</small><em>${escapeHtml(milestone.source)}</em>`:valid&&index+1<month?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`).join("")}
-        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${valid?`النتيجة ${resultIndex+1} · ${status}`:"موعد غير محدد"}</span></div>`;
+        const status=delivered?"تم التسليم":evaluation.label;
+        return `<div class="plan-milestone-row"><div class="plan-milestone-name"><b>${escapeHtml(item.id.replace("O",""))}.${resultIndex+1}</b><span><small>${escapeHtml(planListValue(item,"results",resultIndex))}</small></span></div>
+        ${months.map((monthName,index)=>{
+          const monthMilestones=milestones.filter(milestone=>milestone.date?.getFullYear()===2026&&milestone.date.getMonth()===index);
+          return `<div class="plan-milestone-cell ${monthMilestones.length?"marked":""} ${valid&&index+1<lastMonth?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}" data-month="${escapeHtml(monthName)}">${monthMilestones.map(milestone=>`<span class="plan-target ${milestone.tone}" title="النتيجة ${resultIndex+1} · ${escapeHtml(milestone.label)} · ${escapeHtml(milestone.value)}"><b>ن${resultIndex+1}</b><time>${compactPlanDate(milestone.date)}</time><em>${escapeHtml(milestone.short)}</em></span>`).join("")}${!monthMilestones.length&&valid&&index+1<lastMonth?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`;
+        }).join("")}
+        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${valid?escapeHtml(status):"موعد غير محدد"}</span></div>`;
       }).join("")}</div>`;
   }
   function resultScheduleRows(item){
