@@ -495,13 +495,13 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 @media(max-width:700px){.plan-goal-open{grid-template-columns:48px minmax(0,1fr);min-height:0}.plan-goal-id{width:45px;height:45px}.plan-goal-progress,.plan-goal-open>.plan-goal-state{grid-column:2}.plan-goal-panel{padding:24px 16px}.plan-goal-detail-head{padding-right:0;flex-direction:column}.plan-goal-panel .plan-leadership,.media-tile-grid{grid-template-columns:1fr}.plan-goal-panel .plan-result-delivery-row{grid-template-columns:1fr}.tracker-kanban-column{min-height:420px}.media-tile{min-height:245px}}
 
 /* Clear executive figures in the two overview cards called out in review. */
-#overview .metric-grid .metric-card:nth-child(1),#overview .metric-grid .metric-card:nth-child(3){min-height:190px;border:2px solid rgba(48,91,73,.16);box-shadow:0 14px 34px rgba(31,72,55,.11)}
-#overview .metric-grid .metric-card:nth-child(1){background:linear-gradient(145deg,#eaf4ed,#fff)!important}
-#overview .metric-grid .metric-card:nth-child(3){background:linear-gradient(145deg,#f3e8f0,#fff)!important;border-color:rgba(108,41,71,.17)}
-#overview .metric-grid .metric-card:nth-child(1) .metric-top span,#overview .metric-grid .metric-card:nth-child(3) .metric-top span{color:#203f34;font-size:14px;font-weight:900;line-height:1.45}
-#overview .metric-grid .metric-card:nth-child(1)>strong,#overview .metric-grid .metric-card:nth-child(3)>strong{font-size:clamp(44px,4.4vw,62px)!important;font-weight:900;line-height:1.05;color:#245a46;text-shadow:0 1px 0 #fff}
-#overview .metric-grid .metric-card:nth-child(3)>strong{color:#762c50}
-#overview .metric-grid .metric-card:nth-child(1)>small,#overview .metric-grid .metric-card:nth-child(3)>small{margin-top:7px;color:#415b51;font-size:12px;font-weight:700;line-height:1.6}
+.hero-metrics .metric-card:nth-child(1),.hero-metrics .metric-card:nth-child(3){min-height:190px;border:2px solid rgba(48,91,73,.16);box-shadow:0 14px 34px rgba(31,72,55,.11)}
+.hero-metrics .metric-card:nth-child(1){background:linear-gradient(145deg,#eaf4ed,#fff)!important}
+.hero-metrics .metric-card:nth-child(3){background:linear-gradient(145deg,#f3e8f0,#fff)!important;border-color:rgba(108,41,71,.17)}
+.hero-metrics .metric-card:nth-child(1) .metric-top span,.hero-metrics .metric-card:nth-child(3) .metric-top span{color:#203f34;font-size:14px;font-weight:900;line-height:1.45}
+.hero-metrics .metric-card:nth-child(1)>strong,.hero-metrics .metric-card:nth-child(3)>strong{font-size:clamp(44px,4.4vw,62px)!important;font-weight:900;line-height:1.05;color:#245a46;text-shadow:0 1px 0 #fff}
+.hero-metrics .metric-card:nth-child(3)>strong{color:#762c50}
+.hero-metrics .metric-card:nth-child(1)>small,.hero-metrics .metric-card:nth-child(3)>small{margin-top:7px;color:#415b51;font-size:12px;font-weight:700;line-height:1.6}
 
 /* One timeline row per result, with its own due-date marker. */
 .plan-milestone-axis,.plan-milestone-row{grid-template-columns:minmax(390px,3.2fr) repeat(12,minmax(76px,1fr)) minmax(135px,1fr);min-width:1580px}
