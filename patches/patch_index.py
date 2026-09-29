@@ -173,7 +173,7 @@ performance_section = '''        <section class="section-block performance-prior
           <div class="kpi-components" aria-label="مكونات المؤشر الرئيسي وأوزانها">
             <article class="component-card satisfaction-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon"><use href="#pi-heart"/></svg><div><span>المكوّن الأول</span><h3>مؤشر رضا المستفيدين</h3></div></div><b>70%<small>الوزن</small></b></div>
-              <div class="component-score-layout"><div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div><div class="quarter-comparison"><div><span>الربع الأول</span><b>82%</b></div><div><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div></div>
+              <div class="component-score-layout"><div class="component-result"><div class="component-ring" style="--value:86"><strong>86%</strong><span>النتيجة</span></div></div><div class="quarter-comparison"><div style="--quarter-score:82"><span>الربع الأول</span><b>82%</b><small>خط الأساس</small></div><div class="quarter-improved" style="--quarter-score:87"><span>الربع الثاني</span><b>87%</b><small>↑ 5 نقاط</small></div></div></div>
               <div class="satisfaction-sources">
                 <span>المؤشرات الفرعية المعتمدة</span>
                 <div><article><i>01</i><b>المركز الوطني للإحصاء والمعلومات</b><small>وفق مؤشرات المركز</small></article><article><i>02</i><b>وزارة العمل</b><small>وفق مؤشرات الوزارة</small></article><article><i>03</i><b>منصة تجاوب</b><small>المقترحات والشكاوى والبلاغات</small></article></div>
@@ -181,7 +181,7 @@ performance_section = '''        <section class="section-block performance-prior
             </article>
             <article class="component-card communication-component">
               <div class="component-head"><div class="icon-title"><svg class="card-icon gold-icon"><use href="#pi-message"/></svg><div><span>المكوّن الثاني</span><h3>مؤشر التواصل والتفاعل</h3></div></div><b>30%<small>الوزن</small></b></div>
-              <div class="component-score-layout"><div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div><div class="quarter-comparison"><div><span>الربع الأول</span><b>90%</b></div><div><span>الربع الثاني</span><b>86%</b><small>انخفاض 4 نقاط</small></div></div></div>
+              <div class="component-score-layout"><div class="component-result"><div class="component-ring gold-ring" style="--value:88"><strong>88%</strong><span>النتيجة</span></div></div><div class="quarter-comparison communication-quarters"><div style="--quarter-score:90"><span>الربع الأول</span><b>90%</b><small>خط الأساس</small></div><div class="quarter-declined" style="--quarter-score:86"><span>الربع الثاني</span><b>86%</b><small>↓ 4 نقاط</small></div></div></div>
             </article>
           </div>
 
@@ -243,9 +243,9 @@ tajawob_section = '''        <section class="section-block tajawob-updated" id="
             <article style="--rate:65"><span>البلاغات</span><strong>20</strong><b>13 منجزة · 65%</b><i><em></em></i></article>
             <article style="--rate:99"><span>الاستفسارات</span><strong>3,499</strong><b>3,456 منجزة · 99%</b><i><em></em></i></article>
           </div>
-          <div class="tajawob-compare">
-            <article><div><span>عام 2025</span><strong>3,481 طلبًا</strong></div><p>معدل الإنجاز 74% وفق التقرير السابق.</p></article>
-            <article><div><span>يناير–أغسطس 2026</span><strong>5,610 طلبات</strong></div><p>زيادة حجم الطلبات مع بلوغ متوسط الإنجاز 97.8%.</p></article>
+          <div class="tajawob-compare" aria-label="مقارنة حجم الطلبات ونسبة الإنجاز بين 2025 و2026">
+            <article class="tajawob-year-card year-2025" style="--year-rate:74" data-rate="74%"><div><span>عام 2025</span><strong>3,481 <small>طلبًا</small></strong></div><p>معدل الإنجاز وفق التقرير السابق</p></article>
+            <article class="tajawob-year-card year-2026" style="--year-rate:97.8" data-rate="97.8%"><div><span>يناير–أغسطس 2026</span><strong>5,610 <small>طلبات</small></strong></div><p data-growth="↑ 61.2%">متوسط الإنجاز مع نمو واضح في حجم الطلبات</p></article>
           </div>
           <div class="tajawob-peaks" aria-label="أوقات الذروة في منصة تجاوب">
             <article><span>أكثر يوم ازدحامًا</span><strong>الاثنين 27 أبريل</strong><small>97 طلبًا</small></article>
