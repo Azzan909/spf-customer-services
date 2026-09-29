@@ -545,7 +545,7 @@ header{height:72px;padding:0 34px;background:rgba(20,56,47,.97);border:0;color:#
 <script>
 const DEFAULT_DATA = [];
 
-const GITHUB_OWNER='Azzan909';
+const GITHUB_OWNER='CustomerServices2040';
 const GITHUB_REPO='spf-customer-services';
 const TASKS_REPO_PATH='overrides/assets/tasks-data.json';
 const AUTH_PROXY='https://customer-compass-github-auth.spf2040.chatgpt.site';
@@ -578,7 +578,7 @@ async function githubError(response,fallback){
   const message=String(detail.message||'');
   if(response.status===401)return new Error('مفتاح GitHub غير صالح أو انتهت صلاحيته. أنشئ مفتاحًا جديدًا ثم سجّل الدخول مرة أخرى.');
   if(response.status===403&&/Resource not accessible by personal access token/i.test(message)){
-    return new Error('المفتاح لا يملك صلاحية التعديل على هذا المستودع. في إعداد المفتاح اختر Resource owner: Azzan909، ثم Only select repositories: spf-customer-services، ثم Repository permissions → Contents: Read and write. بعد تعديل المفتاح سجّل خروج المالك ثم ادخل بالمفتاح المحدّث.');
+    return new Error('المفتاح لا يملك صلاحية التعديل على هذا المستودع. في إعداد المفتاح اختر Resource owner: CustomerServices2040، ثم Only select repositories: spf-customer-services، ثم Repository permissions → Contents: Read and write. بعد تعديل المفتاح سجّل خروج المنسقة ثم ادخل بالمفتاح المحدّث.');
   }
   if(response.status===404)return new Error('المفتاح لا يستطيع الوصول إلى مستودع المنصة. تأكد من اختيار المستودع spf-customer-services عند إنشاء المفتاح.');
   if(response.status===409)return new Error('نُشرت تغييرات أخرى في الوقت نفسه. اضغط «تحديث السجل» ثم أعد المحاولة؛ جلسة الدخول ما زالت فعالة.');
