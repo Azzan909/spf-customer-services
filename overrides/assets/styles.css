@@ -611,14 +611,14 @@ html{scroll-padding-top:150px}.governorate-grid span{display:flex;flex-direction
 .component-score-layout .quarter-comparison>div{position:relative;z-index:1;min-height:0!important;padding:0;border:0;border-radius:0;background:none;box-shadow:none;text-align:center!important;overflow:visible}
 .component-score-layout .quarter-comparison>div:before,.component-score-layout .quarter-comparison>div:after{content:none}
 .component-score-layout .quarter-period{display:grid;place-items:center;align-content:center;width:100%;aspect-ratio:1.34/1;max-height:108px;border:1px solid rgba(42,84,67,.14)!important;border-radius:16px!important;background:#fff!important;box-shadow:0 7px 17px rgba(31,72,55,.065)!important}
-.component-score-layout .quarter-period span{color:#60766c;font-size:10px;font-weight:800;line-height:1.25}
-.component-score-layout .quarter-period b{margin:6px 0 0;color:#285b47;font-size:31px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.component-score-layout .quarter-period span{display:block;width:100%;color:#60766c;font-size:10px;font-weight:800;line-height:1.25;text-align:center}
+.component-score-layout .quarter-period b{display:block;width:100%;margin:6px 0 0;color:#285b47;font-size:31px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;text-align:center}
 .component-score-layout .quarter-q2{border-color:rgba(43,112,79,.28)!important;background:linear-gradient(145deg,#fff,#eaf4ee)!important;box-shadow:0 9px 20px rgba(38,104,74,.11)!important}
 .component-score-layout .quarter-q2 b{color:#236346}
 .component-score-layout .quarter-change{display:grid;place-items:center;align-content:center;width:58px;height:58px;margin:auto;border:5px solid #f7faf8;border-radius:50%;background:#2f7454!important;color:#fff;box-shadow:0 5px 14px rgba(40,104,74,.2)!important}
 .component-score-layout .quarter-change i{position:absolute;top:-17px;color:#2f7454;font-size:20px;font-style:normal;font-weight:900;line-height:1}
-.component-score-layout .quarter-change strong{margin:0;color:#fff;font-size:17px;line-height:1;font-variant-numeric:tabular-nums}
-.component-score-layout .quarter-change small{margin-top:2px;padding:0;background:none;color:rgba(255,255,255,.85);font-size:7px;font-weight:800}
+.component-score-layout .quarter-change strong{display:block;width:100%;margin:0;color:#fff;font-size:17px;line-height:1;font-variant-numeric:tabular-nums;text-align:center}
+.component-score-layout .quarter-change small{display:block;width:100%;margin-top:2px;padding:0;background:none;color:rgba(255,255,255,.85);font-size:7px;font-weight:800;text-align:center}
 .component-score-layout .quarter-down{background:#873653!important;box-shadow:0 5px 14px rgba(135,54,83,.2)!important}
 .component-score-layout .quarter-down i{color:#873653}
 .component-score-layout .communication-quarters:before{background:#e8ddd2}
