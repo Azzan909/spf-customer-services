@@ -415,6 +415,29 @@ header{height:72px;background:rgba(255,255,255,.96);color:var(--navy);border-bot
 .deptbar-list{gap:12px}.deptbar-row{border-color:#DDE6E0;background:linear-gradient(145deg,#FFF,#F4F8F5);box-shadow:0 7px 18px rgba(37,78,68,.045)}.deptbar-top .pct{color:#3F765F}.deptbar-track{background:#E0E9E3}.deptbar-fill{background:linear-gradient(90deg,#3E7962,#C5A25D)!important}
 thead th{background:#315F50}.perf-card.is-total{background:linear-gradient(145deg,#3E765F,#285244)}.perf-toggle button.active{background:#315F50;border-color:#315F50}
 @media(max-width:760px){header{background:#FFF}.hero{padding:24px 14px 20px}.hero-figure{justify-self:center}.hero-stat{min-height:88px;padding:13px}.hero-stat .n{font-size:28px}.hero-context span{font-size:10px}.filter-bar{top:auto}}
+
+/* Restore the previously approved dark executive masthead. */
+header{height:72px;padding:0 34px;background:rgba(20,56,47,.97);border:0;color:#fff;box-shadow:0 14px 35px rgba(20,56,47,.14)}
+.brand-mark{width:44px;height:44px;padding:5px;border-radius:50%;background:#fff;border:1px solid rgba(226,193,126,.55);box-shadow:0 0 0 4px rgba(255,255,255,.08)}.brand-name{color:#fff}.brand-sub{color:#D8E3DE}
+.header-tag{color:#F4E3C4;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}.header-tag .live-dot{background:var(--gold-bright);box-shadow:0 0 0 4px rgba(226,193,126,.14)}
+.hero{margin:0 0 22px;padding:34px 32px 26px;border:0;border-radius:0 0 44px 8px;background:radial-gradient(circle at 16% 18%,rgba(226,193,126,.22),transparent 28%),linear-gradient(120deg,var(--burgundy) 0%,#3D1A2B 35%,var(--navy-deep) 72%,var(--navy) 100%);box-shadow:none}
+.hero:before{opacity:1;background:repeating-radial-gradient(ellipse at 82% -130%,transparent 0 22px,rgba(255,255,255,.055) 23px 24px)}.hero:after{border-color:rgba(226,193,126,.22)}
+.hero-intro>span{padding:0;background:transparent;color:var(--gold-bright)}.hero-intro h1{color:#fff;text-shadow:none}.hero-intro p{color:rgba(255,255,255,.73)}.hero-context span{border-color:rgba(255,255,255,.13);background:rgba(255,255,255,.07);color:#F0E7D7}
+.hero-figure{background:conic-gradient(var(--gold-bright) calc(var(--rate)*1%),rgba(255,255,255,.12) 0);box-shadow:0 24px 45px rgba(0,0,0,.18)}.hero-figure:before{background:linear-gradient(145deg,#274F44,#183A32);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}.hero-figure .label{color:rgba(255,255,255,.67)}.hero-figure .value{color:#fff}.hero-figure .value .unit{color:var(--gold-bright)}
+.hero-stats{gap:9px;margin-top:4px}.hero-stat,.hero-stat.is-good,.hero-stat.is-warn,.hero-stat.is-bad,.hero-stat:nth-child(5),.hero-stat:nth-child(6){min-height:92px;padding:15px 16px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.075);box-shadow:none;backdrop-filter:blur(7px)}.hero-stat:hover{background:rgba(255,255,255,.12);border-color:rgba(226,193,126,.55);box-shadow:none}.hero-stat:after{display:none}.hero-stat .n{font-size:29px;color:#fff}.hero-stat .l{color:rgba(255,255,255,.67)}.hero-stat.is-good .n{color:#8ED2B4}.hero-stat.is-warn .n{color:#E9C37C}.hero-stat.is-bad .n{color:#F0A2AF}.hero-stat:nth-child(5) .n,.hero-stat:nth-child(6) .n{color:#fff}
+
+/* Visual navigation for the lower detailed views. */
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
+.tab{display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:11px;min-height:78px;padding:13px 15px;border:1px solid #DDE5DF!important;border-radius:17px 6px 17px 6px!important;background:#fff;color:#34584B;text-align:right;box-shadow:0 8px 20px rgba(37,78,68,.055)}
+.tab:hover{transform:translateY(-2px);background:#fff;border-color:#B9CFC3!important}.tab>span:last-child{display:grid;gap:2px}.tab b{font-size:14px}.tab small{color:#778881;font-size:10px;font-weight:500}.tab-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px 5px 13px 5px;background:#EEF4F0;color:#356B56;font-size:21px;font-weight:900}
+.tab:nth-child(2) .tab-icon{background:#F4EBEF;color:#762E50}.tab:nth-child(3) .tab-icon{background:#FFF4DF;color:#9A6928}.tab:nth-child(4) .tab-icon{background:#EEF1F4;color:#4D6672}
+.tab.active{background:linear-gradient(140deg,#356B56,#214C3D);color:#fff;border-color:#356B56!important;box-shadow:0 13px 27px -18px rgba(33,76,61,.7)}.tab.active .tab-icon{background:rgba(255,255,255,.14);color:#F2D69A}.tab.active small{color:rgba(255,255,255,.72)}.tab .badge{display:inline-grid;place-items:center;min-width:20px;height:18px;margin-inline-start:4px;border-radius:999px;background:#F0D89F;color:#4B3920;font-size:9px;font-style:normal}
+.tab-panel.active{animation:panel-in .24s ease both}@keyframes panel-in{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:none}}
+#panel-overview>.grid-2>.card:first-child{border-top:4px solid #356B56}#panel-overview>.grid-2>.card:nth-child(2){border-top:4px solid #B58A4A}#panel-overview>.card{border-top:4px solid #762E50}
+#panel-overview .card-head h3{display:flex;align-items:center;gap:8px}#panel-overview .card-head h3:before{content:"";width:9px;height:9px;border-radius:3px;background:#356B56;box-shadow:0 0 0 4px rgba(53,107,86,.1)}#panel-overview>.grid-2>.card:nth-child(2) .card-head h3:before{background:#B58A4A;box-shadow:0 0 0 4px rgba(181,138,74,.12)}#panel-overview>.card .card-head h3:before{background:#762E50;box-shadow:0 0 0 4px rgba(118,46,80,.1)}
+#panel-table .table-card{border-top:4px solid #762E50}#panel-perf .perf-toggle{border-top:3px solid #B58A4A}#panel-perf .perf-card{border-top:3px solid #356B56}#panel-dq .dq-card{border-top:3px solid #4D6672}
+@media(max-width:760px){header{background:rgba(20,56,47,.97)}.hero{padding:24px 14px 20px}.hero-figure{justify-self:start}.tabs{grid-template-columns:1fr 1fr;overflow:visible}.tab{min-width:0;min-height:70px;grid-template-columns:38px minmax(0,1fr);padding:10px}.tab-icon{width:36px;height:36px}.tab b{font-size:12px}.tab small{font-size:9px}}
+@media(max-width:430px){.tabs{grid-template-columns:1fr}.tab{min-height:64px}}
 </style>
 </head>
 <body>
@@ -472,11 +495,11 @@ thead th{background:#315F50}.perf-card.is-total{background:linear-gradient(145de
     <span class="filter-count" id="filter-count"></span>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="overview" onclick="switchTab('overview')">نظرة عامة</button>
-    <button class="tab" data-tab="table" onclick="switchTab('table')">السجل التفصيلي</button>
-    <button class="tab" data-tab="perf" onclick="switchTab('perf')">الأداء</button>
-    <button class="tab" data-tab="dq" onclick="switchTab('dq')">جودة البيانات <span class="badge" id="dq-badge">0</span></button>
+  <div class="tabs" aria-label="أقسام لوحة الموقف التنفيذي">
+    <button class="tab active" data-tab="overview" onclick="switchTab('overview')"><span class="tab-icon" aria-hidden="true">◉</span><span><b>نظرة عامة</b><small>المشهد التنفيذي</small></span></button>
+    <button class="tab" data-tab="table" onclick="switchTab('table')"><span class="tab-icon" aria-hidden="true">▤</span><span><b>السجل التفصيلي</b><small>عرض وتحديث المهام</small></span></button>
+    <button class="tab" data-tab="perf" onclick="switchTab('perf')"><span class="tab-icon" aria-hidden="true">↗</span><span><b>الأداء</b><small>الأقسام والموظفون</small></span></button>
+    <button class="tab" data-tab="dq" onclick="switchTab('dq')"><span class="tab-icon" aria-hidden="true">✓</span><span><b>جودة البيانات</b><small>اكتمال السجل <em class="badge" id="dq-badge">0</em></small></span></button>
   </div>
 
   <!-- OVERVIEW -->
