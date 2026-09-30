@@ -265,24 +265,25 @@
     const section=$("#operational-plan"),summary=$(".plan-summary",section);if(!section||!summary)return;
     let panel=$("#planMilestones");if(!panel){panel=document.createElement("div");panel.id="planMilestones";panel.className="plan-milestones";summary.insertAdjacentElement("afterend",panel)}
     const months=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
-    const items=window.SPF_OPERATIONAL_PLAN.filter(item=>item.group==="core").flatMap(item=>
-      item.results.map((_,resultIndex)=>({item,resultIndex,milestones:resultMilestones(item,resultIndex),evaluation:resultEvaluation(item,resultIndex),state:ensurePlanState(item).results[resultIndex]||{}}))
-    );
-    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>مواعيد تسليم نتائج الأهداف التشغيلية</h3></div><div><small>كل صف يمثل نتيجة مستقلة وفق المستهدفات المعتمدة في الكشف</small><div class="plan-milestone-legend"><i class="above"></i>يفوق التوقعات <i class="expected"></i>يحقق التوقعات <i class="below"></i>دون التوقعات</div></div></div>
-      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>النتيجة</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
-      ${items.map(({item,resultIndex,milestones,evaluation,state})=>{
-        const valid=milestones.some(milestone=>milestone.date?.getFullYear()===2026);
-        const lastMonth=Math.max(0,...milestones.filter(milestone=>milestone.date?.getFullYear()===2026).map(milestone=>milestone.date.getMonth()+1));
-        const delivered=state.delivered==="yes"&&!!state.date;
-        const status=delivered?"تم التسليم":evaluation.label;
-        return `<div class="plan-milestone-row"><div class="plan-milestone-name"><b>${escapeHtml(item.id.replace("O",""))}.${resultIndex+1}</b><span><small>${escapeHtml(planListValue(item,"results",resultIndex))}</small></span></div>
+    const items=window.SPF_OPERATIONAL_PLAN;
+    panel.innerHTML=`<div class="plan-milestone-head"><div><span>المشهد الزمني · 2026</span><h3>الأهداف والمبادرات التشغيلية والإضافية</h3></div><div><small>كل صف يمثل هدفًا أو مبادرة · اضغط على الاسم لعرض التفاصيل والمواعيد المعتمدة</small><div class="plan-milestone-legend"><i class="above"></i>يفوق التوقعات <i class="expected"></i>يحقق التوقعات <i class="below"></i>دون التوقعات</div></div></div>
+      <div class="plan-milestone-scroll"><div class="plan-milestone-axis"><span>الهدف / المبادرة</span>${months.map(month=>`<span>${month}</span>`).join("")}<span>الحالة</span></div>
+      ${items.map(item=>{
+        const milestones=item.results.flatMap((_,resultIndex)=>resultMilestones(item,resultIndex).map(m=>({...m,resultIndex})));
+        const evaluation=planEvaluation(item);
+        const valid=milestones.some(m=>m.date?.getFullYear()===2026);
+        const lastMonth=Math.max(0,...milestones.filter(m=>m.date?.getFullYear()===2026).map(m=>m.date.getMonth()+1));
+        const delivered=ensurePlanState(item).results.every(r=>r.delivered==="yes"&&!!r.date);
+        return `<div class="plan-milestone-row"><button type="button" class="plan-milestone-name" data-plan-open="${escapeHtml(item.id)}" aria-label="عرض تفاصيل ${escapeHtml(planValue(item,"title"))}"><b>${escapeHtml(item.id.replace("O","G"))}</b><span><small>${escapeHtml(planValue(item,"title"))}</small><em>${item.group==="core"?"هدف تشغيلي":"مبادرة إضافية"} · عرض التفاصيل ↗</em></span></button>
         ${months.map((monthName,index)=>{
-          const monthMilestones=milestones.filter(milestone=>milestone.date?.getFullYear()===2026&&milestone.date.getMonth()===index);
-          return `<div class="plan-milestone-cell ${monthMilestones.length?"marked":""} ${valid&&index+1<lastMonth?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}" data-month="${escapeHtml(monthName)}">${monthMilestones.map(milestone=>`<span class="plan-target ${milestone.tone}" title="النتيجة ${resultIndex+1} · ${escapeHtml(milestone.label)} · ${escapeHtml(milestone.value)}"><b>ن${resultIndex+1}</b><time>${compactPlanDate(milestone.date)}</time><em>${escapeHtml(milestone.short)}</em></span>`).join("")}${!monthMilestones.length&&valid&&index+1<lastMonth?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`;
+          const monthMilestones=milestones.filter(m=>m.date?.getFullYear()===2026&&m.date.getMonth()===index);
+          return `<div class="plan-milestone-cell ${monthMilestones.length?"marked":""} ${valid&&index+1<lastMonth?"active-range":""} ${new Date().getFullYear()===2026&&new Date().getMonth()===index?"current-month":""}" data-month="${escapeHtml(monthName)}">${monthMilestones.map(m=>`<span class="plan-target ${m.tone}" title="${escapeHtml(planListValue(item,"results",m.resultIndex))} · ${escapeHtml(m.label)} · ${escapeHtml(m.value)}"><b>ن${m.resultIndex+1}</b><time>${compactPlanDate(m.date)}</time><em>${escapeHtml(m.short)}</em></span>`).join("")}${!monthMilestones.length&&valid&&index+1<lastMonth?`<i class="range-line ${delivered?"done":evaluation.code==="late"?"late":"pending"}" aria-hidden="true"></i>`:""}</div>`;
         }).join("")}
-        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${valid?escapeHtml(status):"موعد غير محدد"}</span></div>`;
+        <span class="plan-milestone-status ${delivered?"done":evaluation.code==="late"?"late":"pending"}">${escapeHtml(evaluation.label)}${!valid?" · لا يوجد موعد بتاريخ محدد":""}</span></div>`;
       }).join("")}</div>`;
+    panel.onclick=e=>{const opener=e.target.closest("[data-plan-open]");if(opener)openPlanGoal(opener.dataset.planOpen)};
   }
+
   function resultScheduleRows(item){
     return item.results.map((value,index)=>`<div class="plan-result-row">
       <div class="plan-result-name"><span>النتيجة ${index+1}</span><b data-edit-key="plan.${item.id}.results.${index}">${planListValue(item,"results",index)}</b></div>
@@ -334,6 +335,7 @@
   function renderOperationalPlan(filter="core"){
     const items=window.SPF_OPERATIONAL_PLAN.filter(item=>filter==="all"||item.group===filter);
     renderPlanHero();
+    $("#planGoalModal")?.remove();
     planGrid.innerHTML=items.map(item=>{const state=ensurePlanState(item),evaluation=planEvaluation(item),delivered=state.results.filter(result=>result.delivered==="yes"&&result.date).length,total=item.results.length,completion=total?Math.round(delivered/total*100):0;return `<article class="plan-card plan-goal-card ${item.group}" data-plan-card="${item.id}">
       <button class="plan-goal-open" type="button" data-plan-open="${item.id}" aria-label="عرض التفاصيل الشاملة للهدف ${escapeHtml(item.id)}">
         <span class="plan-goal-id">${item.id.replace("O","G")}</span>
@@ -342,6 +344,9 @@
         <span class="plan-goal-state ${evaluation.code}">${evaluation.label}</span>
       </button>
     </article>`}).join("")+`<div class="modal plan-goal-modal" id="planGoalModal" aria-hidden="true"><div class="modal-backdrop" data-close-plan-goal></div><article class="modal-panel wide plan-goal-panel" role="dialog" aria-modal="true" aria-labelledby="planGoalTitle"><button class="modal-close" type="button" data-close-plan-goal aria-label="إغلاق">×</button><div id="planGoalDetail"></div></article></div>`;
+    // Keep the dialog outside the chapter stacking context and fixed headers.
+    const dialog=$("#planGoalModal");document.body.appendChild(dialog);
+    dialog.addEventListener("click",e=>{if(e.target.closest("[data-close-plan-goal]")){dialog.classList.remove("open");dialog.setAttribute("aria-hidden","true")}});
     prepareEditable(planGrid);
   }
   renderOperationalPlan("core");
@@ -356,7 +361,7 @@
     if(e.target.closest("[data-close-plan-goal]")){const dialog=$("#planGoalModal");dialog?.classList.remove("open");dialog?.setAttribute("aria-hidden","true")}
   });
 
-  planGrid.addEventListener("change",e=>{
+  document.addEventListener("change",e=>{
     const resultDelivered=e.target.closest("[data-plan-result-delivered]"),resultDate=e.target.closest("[data-plan-result-date]");
     const finalDelivered=e.target.closest("[data-plan-final-delivered]"),finalDate=e.target.closest("[data-plan-final-date]");
     const id=resultDelivered?.dataset.planResultDelivered||resultDate?.dataset.planResultDate||finalDelivered?.dataset.planFinalDelivered||finalDate?.dataset.planFinalDate;
@@ -531,7 +536,7 @@
       const items=tasks.filter(task=>classify(task)===group.code);
       return `<section class="tracker-kanban-column ${group.tone}" aria-label="${group.label}: ${items.length} مهام"><h4><span><i aria-hidden="true">${group.icon}</i>${group.label}</span><strong>${items.length}</strong></h4><div class="tracker-kanban-list">${items.slice(0,3).map(task=>{
         const pct=Number(task.pct),valid=Number.isFinite(pct)&&task.pct!=null;
-        return `<article><small>${escapeHtml(task.dept||"قسم غير محدد")}${task.id?` · ${escapeHtml(task.id)}`:""}</small><b>${escapeHtml(task.title)}</b><div class="tracker-kanban-progress"><i><em style="width:${valid?Math.max(0,Math.min(100,pct)):0}%"></em></i><span>${valid?`${Math.round(pct)}%`:"—"}</span></div><footer><span>${escapeHtml(task.emp||"غير محدد")}</span><time>${escapeHtml(task.date||task.due||"—")}</time></footer></article>`;
+        return `<article><small>${escapeHtml(task.dept||"قسم غير محدد")}</small><b>${escapeHtml(task.title)}</b><div class="tracker-kanban-progress"><i><em style="width:${valid?Math.max(0,Math.min(100,pct)):0}%"></em></i><span>${valid?`${Math.round(pct)}%`:"—"}</span></div><footer><span>${escapeHtml(task.emp||"غير محدد")}</span><time>${escapeHtml(task.date||task.due||"—")}</time></footer></article>`;
       }).join("")||'<p>لا توجد مهام بهذه الحالة</p>'}</div><a href="assets/work-tracker.html" target="_blank" rel="noopener">فتح السجل التفصيلي ←</a></section>`;
     }).join("")}</div>`;
     prepareEditable(panel);

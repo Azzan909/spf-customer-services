@@ -1,0 +1,71 @@
+/* September review: compact, responsive cards with unambiguous figures. */
+#methodology .pillar-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#methodology .pillar-track>article{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-content:center;align-items:center;gap:8px 12px;min-height:0;padding:18px;border-radius:18px;border:1px solid #d7e1db;text-align:start;background:#f0f5f1}
+#methodology .pillar-track>article:nth-child(even){background:#f8f3e7}
+#methodology .pillar-track>article:last-child{grid-column:1/-1}
+#methodology .pillar-track>article>b{grid-column:3;grid-row:1;position:static;color:#9e793e;font-size:18px}
+#methodology .pillar-track h3{grid-column:2;grid-row:1;margin:0;font-size:18px;line-height:1.5}
+#methodology .pillar-track p{grid-column:2/-1;margin:0;font-size:13px;line-height:1.7;color:#5c7065}
+.pillar-illustration{grid-row:1/3;width:56px;height:56px;padding:12px;stroke:#315e4d;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;border-radius:16px;background:#fff;border:1px solid #d4e3da}
+#methodology .pillar-visual-flow{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+#methodology .pillar-visual-flow span{display:inline-flex;align-items:center;padding:4px 8px;border:1px solid #dae2d8;border-radius:7px;background:#ffffffa6;color:#315e4d;font-size:11px;font-weight:700}
+#methodology .pillar-visual-flow span+span:before{content:'←';margin-inline-end:7px;color:#a37f44}
+/* Icon gets its own row, so large values never sit behind it. */
+#governorateInspector :is(.work-metrics,.inspector-kpis,.governorate-productivity){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#governorateInspector :is(.work-metrics,.inspector-kpis,.governorate-productivity) article{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:150px;padding:14px 10px!important;gap:7px;text-align:center;overflow:visible}
+#governorateInspector .governorate-card-icon{position:static!important;inset:auto!important;flex:none;display:block;width:34px;height:34px;padding:7px;margin:0;order:0}
+#governorateInspector :is(.work-metrics,.inspector-kpis,.governorate-productivity) article :is(b,strong){position:static;order:1;margin:0;width:100%;font-size:clamp(23px,2.8vw,32px)!important;line-height:1.25;white-space:nowrap;direction:ltr;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+#governorateInspector :is(.work-metrics,.inspector-kpis,.governorate-productivity) article>span{order:2;min-height:0;max-width:100%;width:100%;font-size:13px!important;line-height:1.5!important}
+#governorateInspector :is(.work-metrics,.inspector-kpis,.governorate-productivity) article>small{order:3;margin:0;font-size:11px!important}
+/* Five states fit as a grid; narrower screens stack entire columns. */
+#trackerKanban{min-width:0;max-width:100%;padding:18px}
+#trackerKanban .tracker-kanban-columns{grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;scroll-snap-type:none;gap:10px;padding:0}
+#trackerKanban .tracker-kanban-column{min-width:0;min-height:0;padding:10px;display:flex;flex-direction:column}
+#trackerKanban .tracker-kanban-column h4{flex-wrap:wrap;font-size:14px}
+#trackerKanban .tracker-kanban-list{min-width:0;width:100%;gap:10px}
+#trackerKanban .tracker-kanban-list article{min-width:0;width:100%;max-width:100%;min-height:0;padding:12px;overflow-wrap:anywhere}
+#trackerKanban .tracker-kanban-list article>b{font-size:14px;line-height:1.6}
+#trackerKanban .tracker-kanban-list article>small{font-size:11px;line-height:1.5}
+#trackerKanban .tracker-kanban-progress i{min-width:0}
+#trackerKanban .tracker-kanban-column>a{margin-top:auto;padding-top:16px;font-size:12px}
+#trackerKanban footer{flex-wrap:wrap;gap:5px;font-size:11px}
+#trackerKanban footer span{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#trackerKanban footer time{font-size:11px}
+#planMilestones button.plan-milestone-name{width:100%;min-width:0;border:0;background:transparent;font:inherit;text-align:start;cursor:pointer;color:#294e40;padding:10px 8px;align-self:stretch}
+#planMilestones button.plan-milestone-name:hover{background:#e4efe8}
+#planMilestones button.plan-milestone-name:focus-visible{outline:3px solid #a47b38;outline-offset:-3px;border-radius:8px}
+#planMilestones .plan-milestone-name em{display:block;font-size:10px;font-style:normal;color:#8d682c;margin-top:6px}
+#planMilestones .plan-milestone-name b{width:38px;font-size:11px}
+/* Centre each quarterly value inside a consistent block. */
+#performance .component-score-layout .quarter-comparison{align-items:center}
+#performance .component-score-layout .quarter-period{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:110px!important;height:110px;max-height:none;aspect-ratio:auto}
+#performance .component-score-layout .quarter-period :is(span,b){margin:0;position:static;text-align:center}
+#performance .component-score-layout .quarter-change{display:flex!important;flex-direction:column;justify-content:center;align-items:center;gap:3px;min-height:64px!important;height:64px;width:64px;flex:none}
+#performance .component-score-layout .quarter-change :is(strong,small){margin:0;line-height:1.1;text-align:center}
+/* Tajawob uses completion rings, proportional bars and a compact process. */
+#tajawob .tajawob-hero{gap:12px}
+#tajawob .tajawob-hero>div{min-height:0;padding:20px;display:flex;flex-direction:column;justify-content:center;gap:7px}
+#tajawob .tajawob-hero strong{margin:0;font-size:clamp(32px,3.6vw,48px);line-height:1.2}
+#tajawob .tajawob-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
+#tajawob .tajawob-flow article{position:relative;min-height:0;padding:16px;display:grid;grid-template-columns:36px minmax(0,1fr);gap:6px 10px;align-content:center;border:1px solid #dce5dc;border-radius:14px;background:#f0f5f0}
+#tajawob .tajawob-flow article>i{grid-row:1/3;position:static;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#315f4d;color:#fff;font-style:normal;font-size:16px}
+#tajawob .tajawob-flow article>b{font-size:14px;line-height:1.5}
+#tajawob .tajawob-flow article>span{font-size:12px;line-height:1.6}
+#tajawob .tajawob-type-grid article{min-height:0;padding:18px;display:flex;flex-direction:column;gap:8px}
+#tajawob .tajawob-type-grid strong{margin:0;font-size:34px;line-height:1.2}
+#tajawob .tajawob-type-grid article>i{height:9px;display:block;width:100%;margin:0;background:#dce5dc;border-radius:5px;overflow:hidden}
+#tajawob .tajawob-type-grid article>i>em{height:100%;display:block;width:calc(var(--rate)*1%);background:linear-gradient(90deg,#a8c4b4,#315f4d)}
+#tajawob .tajawob-peaks{gap:10px}
+#tajawob .tajawob-peaks article{min-height:0;padding:16px;border-inline-start:4px solid #c3a063;display:flex;flex-direction:column;gap:6px}
+#tajawob .tajawob-peaks strong{font-size:19px;line-height:1.5;margin:0}
+@media(max-width:1250px){#trackerKanban .tracker-kanban-columns{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){#trackerKanban .tracker-kanban-columns{grid-template-columns:repeat(2,minmax(0,1fr))}#tajawob .tajawob-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){#methodology .pillar-track{grid-template-columns:minmax(0,1fr)}#methodology .pillar-track>article:last-child{grid-column:auto}#trackerKanban .tracker-kanban-columns{grid-template-columns:minmax(0,1fr)}#trackerKanban{padding:14px}#trackerKanban .tracker-kanban-column{padding:12px}#tajawob .tajawob-hero,#tajawob .tajawob-type-grid,#tajawob .tajawob-peaks{grid-template-columns:repeat(2,minmax(0,1fr))}#tajawob .tajawob-peaks article:last-child{grid-column:1/-1}#tajawob .tajawob-hero>div,#tajawob .tajawob-type-grid article{padding:14px}#tajawob .tajawob-flow article{padding:12px;grid-template-columns:28px minmax(0,1fr)}#tajawob .tajawob-flow article>i{width:28px;height:28px;font-size:13px}#methodology .pillar-track h3{font-size:16px}#performance .component-score-layout .quarter-period{min-height:104px!important;height:104px}#performance .component-score-layout .quarter-change{width:52px;height:52px;min-height:52px!important}}
+@media(prefers-reduced-motion:reduce){#methodology .pillar-track>article,#planMilestones button{transition:none}}
+
+#planGoalModal{z-index:500}
+#planGoalModal .plan-goal-panel{max-height:90dvh;overflow-y:auto;color:#294e40}
+#planGoalModal .plan-milestone-name small{color:#315e4d}
+#planMilestones .plan-milestone-name small{color:#f0f5f1}
+@media(max-width:480px){#governorateInspector .governorate-work{padding:10px}#governorateInspector :is(.work-metrics,.governorate-productivity) article :is(b,strong){font-size:20px!important;letter-spacing:-.025em}#governorateInspector :is(.work-metrics,.governorate-productivity) article{padding-inline:7px!important}}
+@media(max-width:360px){#governorateInspector :is(.work-metrics,.inspector-kpis,.governorate-productivity){grid-template-columns:minmax(0,1fr)}#governorateInspector :is(.work-metrics,.governorate-productivity) article :is(b,strong){font-size:26px!important}}
