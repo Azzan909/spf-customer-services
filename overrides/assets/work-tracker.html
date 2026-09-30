@@ -598,13 +598,72 @@ const AUTH_PROXY='https://customer-compass-github-auth.spf2040.chatgpt.site';
 const FILTER_STORAGE_KEY='spf-work-tracker-filters-v1';
 const OWNER_SESSION_KEY='spf-work-tracker-owner-session-v1';
 let isOwner=false,ownerAccessToken='',loadedTasksUpdatedAt=null,loadedTasksSha=null,pendingTaskImport=null,taskMutationInFlight=false,importReadInFlight=false,importSheetLayouts=[];
-// Keep distinct people with the same first name (e.g. سعيد) separate.
-const EMPLOYEE_ALIASES={'يسرى الراسبية':'يسرى','يسرى الراسبي':'يسرى','سهى البلوشي':'سهى','سهى ا':'سهى','أحمد العبري':'أحمد','عزان الريامي':'عزان','فاطمة الجرادي':'فاطمة','عبدالله البوسعيدي':'عبدالله','زكية الوهيبي':'زكية','زهرة المصلحي':'زهرة','زهره المصلحي':'زهرة','حسناء المنجية':'حسناء','حسناء المنجي':'حسناء','ميعاد العلوي':'ميعاد','عبدالعزيز الغيثي':'عبدالعزيز'};
-function normalizeEmployees(value){
-  let result=String(value||'');
-  for(const [alias,name] of Object.entries(EMPLOYEE_ALIASES).sort((a,b)=>b[0].length-a[0].length))result=result.replaceAll(alias,name);
-  return result.trim();
+// Keep distinct people with the same first name (e.g. سعيد) separate, while
+// unifying harmless spelling differences and crediting shared work to everyone.
+const EMPLOYEE_ALIASES={
+  'احمد':'أحمد','أحمد العبري':'أحمد','احمد العبري':'أحمد',
+  'عبد العزيز':'عبدالعزيز','عبدالعزيز الغيثي':'عبدالعزيز','عبد العزيز الغيثي':'عبدالعزيز',
+  'عبد الله':'عبدالله','عبدالله البوسعيدي':'عبدالله','عبد الله البوسعيدي':'عبدالله',
+  'معتصم':'المعتصم',
+  'شوتي':'Sruthy','شورتي':'Sruthy','سورتي':'Sruthy','سروثي':'Sruthy','سعيد':'سعيد الرحبي',
+  'يسرى الراسبية':'يسرى','يسرى الراسبي':'يسرى',
+  'سها':'سهى','سوهى':'سهى','سوهة':'سهى','سهى البلوشي':'سهى','سهى ا':'سهى',
+  'أحمد العبري':'أحمد','عزان الريامي':'عزان','فاطمة الجرادي':'فاطمة',
+  'زكية الوهيبي':'زكية','زهرة المصلحي':'زهرة','زهره المصلحي':'زهرة',
+  'حسناء المنجية':'حسناء','حسناء المنجي':'حسناء',
+  'ميعاد العلوي':'ميعاد'
+};
+const KNOWN_EMPLOYEES=[
+  'أحمد','عزان','فاطمة','لمى','يسرى','عبدالله','ليلى','سليمان','زهرة','زكية','سهى','ميعاد','حسناء','عبدالعزيز','المعتصم','عبير','هاشم','شاذلي','جميلة','عصام',
+  'لطيفة العوفي','سعيد الشبلي','سعادة الصارخية','عهود المعمري','غفران الوهيبي','سعيد الرحبي','يوسف الخياري','قحطان البطاشي','خلود الفارسي','لميس السعدي','آية الحراصي','شهد الغافري','علي الدغيشي','أنوار الحسني','Sruthy'
+];
+const NON_PERSON_ASSIGNMENTS=new Set(['القسم','الجميع','الفريق','قسم دائرة الخدمات','فريق مشروع مركز الاتصال','cc project platform']);
+function employeeKey(value){
+  return String(value||'').normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/\s+/g,' ').trim().toLowerCase();
 }
+const EMPLOYEE_CANONICAL=new Map();
+KNOWN_EMPLOYEES.forEach(name=>EMPLOYEE_CANONICAL.set(employeeKey(name),name));
+Object.entries(EMPLOYEE_ALIASES).forEach(([alias,name])=>EMPLOYEE_CANONICAL.set(employeeKey(alias),name));
+const EMPLOYEE_PHRASES=[...EMPLOYEE_CANONICAL.entries()].sort((a,b)=>b[0].split(' ').length-a[0].split(' ').length);
+function canonicalEmployeeName(value){
+  const clean=String(value||'').normalize('NFKC').replace(/\s+/g,' ').trim();
+  return EMPLOYEE_CANONICAL.get(employeeKey(clean))||clean;
+}
+function splitKnownEmployeeSequence(value){
+  const words=employeeKey(value).split(' ').filter(Boolean),memo=new Map();
+  function walk(index){
+    if(index===words.length)return [];
+    if(memo.has(index))return memo.get(index);
+    for(const [alias,name] of EMPLOYEE_PHRASES){
+      const parts=alias.split(' ');
+      if(parts.every((part,offset)=>words[index+offset]===part)){
+        const rest=walk(index+parts.length);
+        if(rest){const result=[name,...rest];memo.set(index,result);return result;}
+      }
+    }
+    memo.set(index,null);return null;
+  }
+  const result=walk(0);
+  return result&&result.length>1?result:null;
+}
+function splitEmps(emp){
+  const parts=String(emp||'').normalize('NFKC')
+    .replace(/\s+و\s*/g,'/')
+    .split(/[/\\،,;؛|\-–—+]+/)
+    .map(value=>value.trim()).filter(Boolean);
+  const people=[];
+  parts.forEach(part=>{
+    if(NON_PERSON_ASSIGNMENTS.has(employeeKey(part)))return;
+    const exact=EMPLOYEE_CANONICAL.get(employeeKey(part));
+    const names=exact?[exact]:(splitKnownEmployeeSequence(part)||[canonicalEmployeeName(part)]);
+    names.forEach(name=>{
+      const key=employeeKey(name);
+      if(name.length>1&&!NON_PERSON_ASSIGNMENTS.has(key)&&!people.some(person=>employeeKey(person)===key))people.push(name);
+    });
+  });
+  return people;
+}
+function normalizeEmployees(value){return splitEmps(value).join(' / ');}
 function cloneDefaults(){return DEFAULT_DATA.map((r,index)=>({...r,emp:normalizeEmployees(r.emp),id:r.id||`source-${index+1}`}));}
 async function loadTasks(){
   try{
@@ -840,9 +899,6 @@ function refreshFiltersAfterDataChange(){
   applyFilters();
 }
 
-function splitEmps(emp){
-  return normalizeEmployees(emp).split(/[/،,\-–+]/).map(n=>n.trim()).filter(n=>n.length>1 && n!=='القسم' && n!=='الجميع' && n!=='الفريق');
-}
 function importKey(task){
   const clean=value=>importHeader(value);
   return `${clean(task.dept)}|${clean(task.title)}`;
