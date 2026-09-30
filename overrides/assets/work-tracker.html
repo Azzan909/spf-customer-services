@@ -625,9 +625,30 @@ const EMPLOYEE_CANONICAL=new Map();
 KNOWN_EMPLOYEES.forEach(name=>EMPLOYEE_CANONICAL.set(employeeKey(name),name));
 Object.entries(EMPLOYEE_ALIASES).forEach(([alias,name])=>EMPLOYEE_CANONICAL.set(employeeKey(alias),name));
 const EMPLOYEE_PHRASES=[...EMPLOYEE_CANONICAL.entries()].sort((a,b)=>b[0].split(' ').length-a[0].split(' ').length);
+function employeeEditDistance(left,right){
+  if(Math.abs(left.length-right.length)>1)return 2;
+  let previous=Array.from({length:right.length+1},(_,index)=>index);
+  for(let i=1;i<=left.length;i++){
+    const current=[i];
+    for(let j=1;j<=right.length;j++)current[j]=Math.min(current[j-1]+1,previous[j]+1,previous[j-1]+(left[i-1]===right[j-1]?0:1));
+    previous=current;
+  }
+  return previous[right.length];
+}
+function closestKnownEmployee(value){
+  const key=employeeKey(value);
+  if(key.length<4)return null;
+  let distance=2,matches=new Set();
+  for(const [alias,name] of EMPLOYEE_CANONICAL){
+    const candidate=employeeEditDistance(key,alias);
+    if(candidate<distance){distance=candidate;matches=new Set([name]);}
+    else if(candidate===distance)matches.add(name);
+  }
+  return distance===1&&matches.size===1?[...matches][0]:null;
+}
 function canonicalEmployeeName(value){
   const clean=String(value||'').normalize('NFKC').replace(/\s+/g,' ').trim();
-  return EMPLOYEE_CANONICAL.get(employeeKey(clean))||clean;
+  return EMPLOYEE_CANONICAL.get(employeeKey(clean))||closestKnownEmployee(clean)||clean;
 }
 function splitKnownEmployeeSequence(value){
   const words=employeeKey(value).split(' ').filter(Boolean),memo=new Map();

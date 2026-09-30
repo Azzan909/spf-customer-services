@@ -71,8 +71,11 @@
     }
     const governorateSelect=$("#governorateSelect",inspector);
     if(governorateSelect){
+      const allOption=governorateSelect.querySelector('option[value="all"]')||governorateSelect.options[0];
+      setText(allOption,"جميع المحافظات");
       governorateSelect.value="all";
       governorateSelect.dispatchEvent(new Event("change",{bubbles:true}));
+      setText($("#governorateName"),"جميع المحافظات");
     }
     const update=()=>{
       Array.from(inspector.querySelectorAll("article")).forEach(card=>{
