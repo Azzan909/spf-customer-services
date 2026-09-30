@@ -41,6 +41,26 @@
       population.innerHTML=`<div class="population-head"><span>العمانيون في المحافظة · أغسطس 2026</span><a href="reports/population-aug-2026.pdf" target="_blank" rel="noopener">المصدر: النشرة الإحصائية لشهر سبتمبر 2026 ↗</a></div><div class="population-grid"><article><span>عدد العمانيين</span><b id="govOmaniPopulation">—</b></article></div>`;
       inspector.appendChild(population);
     }
+    let reportLink=$("#governorateReportLink",inspector);
+    if(!reportLink){
+      reportLink=document.createElement("a");
+      reportLink.id="governorateReportLink";
+      reportLink.className="governorate-report-link";
+      reportLink.href="reports/dakhiliyah-june-2026.html";
+      reportLink.target="_blank";
+      reportLink.rel="noopener";
+      reportLink.hidden=true;
+      reportLink.innerHTML='<span><small>تقرير المحافظة</small><b>تقرير دائرة الحماية الاجتماعية بمحافظة الداخلية يونيو 2026</b></span><i aria-hidden="true">↗</i>';
+      population.before(reportLink);
+    }
+    let profile=$(".governorate-profile-column",inspector);
+    if(!profile){
+      profile=document.createElement("div");
+      profile.className="governorate-profile-column";
+      const work=$(".governorate-work",inspector);
+      inspector.prepend(profile);
+      [...inspector.children].filter(node=>node!==profile&&node!==work).forEach(node=>profile.appendChild(node));
+    }
     const update=()=>{
       Array.from(inspector.querySelectorAll("article")).forEach(card=>{
         const label=$("span",card); if(!label)return;
@@ -51,6 +71,8 @@
       setText(workCards[0]?.querySelector("span"),"زيارة إلى المقر");
       setText(workCards[7]?.querySelector("span"),"تقييم عبر QR الإجادة المؤسسية - وزارة العمل");
       const name=String($("#governorateName")?.textContent||"").trim().replace(/^محافظة\s*/,"");
+      const showDakhiliyahReport=name==="الداخلية";
+      if(reportLink.hidden===showDakhiliyahReport) reportLink.hidden=!showDakhiliyahReport;
       const omanCount=omanisByGovernorate[name];
       setText($("#govOmaniPopulation",population),omanCount?fmt(omanCount):"—");
       const currentShareSmall=share?.parentElement?.querySelector("small");

@@ -35,6 +35,30 @@ replace_required(
           <small>المنصة التنفيذية للمديرية العامة لخدمات المتعاملين</small>
         </div>''')
 
+replace_required(
+'''        </section>
+
+        <section class="section-block" id="directorate">''',
+'''        </section>
+
+        <section class="operational-budget-card" aria-label="الموازنة التشغيلية">
+          <div class="budget-heading">
+            <span class="budget-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16v12H4zM7 7V5h10v2M8 12h8M8 15h5"/></svg></span>
+            <div><small>الإدارة المالية</small><h2>الموازنة التشغيلية</h2><p>ملخص الاستخدام الفعلي من الموازنة المعتمدة</p></div>
+          </div>
+          <div class="budget-usage" aria-label="النسبة المستخدمة من الموازنة 36 بالمئة">
+            <div class="budget-ring" style="--budget-used:36"><strong>36%</strong><span>المستخدم</span></div>
+            <div><b>النسبة المستخدمة من الموازنة</b><small>المتبقي 64% من إجمالي الاعتماد</small></div>
+          </div>
+          <div class="budget-values">
+            <article><span>القيمة المصروفة من الموازنة</span><strong dir="ltr">1,243,351.62</strong><small>ريال عُماني</small></article>
+            <article><span>الموازنة المعتمدة</span><strong dir="ltr">3,498,674.918</strong><small>ريال عُماني</small></article>
+          </div>
+          <div class="budget-progress" aria-hidden="true"><i style="width:36%"></i></div>
+        </section>
+
+        <section class="section-block" id="directorate">''')
+
 
 replace_required(
 '''          <div class="plan-summary">
@@ -69,7 +93,7 @@ risk_section = '''        <section class="section-block risk-register-section" i
           </div>
           <div class="risk-scale" aria-label="مفتاح تصنيف المخاطر"><span><i class="risk-dot high"></i>متأصل كبير</span><span><i class="risk-dot medium"></i>متبقٍ معتدل</span><span><i class="risk-dot active"></i>الحالة: نشط</span><small>اضغط على أي خطر لعرض الضوابط وخطة المعالجة كاملة.</small></div>
           <div class="risk-cards">
-            <details class="risk-card" open>
+            <details class="risk-card">
               <summary>
                 <span class="risk-ref">R01</span><div class="risk-title"><small>إدارة العمليات التشغيلية لخدمات المتعاملين</small><h3>ارتفاع حجم الأعباء التشغيلية على موظفي خدمات المتعاملين ومركز الاتصال</h3><div><span class="risk-chip">تشغيلي</span><span class="risk-chip active">نشط</span><span class="risk-date">المعالجة المستهدفة: الربع الأول 2027</span></div></div>
                 <div class="risk-score-flow"><span class="score inherent"><b>12</b><small>كبير · متأصل</small></span><i>←</i><span class="score residual"><b>6</b><small>معتدل · متبقٍ</small></span></div>
@@ -486,6 +510,29 @@ if 'id="community-line"' not in text:
 award_anchor = '<article><time>2024</time><div><h3>شهادة التميز في جودة الخدمات</h3><p>تطبيق المبادئ التوجيهية للجمعية الدولية للضمان الاجتماعي (ISSA).</p></div></article>\n          </div>'
 replace_required(award_anchor, '<article><time>2024</time><div><h3>شهادة التميز في جودة الخدمات</h3><p>تطبيق المبادئ التوجيهية للجمعية الدولية للضمان الاجتماعي (ISSA).</p></div></article>\n            <article class="award-2026"><time>2026</time><div><h3>جائزة التميز المؤسسي لأفضل منفذ خدمة</h3><p>حصلت 8 دوائر في المحافظات على جائزة التميز المؤسسي لأفضل منفذ خدمة.</p></div></article>\n          </div>')
 
+# Compact illustrations show the five practical steps without repeating paragraphs.
+pillar_paths = [
+    '<circle cx="12" cy="8" r="3"/><path d="M6 20v-2a6 6 0 0 1 12 0v2M3 7h3M18 7h3M3 12h3M18 12h3"/>',
+    '<circle cx="4" cy="6" r="2"/><circle cx="20" cy="18" r="2"/><path d="M6 6h9a4 4 0 0 1 0 8H9a2 2 0 0 0 0 4h9M17 4l3 2-3 2"/>',
+    '<path d="M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6L12 2Z"/><path d="m8 12 3 3 5-6"/>',
+    '<rect x="3" y="2" width="12" height="20" rx="2"/><path d="M7 5h4M8 18h2M17 10h2a3 3 0 0 1 3 3v5M17 6a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"/>',
+    '<path d="M20 8a9 9 0 0 0-15-3L2 8M2 3v5h5M4 16a9 9 0 0 0 15 3l3-3M22 21v-5h-5M8 15v-3M12 15V8M16 15v-5"/>'
+]
+pillar_tags = [('الاستماع','الفهم','التصنيف'),('الوعي','الحل','المتابعة'),('المعرفة','الصلاحيات','الحل'),('سهولة','شمول','دعم بشري'),('قياس','مراجعة','تحسين')]
+match = re.search(r'<div class="pillar-track">(.*?)</div>', text, re.S)
+if not match:
+    raise SystemExit("Expected five customer centricity steps")
+index = [0]
+def illustrate_pillar(m):
+    n = index[0]; index[0] += 1
+    art = '<svg class="pillar-illustration" viewBox="0 0 24 24" aria-hidden="true">' + pillar_paths[n] + '</svg>'
+    tags = '<div class="pillar-visual-flow">' + ''.join('<span>'+t+'</span>' for t in pillar_tags[n]) + '</div>'
+    return '<article>' + art + m.group(1) + tags + '</article>'
+pipeline = re.sub(r'<article>(.*?)</article>', illustrate_pillar, match.group(1), flags=re.S)
+if index[0] != 5:
+    raise SystemExit("Expected exactly five customer centricity steps")
+text = text[:match.start(1)] + pipeline + text[match.end(1):]
+
 # Force fresh navigation and presentation scripts after routing fixes.
 text = text.replace('src="assets/exhibition.js"', 'src="assets/exhibition.js?v=20260927-final"')
 text = text.replace('src="assets/platform-enhancements.js?v=20260927-5"', 'src="assets/platform-enhancements.js?v=20260927-final"')
@@ -504,6 +551,7 @@ text = re.sub(r'src="assets/work-tracker.html(?:\?v=[^"]*)?"', f'src="assets/wor
 
 # Load this last: the upstream exhibition stylesheet centers an overflowing
 # tab row, placing its first tabs beyond the right edge on some screens.
+text = text.replace('</head>', f'  <link rel="stylesheet" href="assets/card-refinements.css?v={asset_revision}" />\n</head>', 1)
 navigation_css = f'  <link rel="stylesheet" href="assets/navigation-reliability.css?v={asset_revision}" />'
 text = text.replace('</head>', navigation_css + '\n</head>', 1)
 

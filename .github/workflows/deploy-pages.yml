@@ -170,6 +170,19 @@ jobs:
               if target.stat().st_size < 1_000_000 or target.open("rb").read(4) != b"%PDF":
                   raise SystemExit(f"Quarterly report is not a complete PDF: {report}")
 
+          dakhiliyah_report = html_path.parent / "reports/dakhiliyah-june-2026.html"
+          if not dakhiliyah_report.is_file() or dakhiliyah_report.stat().st_size < 1_000_000:
+              raise SystemExit("Dakhiliyah June 2026 report is missing or incomplete")
+          report_text = dakhiliyah_report.read_text(encoding="utf-8")
+          expected_report_title = "تقرير دائرة الحماية الاجتماعية بمحافظة الداخلية يونيو 2026"
+          if f"<title>{expected_report_title}</title>" not in report_text:
+              raise SystemExit("Dakhiliyah report title is incorrect")
+          if "الهيكل الإداري للدائرة" in report_text or 'class="org-section"' in report_text:
+              raise SystemExit("Dakhiliyah organisation/employee slide was not removed")
+          enhancement_js = (html_path.parent / "assets/platform-enhancements.js").read_text(encoding="utf-8")
+          if "reports/dakhiliyah-june-2026.html" not in enhancement_js or expected_report_title not in enhancement_js:
+              raise SystemExit("Dakhiliyah report link is missing from the governorate panel")
+
           if "316" in text:
               raise SystemExit("Deprecated community total 316 still exists in generated page")
           if text.count('id="community-line"') != 1 or text.count('id="media-center"') != 1:
