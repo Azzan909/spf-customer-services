@@ -24,6 +24,7 @@
   const next=document.getElementById("nextChapter");
   const output=document.getElementById("chapterPosition");
   const heroMetrics=document.querySelector(".hero-metrics");
+  const overviewCompanions=[heroMetrics,document.querySelector(".operational-budget-card")].filter(Boolean);
 
   function normalizeIndex(index){
     if(!Number.isFinite(index))return 0;
@@ -48,10 +49,13 @@
       else item.link.removeAttribute("aria-current");
     });
 
-    if(heroMetrics){
+    if(overviewCompanions.length){
       const overviewActive=entries[current].id==="overview";
-      heroMetrics.classList.toggle("chapter-hidden",!overviewActive);
-      heroMetrics.hidden=!overviewActive;
+      overviewCompanions.forEach(section=>{
+        section.classList.toggle("chapter-hidden",!overviewActive);
+        section.hidden=!overviewActive;
+        section.setAttribute("aria-hidden",overviewActive?"false":"true");
+      });
     }
 
     if(output)output.textContent=`${String(current+1).padStart(2,"0")} / ${entries.length} — ${entries[current].link.textContent.trim()}`;

@@ -35,6 +35,30 @@ replace_required(
           <small>المنصة التنفيذية للمديرية العامة لخدمات المتعاملين</small>
         </div>''')
 
+replace_required(
+'''        </section>
+
+        <section class="section-block" id="directorate">''',
+'''        </section>
+
+        <section class="operational-budget-card" aria-label="الموازنة التشغيلية">
+          <div class="budget-heading">
+            <span class="budget-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16v12H4zM7 7V5h10v2M8 12h8M8 15h5"/></svg></span>
+            <div><small>الإدارة المالية</small><h2>الموازنة التشغيلية</h2><p>ملخص الاستخدام الفعلي من الموازنة المعتمدة</p></div>
+          </div>
+          <div class="budget-usage" aria-label="النسبة المستخدمة من الموازنة 36 بالمئة">
+            <div class="budget-ring" style="--budget-used:36"><strong>36%</strong><span>المستخدم</span></div>
+            <div><b>النسبة المستخدمة من الموازنة</b><small>المتبقي 64% من إجمالي الاعتماد</small></div>
+          </div>
+          <div class="budget-values">
+            <article><span>القيمة المصروفة من الموازنة</span><strong dir="ltr">1,243,351.62</strong><small>ريال عُماني</small></article>
+            <article><span>الموازنة المعتمدة</span><strong dir="ltr">3,498,674.918</strong><small>ريال عُماني</small></article>
+          </div>
+          <div class="budget-progress" aria-hidden="true"><i style="width:36%"></i></div>
+        </section>
+
+        <section class="section-block" id="directorate">''')
+
 
 replace_required(
 '''          <div class="plan-summary">
