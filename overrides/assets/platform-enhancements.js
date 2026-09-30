@@ -47,10 +47,18 @@
       reportLink.id="governorateReportLink";
       reportLink.className="governorate-report-link";
       reportLink.href="reports/dakhiliyah-june-2026.html";
-      reportLink.target="_blank";
-      reportLink.rel="noopener";
       reportLink.hidden=true;
       reportLink.innerHTML='<span><small>تقرير المحافظة</small><b>تقرير دائرة الحماية الاجتماعية بمحافظة الداخلية يونيو 2026</b></span><i aria-hidden="true">↗</i>';
+      reportLink.addEventListener("click",event=>{
+        const href=reportLink.getAttribute("href")||"";
+        if(!href.startsWith("data:text/html;base64,")) return;
+        event.preventDefault();
+        try{
+          const binary=atob(href.slice("data:text/html;base64,".length));
+          const bytes=Uint8Array.from(binary,char=>char.charCodeAt(0));
+          location.assign(URL.createObjectURL(new Blob([bytes],{type:"text/html;charset=utf-8"})));
+        }catch(_){ location.assign(href) }
+      });
       population.before(reportLink);
     }
     let profile=$(".governorate-profile-column",inspector);
@@ -60,6 +68,11 @@
       const work=$(".governorate-work",inspector);
       inspector.prepend(profile);
       [...inspector.children].filter(node=>node!==profile&&node!==work).forEach(node=>profile.appendChild(node));
+    }
+    const governorateSelect=$("#governorateSelect",inspector);
+    if(governorateSelect){
+      governorateSelect.value="all";
+      governorateSelect.dispatchEvent(new Event("change",{bubbles:true}));
     }
     const update=()=>{
       Array.from(inspector.querySelectorAll("article")).forEach(card=>{
