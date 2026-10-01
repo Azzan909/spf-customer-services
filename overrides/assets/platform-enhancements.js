@@ -170,8 +170,41 @@
     });
   }
 
+  function enhanceFullscreenToggle(){
+    const actions=$(".top-actions"); if(!actions)return;
+    let button=$("#fullscreenViewButton",actions);
+    if(!button){
+      button=document.createElement("button");
+      button.id="fullscreenViewButton";
+      button.type="button";
+      button.className="btn secondary fullscreen-action";
+      button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5"/></svg><span>عرض بملء الشاشة</span>';
+      const printAction=$(".print-action",actions)||[...actions.querySelectorAll("button")].find(item=>item.textContent.includes("طباعة"));
+      if(printAction)printAction.before(button);else actions.appendChild(button);
+    }
+    const requestFullscreen=document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen;
+    const exitFullscreen=document.exitFullscreen||document.webkitExitFullscreen;
+    if(!requestFullscreen||!exitFullscreen){button.hidden=true;return;}
+    const sync=()=>{
+      const active=Boolean(document.fullscreenElement||document.webkitFullscreenElement);
+      button.setAttribute("aria-pressed",String(active));
+      button.setAttribute("aria-label",active?"الخروج من ملء الشاشة":"عرض المنصة بملء الشاشة");
+      const label=$("span",button);if(label)label.textContent=active?"الخروج من ملء الشاشة":"عرض بملء الشاشة";
+      button.classList.toggle("active",active);
+    };
+    button.addEventListener("click",async()=>{
+      try{
+        if(document.fullscreenElement||document.webkitFullscreenElement)await exitFullscreen.call(document);
+        else await requestFullscreen.call(document.documentElement);
+      }catch(_){button.title="تعذّر فتح وضع ملء الشاشة في هذا المتصفح";}
+    });
+    document.addEventListener("fullscreenchange",sync);
+    document.addEventListener("webkitfullscreenchange",sync);
+    sync();
+  }
+
   function boot(){
-    enhanceGovernorateInspector(); decorateGovernorateCards(); correctDirectorateEmployeeCount();
+    enhanceGovernorateInspector(); decorateGovernorateCards(); correctDirectorateEmployeeCount(); enhanceFullscreenToggle();
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,0)); else setTimeout(boot,0);
 })();
