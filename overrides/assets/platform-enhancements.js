@@ -184,22 +184,35 @@
     }
     const requestFullscreen=document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen;
     const exitFullscreen=document.exitFullscreen||document.webkitExitFullscreen;
-    if(!requestFullscreen||!exitFullscreen){button.hidden=true;return;}
+    let nativeFullscreenEntered=false;
     const sync=()=>{
-      const active=Boolean(document.fullscreenElement||document.webkitFullscreenElement);
+      const active=Boolean(document.fullscreenElement||document.webkitFullscreenElement||document.documentElement.classList.contains("presentation-fullscreen"));
       button.setAttribute("aria-pressed",String(active));
       button.setAttribute("aria-label",active?"الخروج من ملء الشاشة":"عرض المنصة بملء الشاشة");
       const label=$("span",button);if(label)label.textContent=active?"الخروج من ملء الشاشة":"عرض بملء الشاشة";
       button.classList.toggle("active",active);
     };
     button.addEventListener("click",async()=>{
+      const nativeActive=Boolean(document.fullscreenElement||document.webkitFullscreenElement);
+      const presentationActive=document.documentElement.classList.contains("presentation-fullscreen");
       try{
-        if(document.fullscreenElement||document.webkitFullscreenElement)await exitFullscreen.call(document);
-        else await requestFullscreen.call(document.documentElement);
-      }catch(_){button.title="تعذّر فتح وضع ملء الشاشة في هذا المتصفح";}
+        if(nativeActive&&exitFullscreen)await exitFullscreen.call(document);
+        else if(presentationActive)document.documentElement.classList.remove("presentation-fullscreen");
+        else{
+          document.documentElement.classList.add("presentation-fullscreen");
+          if(requestFullscreen)await requestFullscreen.call(document.documentElement);
+        }
+      }catch(_){button.title="تم تفعيل العرض الكامل داخل الصفحة؛ يمنع هذا المتصفح الشاشة الكاملة الأصلية";}
+      sync();
     });
-    document.addEventListener("fullscreenchange",sync);
-    document.addEventListener("webkitfullscreenchange",sync);
+    const onFullscreenChange=()=>{
+      const nativeActive=Boolean(document.fullscreenElement||document.webkitFullscreenElement);
+      if(nativeActive)nativeFullscreenEntered=true;
+      else if(nativeFullscreenEntered){document.documentElement.classList.remove("presentation-fullscreen");nativeFullscreenEntered=false;}
+      sync();
+    };
+    document.addEventListener("fullscreenchange",onFullscreenChange);
+    document.addEventListener("webkitfullscreenchange",onFullscreenChange);
     sync();
   }
 
