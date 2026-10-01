@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-09-30T08:28:32.199Z",
+  "updatedAt": "2026-10-01T05:28:04.638Z",
   "edits": {
     "div:1>main:1>header:1>div:1>span:1": "صندوق الحماية الاجتماعية · سلطنة عُمان",
     "div:1>main:1>header:1>div:1>h1:1": "بوصلة المتعامل",
@@ -255,7 +255,7 @@
     "#governorateInspector>div:5>b:1": "الأحد–الخميس · 8ص–2م",
     "#governorateInspector>div:6>div:1>span:1": "",
     "#governorateInspector>div:6>div:1>b:1": "يناير–أغسطس 2026",
-    "#governorateInspector>div:6>div:2>span:1": "إجمالي الأعمال المنجزة",
+    "#governorateInspector>div:6>div:2>span:1": "إجمالي الأعمال المنجزة                                   يناير إلى اغسطس 2026",
     "#govTransactions": "173,336",
     "#governorateInspector>div:6>div:3>article:1>span:1": "زيارة إلى المقر",
     "#govAppointments": "127,340",
