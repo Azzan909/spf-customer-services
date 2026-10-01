@@ -41,6 +41,16 @@
       population.innerHTML=`<div class="population-head"><span>العمانيون في المحافظة · أغسطس 2026</span><a href="reports/population-aug-2026.pdf" target="_blank" rel="noopener">المصدر: النشرة الإحصائية لشهر سبتمبر 2026 ↗</a></div><div class="population-grid"><article><span>عدد العمانيين</span><b id="govOmaniPopulation">—</b></article></div>`;
       inspector.appendChild(population);
     }
+    let premises=$("#dakhiliyahPremises",inspector);
+    if(!premises){
+      premises=document.createElement("section");
+      premises.id="dakhiliyahPremises";
+      premises.className="dakhiliyah-premises";
+      premises.hidden=true;
+      premises.setAttribute("aria-label","مقر دائرة الحماية الاجتماعية بمحافظة الداخلية");
+      premises.innerHTML=`<div class="premises-heading"><span class="premises-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21V7l8-4 8 4v14M8 21v-4h8v4M8 9h2m4 0h2m-8 4h2m4 0h2"/></svg></span><div><small>بيانات المقر</small><h4>مقر دائرة الحماية الاجتماعية بمحافظة الداخلية</h4></div></div><div class="premises-metrics"><article><span aria-hidden="true">□</span><div><small>المساحة</small><strong><b>632</b> متر مربع</strong></div></article><article><span aria-hidden="true">ر.ع</span><div><small>قيمة الإيجار</small><strong><b>2,214</b> ريال عُماني شهريًا</strong></div></article><article><span aria-hidden="true">◇</span><div><small>تكلفة التنفيذ</small><strong><b>267,980</b> ريال عُماني</strong></div></article></div><a class="premises-location" href="https://maps.app.goo.gl/amkyRoVHV9xiTp2C7" target="_blank" rel="noopener"><span><small>الموقع الجغرافي</small><b>فتح موقع المقر على الخريطة</b></span><i aria-hidden="true">⌖</i></a>`;
+      population.after(premises);
+    }
     let reportLink=$("#governorateReportLink",inspector);
     if(!reportLink){
       reportLink=document.createElement("a");
@@ -101,6 +111,7 @@
       const name=String($("#governorateName")?.textContent||"").trim().replace(/^محافظة\s*/,"");
       const showDakhiliyahReport=name==="الداخلية";
       if(reportLink.hidden===showDakhiliyahReport) reportLink.hidden=!showDakhiliyahReport;
+      if(premises.hidden===showDakhiliyahReport) premises.hidden=!showDakhiliyahReport;
       const omanCount=omanisByGovernorate[name];
       setText($("#govOmaniPopulation",population),omanCount?fmt(omanCount):"—");
       const currentShareSmall=share?.parentElement?.querySelector("small");
