@@ -82,22 +82,15 @@
     const governorateSelect=$("#governorateSelect",inspector);
     if(governorateSelect){
       const allOption=governorateSelect.querySelector('option[value="all"]')||governorateSelect.options[0];
-      let governorateUserSelected=false,syncingDefaultGovernorate=false;
-      const syncDefaultGovernorate=()=>{
-        if(governorateUserSelected||syncingDefaultGovernorate)return;
-        const heading=$("#governorateName");
-        if(allOption.textContent==="جميع المحافظات"&&governorateSelect.value===allOption.value&&heading?.textContent==="جميع المحافظات")return;
-        syncingDefaultGovernorate=true;
-        setText(allOption,"جميع المحافظات");
-        governorateSelect.value=allOption.value;
-        governorateSelect.dispatchEvent(new Event("change",{bubbles:true}));
-        setText(heading,"جميع المحافظات");
-        queueMicrotask(()=>{syncingDefaultGovernorate=false;});
-      };
-      governorateSelect.addEventListener("change",event=>{if(event.isTrusted)governorateUserSelected=true;},true);
-      syncDefaultGovernorate();
-      new MutationObserver(()=>queueMicrotask(syncDefaultGovernorate)).observe(inspector,{subtree:true,childList:true,characterData:true});
-      window.addEventListener("load",syncDefaultGovernorate,{once:true});
+      const heading=$("#governorateName");
+      // Set the requested default once. Do not keep forcing it afterward:
+      // map buttons update the select programmatically and dispatch an
+      // untrusted change event, which a persistent default synchronizer would
+      // otherwise immediately overwrite.
+      setText(allOption,"جميع المحافظات");
+      governorateSelect.value=allOption.value;
+      governorateSelect.dispatchEvent(new Event("change",{bubbles:true}));
+      setText(heading,"جميع المحافظات");
     }
     const update=()=>{
       Array.from(inspector.querySelectorAll("article")).forEach(card=>{
